@@ -1,0 +1,22 @@
+%Filename: lmy2zpmn.fd
+%Created by: tex fontpmnt
+%Created using fontinst v1.926
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{lmy2zpmn.fd}
+   [2003/10/28 Fontinst v1.926 font definitions for LMY2/zpmn.]
+
+\DeclareFontFamily{LMY2}{zpmn}{}
+
+\DeclareFontShape{LMY2}{zpmn}{m}{n}{
+   <-> zpmnsy
+}{}
+
+\DeclareFontShape{LMY2}{zpmn}{b}{n}{
+   <-> zpmnsyb
+}{}
+
+\DeclareFontShape{LMY2}{zpmn}{bx}{n}{<->ssub * zpmn/b/n}{}
+
+\endinput

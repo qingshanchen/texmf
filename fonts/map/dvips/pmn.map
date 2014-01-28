@@ -1,0 +1,18 @@
+pmnb8r Minion-Bold "TeXBase1Encoding ReEncodeFont " <8r.enc <pmnb8a.pfb
+pmnbi8r Minion-BoldItalic "TeXBase1Encoding ReEncodeFont " <8r.enc <pmnbi8a.pfb
+pmns8r Minion-Semibold "TeXBase1Encoding ReEncodeFont " <8r.enc <pmns8a.pfb
+pmnsi8r Minion-SemiboldItalic "TeXBase1Encoding ReEncodeFont " <8r.enc <pmnsi8a.pfb
+pmnr8r Minion-Regular "TeXBase1Encoding ReEncodeFont " <8r.enc <pmnr8a.pfb
+pmnri8r Minion-Italic "TeXBase1Encoding ReEncodeFont " <8r.enc <pmnri8a.pfb
+pmnb8x MinionExp-Bold <pmnb8x.pfb
+pmnbi8x MinionExp-BoldItalic <pmnbi8x.pfb
+pmnr8x MinionExp-Regular <pmnr8x.pfb
+pmnri8x MinionExp-Italic <pmnri8x.pfb
+pmns8x MinionExp-Semibold <pmns8x.pfb
+pmnsi8x MinionExp-SemiboldItalic <pmnsi8x.pfb
+pmnrd8r Minion-DisplayRegular "TeXBase1Encoding ReEncodeFont " <8r.enc <pmnrd8a.pfb
+pmnrd8x MinionExp-DisplayRegular <pmnrd8x.pfb
+pmnrid8r Minion-DisplayItalic "TeXBase1Encoding ReEncodeFont " <8r.enc <pmnrid8a.pfb
+pmnrid8x MinionExp-DisplayItalic <pmnrid8x.pfb
+pmnrp  Minion-Ornaments <pmnrp.pfb
+

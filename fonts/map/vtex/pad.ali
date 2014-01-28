@@ -1,0 +1,22 @@
+%1 = $PFM$
+%2 = $TEXMF$fonts/type1/adobe/agaramon/
+
+@AGaramond-Regular = padr8a %2,1
+@AGaramond-Regular-8r = padr8r %2,1,r="8r",b="padr8a"
+@AGaramond-Italic = padri8a %2,1
+@AGaramond-Italic-8r = padri8r %2,1,r="8r",b="padri8a"
+@AGaramond-Semibold = pads8a %2,1
+@AGaramond-Semibold-8r = pads8r %2,1,r="8r",b="pads8a"
+@AGaramond-SemiboldItalic = padsi8a %2,1
+@AGaramond-SemiboldItalic-8r = padsi8r %2,1,r="8r",b="padsi8a"
+@AGaramond-Bold = padb8a %2,1
+@AGaramond-Bold-8r = padb8r %2,1,r="8r",b="padb8a"
+@AGaramond-BoldItalic = padbi8a %2,1
+@AGaramond-BoldItalic-8r = padbi8r %2,1,r="8r",b="padbi8a"
+@AGaramondExp-Regular = padr8x %2,1
+@AGaramondExp-Italic = padri8x %2,1
+@AGaramondExp-Semibold = pads8x %2,1
+@AGaramondExp-SemiboldItalic = padsi8x %2,1
+@AGaramondExp-Bold = padb8x %2,1
+@AGaramondExp-BoldItalic = padbi8x %2,1
+

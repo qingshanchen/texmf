@@ -1,0 +1,14 @@
+% Adobe Garamond
+padr8r  AGaramond-Regular        "TeXBase1Encoding ReEncodeFont" <8r.enc <padr8a.pfb
+padri8r AGaramond-Italic         "TeXBase1Encoding ReEncodeFont" <8r.enc <padri8a.pfb
+pads8r  AGaramond-Semibold       "TeXBase1Encoding ReEncodeFont" <8r.enc <pads8a.pfb
+padsi8r AGaramond-SemiboldItalic "TeXBase1Encoding ReEncodeFont" <8r.enc <padsi8a.pfb
+padb8r  AGaramond-Bold           "TeXBase1Encoding ReEncodeFont" <8r.enc <padb8a.pfb
+padbi8r AGaramond-BoldItalic     "TeXBase1Encoding ReEncodeFont" <8r.enc <padbi8a.pfb
+padr8x  AGaramondExp-Regular        <padr8x.pfb
+padri8x AGaramondExp-Italic         <padri8x.pfb
+pads8x  AGaramondExp-Semibold       <pads8x.pfb
+padsi8x AGaramondExp-SemiboldItalic <padsi8x.pfb
+padb8x  AGaramondExp-Bold           <padb8x.pfb
+padbi8x AGaramondExp-BoldItalic     <padbi8x.pfb
+

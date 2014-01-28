@@ -1,0 +1,47 @@
+%Filename: ts1padx.fd
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{ts1padx.fd}
+   [2003/05/29 scalable font definitions for TS1/padx.]
+
+\expandafter\ifx\csname pad@Scale\endcsname\relax
+ \let\pad@@Scale\@empty
+\else
+ \edef\pad@@Scale{s*[\csname pad@Scale\endcsname]}%
+\fi
+
+\DeclareFontFamily{TS1}{padx}{}
+
+\DeclareFontShape{TS1}{padx}{m}{n}{
+   <-> \pad@@Scale padr9c
+}{}
+
+\DeclareFontShape{TS1}{padx}{m}{it}{
+   <-> \pad@@Scale padri9c
+}{}
+
+\DeclareFontShape{TS1}{padx}{b}{n}{
+   <-> \pad@@Scale padb9c
+}{}
+
+\DeclareFontShape{TS1}{padx}{b}{it}{
+   <-> \pad@@Scale padbi9c
+}{}
+
+\DeclareFontShape{TS1}{padx}{sb}{n}{
+   <-> \pad@@Scale pads9c
+}{}
+
+\DeclareFontShape{TS1}{padx}{sb}{it}{
+   <-> \pad@@Scale padsi9c
+}{}
+
+\DeclareFontShape{TS1}{padx}{m}{sl}{<->ssub * padx/m/it}{}
+\DeclareFontShape{TS1}{padx}{bx}{n}{<->ssub * padx/b/n}{}
+\DeclareFontShape{TS1}{padx}{bx}{it}{<->ssub * padx/b/it}{}
+\DeclareFontShape{TS1}{padx}{b}{sl}{<->ssub * padx/b/it}{}
+\DeclareFontShape{TS1}{padx}{bx}{sl}{<->ssub * padx/b/sl}{}
+\DeclareFontShape{TS1}{padx}{sb}{sl}{<->ssub * padx/sb/it}{}
+
+\endinput

@@ -1,0 +1,2513 @@
+% \iffalse
+%% Copyright 1996 1997 Frank Mittelbach and David Carlisle.
+%% Copyright 2001--2004 Frank Mittelbach, David Carlisle and Walter Schmidt
+%<*dtx>
+          \ProvidesFile{mtpro.dtx}
+%</dtx>
+%<mtpro>\NeedsTeXFormat{LaTeX2e}[1997/06/01]
+%<mtpro>\ProvidesPackage{mtpro}
+%<MPY1mtt>\ProvidesFile{mpy1mtt.fd}%
+%<MPY2mtt>\ProvidesFile{mpy2mtt.fd}%
+%<MPY3mtt>\ProvidesFile{mpy3mtt.fd}%
+%<Umtt>\ProvidesFile{umtt.fd}%
+%<Umtms>\ProvidesFile{umtms.fd}%
+%<OMSlby>\ProvidesFile{omslby.fd}%
+%<driver>\ProvidesFile{mtpro.drv}
+% \fi
+%         \ProvidesFile{mtpro.dtx}
+ [2004/09/14 v4.0%
+%<mtpro> MathTimePro font support (PCTeX/WaS)%
+%<MPY1mtt> MathTimePro Encoding 1 (WaS)%
+%<MPY2mtt> MathTimePro Encoding 2 (WaS)%
+%<MPY3mtt> MathTimePro Encoding 3 (WaS)%
+%<Umtt> MathTimePro Bold Encoding (MJ)%
+%<Umtms> Math Time Plus Script (FMi)%
+%<OMSlby> Lucida New Math Symbols (FMi)%
+]
+%
+% \iffalse
+%
+%<*driver>
+\documentclass[11pt]{ltxdoc}
+\usepackage[T1]{fontenc}
+\OnlyDescription
+%
+% *** We are using Times, Helvetica and MathTime Professional at 11pt. ***
+% ***            Do NOT change this through ltxdoc.cfg!                ***
+\usepackage[scaled=0.92]{helvet}
+\renewcommand{\rmdefault}{ptm}
+\usepackage{mtpro}
+%
+\usepackage{xspace}
+\newcommand*{\Lpack}[1]{\textsf{#1}}
+\newcommand*{\Lopt}[1]{\textsf{#1}}
+\renewcommand{\labelitemi}{$\triangleright$}
+\newcommand{\mathtime}{{\itshape MathT\kern-.05em\i me}\xspace}
+\newcommand{\mtpro}{{\itshape MathT\kern-.05em\i meProfes\-sional\/}\xspace}
+\newcommand{\mtplus}{{\itshape MathT\kern-.05em\i me\/}~Plus\xspace}
+% the (La)TeX logos for use with Times-Roman
+\def\ptmTeX{T\kern-.1667em\lower.5ex\hbox{E}\kern-.075emX\@}
+\makeatletter
+\DeclareRobustCommand{\ptmLaTeX}{L\kern-.255em
+        {\setbox0\hbox{T}%
+         \vbox to\ht0{\hbox{%
+                            \csname S@\f@size\endcsname
+                            \fontsize\sf@size\z@
+                            \math@fontsfalse\selectfont
+                            A}%
+                      \vss}%
+        }%
+        \kern-.10em
+        \TeX}
+\makeatother
+\let\TeX=\ptmTeX
+\let\LaTeX=\ptmLaTeX
+\begin{document}
+\DocInput{mtpro.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \CheckSum{4011}
+%
+% \GetFileInfo{mtpro.dtx}
+%
+% \title{Using the \mtpro fonts\\ with \LaTeX \thanks{This 
+%          document refers to version \fileversion\ 
+%          of the \Lpack{mtpro} package.}}
+%
+% \date{\filedate}
+% \author{Walter Schmidt}
+% \maketitle
+% \begin{abstract}
+% \noindent 
+% This document describes the macro package \Lpack{mtpro},
+% which serves for using version~4 of the the \mtpro fonts with \LaTeX.
+% The package code was partially adopted from the \Lpack{mathtime} package 
+% written by Frank Mittelbach and David Carlisle.
+% \end{abstract}
+%
+% \tableofcontents
+% \clearpage
+%
+% \sloppy
+%
+%
+% \section{The \mtpro fonts}
+%
+% \mtpro is a set of math fonts particularly designed for 
+% use with \TeX{} or \LaTeX.  
+%
+% Separate fonts for text size, superscripts, and
+% second order superscripts are provided, allowing quality mathematical
+% typesetting that has hitherto been available only with metal
+% type or with the Computer Modern and the Euler fonts.  Furthermore, \mtpro
+% includes individually designed delimiters and roots for sizes
+% up to 4~inches and extra-wide mathematical accents.  
+%
+% With the release of version 2, additional bold and extra-bold math fonts 
+% were made available.  
+% With version~4, a full upright Greek alphabet was added, 
+% as well as additional multiple, line and surface integral signs,
+% additional mathematical symbols 
+% and extra-large operator symbols.
+% 
+% \iffalse  %%%%%%%%%%%%%%%%%%%%%%%  no longer applicable %%%%%%%%%%%%%%%%%%%%%%%
+% For a detailed discussion of these fonts see the document
+% `Brief Guide to the New \mtpro Fonts', file \texttt{mtpguide.pdf}.\footnote{%
+% The Sections \ref{sec:large} and 
+% \ref{sec:accents} were partially adopted from that document.}
+% \fi       %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%
+% \section{The \Lopt{mtpro} package}
+%
+% Basically, 
+% loading the macro package \Lpack{mtpro}
+% \begin{verse}
+%   |\usepackage|\oarg{options}|{mtpro}|
+% \end{verse}
+% makes \LaTeX{} use \mtpro in place of
+% the default Computer Modern math fonts.
+% The following sections describe the
+% particular features of the package and the additional options that
+% control its behavior.
+%
+%
+% \subsection{Text fonts}
+% Loading the \Lpack{mtpro} package does not change \LaTeX's default 
+% text font families (Computer Modern).  However, the \mtpro fonts were designed
+% to blend best with Times.  The Monotype Times New Roman  fonts are an ideal match, 
+% but \Lpack{mtpro} can equally well be used with Adobe Times and similar typefaces, 
+% such as Times Ten, and also turns out to work quite well with other text fonts, 
+% like Baskerville or Concorde.  
+% 
+% The roman, sans-serif and typewriter font families
+% and the encoding of the text fonts are to be selected \emph{before} loading of
+% \Lpack{mtpro} (unless you stay with \LaTeX's defaults), so that the package 
+% `knows' the fonts and the encoding to be used for operator names such as `sin'
+% and for the math alphabets 
+% \cmd{\mathrm}, \cmd{\mathsf} and \cmd{\mathtt}.
+% For instance,
+% \begin{verse}
+% |\usepackage[T1]{fontenc}|\\
+% |\usepackage{textcomp}|\\
+% |\renewcommand{\rmdefault}{ptm}|\\
+% |\usepackage[scaled=0.92]{helvet}|\\
+% |\usepackage{mtpro}|
+% \end{verse}
+% selects T1 encoding with additional text companion symbols and loads
+% \mtpro in conjunction with Adobe Times (|ptm|) and Helvetica, while the 
+% default typewriter font family (CM Typewriter) is unchanged.
+% This is how the present document has been typeset.
+%
+%
+% \subsection{Greek letters}
+%
+% With \TeX{} or \LaTeX{}, uppercase Greek letters in math mode 
+% are usually typeset as upright, even though they are usually meant to designate
+% variables.  Since this violates the
+% International Standards ISO31-0:1992 to ISO31-13:1992,
+% the \Lpack{mtpro} package provides an option \Lopt{slantedGreek}, which
+% causes uppercase Greek (\cmd{\Gamma}, \cmd{\Delta} etc.), to be typeset as slanted.
+%
+% Upright lowercase and uppercase Greek letters are available with command
+% names such as \cmd{\upalpha}, \cmd{\upbeta}, \cmd{\upGamma}, \cmd{\upDelta}, etc.
+% They are always upright, regardless of the \Lopt{slantedGreek} option.
+%
+%
+% \subsection{Numbers and punctuation in math mode}
+% 
+% \LaTeX's  default behavior is to typeset numbers and punctuation 
+% in math mode using the \cmd{\mathrm} alphabet, which normally equals
+% the default text font.
+%
+% With the \Lpack{mtpro} package, in contrast, numerals and punctuation 
+% characters are---in math mode---taken from the \mtpro fonts.
+% ^^A These numerals are somewhat smaller than those from
+% ^^A Times~NRMT and seem to be more appropriate for use in formulas.
+% Thus, entering
+% |$1.23$| will yield a different result than |1.23|, 
+% and you will have to decide in each case whether an input fragment 
+% is a math or a non-math entity.
+%
+% 
+% \subsection{Calligraphic alphabet}
+% \label{sec:calligr}
+% The \mtpro fonts do not include a calligraphic alphabet, so
+% \cmd{\mathcal} defaults to the calligraphic font of the 
+% Computer Modern family.  Alternatively, use the calligraphic `Euler' font 
+% by specifying the package option \Lopt{eucal}.
+% ^^A The MathTime and Lucida fonts are no longer mentioned here,
+% ^^A since they are no longer available. :-(
+%
+% Section~\ref{sec:options} lists further options to set up \cmd{\mathcal}
+% or an additional math alphabet \cmd{\mathscr}.  They are somewhat confusing 
+% and are provided only for the sake of compatibility with the old 
+% \Lpack{mathtime} package.
+%
+%
+% \subsection{Blackboard Bold}
+% \label{sec:bb}
+% Loading the  \Lpack{mtpro} package with the option \Lopt{amsbb}
+% makes the AMS Symbols~B font available as a `blackboard bold'
+% math alphabet \cmd{\mathbb}.  
+% Other blackboard bold fonts can be used
+% by loading of appropriate packages, such as \Lpack{mtpams}
+% (see section~\ref{sec:amsfonts}).
+% In that case, do not select the \Lopt{amsbb} option!
+%
+%
+% \subsection{Bold math fonts}
+% \subsubsection{Emboldening complete formulas}
+% The declaration \cmd{\boldmath} will embolden all formulas within its scope,
+% just as with the standard CM math fonts.
+% Use it, for instance,  to emphasize complete formulas
+% or to make sure that mathematical expressions within bold section titles also appear in
+% bold type.  Bold formulas should, however, not
+% contain the extra-large parentheses, roots and operators
+% described in section~\ref{sec:large} below.
+% The |\wide|\dots\ accents (\ref{sec:accents}) cannot be emboldened, either.
+%
+% \subsubsection{Bold letters and symbols}
+% The declaration \cmd{\boldmath} cannot be issued when you are already in
+% math mode.  Thus it is not a suitable means to embolden single letters,
+% e.g., if you want to designate vectors with bold type.
+% This use of bold letters in formulas is supported through a number of bold \emph{math
+% alphabets}:
+% \begin{itemize}
+% \item
+%   \cmd{\mathbf} prints its argument using the {\bfseries bold upright} text font.
+% \item 
+%   \cmd{\mbf} is similar, but uses a 
+%   specially modified version
+%   of the bold upright Times font,
+%   with the spacing and the letter shapes adapted to math typesetting.  
+%   Thus \cmd{\mbf} is appropriate to typeset single variables, while
+%   \cmd{\mathbf} can be used, e.g., to emphasize an operator name.
+% \item
+%   When the package is loaded with the option \Lopt{boldalphabet},
+%   an additional {\bfseries\itshape bold italic} math alphabet named 
+%   \cmd{\mathbold} is provided---something
+%   that isn't easily available with standard \LaTeX.
+%   In contrast to \cmd{\mathbf} and \cmd{\mbf}, this
+%   alphabet includes also Greek letters.\footnote{The 
+%   shape of the uppercase Greek letters follows the \Lopt{slantedGreek} option.}
+% \item
+%    Beside the usual \cmd{\mathcal} there is also a bold variant \cmd{\mathbcal}.
+% \item
+%   When a \cmd{\mathscr} alphabet is set up through the options 
+%   \Lopt{lucidascr} or \Lopt{mtplusscr}, a corresponding bold
+%   \cmd{\mathbscr} is defined, too.
+% \end{itemize}
+%
+% An \emph{alternative} to the use  of several different bold math alphabets
+% is available through  the macro package \Lpack{bm}.  It defines the command \cmd{\bm}, 
+% which can embolden not only letters but also symbols or arbitrary expressions---provided
+% that the required fonts exist.  
+% The command \cmd{\bm} should, however, not be used on constructs like 
+% |\PARENS| or |\SQRT| or the |\wide|\dots\ accents.
+% The package \Lpack{bm} belongs to the \Lpack{tools} collection, 
+% which is part of every \LaTeX\ system.  \emph{It is highly recommended
+% to read the documentation of the package before using it!}  
+%
+% \subsubsection{`Heavy' symbols}
+% Most---but not all---of the mathematical symbols of the \mtpro fonts exist
+% also in a `heavy' (i.e., extra-bold) variant, which  can be used through the command 
+% \cmd{\hm} of the above-mentioned package \Lpack{bm}.\footnote{Use of the
+% corresponding \cmd{\heavymath} declaration is, however, pointless,
+% because the heavy math fonts are incomplete.}  To recognize the existence
+% of the `heavy' fonts, the package \Lpack{bm} must be loaded \emph{after} \Lpack{mtpro}!
+%
+% The `heavy' symbols  are darker and more prominent than the `bold' ones, so they are suitable, 
+% for instance, if you need an extra-bold plus sign with a different mathematical meaning 
+% than the regular $+$.
+% Applying \cmd{\hm} to characters that are not available as `heavy' yields either
+% normal type or a `slug' (a black box), depending on the math alphabet.  
+% In particular, this restriction affects Latin and Greek letters, as well as the
+% `extra-large' delimiters, root, operators and accents described below.
+%
+%
+% \subsection{Positioning of subscripts}
+%
+% The appearance of subscripts can be improved by loading the package
+% with the option \Lopt{subscriptcorrection}.  When certain letters, like
+% $f$ or $j$, occur as a subscript, the positioning will be automatically
+% adjusted.  In the following example, the left sum was typeset with
+% subscript correction, the right one without:
+% \enablesubscriptcorrection
+% \[
+% C_f + C_j + X_A \qquad
+% \disablesubscriptcorrection
+% C_f + C_j + X_A
+% \]
+% \disablesubscriptcorrection^^A  Just to make sure... 
+% The \cmd{\enablesubscriptcorrection} and \cmd{\disablesubscriptcorrection}
+% commands can also be used to turn subscript correction on and off
+% within the document.
+%
+% No guarantee is made as to the proper functioning of the
+% automatic subscript correction in conjunction with any additional 
+% macro package, because the underscore character |_| is made active.
+%
+%
+% \subsection{The big differences}
+% \label{sec:large}
+%
+% \subsubsection{Extra-large delimiters and roots}
+% The \mtpro font set includes individually designed parentheses and other
+% delimiters which go up to to 4~inches high.
+%
+% The large parentheses are produced by the command |\PARENS{...}|;
+% just compare the left matrix with the output obtained from the ordinary 
+% \cmd{\left(} and \cmd{\right(} macros:
+% \[
+%   \PARENS{ \begin{array}{ccc}
+%   x_{11} & x_{12} & \ldots \\
+%   x_{21} & x_{22} & \ldots \\
+%   x_{31} & x_{32} & \ldots \\
+%   \vdots & \vdots & \ddots
+%   \end{array} }
+%   \qquad
+%   \left( \begin{array}{ccc}
+%   x_{11} & x_{12} & \ldots \\
+%   x_{21} & x_{22} & \ldots \\
+%   x_{31} & x_{32} & \ldots \\
+%   \vdots & \vdots & \ddots
+%   \end{array} \right)
+% \]
+%
+% Basically, |\PARENS{...}| is just an abbreviation for
+% |\LEFTRIGHT(){...}|.
+% In general, 
+% you can use \cmd{\LEFTRIGHT} directly with any two delimiters, including
+% the period for an empty delimiter.  In addition to parentheses,
+% you can get |/|, |\backslash|, |<| (or |\langle|), and
+% |>| (or |\rangle|), all up to 4~inches high.
+% 
+% A combination like 
+% |\LEFTRIGHT(]| is also possible; the $]$ just
+% gets extended in the usual way.  At large sizes, however, the $($ might end up
+% slightly larger than the $]$, since the $]$ grows at the same (6\,pt) rate, no
+% matter how large the argument, while the parentheses grow faster for larger
+% formulas.  So in such cases it might be desirable to add a `strut'
+% (i.e.\ a construction  of the form |\rule{0pt}|\marg{height})
+% to the formula to force a larger $]$ symbol.
+%
+% In addition to the \cmd{\sqrt} command, which uses an  
+% `extensible' symbol, \Lpack{mtpro} provides \cmd{\SQRT}, with the same syntax.
+% It produces individually designed root signs up to 4~inches high:
+% In the example below, 
+% the left root was typeset using \cmd{\SQRT}, the right one results
+% from the ordinary \cmd{\sqrt} command.
+% \[
+%   \SQRT[3]{\sum_{i=1}^n (y^i -x^i )^3 }
+%   \qquad
+%   \sqrt[3]{\sum_{i=1}^n (y^i -x^i )^3 }
+% \]
+% 
+% The positioning of the root index can be adjusted through the commands
+% \cmd{\LEFTROOT} and \cmd{\UPROOT}.  They are to be issued in
+% math mode, they are valid inside the current formula only, and they
+% act only on roots produced from
+% \cmd{\SQRT}. 
+% Positive arguments to these commands will move the root index to the 
+% left and up respectively, while a negative argument will move it
+% to the right and down.  The units of increment are quite small, which is useful
+% for such adjustments.
+% In the example below, the index $\beta$ of the left root is moved
+% 2 units to the right and 6 units up by saying 
+% |\LEFTROOT{-2}| |\UPROOT{6}| |\SQRT...|\,; the right root shows the
+% default appearance:
+% \[
+%  \LEFTROOT{-2}\UPROOT{6}
+%  \SQRT[\beta]{k} \qquad 
+%  \sqrt[\beta]{k}
+% \]
+% Notice that the syntax of the \cmd{\LEFTROOT} and \cmd{\UPROOT} commands differs 
+% both from the \Lpack{amsmath} package 
+% and from \texttt{mtp.tex}\,!
+%
+% You can nest |\PARENS| (or |\LEFTRIGHT|),
+% though of course that shouldn't be needed very often.  
+% Doing so slows \TeX\ down exponentially and may also exhaust its
+% capacity.  
+% It should also be mentioned that \cmd{\PARENS} ends up typesetting its argument
+% more than once, in order to find out the right size of the delimiters,
+% so you need to be careful when using boxes:  For example, if you
+% have stored a formula in |\box\eqnbox|, then you should be sure to type
+% |\PARENS{\copy\eqnbox}|, rather than |\PARENS{\box\eqnbox}|.
+% The same precaution applies to |\SQRT| and to the new |\wide...| accents 
+% explained in  section~\ref{sec:accents}.
+%
+% \subsubsection{Extra-large operator symbols}
+% In a displayed formula like
+% \[
+%   \sum_{i \notin I} 
+%     \frac{\displaystyle \int\nolimits_{-\infty}^{+\infty}f(\alpha_i x)\,dx + 1}%
+%          {\displaystyle \oint_C f(\beta_i z)\,dz - 1}
+% \]
+% you might feel the need for a larger sum sign.  Normally printers don't
+% provide one, but with the \mtpro  fonts you can get an extra-large 
+% \cmd{\sum}  with the \cmd{\xl} command.  For instance,
+% \verb+\xl{i \notin I}{}\sum+\dots yields:
+% \[
+% \xl{i \notin I}{}\sum
+%     \frac{\displaystyle \int\nolimits_{-\infty}^{+\infty}f(\alpha_i x)\,dx + 1}%
+%          {\displaystyle \oint_C f(\beta_i z)\,dz - 1}
+% \]
+% Notice that the  limits  are to be given as the first two arguments of \cmd{\xl}, 
+% rather than as a subscript and superscript to \cmd{\sum}. 
+% The two arguments \emph{must} appear, even if one, or both, are empty: \verb+{}+.
+%
+% \verb+\xl+  can be applied to all `large' operators, including those in 
+% section~\ref{sec:integrals}.
+% In most cases \verb+\xl+ produces a symbol about 18\,pt tall.
+% There are also \verb+\XL and +\verb+\XXL+ versions 
+% that are 36\,pt  and 72\,pt (a full inch) high! 
+% And, heaven forbid, you can even get \verb+\XXXL+ versions that are two inches high, 
+% thereby assuring yourself (as well as the designer of the MathTime fonts)
+% the lasting enmity of journal editors everywhere.
+%
+% If you want `no limits', i.e., if you'd like the limits set 
+% as subscripts and superscripts, use the corresponding macros \cmd{\xlnl}, \cmd{\XLNL} etc.
+% For instance, 
+% \verb+\xlnl{a}{b}\int+ prints
+% \[
+% \xlnl ab\int\ .
+% \]
+%
+%
+% \subsection{Accents in math}
+% \label{sec:accents}
+%
+% In addition to |\widehat| and |\widetilde|, there is now |\widecheck|.
+% The |\widehat|, |\widecheck|, and |\widetilde| accents are extended
+% in a similar fashion as the large delimiters and roots (see above);
+% in each case you can get accents up to 4~inches wide:
+% \[
+%   \widehat{a+b} + \widehat{a+b+c} + \widehat{a+b+c+d} + \widehat{a+b+c+d+e}
+% \]
+% 
+% In a combination like $\hat A$, the |\hat| accent might look a 
+% little small, while |\widehat| produces an accent $\widehat A$
+% that looks too large. So there is |\what| to produce a slightly wider 
+% hat accent, $\what A$. Similarly, there are 
+% |\wtilde|, |\wcheck|, and |\wbar|.
+%
+% In addition, there are slightly larger |\wwhat|, |\wwcheck|, |\wwtilde|,
+% and |\wwbar|. The |\wwhat|, |\wwcheck|, and |\wwtilde| accents are identical
+% to the smallest versions of the accents produced by |\widehat| etc.,
+% but in some cases it might be preferable
+% to force this smallest size instead of relying on the |\wide|\dots{}
+% accents themselves. For example, |\widehat M| yields $\widehat M$,
+% because the $M$ (counting the white space on its sides) happens to be just 
+% a bit too wide for the smallest |\widehat| accent, whereas |\wwhat M| 
+% will result in $\wwhat M$.
+%
+% The |\wwbar| accent is what used to be called |\widebar| in the
+% \mathtime fonts, but that really wasn't a very good name, since
+% |\overline| is what actually corresponds to the |\wide|\dots{} accents.
+% 
+% The standard commands |\dot| and |\ddot| are complemented with
+% ready-made triple and quadruple dot accents \cmd{\dddot} and \cmd{\ddddot};
+% they work with or without the \Lpack{amsmath} package.
+%
+% In situations like $\dot \Gamma$,
+% the dot accents might look better 
+% if they were moved up a bit. So there are \cmd{\dotup},
+% \cmd{\ddotup}, \cmd{\dddotup} and \cmd{\ddddotup},
+% to produce $\dotup\Gamma$, $\ddotup\Gamma$ etc.
+%
+%
+% \subsection{Additional symbols not available with standard \LaTeX}
+% \label{sec:symbols}
+% \subsubsection{Integrals}
+% \label{sec:integrals}
+% The \mtpro fonts include multiple, surface and line integrals.
+% They are available in text size (as shown in the below table)
+% as well as display size:
+% \begin{center}
+% \begin{tabular}{ll@{\qquad}ll@{\qquad}ll@{\qquad}ll}
+% $\iint$ & \cmd{\iint} & $\iiint$ & \cmd{\iiint} & $\oiint$ & \cmd{\oiint} & $\oiiint$ & \cmd{\oiiint} \\
+% $\cwoint$ & \cmd{\cwoint} & $\awoint$ & \cmd{\awoint} & $\cwint$ & \cmd{\cwint}\\
+% \end{tabular}
+% \end{center}
+% The macros are compatible  with the \Lpack{amsmath} package,
+% which may be loaded additionally.
+%
+% \subsubsection{Negated relation symbols}
+% \label{sec:negrel}
+% \mtpro includes a number of ready-made negated relation symbols,
+% which are normally built from pieces.  For instance, with \mtpro you should write
+% |\notleq| instead of |\not\leq|.
+% For some of these symbols an alternative name is indicated,
+% which follows the naming scheme of the \Lpack{amssymb} package.
+% Symbols, that are marked with an asterisk, do, however, not 
+% actually exist in the AMS fonts:
+% \begin{center}
+% \begin{tabular}{ll@{\qquad}ll}
+%  $\notless$      &  \cmd{\notless}, \cmd{\nless}              &  $\notsupset$    &  \cmd{\notsupset}, \cmd{\nsupset}*        \\
+%  $\notleq$       &  \cmd{\notleq}, \cmd{\nleq}                &  $\notsupseteq$  &  \cmd{\notsupseteq}, \cmd{\nsupseteq}     \\
+%  $\notprec$      &  \cmd{\notprec}, \cmd{\nprec}              &  $\notsqsupseteq$&  \cmd{\notsqsupseteq}, \cmd{\nsqsupseteq}*\\
+%  $\notpreceq$    &  \cmd{\notpreceq}, \cmd{\npreceq}          &  $\neq$          &  \cmd{\neq}                               \\
+%  $\notsubset$    &  \cmd{\notsubset}, \cmd{\nsubset}*         &  $\notequiv$     &  \cmd{\notequiv}                          \\
+%  $\notsubseteq$  &  \cmd{\notsubseteq}, \cmd{\nsubseteq}      &  $\notsim$       &  \cmd{\notsim}                            \\
+%  $\notsqsubseteq$&  \cmd{\notsqsubseteq}, \cmd{\nsqsubseteq}* &  $\notsimeq$     &  \cmd{\notsimeq}                          \\
+%  $\notgr$        &  \cmd{\notgr}, \cmd{\ngtr}                 &  $\notapprox$    &  \cmd{\notapprox}                         \\
+%  $\notgeq$       &  \cmd{\notgeq}, \cmd{\ngeq}                &  $\notcong$      &  \cmd{\notcong}, \cmd{\ncong}             \\
+%  $\notsucc$      &  \cmd{\notsucc}, \cmd{\nsucc}              &  $\notasymp$     &  \cmd{\notasymp}                          \\
+%  $\notsucceq$    &  \cmd{\notsucceq}, \cmd{\nsucceq} \\
+% \end{tabular}
+% \end{center}
+% 
+%
+% \subsubsection{Miscellaneous symbols}
+% \label{sec:miscsym}
+% The \mtpro fonts provide various operator symbols and letters,
+% which are not defined with standard \LaTeX:
+% \begin{center}
+% \begin{tabular}{ll@{\qquad}ll}
+% \multicolumn{4}{c}{Binary operators}\\[.5ex]
+% $\capprod$ & \cmd{\capprod} & $\cupprod$ & \cmd{\cupprod} \\
+% $\comp$    & \cmd{\comp}    & $\setdif$   & \cmd{\setdif} \\[1.25ex]
+% \multicolumn{4}{c}{Large operators}\\[.5ex]
+% $\bigcapprod$ & \cmd{\bigcapprod} & $\bigcupprod$ & \cmd{\bigcupprod}\\[1.25ex]
+% \multicolumn{4}{c}{Letters}\\[.5ex]
+% $\varbeta$   & \cmd{\varbeta}  & $\upvarbeta$ & \cmd{\upvarbeta} \\
+% $\vardelta$   & \cmd{\vardelta}& $\upvardelta$ & \cmd{\upvardelta} \\
+% $\varkappa$  & \cmd{\varkappa} & $\upvarkappa$ & \cmd{\upvarkappa}\\
+% $\hslash$  & \cmd{\hslash} & $\digamma$ & \cmd{\digamma}\\
+% $\yen$  & \cmd{\yen} \\[1.25ex]
+% \end{tabular}
+% \end{center}
+% The above table shows \cmd{\bigccapprod} and \cmd{\bigcupprod} as they would
+% appear within inline formulas.  Being 'large operators', they are enlarged
+% when used within displayed formulas:
+% \[
+% \bigcapprod_{i=1}^n\alpha_i \qquad \bigcupprod_{i=1}^n\alpha_i
+% \]
+% \cmd{\varbeta} and \cmd{\vardelta} are old forms of $\beta$ and $\delta$ that you
+% might find useful if you are trying to imitate certain old books.
+% Notice that \cmd{\vardelta} is hardly distinguishable
+% from the \cmd{\partial} symbol (the circular portion of \cmd{\vardelta}
+% is taller, to match the height of letters like $x$ and $o$ in math formulas). The
+% only reason for providing \cmd{\vardelta} is that all the various Greek alphabets
+% specified for mathematics in the Unicode standard include
+% this variant (perversely called `partial'). 
+%
+% The command \cmd{\yen} can be used in text mode, too.  In this case
+% the \yen\ is taken from the current text font, if it is available there;
+% otherwise, the symbol is taken from the math font.
+%
+% The bold or heavy versions of $\spadesuit$ and $\clubsuit$ are somewhat grotesque.
+% If you need to have different varieties of these, you might like to use
+% the following ones:
+% \begin{center}
+% \begin{tabular}{ll@{\qquad}ll@{\qquad}ll}
+% $\openspadesuit$ & \cmd{\openspadesuit} & $\shadedspadesuit$ & \cmd{\shadedspadesuit}\\
+% $\openclubsuit$ &\cmd{\openclubsuit}& $\shadedclubsuit$ & \cmd{\shadedclubsuit}
+% \end{tabular}
+% \end{center}
+% Notice, however, that the open and shaded symbols themselves
+% have no bold or heavy counterparts!
+%
+%
+% \subsection{Using the AMS symbols and fonts}
+% \label{sec:amsfonts}
+% The basic \mtpro fonts provide already a subset of the AMS symbols,
+% see the above sections \ref{sec:negrel} and \ref{sec:miscsym}.  
+% To make all of the AMS symbols available with \mtpro, 
+% you need to obtain the \mtpro Font Supplement~A 
+% and use the related macro package \Lpack{mtpams}.
+% (The symbol fonts that can be used by loading of the `standard' packages
+% \Lpack{amsfonts} and \Lpack{amssymb}, would \emph{not} match the style of \mtpro, 
+% and the packages are \emph{not} compatible with \Lpack{mtpro}.)
+%
+% The Euler Fraktur math alphabet can be used
+% through the package \Lpack{eufrak}, which is part of the AMS fonts
+% collection; this package \emph{is} compatible with \Lpack{mtpro}.  
+% Use of the Euler Calligraphic alphabet and of the AMS Blackboard Bold font
+% is already provided within the \Lpack{mtpro} package,
+% see the above sections \ref{sec:calligr} and \ref{sec:bb}.
+% 
+% 
+%
+% \subsection{Change history}
+% \label{sec:changes}
+% Version 4.0 as of 2004-09-14, to be used with version 4 of the fonts:
+% \begin{itemize}
+% \item additional symbols \cmd{\yen}, \cmd{\hslash}, \cmd{\digamma}
+% \item AMS-like alternative names for negated relation symbols
+% \item \verb+\xl+ operators
+% \end{itemize}
+% Version 3.3 as of 2004-05-21, to be used with version~3 of the fonts:
+% \begin{itemize}
+% \item
+%   non-bold upright Greek letters
+% \item
+%   additional operator symbols and variant Greek letters
+% \item
+%   \verb+\XL+, \verb+\XXL+ and \verb+\XXXL+ operators.
+% \item
+%   additional integrals signs
+% \end{itemize}
+% Version 3.0 as of 2004-01-07, to be used with version~2 of the fonts:
+% \begin{itemize}
+% \item
+%   The new bold and heavy \mtpro fonts 
+%   can be used via \cmd{\boldmath} or the package \Lpack{bm}.
+% \item Additional math symbols and multiple dot accents
+%   are made available.
+% \item
+%   \cmd{\mathbold} now acts on uppercase Greek, too, and the shape of the
+%   bold uppercase Greek letters follows the \Lopt{slantedGreek} option.
+% \item A full upright Greek alphabet is supported (but the lower-case
+%   letters are available only with bold weight).
+% \item 
+%   New option \Lopt{eucal} to use Euler Script as \cmd{\mathcal}.
+%  This has a few advantages over using the external package \Lpack{eucal}.
+% \end{itemize}
+% Version 2.0.16 as of 2003-12-12:
+% \begin{itemize}
+% \item 
+%   The (undocumented) options \Lopt{OT1}, \Lopt{T1}, \Lopt{LY1}
+%   and \Lopt{noTS1} have been abolished.
+% \item A new option \Lopt{boldalphabet} controls whether the
+%   math alphabet command \cmd{\mathbold} is made available.
+% \end{itemize}
+%
+%
+% \section{Option summary}
+% \label{sec:options}
+% This section lists all options of the \Lpack{mtpro} package.
+% Options that correspond to the default behavior of the package are
+% marked by an asterisk and need normally not to be specified.
+%
+% \begin{description}
+% \item[\Lopt{uprightGreek}*] Makes the uppercase Greek letters upright.
+% \item[\Lopt{slantedGreek}] Makes the uppercase Greek letters slanted.
+% \item[\Lopt{subscriptcorrection}]
+%   Redefines the underscore character so that it automatically corrects 
+%   the spacing of subscripts.
+% \item[\Lopt{nosubscriptcorrection}*]
+%   Disables the subscript correction.
+%  \item[\Lopt{amsbb}] Defines \cmd{\mathbb} to refer to the blackboard bold 
+%   math alphabet from the AMS fonts.
+%  \item[\Lopt{boldalphabet}] Defines \cmd{\mathbold} to refer to a bold italic
+%   math alphabet.
+% \item[\Lopt{cmcal}*]
+%   Uses the Computer Modern calligraphic alphabet
+%   for \cmd{\mathcal} and \cmd{\mathbcal}.
+% \item[\Lopt{eucal}] Sets up \cmd{\mathcal} and \cmd{\mathbcal}
+%   to use the Euler script fonts.
+% \item[\Lopt{lucidacal}] Sets up \cmd{\mathcal} and \cmd{\mathbcal} 
+%   to use  the Lucida calligraphic fonts
+% \item[\Lopt{lucidascr}] Like \Lopt{lucidacal}, but puts the fonts into
+%   \cmd{\mathscr} and \cmd{\mathbscr}.
+% \item[\Lopt{mtplusscr}] Sets up \cmd{\mathscr} and \cmd{\mathbscr}
+%   to use the  MTMS and MTMSB script fonts, which are part of Y\&Y's
+%   \mtplus collection.
+% \item[\Lopt{mtpluscal}] Like \Lopt{mtplusscr}, but puts the fonts into the
+%   \cmd{\mathcal} and \cmd{\mathbcal} alphabets.
+% \end{description}
+% This package makes a lot of font re-assignments. Normally these
+% generate warning messages on the terminal, however getting so many
+% messages would be distracting, so a further three options control the
+% font tracing. Even more control may be obtained by loading the
+% \Lpack{tracefnt} package.
+% \begin{description}
+% \item[\Lopt{errorshow}*] Only show font \emph{errors} on the terminal.
+%   Warnings are just sent to the log file. 
+% \item[\Lopt{warningshow}] Show font warnings on the terminal. This
+%   corresponds to the usual \LaTeX\ behavior.
+% \item[\Lopt{nofontinfo}] Suppress all font warnings, even from the log file.
+% \end{description}
+%
+% \noindent\textbf{NB: }Not all options can be used together, e.g., one can at most select one
+% of the options setting up \cmd{\mathcal}: If more than one option is given,
+% \Lopt{eucal} will win over \Lopt{mtpluscal} and \Lopt{lucidacal}.
+%
+% \noindent\textbf{NB: }The options \Lopt{lucidascr} or \Lopt{mtplusscr} must not be used,
+% when an additional package is loaded to set up a \cmd{\mathscr} alphabet.
+% 
+%
+% \StopEventually{\par\vfill\noindent{\small
+% \mathtime\ is a trademark of Publish or Perish, Inc.
+% Times and Helvetica are trademarks of Linotype~AG and/or its subsidiaries.
+% Concorde is a trademark of H. Berthold AG.
+% \par}}
+%
+%
+% \section{The implementation of \Lpack{mtpro}}
+%
+% \subsection{Options}
+%
+% We start with declaring the options. For the (un)slanted Greek we take
+% |\Gamma| as a marker,  since it will be redefined anyway.
+%    \begin{macrocode}
+%<*mtpro>
+\DeclareOption{slantedGreek}{\let\Gamma=s}
+\DeclareOption{uprightGreek}{\let\Gamma=u}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\newcommand\enablesubscriptcorrection {\catcode`\_=12\relax}
+\newcommand\disablesubscriptcorrection{\catcode`\_=8\relax}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\DeclareOption{nosubscriptcorrection}{\disablesubscriptcorrection}
+\DeclareOption{subscriptcorrection}  {\enablesubscriptcorrection}
+%    \end{macrocode}
+%
+% We signal that we want Lucida calligraphic by defining |\mathcal|
+% to be the letter |l|. In a similar fashion we handle |\mathscr|.
+%    \begin{macrocode}
+\DeclareOption{cmcal}    {\let\mathcal=c}
+\DeclareOption{lucidacal}{\let\mathcal=l}
+\DeclareOption{eucal}    {\let\mathcal=e}
+\DeclareOption{mtpluscal}{\let\mathcal=s}
+\DeclareOption{lucidascr}{\let\mathscr=l}
+\DeclareOption{mtplusscr}{\let\mathscr=s}
+%    \end{macrocode}
+%
+% The option \Lpack{boldalphabet} controls whether the \cmd{\mathbold}
+% alphabet is made available.  Not providing \cmd{\mathbold} saves one math family, 
+% and all Greek letters can be declared as type `mathord', which 
+% ensures against constructs such as |\mathbf{\alpha}| printing garbage.
+%    \begin{macrocode}
+\let\mathbold\@undefined
+\DeclareOption{boldalphabet} {\let\mathbold=m}
+%    \end{macrocode}
+%
+% Finally, there is an option for setting up a \cmd{\mathbb} alphabet
+% using the AMS Symbols~B font.  This is necessary, because the 
+% \Lpack{amsfonts} package cannot be used in conjunction with \Lpack{mtpro}.
+%    \begin{macrocode}
+\DeclareOption{amsbb}{\let\mathbb=y}
+%    \end{macrocode}
+%
+% The option \Lopt{noTS1} is no longer required, but we make sure that
+% it does not cause an error message, if it's still used:
+%    \begin{macrocode}
+\DeclareOption{noTS1}{PackageWarning{mtpro}{%
+  The option \CurrentOption\space is no longer required.}}
+%    \end{macrocode}
+%
+% This package makes a lot of redefinitions. The warnings can be rather
+% annoying so some package options control whether the information
+% is printed to the terminal or log file. More control can be obtained
+% by loading the \textsf{tracefnt} package.
+%
+% Just show font errors; Warning and info to the log file.
+% The default for this package.
+%    \begin{macrocode}
+\DeclareOption{errorshow}{%
+   \def\@font@info#1{%
+         \GenericInfo{(Font)\@spaces\@spaces\@spaces\space\space}%
+                     {LaTeX Font Info: \space\space\space#1}}%
+    \def\@font@warning#1{%
+         \GenericInfo{(Font)\@spaces\@spaces\@spaces\space\space}%
+                        {LaTeX Font Warning: #1}}}
+%    \end{macrocode}
+%
+% The normal \LaTeX\ default, Font Info to the log file and Font
+% Warning to the terminal.
+%    \begin{macrocode}
+\DeclareOption{warningshow}{%
+   \def\@font@info#1{%
+         \GenericInfo{(Font)\@spaces\@spaces\@spaces\space\space}%
+                     {LaTeX Font Info: \space\space\space#1}}%
+    \def\@font@warning#1{%
+         \GenericWarning{(Font)\@spaces\@spaces\@spaces\space\space}%
+                        {LaTeX Font Warning: #1}}}
+%    \end{macrocode}
+%
+% On some machines writing all the log info may slow things down
+% so extra option not to log font changes at all.
+%    \begin{macrocode}
+\DeclareOption{nofontinfo}{%
+   \let\@font@info\@gobble
+   \let\@font@warning\@gobble}
+%    \end{macrocode}
+%
+% The defaults:
+%    \begin{macrocode}
+\ExecuteOptions{%
+  uprightGreek,nosubscriptcorrection,cmcal,errorshow}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\ProcessOptions
+%    \end{macrocode}
+%
+% \subsection{Fonts}
+% Switch to |\normalfont|.  This makes any---possibly---changed values of em and ex
+% come into effect.  (Is this really necessary?  In any case, it won't hurt\dots)
+%    \begin{macrocode}
+\normalfont
+%    \end{macrocode}
+%
+% As the \mtpro fonts come with their 
+% private encodings we need to make those encodings known to \LaTeX.
+%    \begin{macrocode}
+\DeclareFontEncoding{MPY1}{}{}
+\DeclareFontEncoding{MPY2}{}{}
+\DeclareFontEncoding{MPY3}{}{}
+\DeclareFontSubstitution{MPY1}{mtt}{m}{it}
+\DeclareFontSubstitution{MPY2}{mtt}{m}{n}
+\DeclareFontSubstitution{MPY3}{mtt}{m}{n}
+%    \end{macrocode}
+% By default there is no `heavy' mathversion, so let's declare it:
+%    \begin{macrocode}
+\DeclareMathVersion{heavy}
+\newcommand\heavymath{\@nomath\heavymath\mathversion{heavy}}
+%    \end{macrocode}
+% The main four symbol fonts:
+%    \begin{macrocode}
+\DeclareSymbolFont{operators}   {\encodingdefault}{\rmdefault}{m}{n}
+\DeclareSymbolFont{letters}     {MPY1}{mtt}{m}{it}
+\DeclareSymbolFont{symbols}     {MPY2}{mtt}{m}{n}
+\DeclareSymbolFont{largesymbols}{MPY3}{mtt}{m}{n}
+%    \end{macrocode}
+% The bold mathversion:
+%    \begin{macrocode}
+\SetSymbolFont{operators}   {bold}{\encodingdefault}{\rmdefault}{b}{n}
+\SetSymbolFont{letters}     {bold}{MPY1}{mtt}{b}{it}
+\SetSymbolFont{symbols}     {bold}{MPY2}{mtt}{b}{n}
+\SetSymbolFont{largesymbols}{bold}{MPY3}{mtt}{b}{n}
+%    \end{macrocode}
+% The `heavy' mathversion.  There are no `heavy' versions of the
+% `letters' and `operators' fonts:
+%    \begin{macrocode}
+\SetSymbolFont{symbols}     {heavy}{MPY2}{mtt}{eb}{n}
+\SetSymbolFont{largesymbols}{heavy}{MPY3}{mtt}{eb}{n}
+%    \end{macrocode}
+% The fonts named \cmd{\MTEXA@}, \cmd{\MTEXE@}, \cmd{\MTEXF@} and \cmd{\MTEXG@},
+% are used for the extra-large roots, delimiters and accents.
+% The fonts \cmd{\MTXL@} and \cmd{\MTXXXL@} provide the extra-large operators.
+% They are to be loaded at $1\times$, $2\times$, $3\times$ and
+% $4\times$ \cmd{\normalsize}.  Notice that we are bypassing the NFSS:
+%    \begin{macrocode}
+\normalsize
+\dimen@\f@size pt
+\font\MTEXA@=mtexa at \the\dimen@
+\font\MTXL@=mtxl at \the\dimen@
+\multiply\dimen@\tw@
+\font\MTEXE@=mtexe at \the\dimen@
+\font\MTXXXL@=mtxxxl at \the\dimen@
+\multiply\dimen@\tw@
+\font\MTEXF@=mtexf at \the\dimen@
+\multiply\dimen@\tw@
+\font\MTEXG@=mtexg at \the\dimen@
+%    \end{macrocode}
+%
+% \subsection{Math alphabet declarations}
+%
+% \subsubsection{The standard alphabets}
+% We don't have to declare |\mathrm| as \LaTeX{} declares it as
+% a math symbol alphabet pointing to `operators' symbol font.
+% Notice that we let \cmd{\mathbf} point to series `b' rather than 'bf', since
+% Times and similar fonts are usually available with that series.
+%    \begin{macrocode}
+% \DeclareSymbolFontAlphabet{\mathrm}{operators}
+\DeclareMathAlphabet{\mathbf}{\encodingdefault}{\rmdefault}{b}{n}
+\DeclareMathAlphabet{\mathit}{\encodingdefault}{\rmdefault}{m}{it}
+\DeclareMathAlphabet{\mathsf}{\encodingdefault}{\sfdefault}{m}{n}
+\DeclareMathAlphabet{\mathtt}{\encodingdefault}{\ttdefault}{m}{n}
+\SetMathAlphabet{\mathit}{bold}{\encodingdefault}{\rmdefault}{b}{it}
+\SetMathAlphabet{\mathsf}{bold}{\encodingdefault}{\sfdefault}{b}{n}
+\SetMathAlphabet{\mathtt}{bold}{\encodingdefault}{\ttdefault}{b}{n}
+%    \end{macrocode}
+%
+% \subsubsection{Script alphabets}
+% If the \Lopt{mtplusscr} option was selected
+% we make \cmd{\mathscr} and \cmd{\mathbscr} point to Spivak's script fonts:
+%
+%    \begin{macrocode}
+\ifx\mathscr s
+  \let\mathscr\relax
+  \DeclareMathAlphabet{\mathscr}       {U}{mtms}{m}{n}
+  \SetMathAlphabet    {\mathscr} {bold}{U}{mtms}{b}{n}
+  \DeclareMathAlphabet{\mathbscr}      {U}{mtms}{b}{n}
+\fi
+%    \end{macrocode}
+% If \Lopt{lucidascr} was selected we put the Lucida calligraphic
+% font in \cmd{\mathscr}.  
+%    \begin{macrocode}
+\ifx\mathscr l
+  \let\mathscr\relax
+  \DeclareMathAlphabet{\mathscr}  {OMS}{lby}{m}{n}
+  \SetMathAlphabet{\mathscr}{bold}{OMS}{lby}{b}{n}
+  \DeclareMathAlphabet{\mathbscr} {OMS}{lby}{b}{n}
+\fi
+%    \end{macrocode}
+%
+% \subsubsection{Calligraphic alphabets}
+%
+% If the \texttt{lucidacal} option was selected we set up |\mathcal| to
+% use Lucida:
+%    \begin{macrocode}
+\ifx\mathcal l
+  \let\mathcal\relax
+  \DeclareMathAlphabet{\mathcal}  {OMS}{lby}{m}{n}
+  \SetMathAlphabet{\mathcal}{bold}{OMS}{lby}{b}{n}
+  \DeclareMathAlphabet{\mathbcal} {OMS}{lby}{b}{n}
+\fi
+%    \end{macrocode}
+% The code below refers to the \Lopt{mtpluscal} option:
+%    \begin{macrocode}
+\ifx\mathcal s
+  \let\mathcal\relax
+  \DeclareMathAlphabet{\mathcal}  {U}{mtms}{m}{n}
+  \SetMathAlphabet{\mathcal}{bold}{U}{mtms}{b}{n}
+  \DeclareMathAlphabet{\mathbcal} {U}{mtms}{b}{n}
+\fi
+%    \end{macrocode}
+% The option \Lopt{eucal} loads Euler Script as \cmd{\mathcal}:
+%    \begin{macrocode}
+\ifx\mathcal e
+  \let\mathcal\relax
+  \DeclareFontFamily{U}{eus}{\skewchar\font'60}
+  \DeclareFontShape{U}{eus}{m}{n}{<-7>eusm5<7-9>eusm7<9->eusm10}{}
+  \DeclareFontShape{U}{eus}{b}{n}{<-7>eusb5<7-9>eusb7<9->eusb10}{}
+  \DeclareMathAlphabet{\mathcal}  {U}{eus}{m}{n}
+  \SetMathAlphabet{\mathcal}{bold}{U}{eus}{b}{n}
+  \DeclareMathAlphabet{\mathbcal} {U}{eus}{b}{n}
+\fi
+%    \end{macrocode}
+% Use CM for |\mathcal|; this is the default behavior, since
+% the CM Calligraphic fonts are always available:
+%    \begin{macrocode}
+\ifx\mathcal c
+  \let\mathcal\relax
+  \DeclareMathAlphabet{\mathcal}  {OMS}{cmsy}{m}{n}
+  \SetMathAlphabet{\mathcal}{bold}{OMS}{cmsy}{b}{n}
+  \DeclareMathAlphabet{\mathbcal} {OMS}{cmsy}{b}{n}
+\fi
+%    \end{macrocode}
+%
+% \subsubsection{Bold math alphabets}
+% We provide a non-standard {\bfseries bold upright} math alphabet, which points to the
+% MTMBF, MTMBS and MTMBT fonts:
+%    \begin{macrocode}
+\DeclareMathAlphabet{\mbf}{U}{mtt}{b}{n}
+%    \end{macrocode}
+% The {\bfseries\itshape bold italic} math alphabet is optional:
+%    \begin{macrocode}
+\ifx\mathbold m
+  \let\mathbold\relax
+  \DeclareMathAlphabet{\mathbold}{MPY1}{mtt}{b}{it}
+\fi
+%    \end{macrocode}
+% NB: Packages such \Lpack{mathpazo}, \Lpack{eulervm} or
+% \Lpack{fixmath}, too, provide a \cmd{\mathbold} alphabet.
+%
+% \subsubsection{Blackboard Bold alphabet}
+% Optionally, we set up a `blackboard bold' alphabet, too.
+%    \begin{macrocode}
+\ifx\mathbb y
+  \let\mathbb\relax
+  \DeclareFontFamily{U}{msb}{}%
+  \DeclareFontShape{U}{msb}{m}{n}{<-7>msbm5<7-9>msbm7<9->msbm10}{}%
+  \DeclareMathAlphabet{\mathbb}{U}{msb}{m}{n}
+\fi
+%    \end{macrocode}
+%
+%
+% \subsection{Math symbol declarations}
+% Definitions which are unchanged from standard \LaTeX{} are commented out.
+% \smallskip
+%
+% \subsubsection{Existing symbols}
+% All digits and punctuation characters are taken from the `letters' 
+% and `symbols' fonts now:
+%    \begin{macrocode}
+\DeclareMathSymbol{0}{\mathalpha}{letters}{"30}
+\DeclareMathSymbol{1}{\mathalpha}{letters}{"31}
+\DeclareMathSymbol{2}{\mathalpha}{letters}{"32}
+\DeclareMathSymbol{3}{\mathalpha}{letters}{"33}
+\DeclareMathSymbol{4}{\mathalpha}{letters}{"34}
+\DeclareMathSymbol{5}{\mathalpha}{letters}{"35}
+\DeclareMathSymbol{6}{\mathalpha}{letters}{"36}
+\DeclareMathSymbol{7}{\mathalpha}{letters}{"37}
+\DeclareMathSymbol{8}{\mathalpha}{letters}{"38}
+\DeclareMathSymbol{9}{\mathalpha}{letters}{"39}
+\DeclareMathSymbol{!}{\mathclose}{letters}{"8A}
+% \DeclareMathSymbol{*}{\mathbin}{symbols}{"03} % \ast
+\DeclareMathSymbol{+}{\mathbin}{symbols}{67}
+% \DeclareMathSymbol{,}{\mathpunct}{letters}{"3B}
+% \DeclareMathSymbol{-}{\mathbin}{symbols}{"00}
+% \DeclareMathSymbol{.}{\mathord}{letters}{"3A}
+\DeclareMathSymbol{:}{\mathrel}{symbols}{"57}
+\DeclareMathSymbol{;}{\mathpunct}{symbols}{"49}
+\DeclareMathSymbol{?}{\mathclose}{letters}{"8B}
+\DeclareMathSymbol{=}{\mathrel}{symbols}{"44}
+%    \end{macrocode}
+% All delimiters that are normally taken from the `operators' font
+% are mapped to `symbols' or `letters' now:
+%    \begin{macrocode}
+\DeclareMathDelimiter{(}{\mathopen}{letters}{46}{largesymbols}{0}
+\DeclareMathDelimiter{)}{\mathclose}{letters}{47}{largesymbols}{1}
+\DeclareMathDelimiter{[}{\mathopen} {letters}{140}{largesymbols}{"02}
+\DeclareMathDelimiter{]}{\mathclose}{letters}{141}{largesymbols}{"03}
+% \DeclareMathDelimiter{<}{\mathopen}{symbols}{"68}{largesymbols}{"0A}
+% \DeclareMathDelimiter{>}{\mathclose}{symbols}{"69}{largesymbols}{"0B}
+% \DeclareMathSymbol{<}{\mathrel}{letters}{"3C}
+% \DeclareMathSymbol{>}{\mathrel}{letters}{"3E}
+\DeclareMathDelimiter{/}{\mathord}{letters}{"3D}{largesymbols}{"0E}
+% \DeclareMathSymbol{/}{\mathord}{letters}{"3D}
+% \DeclareMathDelimiter{|}{\mathord}{symbols}{"6A}{largesymbols}{"0C}
+% \expandafter\DeclareMathDelimiter\@backslashchar
+%                         {\mathord}{symbols}{"6E}{largesymbols}{"0F}
+%    \end{macrocode}
+%
+% The lowercase Greek letters must be made \cmd{\mathalpha},
+% if we want \cmd{\mathbold} to act on them:
+%    \begin{macrocode}
+\ifx\mathbold\@undefined
+% \DeclareMathSymbol{\alpha}{\mathord}{letters}{"0B}
+% \DeclareMathSymbol{\beta}{\mathord}{letters}{"0C}
+% \DeclareMathSymbol{\gamma}{\mathord}{letters}{"0D}
+% \DeclareMathSymbol{\delta}{\mathord}{letters}{"0E}
+% \DeclareMathSymbol{\epsilon}{\mathord}{letters}{"0F}
+% \DeclareMathSymbol{\zeta}{\mathord}{letters}{"10}
+% \DeclareMathSymbol{\eta}{\mathord}{letters}{"11}
+% \DeclareMathSymbol{\theta}{\mathord}{letters}{"12}
+% \DeclareMathSymbol{\iota}{\mathord}{letters}{"13}
+% \DeclareMathSymbol{\kappa}{\mathord}{letters}{"14}
+% \DeclareMathSymbol{\lambda}{\mathord}{letters}{"15}
+% \DeclareMathSymbol{\mu}{\mathord}{letters}{"16}
+% \DeclareMathSymbol{\nu}{\mathord}{letters}{"17}
+% \DeclareMathSymbol{\xi}{\mathord}{letters}{"18}
+% \DeclareMathSymbol{\pi}{\mathord}{letters}{"19}
+% \DeclareMathSymbol{\rho}{\mathord}{letters}{"1A}
+% \DeclareMathSymbol{\sigma}{\mathord}{letters}{"1B}
+% \DeclareMathSymbol{\tau}{\mathord}{letters}{"1C}
+% \DeclareMathSymbol{\upsilon}{\mathord}{letters}{"1D}
+% \DeclareMathSymbol{\phi}{\mathord}{letters}{"1E}
+% \DeclareMathSymbol{\chi}{\mathord}{letters}{"1F}
+% \DeclareMathSymbol{\psi}{\mathord}{letters}{"20}
+% \DeclareMathSymbol{\omega}{\mathord}{letters}{"21}
+% \DeclareMathSymbol{\varepsilon}{\mathord}{letters}{"22}
+% \DeclareMathSymbol{\vartheta}{\mathord}{letters}{"23}
+% \DeclareMathSymbol{\varpi}{\mathord}{letters}{"24}
+% \DeclareMathSymbol{\varrho}{\mathord}{letters}{"25}
+% \DeclareMathSymbol{\varsigma}{\mathord}{letters}{"26}
+% \DeclareMathSymbol{\varphi}{\mathord}{letters}{"27}
+  \DeclareMathSymbol{\varkappa}{\mathord}{letters}{126}% new
+  \DeclareMathSymbol{\varbeta}{\mathord}{letters}{176} % new
+  \DeclareMathSymbol{\vardelta}{\mathord}{letters}{178}% new
+\else
+  \DeclareMathSymbol{\alpha}{\mathalpha}{letters}{"0B}
+  \DeclareMathSymbol{\beta}{\mathalpha}{letters}{"0C}
+  \DeclareMathSymbol{\gamma}{\mathalpha}{letters}{"0D}
+  \DeclareMathSymbol{\delta}{\mathalpha}{letters}{"0E}
+  \DeclareMathSymbol{\epsilon}{\mathalpha}{letters}{"0F}
+  \DeclareMathSymbol{\zeta}{\mathalpha}{letters}{"10}
+  \DeclareMathSymbol{\eta}{\mathalpha}{letters}{"11}
+  \DeclareMathSymbol{\theta}{\mathalpha}{letters}{"12}
+  \DeclareMathSymbol{\iota}{\mathalpha}{letters}{"13}
+  \DeclareMathSymbol{\kappa}{\mathalpha}{letters}{"14}
+  \DeclareMathSymbol{\lambda}{\mathalpha}{letters}{"15}
+  \DeclareMathSymbol{\mu}{\mathalpha}{letters}{"16}
+  \DeclareMathSymbol{\nu}{\mathalpha}{letters}{"17}
+  \DeclareMathSymbol{\xi}{\mathalpha}{letters}{"18}
+  \DeclareMathSymbol{\pi}{\mathalpha}{letters}{"19}
+  \DeclareMathSymbol{\rho}{\mathalpha}{letters}{"1A}
+  \DeclareMathSymbol{\sigma}{\mathalpha}{letters}{"1B}
+  \DeclareMathSymbol{\tau}{\mathalpha}{letters}{"1C}
+  \DeclareMathSymbol{\upsilon}{\mathalpha}{letters}{"1D}
+  \DeclareMathSymbol{\phi}{\mathalpha}{letters}{"1E}
+  \DeclareMathSymbol{\chi}{\mathalpha}{letters}{"1F}
+  \DeclareMathSymbol{\psi}{\mathalpha}{letters}{"20}
+  \DeclareMathSymbol{\omega}{\mathalpha}{letters}{"21}
+  \DeclareMathSymbol{\varepsilon}{\mathalpha}{letters}{"22}
+  \DeclareMathSymbol{\vartheta}{\mathalpha}{letters}{"23}
+  \DeclareMathSymbol{\varpi}{\mathalpha}{letters}{"24}
+  \DeclareMathSymbol{\varrho}{\mathalpha}{letters}{"25}
+  \DeclareMathSymbol{\varsigma}{\mathalpha}{letters}{"26}
+  \DeclareMathSymbol{\varphi}{\mathalpha}{letters}{"27}
+  \DeclareMathSymbol{\varkappa}{\mathalpha}{letters}{126}% new
+  \DeclareMathSymbol{\varbeta}{\mathalpha}{letters}{176} % new
+  \DeclareMathSymbol{\vardelta}{\mathalpha}{letters}{178}% new
+\fi
+%    \end{macrocode}
+%
+% With ordinary \LaTeX{} uppercase Greek is always upright---why?
+% The options \Lopt{uprightGreek} and \Lopt{slantedGreek} control,
+% how uppercase Greek letters are to appear.
+% This option is also provided with packages such as \Lpack{mathpazo}.
+%
+% By default, the uc Greek letters are made \cmd{\mathord}, because they
+% are not available from any other alphabet.  However, if the option
+% \Lopt{boldalphabet} is selected,
+% we must define them as \cmd{\mathalpha}.  Let's start with \Lopt[slantedGreek]:
+%    \begin{macrocode}
+\ifx\Gamma s
+  \let\Gamma\@undefined
+  \ifx\mathbold\@undefined
+    \DeclareMathSymbol{\Gamma}{\mathord}{letters}{"00}
+    \DeclareMathSymbol{\Delta}{\mathord}{letters}{"01}
+    \DeclareMathSymbol{\Theta}{\mathord}{letters}{"02}
+    \DeclareMathSymbol{\Lambda}{\mathord}{letters}{"03}
+    \DeclareMathSymbol{\Xi}{\mathord}{letters}{"04}
+    \DeclareMathSymbol{\Pi}{\mathord}{letters}{"05}
+    \DeclareMathSymbol{\Sigma}{\mathord}{letters}{"06}
+    \DeclareMathSymbol{\Upsilon}{\mathord}{letters}{"07}
+    \DeclareMathSymbol{\Phi}{\mathord}{letters}{"08}
+    \DeclareMathSymbol{\Psi}{\mathord}{letters}{"09}
+    \DeclareMathSymbol{\Omega}{\mathord}{letters}{"0A}
+  \else
+    \DeclareMathSymbol{\Gamma}{\mathalpha}{letters}{"00}
+    \DeclareMathSymbol{\Delta}{\mathalpha}{letters}{"01}
+    \DeclareMathSymbol{\Theta}{\mathalpha}{letters}{"02}
+    \DeclareMathSymbol{\Lambda}{\mathalpha}{letters}{"03}
+    \DeclareMathSymbol{\Xi}{\mathalpha}{letters}{"04}
+    \DeclareMathSymbol{\Pi}{\mathalpha}{letters}{"05}
+    \DeclareMathSymbol{\Sigma}{\mathalpha}{letters}{"06}
+    \DeclareMathSymbol{\Upsilon}{\mathalpha}{letters}{"07}
+    \DeclareMathSymbol{\Phi}{\mathalpha}{letters}{"08}
+    \DeclareMathSymbol{\Psi}{\mathalpha}{letters}{"09}
+    \DeclareMathSymbol{\Omega}{\mathalpha}{letters}{"0A}
+  \fi
+%    \end{macrocode}
+% The \Lopt{[uprightGreek]} variant, which is the default:
+%    \begin{macrocode}
+\else
+  \let\Gamma\@undefined
+  \ifx\mathbold\@undefined
+    \DeclareMathSymbol{\Gamma}{\mathord}{letters}{"80}
+    \DeclareMathSymbol{\Delta}{\mathord}{letters}{"81}
+    \DeclareMathSymbol{\Theta}{\mathord}{letters}{"82}
+    \DeclareMathSymbol{\Lambda}{\mathord}{letters}{"83}
+    \DeclareMathSymbol{\Xi}{\mathord}{letters}{"84}
+    \DeclareMathSymbol{\Pi}{\mathord}{letters}{"85}
+    \DeclareMathSymbol{\Sigma}{\mathord}{letters}{"86}
+    \DeclareMathSymbol{\Upsilon}{\mathord}{letters}{"87}
+    \DeclareMathSymbol{\Phi}{\mathord}{letters}{"88}
+    \DeclareMathSymbol{\Psi}{\mathord}{letters}{"89}
+    \DeclareMathSymbol{\Omega}{\mathord}{letters}{"7F}
+  \else
+    \DeclareMathSymbol{\Gamma}{\mathalpha}{letters}{"80}
+    \DeclareMathSymbol{\Delta}{\mathalpha}{letters}{"81}
+    \DeclareMathSymbol{\Theta}{\mathalpha}{letters}{"82}
+    \DeclareMathSymbol{\Lambda}{\mathalpha}{letters}{"83}
+    \DeclareMathSymbol{\Xi}{\mathalpha}{letters}{"84}
+    \DeclareMathSymbol{\Pi}{\mathalpha}{letters}{"85}
+    \DeclareMathSymbol{\Sigma}{\mathalpha}{letters}{"86}
+    \DeclareMathSymbol{\Upsilon}{\mathalpha}{letters}{"87}
+    \DeclareMathSymbol{\Phi}{\mathalpha}{letters}{"88}
+    \DeclareMathSymbol{\Psi}{\mathalpha}{letters}{"89}
+    \DeclareMathSymbol{\Omega}{\mathalpha}{letters}{"7F}
+  \fi
+\fi
+%    \end{macrocode}
+%
+% The slanted uppercase Greek letters are made available with alternative names,
+% too.  Notice that these are undocumented:
+%    \begin{macrocode}
+ \DeclareMathSymbol{\varGamma}{\mathord}{letters}{"00} 
+ \DeclareMathSymbol{\varDelta}{\mathord}{letters}{"01} 
+ \DeclareMathSymbol{\varTheta}{\mathord}{letters}{"02} 
+ \DeclareMathSymbol{\varLambda}{\mathord}{letters}{"03} 
+ \DeclareMathSymbol{\varXi}{\mathord}{letters}{"04} 
+ \DeclareMathSymbol{\varPi}{\mathord}{letters}{"05} 
+ \DeclareMathSymbol{\varSigma}{\mathord}{letters}{"06} 
+ \DeclareMathSymbol{\varUpsilon}{\mathord}{letters}{"07} 
+ \DeclareMathSymbol{\varPhi}{\mathord}{letters}{"08} 
+ \DeclareMathSymbol{\varPsi}{\mathord}{letters}{"09} 
+ \DeclareMathSymbol{\varOmega}{\mathord}{letters}{"0A} 
+%    \end{macrocode}
+%
+% The following Greek letters are always upright.
+%    \begin{macrocode}
+ \DeclareMathSymbol{\upGamma}{\mathord}{letters}{"80} 
+ \DeclareMathSymbol{\upDelta}{\mathord}{letters}{"81} 
+ \DeclareMathSymbol{\upTheta}{\mathord}{letters}{"82} 
+ \DeclareMathSymbol{\upLambda}{\mathord}{letters}{"83} 
+ \DeclareMathSymbol{\upXi}{\mathord}{letters}{"84} 
+ \DeclareMathSymbol{\upPi}{\mathord}{letters}{"85} 
+ \DeclareMathSymbol{\upSigma}{\mathord}{letters}{"86} 
+ \DeclareMathSymbol{\upUpsilon}{\mathord}{letters}{"87} 
+ \DeclareMathSymbol{\upPhi}{\mathord}{letters}{"88} 
+ \DeclareMathSymbol{\upPsi}{\mathord}{letters}{"89} 
+ \DeclareMathSymbol{\upOmega}{\mathord}{letters}{"7F} 
+ \DeclareMathSymbol{\upalpha}{\mathord}{letters}{"92}
+ \DeclareMathSymbol{\upbeta}{\mathord}{letters}{"93}
+ \DeclareMathSymbol{\upgamma}{\mathord}{letters}{"94}
+ \DeclareMathSymbol{\updelta}{\mathord}{letters}{"95}
+ \DeclareMathSymbol{\upepsilon}{\mathord}{letters}{"96}
+ \DeclareMathSymbol{\upzeta}{\mathord}{letters}{"97}
+ \DeclareMathSymbol{\upeta}{\mathord}{letters}{"98}
+ \DeclareMathSymbol{\uptheta}{\mathord}{letters}{"99}
+ \DeclareMathSymbol{\upiota}{\mathord}{letters}{"9A}
+ \DeclareMathSymbol{\upkappa}{\mathord}{letters}{"9B}
+ \DeclareMathSymbol{\uplambda}{\mathord}{letters}{"9C}
+ \DeclareMathSymbol{\upmu}{\mathord}{letters}{"9D}
+ \DeclareMathSymbol{\upnu}{\mathord}{letters}{"9E}
+ \DeclareMathSymbol{\upxi}{\mathord}{letters}{"9F}
+ \DeclareMathSymbol{\uppi}{\mathord}{letters}{160}
+ \DeclareMathSymbol{\uprho}{\mathord}{letters}{161}
+ \DeclareMathSymbol{\upsigma}{\mathord}{letters}{162}
+ \DeclareMathSymbol{\uptau}{\mathord}{letters}{163}
+ \DeclareMathSymbol{\upupsilon}{\mathord}{letters}{164}
+ \DeclareMathSymbol{\upphi}{\mathord}{letters}{165}
+ \DeclareMathSymbol{\upchi}{\mathord}{letters}{166}
+ \DeclareMathSymbol{\uppsi}{\mathord}{letters}{167}
+ \DeclareMathSymbol{\upomega}{\mathord}{letters}{168}
+ \DeclareMathSymbol{\upvarepsilon}{\mathord}{letters}{169}
+ \DeclareMathSymbol{\upvartheta}{\mathord}{letters}{170}
+ \DeclareMathSymbol{\upvarpi}{\mathord}{letters}{171}
+ \DeclareMathSymbol{\upvarrho}{\mathord}{letters}{172}
+ \DeclareMathSymbol{\upvarsigma}{\mathord}{letters}{173}
+ \DeclareMathSymbol{\upvarphi}{\mathord}{letters}{174}
+ \DeclareMathSymbol{\upvarkappa}{\mathord}{letters}{175}
+ \DeclareMathSymbol{\upvarbeta}{\mathord}{letters}{177}
+ \DeclareMathSymbol{\upvardelta}{\mathord}{letters}{179}
+%    \end{macrocode}
+%
+% We continue with standard symbols:
+%    \begin{macrocode}
+% \DeclareMathSymbol{\aleph}{\mathord}{symbols}{"40}
+% \DeclareMathSymbol{\imath}{\mathord}{letters}{"7B}
+% \DeclareMathSymbol{\jmath}{\mathord}{letters}{"7C}
+% \DeclareMathSymbol{\ell}{\mathord}{letters}{"60}
+% \DeclareMathSymbol{\wp}{\mathord}{letters}{"7D}
+% \DeclareMathSymbol{\Re}{\mathord}{symbols}{"3C}
+% \DeclareMathSymbol{\Im}{\mathord}{symbols}{"3D}
+% \DeclareMathSymbol{\partial}{\mathord}{letters}{"40}
+% \DeclareMathSymbol{\infty}{\mathord}{symbols}{"31}
+% \DeclareMathSymbol{\prime}{\mathord}{symbols}{"30}
+% \DeclareMathSymbol{\emptyset}{\mathord}{symbols}{"3B}
+% \DeclareMathSymbol{\nabla}{\mathord}{symbols}{"72}
+% \def\surd{{\mathchar"1270}}
+% \DeclareMathSymbol{\top}{\mathord}{symbols}{"3E}
+% \DeclareMathSymbol{\bot}{\mathord}{symbols}{"3F}
+% \DeclareMathSymbol{\triangle}{\mathord}{symbols}{"34}
+% \DeclareMathSymbol{\forall}{\mathord}{symbols}{"38}
+% \DeclareMathSymbol{\exists}{\mathord}{symbols}{"39}
+% \DeclareMathSymbol{\neg}{\mathord}{symbols}{"3A}
+%     \let\lnot=\neg
+% \DeclareMathSymbol{\flat}{\mathord}{letters}{"5B}
+% \DeclareMathSymbol{\natural}{\mathord}{letters}{"5C}
+% \DeclareMathSymbol{\sharp}{\mathord}{letters}{"5D}
+% \DeclareMathSymbol{\clubsuit}{\mathord}{symbols}{"7C}
+% \DeclareMathSymbol{\diamondsuit}{\mathord}{symbols}{"7D}
+% \DeclareMathSymbol{\heartsuit}{\mathord}{symbols}{"7E}
+% \DeclareMathSymbol{\spadesuit}{\mathord}{symbols}{"7F}
+% \DeclareMathSymbol{\coprod}{\mathop}{largesymbols}{"60}
+% \DeclareMathSymbol{\bigvee}{\mathop}{largesymbols}{"57}
+% \DeclareMathSymbol{\bigwedge}{\mathop}{largesymbols}{"56}
+% \DeclareMathSymbol{\biguplus}{\mathop}{largesymbols}{"55}
+% \DeclareMathSymbol{\bigcap}{\mathop}{largesymbols}{"54}
+% \DeclareMathSymbol{\bigcup}{\mathop}{largesymbols}{"53}
+% \DeclareMathSymbol{\intop}{\mathop}{largesymbols}{"52}
+%     \def\int{\intop\nolimits}
+% \DeclareMathSymbol{\prod}{\mathop}{largesymbols}{"51}
+% \DeclareMathSymbol{\sum}{\mathop}{largesymbols}{"50}
+% \DeclareMathSymbol{\bigotimes}{\mathop}{largesymbols}{"4E}
+% \DeclareMathSymbol{\bigoplus}{\mathop}{largesymbols}{"4C}
+% \DeclareMathSymbol{\bigodot}{\mathop}{largesymbols}{"4A}
+% \DeclareMathSymbol{\ointop}{\mathop}{largesymbols}{"48}
+%     \def\oint{\ointop\nolimits}
+% \DeclareMathSymbol{\bigsqcup}{\mathop}{largesymbols}{"46}
+% \DeclareMathSymbol{\smallint}{\mathop}{symbols}{"73}
+\DeclareMathSymbol{\triangleleft}{\mathbin}{symbols}{"47}
+\DeclareMathSymbol{\triangleright}{\mathbin}{symbols}{"46}
+% \DeclareMathSymbol{\bigtriangleup}{\mathbin}{symbols}{"34}
+% \DeclareMathSymbol{\bigtriangledown}{\mathbin}{symbols}{"35}
+% \DeclareMathSymbol{\wedge}{\mathbin}{symbols}{"5E}
+%    \let\land=\wedge
+% \DeclareMathSymbol{\vee}{\mathbin}{symbols}{"5F}
+%    \let\lor=\vee
+% \DeclareMathSymbol{\cap}{\mathbin}{symbols}{"5C}
+% \DeclareMathSymbol{\cup}{\mathbin}{symbols}{"5B}
+\DeclareMathSymbol{\ddagger}{\mathbin}{letters}{"8F}
+\DeclareMathSymbol{\dagger}{\mathbin}{letters}{"8E}
+% \DeclareMathSymbol{\sqcap}{\mathbin}{symbols}{"75}
+% \DeclareMathSymbol{\sqcup}{\mathbin}{symbols}{"74}
+% \DeclareMathSymbol{\uplus}{\mathbin}{symbols}{"5D}
+% \DeclareMathSymbol{\amalg}{\mathbin}{symbols}{"71}
+% \DeclareMathSymbol{\diamond}{\mathbin}{symbols}{"05}
+% \DeclareMathSymbol{\bullet}{\mathbin}{symbols}{"0F}
+% \DeclareMathSymbol{\wr}{\mathbin}{symbols}{"6F}
+% \DeclareMathSymbol{\div}{\mathbin}{symbols}{"04}
+% \DeclareMathSymbol{\odot}{\mathbin}{symbols}{"0C}
+% \DeclareMathSymbol{\oslash}{\mathbin}{symbols}{"0B}
+% \DeclareMathSymbol{\otimes}{\mathbin}{symbols}{"0A}
+% \DeclareMathSymbol{\ominus}{\mathbin}{symbols}{"09}
+% \DeclareMathSymbol{\oplus}{\mathbin}{symbols}{"08}
+% \DeclareMathSymbol{\mp}{\mathbin}{symbols}{"07}
+% \DeclareMathSymbol{\pm}{\mathbin}{symbols}{"06}
+% \DeclareMathSymbol{\circ}{\mathbin}{symbols}{"0E}
+% \DeclareMathSymbol{\bigcirc}{\mathbin}{symbols}{"0D}
+% \DeclareMathSymbol{\setminus}{\mathbin}{symbols}{"6E}
+% \DeclareMathSymbol{\cdot}{\mathbin}{symbols}{"01}
+% \DeclareMathSymbol{\ast}{\mathbin}{symbols}{"03}
+% \DeclareMathSymbol{\times}{\mathbin}{symbols}{"02}
+% \DeclareMathSymbol{\star}{\mathbin}{letters}{"3F}
+% \DeclareMathSymbol{\propto}{\mathrel}{symbols}{"2F}
+% \DeclareMathSymbol{\sqsubseteq}{\mathrel}{symbols}{"76}
+% \DeclareMathSymbol{\sqsupseteq}{\mathrel}{symbols}{"77}
+% \DeclareMathSymbol{\parallel}{\mathrel}{symbols}{"6B}
+% \DeclareMathSymbol{\mid}{\mathrel}{symbols}{"6A}
+% \DeclareMathSymbol{\dashv}{\mathrel}{symbols}{"61}
+% \DeclareMathSymbol{\vdash}{\mathrel}{symbols}{"60}
+% \DeclareMathSymbol{\nearrow}{\mathrel}{symbols}{"25}
+% \DeclareMathSymbol{\searrow}{\mathrel}{symbols}{"26}
+% \DeclareMathSymbol{\nwarrow}{\mathrel}{symbols}{"2D}
+% \DeclareMathSymbol{\swarrow}{\mathrel}{symbols}{"2E}
+% \DeclareMathSymbol{\Leftrightarrow}{\mathrel}{symbols}{"2C}
+% \DeclareMathSymbol{\Leftarrow}{\mathrel}{symbols}{"28}
+% \DeclareMathSymbol{\Rightarrow}{\mathrel}{symbols}{"29}
+% \def\neq{\not=} \let\ne=\neq
+% \DeclareMathSymbol{\leq}{\mathrel}{symbols}{"14}
+%    \let\le=\leq
+% \DeclareMathSymbol{\geq}{\mathrel}{symbols}{"15}
+%    \let\ge=\geq
+% \DeclareMathSymbol{\succ}{\mathrel}{symbols}{"1F}
+% \DeclareMathSymbol{\prec}{\mathrel}{symbols}{"1E}
+% \DeclareMathSymbol{\approx}{\mathrel}{symbols}{"19}
+% \DeclareMathSymbol{\succeq}{\mathrel}{symbols}{"17}
+% \DeclareMathSymbol{\preceq}{\mathrel}{symbols}{"16}
+% \DeclareMathSymbol{\supset}{\mathrel}{symbols}{"1B}
+% \DeclareMathSymbol{\subset}{\mathrel}{symbols}{"1A}
+% \DeclareMathSymbol{\supseteq}{\mathrel}{symbols}{"13}
+% \DeclareMathSymbol{\subseteq}{\mathrel}{symbols}{"12}
+% \DeclareMathSymbol{\in}{\mathrel}{symbols}{"32}
+% \DeclareMathSymbol{\ni}{\mathrel}{symbols}{"33}
+%     \let\owns=\ni
+% \DeclareMathSymbol{\gg}{\mathrel}{symbols}{"1D}
+% \DeclareMathSymbol{\ll}{\mathrel}{symbols}{"1C}
+% \DeclareMathSymbol{\not}{\mathrel}{symbols}{"36}
+% \DeclareMathSymbol{\leftrightarrow}{\mathrel}{symbols}{"24}
+% \DeclareMathSymbol{\leftarrow}{\mathrel}{symbols}{"20}
+%    \let\gets=\leftarrow
+% \DeclareMathSymbol{\rightarrow}{\mathrel}{symbols}{"21}
+%    \let\to=\rightarrow
+% \DeclareMathSymbol{\mapstochar}{\mathrel}{symbols}{"37}
+% \DeclareMathSymbol{\sim}{\mathrel}{symbols}{"18}
+% \DeclareMathSymbol{\simeq}{\mathrel}{symbols}{"27}
+% \DeclareMathSymbol{\perp}{\mathrel}{symbols}{"3F}
+% \DeclareMathSymbol{\equiv}{\mathrel}{symbols}{"11}
+% \DeclareMathSymbol{\asymp}{\mathrel}{symbols}{"10}
+% \DeclareMathSymbol{\smile}{\mathrel}{letters}{"5E}
+% \DeclareMathSymbol{\frown}{\mathrel}{letters}{"5F}
+% \DeclareMathSymbol{\leftharpoonup}{\mathrel}{letters}{"28}
+% \DeclareMathSymbol{\leftharpoondown}{\mathrel}{letters}{"29}
+% \DeclareMathSymbol{\rightharpoonup}{\mathrel}{letters}{"2A}
+% \DeclareMathSymbol{\rightharpoondown}{\mathrel}{letters}{"2B}
+% \def\doteq{\buildrel\textstyle.\over=}
+% \def\joinrel{\mathrel{\mkern-3mu}}
+% \def\relbar{\mathrel{\smash-}}
+\let\Relbar\@undefined
+\DeclareMathSymbol{\Relbar}{\mathrel}{symbols}{"48}
+% \DeclareMathSymbol{\lhook}{\mathrel}{letters}{"2C}
+%    \def\hookrightarrow{\lhook\joinrel\rightarrow}
+% \DeclareMathSymbol{\rhook}{\mathrel}{letters}{"2D}
+%    \def\hookleftarrow{\leftarrow\joinrel\rhook}
+% \def\bowtie{\mathrel\triangleright\joinrel\mathrel\triangleleft}
+% \def\models{\mathrel{|}\joinrel\Relbar}
+% \def\Longrightarrow{\Relbar\joinrel\Rightarrow}
+% \DeclareRobustCommand\longrightarrow
+%      {\relbar\joinrel\rightarrow}
+% \DeclareRobustCommand\longleftarrow
+%      {\leftarrow\joinrel\relbar}
+% \def\Longleftarrow{\Leftarrow\joinrel\Relbar}
+% \def\longmapsto{\mapstochar\longrightarrow}
+% \def\longleftrightarrow{\leftarrow\joinrel\rightarrow}
+% \def\Longleftrightarrow{\Leftarrow\joinrel\Rightarrow}
+% \def\iff{\;\Longleftrightarrow\;}
+\DeclareMathSymbol{\ldotp}{\mathpunct}{letters}{"3A}
+% \DeclareMathSymbol{\cdotp}{\mathpunct}{symbols}{"01}
+\let\colon\@undefined % for amsmath!
+\DeclareMathSymbol{\colon}{\mathpunct}{symbols}{"57}
+% \def\cdots{\mathinner{\cdotp\cdotp\cdotp}}
+%    \end{macrocode}
+% Improved definitions of the commands \cmd{\vdots} and 
+% \cmd{\ddots} are adapted from \Lpack{mathtime}.
+% They take their dots always from the math font, rather than
+% from a text font.  If the package \Lpack{mathdots} was
+% loaded before, we skip the redefinitions, since that package
+% provides a much more comprehensive solution.
+%    \begin{macrocode}
+\@ifpackageloaded{mathdots}{}{%
+  \newcommand\hb@xmdot{\hbox{$\m@th.$}}
+  \def\vdots{\vbox{\baselineskip4\p@ \lineskiplimit\z@
+    \kern6\p@\hb@xmdot\hb@xmdot\hb@xmdot}}
+  \def\ddots{\mathinner{\mkern1mu\raise7\p@\vbox{\kern7\p@
+    \hb@xmdot}\mkern2mu
+    \raise4\p@\hb@xmdot\mkern2mu\raise\p@\hb@xmdot\mkern1mu}}
+}  
+%    \end{macrocode}
+% We make all accents |\mathord|; as they are placed in strange
+% positions it is really not feasible to support changing them.
+%    \begin{macrocode}
+\DeclareMathAccent{\vec}{\mathord}{symbols}{69}
+\DeclareMathAccent{\grave}{\mathord}{symbols}{74}
+\DeclareMathAccent{\acute}{\mathord}{symbols}{75}
+\DeclareMathAccent{\check}{\mathord}{symbols}{76}
+\DeclareMathAccent{\breve}{\mathord}{symbols}{77}
+\DeclareMathAccent{\bar}{\mathord}{symbols}{78}
+\DeclareMathAccent{\hat}{\mathord}{symbols}{79}
+\DeclareMathAccent{\dot}{\mathord}{symbols}{80}
+\DeclareMathAccent{\tilde}{\mathord}{symbols}{81}
+\DeclareMathAccent{\ddot}{\mathord}{symbols}{82}
+\DeclareMathAccent{\mathring}{\mathord}{symbols}{86}
+%    \end{macrocode}
+% The wide math accents will later be defined as macros:
+%    \begin{macrocode}
+% \DeclareMathAccent{\widetilde}{\mathord}{largesymbols}{"65}
+% \DeclareMathAccent{\widehat}{\mathord}{largesymbols}{"62}
+%    \end{macrocode}
+%    \begin{macrocode}
+% \DeclareMathRadical{\sqrtsign}{symbols}{"70}{largesymbols}{"70}
+% \def\overrightarrow#1{\vbox{\m@th\ialign{##\crcr
+%       \rightarrowfill\crcr\noalign{\kern-\p@\nointerlineskip}
+%       $\hfil\displaystyle{#1}\hfil$\crcr}}}
+% \def\overleftarrow#1{\vbox{\m@th\ialign{##\crcr
+%       \leftarrowfill\crcr\noalign{\kern-\p@\nointerlineskip}%
+%       $\hfil\displaystyle{#1}\hfil$\crcr}}}
+% \def\overbrace#1{\mathop{\vbox{\m@th\ialign{##\crcr\noalign{\kern3\p@}%
+%       \downbracefill\crcr\noalign{\kern3\p@\nointerlineskip}%
+%       $\hfil\displaystyle{#1}\hfil$\crcr}}}\limits}
+% \def\underbrace#1{\mathop{\vtop{\m@th\ialign{##\crcr
+%    $\hfil\displaystyle{#1}\hfil$\crcr
+%    \noalign{\kern3\p@\nointerlineskip}%
+%    \upbracefill\crcr\noalign{\kern3\p@}}}}\limits}
+% \def\skew#1#2#3{{\muskip\z@#1mu\divide\muskip\z@\tw@ \mkern\muskip\z@
+%     #2{\mkern-\muskip\z@{#3}\mkern\muskip\z@}\mkern-\muskip\z@}{}}
+% \def\rightarrowfill{$\m@th\smash-\mkern-7mu%
+%   \cleaders\hbox{$\mkern-2mu\smash-\mkern-2mu$}\hfill
+%   \mkern-7mu\mathord\rightarrow$}
+% \def\leftarrowfill{$\m@th\mathord\leftarrow\mkern-7mu%
+%   \cleaders\hbox{$\mkern-2mu\smash-\mkern-2mu$}\hfill
+%   \mkern-7mu\smash-$}
+%    \end{macrocode}
+%    \begin{macrocode}
+\DeclareMathSymbol{\braceld}{\mathord}{largesymbols}{"82}
+\DeclareMathSymbol{\bracerd}{\mathord}{largesymbols}{"83}
+\DeclareMathSymbol{\bracelu}{\mathord}{largesymbols}{"84}
+\DeclareMathSymbol{\braceru}{\mathord}{largesymbols}{"85}
+% \def\downbracefill{$\m@th \setbox\z@\hbox{$\braceld$}%
+%   \braceld\leaders\vrule \@height\ht\z@ \@depth\z@\hfill\braceru
+%   \bracelu\leaders\vrule \@height\ht\z@ \@depth\z@\hfill\bracerd$}
+% \def\upbracefill{$\m@th \setbox\z@\hbox{$\braceld$}%
+%   \bracelu\leaders\vrule \@height\ht\z@ \@depth\z@\hfill\bracerd
+%   \braceld\leaders\vrule \@height\ht\z@ \@depth\z@\hfill\braceru$}
+% \DeclareMathDelimiter{\lmoustache}   % top from (, bottom from )
+%    {\mathopen}{largesymbols}{"7A}{largesymbols}{"40}
+% \DeclareMathDelimiter{\rmoustache}   % top from ), bottom from (
+%    {\mathclose}{largesymbols}{"7B}{largesymbols}{"41}
+% \DeclareMathDelimiter{\arrowvert}    % arrow without arrowheads
+%    {\mathord}{symbols}{"6A}{largesymbols}{"3C}
+% \DeclareMathDelimiter{\Arrowvert}    % double arrow without arrowheads
+%    {\mathord}{symbols}{"6B}{largesymbols}{"3D}
+% \DeclareMathDelimiter{\Vert}
+%    {\mathord}{symbols}{"6B}{largesymbols}{"0D}
+% \let\|=\Vert
+% \DeclareMathDelimiter{\vert}
+%    {\mathord}{symbols}{"6A}{largesymbols}{"0C}
+% \DeclareMathDelimiter{\uparrow}
+%    {\mathrel}{symbols}{"22}{largesymbols}{"78}
+% \DeclareMathDelimiter{\downarrow}
+%    {\mathrel}{symbols}{"23}{largesymbols}{"79}
+% \DeclareMathDelimiter{\updownarrow}
+%    {\mathrel}{symbols}{"6C}{largesymbols}{"3F}
+% \DeclareMathDelimiter{\Uparrow}
+%    {\mathrel}{symbols}{"2A}{largesymbols}{"7E}
+% \DeclareMathDelimiter{\Downarrow}
+%    {\mathrel}{symbols}{"2B}{largesymbols}{"7F}
+% \DeclareMathDelimiter{\Updownarrow}
+%    {\mathrel}{symbols}{"6D}{largesymbols}{"77}
+% \DeclareMathDelimiter{\backslash}    % for double coset G\backslash H
+%    {\mathord}{symbols}{"6E}{largesymbols}{"0F}
+% \DeclareMathDelimiter{\rangle}
+%    {\mathclose}{symbols}{"69}{largesymbols}{"0B}
+% \DeclareMathDelimiter{\langle}
+%    {\mathopen}{symbols}{"68}{largesymbols}{"0A}
+% \DeclareMathDelimiter{\rbrace}
+%   {\mathclose}{symbols}{"67}{largesymbols}{"09}
+% \DeclareMathDelimiter{\lbrace}
+%    {\mathopen}{symbols}{"66}{largesymbols}{"08}
+% \DeclareMathDelimiter{\rceil}
+%    {\mathclose}{symbols}{"65}{largesymbols}{"07}
+% \DeclareMathDelimiter{\lceil}
+%    {\mathopen}{symbols}{"64}{largesymbols}{"06}
+% \DeclareMathDelimiter{\rfloor}
+%    {\mathclose}{symbols}{"63}{largesymbols}{"05}
+% \DeclareMathDelimiter{\lfloor}
+%    {\mathopen}{symbols}{"62}{largesymbols}{"04}
+% \DeclareMathDelimiter{\lgroup} % extensible ( with sharper tips
+%      {\mathopen}{largesymbols}{"3A}{largesymbols}{"3A}
+% \DeclareMathDelimiter{\rgroup} % extensible ) with sharper tips
+%      {\mathclose}{largesymbols}{"3B}{largesymbols}{"3B}
+% \DeclareMathDelimiter{\bracevert} % the vertical bar that extends braces
+%      {\mathord}{largesymbols}{"3E}{largesymbols}{"3E}
+\DeclareMathSymbol{\mathparagraph}{\mathord}{letters}{"91}
+\DeclareMathSymbol{\mathsection}{\mathord}{letters}{"90}
+%    \end{macrocode}
+%
+% \subsubsection{New symbols and accents}
+% Ordinary symbols:
+%    \begin{macrocode}
+\DeclareMathSymbol{\openclubsuit}{\mathord}{symbols}{"80}
+\DeclareMathSymbol{\shadedclubsuit}{\mathord}{symbols}{"81}
+\DeclareMathSymbol{\openspadesuit}{\mathord}{symbols}{"82}
+\DeclareMathSymbol{\shadedspadesuit}{\mathord}{symbols}{"83}
+\DeclareMathSymbol{\hslash}{\mathord}{symbols}{175}
+\DeclareMathSymbol{\digamma}{\mathord}{symbols}{177}
+\DeclareMathSymbol{\mathyen}{\mathord}{symbols}{176}
+\DeclareRobustCommand{\yen}{\ifmmode\mathyen\else\textyen\fi}
+%    \end{macrocode}
+% Binary operators:
+%    \begin{macrocode}
+\DeclareMathSymbol{\comp}{\mathbin}{symbols}{66}
+\DeclareMathSymbol{\setdif}{\mathbin}{symbols}{88}
+\DeclareMathSymbol{\cupprod}{\mathbin}{symbols}{89}
+\DeclareMathSymbol{\capprod}{\mathbin}{symbols}{90}
+%    \end{macrocode}
+% Large operators:
+%    \begin{macrocode}
+\DeclareMathSymbol{\bigcupprod}{\mathop}{largesymbols}{"8E}
+\DeclareMathSymbol{\bigcapprod}{\mathop}{largesymbols}{"90}
+%    \end{macrocode}
+% \mtpro has triple and quadruple dot accents and raised dot accents.
+% The definitions of \cmd{\dddot} and \cmd{\ddddot} are deferred until
+% |\begin{document}|; otherwise they would break \Lpack{amsmath}, which
+% tries to define them using |\newcommand|.
+%    \begin{macrocode}
+% \DeclareMathAccent{\dddot}{\mathord}{symbols}{171}
+% \DeclareMathAccent{\ddddot}{\mathord}{symbols}{172}
+\DeclareMathAccent{\dotup}{\mathord}{symbols}{"54}
+\DeclareMathAccent{\ddotup}{\mathord}{symbols}{"55}
+\DeclareMathAccent{\dddotup}{\mathord}{symbols}{173}
+\DeclareMathAccent{\ddddotup}{\mathord}{symbols}{174}
+%    \end{macrocode}
+%    \begin{macrocode}
+\let\oacc\mathring
+\DeclareMathAccent{\what}  {\mathord}{symbols}{"79}
+\DeclareMathAccent{\wtilde}{\mathord}{symbols}{"7A}
+\DeclareMathAccent{\wcheck}{\mathord}{symbols}{"7B}
+\DeclareMathAccent{\wbar}  {\mathord}{symbols}{"78}
+%    \end{macrocode}
+%    \begin{macrocode}
+\DeclareMathAccent{\wwhat}  {\mathord}{largesymbols}{"80}
+\DeclareMathAccent{\wwtilde}{\mathord}{largesymbols}{"81}
+\DeclareMathAccent{\wwcheck}{\mathord}{largesymbols}{"7D}
+\DeclareMathAccent{\wwbar}  {\mathord}{symbols}     {"53}
+%    \end{macrocode}
+% A number of symbols that used to be built from pieces
+% are now available as ready-made characters:
+%    \begin{macrocode}
+\DeclareMathSymbol{\hbar}  {\mathord}{symbols}{"84}
+\let\notin\@undefined
+\DeclareMathSymbol{\notin} {\mathrel}{symbols}{"85}
+\let\angle\@undefined
+\DeclareMathSymbol{\angle} {\mathord}{symbols}{"86}
+\let\models\@undefined
+\DeclareMathSymbol{\models}{\mathrel}{symbols}{"88}
+\let\bowtie\@undefined
+\DeclareMathSymbol{\bowtie}{\mathrel}{symbols}{"89}
+\let\cong\@undefined
+\DeclareMathSymbol{\cong}  {\mathrel}{symbols}{"8A}
+\let\Longleftrightarrow\@undefined
+\DeclareMathSymbol{\Longleftrightarrow} {\mathrel}{symbols}{"94}
+\let\rightleftharpoons\@undefined
+\DeclareMathSymbol{\rightleftharpoons}  {\mathrel}{symbols}{"95}
+\DeclareMathSymbol{\notless}          {\mathrel}{symbols}{"96}
+\DeclareMathSymbol{\notleq}           {\mathrel}{symbols}{"97}
+\DeclareMathSymbol{\notprec}          {\mathrel}{symbols}{"98}
+\DeclareMathSymbol{\notpreceq}        {\mathrel}{symbols}{"99}
+\DeclareMathSymbol{\notsubset}        {\mathrel}{symbols}{"9A}
+\DeclareMathSymbol{\notsubseteq}      {\mathrel}{symbols}{"9B}
+\DeclareMathSymbol{\notsqsubseteq}    {\mathrel}{symbols}{"9C}
+\DeclareMathSymbol{\notgr}            {\mathrel}{symbols}{"9D}
+\DeclareMathSymbol{\notgeq}           {\mathrel}{symbols}{"9E}
+\DeclareMathSymbol{\notsucc}          {\mathrel}{symbols}{"9F}
+\DeclareMathSymbol{\notsucceq}        {\mathrel}{symbols}{160}
+\DeclareMathSymbol{\notsupset}        {\mathrel}{symbols}{161}
+\DeclareMathSymbol{\notsupseteq}      {\mathrel}{symbols}{162}
+\DeclareMathSymbol{\notsqsupseteq}    {\mathrel}{symbols}{163}
+\let\neq\@undefined
+\DeclareMathSymbol{\neq}              {\mathrel}{symbols}{164}
+\let\ne=\neq
+\DeclareMathSymbol{\notequiv}         {\mathrel}{symbols}{165}
+\DeclareMathSymbol{\notsim}           {\mathrel}{symbols}{166}
+\DeclareMathSymbol{\notsimeq}         {\mathrel}{symbols}{167}
+\DeclareMathSymbol{\notapprox}        {\mathrel}{symbols}{168}
+\DeclareMathSymbol{\notcong}          {\mathrel}{symbols}{169}
+\DeclareMathSymbol{\notasymp}         {\mathrel}{symbols}{170}
+%    \end{macrocode}
+% Part of the above symbols get alternative names, 
+% which follow the naming scheme of the AMS:
+%    \begin{macrocode}
+\let\nless=\notless
+\let\nleq=\notleq
+\let\nprec=\notprec
+\let\npreceq=\notpreceq
+\let\nsubset=\notsubset
+\let\nsubseteq=\notsubseteq
+\let\nsqsubseteq=\notsqsubseteq
+\let\ngtr=\notgr
+\let\ngeq=\notgeq
+\let\nsucc=\notsucc
+\let\nsucceq=\notsucceq
+\let\nsupset=\notsupset
+\let\nsupseteq=\notsupseteq
+\let\nsqsupseteq=\notsqsupseteq
+\let\ncong=\notcong
+%    \end{macrocode}
+% Unfortunately, the \Lpack{amsmath} package provides its own
+% definitions of the following symbols.  We must not overwrite them,
+% if \Lpack{amslatex} was loaded before \Lpack{mtpro}.
+% (\Lpack{amsmath} was designed with only the standard
+% CM fonts in mind; this constitutes sometimes a real problem!)
+%    \begin{macrocode}
+\@ifpackageloaded{amsmath}{}{%
+  \let\doteq\@undefined
+  \let\hookleftarrow\@undefined
+  \let\hookrightarrow\@undefined
+  \let\longleftarrow\@undefined
+  \let\longrightarrow\@undefined
+  \let\Longleftarrow\@undefined
+  \let\Longrightarrow\@undefined
+  \let\mapsto\@undefined
+  \let\longmapsto\@undefined
+  \let\longleftrightarrow\@undefined
+  \DeclareMathSymbol{\doteq} {\mathrel}{symbols}{"87}
+  \DeclareMathSymbol{\hookleftarrow} {\mathrel}{symbols}{"8B}
+  \DeclareMathSymbol{\hookrightarrow}{\mathrel}{symbols}{"8C}
+  \DeclareMathSymbol{\longleftarrow} {\mathrel}{symbols}{"8D}
+  \DeclareMathSymbol{\longrightarrow}{\mathrel}{symbols}{"8E}
+  \DeclareMathSymbol{\Longleftarrow} {\mathrel}{symbols}{"8F}
+  \DeclareMathSymbol{\Longrightarrow}{\mathrel}{symbols}{"90}
+  \DeclareMathSymbol{\mapsto}    {\mathrel}{symbols}{"91}
+  \DeclareMathSymbol{\longmapsto}{\mathrel}{symbols}{"92}
+  \DeclareMathSymbol{\longleftrightarrow} {\mathrel}{symbols}{"93}
+}
+%    \end{macrocode}
+% One might think of repeating the AMS-style definitions with our
+% ready-made symbols patched in, if \Lpack{amsmath} is detected.  However, 
+% doing so would create an unwanted dependency:  We would have
+% to mirror all future changes the AMS applies possibly to their 
+% code!  
+%
+% Additional integral signs:
+%    \begin{macrocode}
+\DeclareMathSymbol{\iintop}{\mathop}{largesymbols}{"92}
+\DeclareMathSymbol{\iiintop}{\mathop}{largesymbols}{"94}
+\DeclareMathSymbol{\oiintop}{\mathop}{largesymbols}{"96}
+\DeclareMathSymbol{\oiiintop}{\mathop}{largesymbols}{"98}
+\DeclareMathSymbol{\cwointop}{\mathop}{largesymbols}{"9A}
+\DeclareMathSymbol{\awointop}{\mathop}{largesymbols}{"9C}
+\DeclareMathSymbol{\cwintop}{\mathop}{largesymbols}{"9E}
+%    \end{macrocode}
+% The definitions of the actual integral commands such as \cmd{iint} are deferred
+% until |\begin{document}|, see the next section.
+%
+% \subsubsection{Compatibility with \Lpack{amsmath}}
+% In case \Lpack{amsmath} is loaded after \Lpack{mtpro}, we will have to restore
+% our definition of the macro \cmd{\Relbar}; we also must make sure that
+% things like |\mathrm{\hat{A}}| don't come out as garbage.
+% \cmd{\dddot} and \cmd{\ddddot}, too, must not be defined earlier.
+%    \begin{macrocode}
+\AtBeginDocument{%
+  \@ifpackageloaded{amsmath}{%
+     \let\Relbar\@undefined
+     \DeclareMathSymbol{\Relbar}{\mathrel}{symbols}{"48}
+     \def\accentclass@{0}
+  }{}%
+  \let\dddot\@undefined\let\ddddot\@undefined
+  \DeclareMathAccent{\dddot}{\mathord}{symbols}{171}
+  \DeclareMathAccent{\ddddot}{\mathord}{symbols}{172}
+%    \end{macrocode}
+% As far as the extra integrals commands are concerned, 
+% we must overwrite the definitions that may come from the \Lpack{amsmath}
+% package.  Our definitions are compatible with that package, but
+% they work equally well without it:  We just have to make sure that
+% `empty' definitions of the macros \cmd{\DOTSI} and \cmd{\ilimits@} are
+% provided if \Lpack{amsmath} is \emph{not} used:
+%    \begin{macrocode}
+  \ifx\DOTSI\@undefined\let\DOTSI\relax\fi
+  \ifx\ilimits@\@undefined\let\ilimits@\nolimits\fi
+  \def\iint{\DOTSI\iintop\ilimits@}    
+  \def\iiint{\DOTSI\iiintop\ilimits@}  
+  \def\oiint{\DOTSI\oiintop\ilimits@}  
+  \def\oiiint{\DOTSI\oiiintop\ilimits@}
+  \def\cwoint{\DOTSI\cwointop\ilimits@}
+  \def\awoint{\DOTSI\awointop\ilimits@}
+  \def\cwint{\DOTSI\cwintop\ilimits@}  
+}
+%    \end{macrocode}
+%
+% \subsection{Large delimiters, accents and roots}
+% The below code has been adopted from M.~Spivak's
+% plain~\TeX{} package \texttt{mtp.tex} as of 2001-01-11,
+% with fixes regarding the use of \cmd{\displaystyle}.
+% \smallskip
+%
+% Large delimiters:
+%    \begin{macrocode}
+\newbox\prePbox@
+\newbox\Pbox@
+\newif\ifPEX@
+\def\PEX@#1{\setbox\Pbox@\vbox{$$\left.\vcenter{\copy\prePbox@}\right)$$}%
+\setbox\Pbox@\vbox{\unvbox\Pbox@\unskip\unpenalty
+\setbox\Pbox@\lastbox
+\setbox\Pbox@\hbox{\unhbox\Pbox@\setbox\Pbox@\lastbox
+\setbox\Pbox@\hbox{\unhbox\Pbox@\setbox\Pbox@\lastbox
+\setbox0\hbox{#1}%
+\ifdim\dp\Pbox@>\dp0\global\PEX@true\else
+\global\PEX@false\fi}}}}
+%    \end{macrocode}
+%    \begin{macrocode}
+\def\EXtest@#1{\setbox\prePbox@\hbox{$\displaystyle{#1}$}%
+\PEX@{\MTEXA@\char32}%
+\ifPEX@
+{\textfont3=\MTEXE@\PEX@{\MTEXE@\char12}}%
+\ifPEX@
+{\textfont3=\MTEXF@\PEX@{\MTEXF@\char12}}%
+\ifPEX@
+\def\EXtest@@{\textfont3=\MTEXG@}%
+\else
+\def\EXtest@@{\textfont3=\MTEXF@}%
+\fi
+\else
+\def\EXtest@@{\textfont3=\MTEXE@}%
+\fi
+\else
+\def\EXtest@@{\textfont3=\MTEXA@}%
+\fi}
+%    \end{macrocode}
+%    \begin{macrocode}
+\newbox\LRbox@
+\def\LEFTRIGHT@#1#2#3{\setbox\LRbox@\hbox{$\displaystyle{#3}$}%
+ \EXtest@{#3}%
+ \vcenter{\hbox{\EXtest@@$\displaystyle\left#1\box\LRbox@\right#2$}}}%
+%    \end{macrocode}
+%    \begin{macrocode}
+\def\PARENS#1{\LEFTRIGHT@(){#1}}%
+%    \end{macrocode}
+%    \begin{macrocode}
+\newif\ifspecdelim@
+\def\specdelim@#1{\ifx#1(\specdelim@true
+\else\ifx#1)\specdelim@true
+\else\ifx#1<\specdelim@true
+\else\ifx#1\langle\specdelim@true
+\else\ifx#1>\specdelim@true
+\else\ifx#1\rangle\specdelim@true
+\else\ifx#1/\specdelim@true
+\else\ifx#1\backslash\specdelim@true
+\else\specdelim@false\fi\fi\fi\fi\fi\fi\fi\fi}
+%    \end{macrocode}
+%    \begin{macrocode}
+\def\LEFTRIGHT#1#2#3{\specdelim@#1%
+\ifspecdelim@\LEFTRIGHT@#1.{#3}\else\left#1{#3}\right.\fi
+\kern-2\nulldelimiterspace\mskip-\thinmuskip
+\specdelim@#2%
+\ifspecdelim@\LEFTRIGHT@.#2{\vphantom{#3}}\else
+\left.\vphantom{#3}\right#2\fi}%
+%    \end{macrocode}
+%
+% Wide `hat' accents:
+%    \begin{macrocode}
+\newbox\HATbox@
+\def\widehat#1{\setbox\HATbox@\hbox{$\displaystyle{#1}$}%
+\setbox0\hbox{\MTEXF@;}%
+\ifdim\wd\HATbox@>\wd0
+\def\HAT@{\textfont3=\MTEXG@}%
+\else
+\setbox0\hbox{\MTEXE@9}%
+\ifdim\wd\HATbox@>\wd0
+\def\HAT@{\textfont3=\MTEXF@}%
+\else
+\setbox0\hbox{\MTEXA@ d}%
+\ifdim\wd\HATbox@>\wd0
+\def\HAT@{\textfont3=\MTEXE@}%
+\else
+\def\HAT@{\textfont3=\MTEXA@}%
+\fi
+\fi
+\fi
+\hbox{\HAT@$\mathaccent"0362 {#1}$}}
+%    \end{macrocode}
+%
+% Wide tilde accents:
+%    \begin{macrocode}
+\newbox\TDbox@
+\def\widetilde#1{\setbox\TDbox@\hbox{$\displaystyle{#1}$}%
+\setbox0\hbox{\MTEXF@ K}%
+\ifdim\wd\TDbox@>\wd0
+\def\TD@{\textfont3=\MTEXG@}%
+\else
+\setbox0\hbox{\MTEXE@ I}%
+\ifdim\wd\TDbox@>\wd0
+\def\TD@{\textfont3=\MTEXF@}%
+\else
+\setbox0\hbox{\MTEXA@ d}%
+\ifdim\wd\TDbox@>\wd0
+\def\TD@{\textfont3=\MTEXE@}%
+\else
+\def\TD@{\textfont3=\MTEXA@}%
+\fi
+\fi
+\fi
+\hbox{\TD@$\mathaccent"0365 {#1}$}}
+%    \end{macrocode}
+%
+% Wide `check' accents:
+%    \begin{macrocode}
+\newbox\CHbox@
+\def\widecheck#1{\setbox\CHbox@\hbox{$\displaystyle{#1}$}%
+\setbox0\hbox{\MTEXF@[}%
+\ifdim\wd\CHbox@>\wd0
+\def\CHECK@{\textfont3=\MTEXG@}%
+\else
+\setbox0\hbox{\MTEXE@ Y}%
+\ifdim\wd\CHbox@>\wd0
+\def\CHECK@{\textfont3=\MTEXF@}%
+\else
+\setbox0\hbox{\MTEXA@ z}%
+\ifdim\wd\CHbox@>\wd0
+\def\CHECK@{\textfont3=\MTEXE@}%
+\else
+\def\CHECK@{\textfont3=\MTEXA@}%
+\fi
+\fi
+\fi
+\hbox{\CHECK@$\mathaccent"037A {#1}$}}%
+%    \end{macrocode}
+%
+% Large roots:
+% The command \cmd{\SQRT} from the plain \TeX{} package \texttt{mtp.tex} 
+% is named \cmd{\SQR@@T} here.
+%    \begin{macrocode}
+\newbox\preSbox@
+\newbox\Sbox@
+\newif\ifSQEX@
+\def\SQEX@#1{\setbox\Sbox@\vbox{$$\radical"270370{\copy\preSbox@}$$}%
+\setbox\Sbox@\vbox{\unvbox\Sbox@\unskip\unpenalty
+\setbox\Sbox@\lastbox\setbox\Sbox@\hbox{\unhbox\Sbox@\setbox\Sbox@\lastbox
+\setbox\Sbox@\hbox{\unhbox\Sbox@\setbox\Sbox@\lastbox\setbox\Sbox@\lastbox
+\setbox0\hbox{#1}%
+\ifdim\dp\Sbox@>\dp0\global\SQEX@true\else
+\global\SQEX@false\fi}}}}
+%    \end{macrocode}
+%    \begin{macrocode}
+\newcount\SQcount@
+\def\SQtest@#1{\setbox\preSbox@\hbox{$\displaystyle{#1}$}%
+\SQEX@{\MTEXA@ s}%
+\ifSQEX@
+{\textfont3=\MTEXE@\SQEX@{\MTEXE@ u}}%
+\ifSQEX@
+{\textfont3=\MTEXF@\SQEX@{\MTEXF@ u}}%
+\ifSQEX@
+\def\SQtest@@{\textfont3=\MTEXG@}\global\SQcount@3
+\else
+\def\SQtest@@{\textfont3=\MTEXF@}\global\SQcount@2
+\fi
+\else
+\def\SQtest@@{\textfont3=\MTEXE@}\global\SQcount@1
+\fi
+\else
+\def\SQtest@@{\textfont3=\MTEXA@}\global\SQcount@0
+\fi}
+\newbox\SQRTbox@
+\def\SQR@@T#1{\setbox\SQRTbox@\hbox{$\displaystyle{#1}$}%
+\SQtest@{#1}%
+\hbox{\SQtest@@$\displaystyle\radical"270370{\box\SQRTbox@}$}}
+%    \end{macrocode}
+% The names of the counters \cmd{\leftroot@} and \cmd{\uproot@} 
+% and the related commands \cmd{\leftroot} and \cmd{\uproot} 
+% had to be changed to uppercase,
+% so as not to clash with the \Lpack{amsmath} package. 
+% The syntax differs from \Lpack{amsmath}, anyway.
+%    \begin{macrocode}
+\newcount\UPROOT@
+\newcount\LEFTROOT@
+\def\LEFTROOT#1{\relax
+  \ifmmode\LEFTROOT@#1\relax
+  \else\PackageError{mtpro}
+         {\protect\LEFTROOT\space allowed only in math mode}
+         {Type <return> to proceed; the command will be ignored.}
+  \fi}
+\def\UPROOT#1{\relax
+  \ifmmode\UPROOT@#1\relax
+  \else\PackageError{mtpro}
+         {\protect\UPROOT\space allowed only in math mode}
+         {Type <return> to proceed; the command will be ignored.}
+  \fi}
+\def\ROOT#1\OF#2{\setbox\rootbox\hbox{$\m@th\scriptscriptstyle{#1}$}%
+\mathpalette\R@@T{#2}}
+\def\R@@T#1#2{\setbox\z@\hbox{$\UPROOT@\z@\LEFTROOT@\z@\m@th#1\SQR@@T{#2}$}%
+\dimen@\ht\z@\advance\dimen@-\dp\z@
+\dimen@ii\dimen@
+\setbox\tw@\hbox{$\m@th#1\mskip\UPROOT@ mu$}\advance\dimen@ii by1.667\wd\tw@
+\setbox\tw@\hbox{$\m@th#1\mskip10mu$}%
+\ifcase\SQcount@\advance\dimen@3\wd\tw@\or\advance\dimen@1.5\wd\tw@\or
+\advance\dimen@\wd\tw@\fi
+\mkern1mu\kern.13\dimen@\mkern-\LEFTROOT@ mu
+\raise.5\dimen@ii\copy\rootbox % was .44
+\mkern-1mu\kern-.13\dimen@\mkern\LEFTROOT@ mu\box\z@\kern-\wd\rootbox
+\LEFTROOT\z@\UPROOT\z@}
+%    \end{macrocode}
+% Finally the roots are given a more \LaTeX-like syntax, 
+% so that one can say,  e.g., 
+% |\SQRT[3]{...} | instead of |\ROOT 3 \OF ... |.
+%    \begin{macrocode}
+\DeclareRobustCommand\SQRT{\@ifnextchar[\SQRT@\SQR@@T}
+\def\SQRT@[#1]{\ROOT #1\OF}
+%    \end{macrocode}
+%
+%
+% \subsection{Extra-large operators}
+% The code in this section has been adopted from M.~Spivak's
+% plain~\TeX{} package \texttt{mtp.tex} 4.0 as of Sept.\ 2004.
+%
+% The macros assume that
+% \cmd{\MTXL@} and \cmd{\MTXXXL@} refer to the fonts \texttt{mtxl} and \texttt{mtxxxl}.
+% The macro \cmd{\eat@} has been replaced with \cmd{\@gobble}, which is already
+% provided by the \LaTeX{} kernel.
+%
+% \cmd{\FNSS@} is \verb+\futurelet\next+ skipping spaces before the next token.
+%    \begin{macrocode}
+\def\FNSS@#1{\let\FNSS@@#1\FN@\FNSS@@@}
+\def\FNSS@@@{\ifx\next\space@\def\FNSS@@@@. {\FN@\FNSS@@@}\else
+ \def\FNSS@@@@.{\FNSS@@}\fi\FNSS@@@@.}
+%    \end{macrocode}
+%
+% We define struts for subscripts and superscripts to give the extra space that would
+% normally be provided for limits of large operators.
+%    \begin{macrocode}
+\def\fdxiii@sub{\vrule height\fontdimen13 \the\textfont3 width\z@ depth\z@}
+\def\fdxiii@sup{\vrule depth\fontdimen13 \the\textfont3 width\z@ height\z@}
+%    \end{macrocode}
+%
+% \verb+\xl#1#2+ etc., will define \cmd{\next@}, depending on the next symbol.
+% \cmd{\largeopx@} and \cmd{\largeopxNL@} will be used for \cmd{\xl}, \cmd{\XL} and \cmd{\XXL}, 
+% with all operators other 
+% than \cmd{\int}, etc., and \cmd{\largeopxxx@} and \cmd{\largeopxxxNL@} will be used 
+% for \cmd{\XXXL}. 
+%
+% We make the definitions in terms of a common one that uses the font as the argument.
+%    \begin{macrocode}
+\def\LARGEOPx@#1#2#3{% 
+%    \end{macrocode}
+% |#1|=0 or 1 for 'limits' or no 'limits'; |#2| is font, |#3| is char position
+%    \begin{macrocode}
+ \ifnum#1=\@ne
+  \def\next@{\mathop{\hbox{$\vcenter{\hbox{#2\char#3}}$}}\nolimits
+    _{\SUB@}^{\SUP@}\@gobble}%
+ \else
+  \def\next@{\mathop{\hbox{$\vcenter{\hbox{#2\char#3}}$}}%
+    _{\SUB@}^{\SUP@}\@gobble}%
+ \fi}
+\def\largeopx@#1#2{\LARGEOPx@#1\MTXL@{#2}}
+\def\largeopxxx@#1#2{\LARGEOPx@#1\MTXXXL@{#2}}
+%    \end{macrocode}
+%
+% Similarly, for \cmd{\LARGEINTx@}.  When there are 'limits', the construction is especially 
+% complicated. \cmd{\maxXLscripts@} will store the maximum of the widths of the subscripts 
+% and superscripts. There is the additional complication that the amount to adjust the
+% superscript differs for \cmd{\XL} and \cmd{\XXL}, and the adjustment is made in terms of an extra
+% \cmd{\fontdimen} in the \texttt{mtxxl} font, which measures the horizontal distance between the
+% lowest and highest points of the integral sign (for the \cmd{\XXL} versions these are exactly
+% twice the \cmd{\XL} versions).
+%    \begin{macrocode}
+\newdimen\maxXLscripts@
+\newcount\X@count 
+%    \end{macrocode}
+% \cmd{\X@count}: 0 for |\XL|, 1 for |\XXL|, 2 for |\XXXL|, 3 for |\xl|.
+%    \begin{macrocode}
+\def\LARGEINTx@#1#2#3{% 
+ \ifnum#1=\@ne
+  \def\next@{\setbox\z@\hbox{#2\char#3\/}\dimen@\wd\z@
+  \setbox\z@\hbox{#2\char#3}\advance\dimen@-\wd\z@
+  \mathop{\hbox{$\vcenter{\hbox{#2\char#3}}$}}\nolimits
+   _{\SUB@}^{\kern\dimen@\SUP@}\@gobble}%
+ \else                             
+  \def\next@{\setbox\z@\hbox{\ifcase\X@count\kern\tw@\fontdimen8\MTXL@\or
+   \kern4\fontdimen8\MTXL@\or
+   \kern\tw@\fontdimen8\MTXXXL@\or
+   \kern1.7\fontdimen8\MTXL@\fi}%
+\setbox\@ne\hbox{#2\char#3}%
+  \setbox\tw@\hbox{$\scriptstyle{\SUB@}$}%
+  \setbox\thr@@\hbox{$\kern\wd\z@\scriptstyle{\SUP@}$}%
+%    \end{macrocode}
+% let |\maxXLscripts@| be max of subscript and superscript boxes
+%    \begin{macrocode}
+  \maxXLscripts@\wd\thr@@\ifdim\maxXLscripts@<\wd\tw@\maxXLscripts@\wd\tw@\fi
+%    \end{macrocode}
+% let |\dimen@ii| be amount of subscript to left of integral
+%    \begin{macrocode}
+  \dimen@ii.5\wd\tw@ \advance\dimen@ii-.5\wd\@ne
+%    \end{macrocode}
+% Let |\dimen@| be amount of visible superscript to left of int, namely
+% [visible length] - [amount to right of left boundary of |\int| sign], i.e.,
+% [wd3 - wd0] - 1/2(wd3 + wd1)
+%    \begin{macrocode}
+  \dimen@.5\wd\thr@@ \advance\dimen@-\wd\z@ \advance\dimen@-.5\wd\@ne
+  \ifdim\dimen@>\z@ % if visible part of superscript extends to left of \int
+    \ifdim\dimen@>\dimen@ii%  
+%    \end{macrocode}
+% if visible part of superscript to left of subscript,
+% kern by - [1/2(|\maxXLscripts@| - wd1) - |\dimen@|]
+%    \begin{macrocode}
+     \kern\dimen@\kern.5\wd\@ne\kern-.5\maxXLscripts@
+    \else                    
+%    \end{macrocode}
+% only trim to subscript,
+% kern - [1/2(|\maxXLscripts@| - wd1) - |\dimen@ii|]
+%    \begin{macrocode}
+     \kern\dimen@ii\kern.5\wd\@ne\kern-.5\maxXLscripts@
+    \fi
+  \else 
+%    \end{macrocode}
+% visible part of superscript entirely to right of |\int|, so trim to subscript
+%    \begin{macrocode}
+    \ifdim\dimen@ii > \z@
+     \kern\dimen@ii\kern.5\wd\@ne\kern-.5\maxXLscripts@
+    \else
+     \kern.5\wd\@ne\kern-.5\maxXLscripts@
+    \fi 
+  \fi
+  \setbox\@ne\hbox{#2\char#3\/}\dimen@ii\wd\@ne
+  \setbox\@ne\hbox{#2\char#3}\advance\dimen@ii-\wd\@ne
+  \mathop{\hbox{$\vcenter{\hbox{#2\char#3}}$}}_{\SUB@}^{\kern\wd\z@\SUP@}%
+    \kern\dimen@ii\@gobble}%
+ \fi}
+\def\largeintx@#1#2{\LARGEINTx@#1\MTXL@{#2}}
+\def\largeintxxx@#1#2{\LARGEINTx@#1\MTXXXL@{#2}}
+%    \end{macrocode}
+%    \begin{macrocode}
+\newcount\XLtype@
+%    \end{macrocode}
+%    \begin{macrocode}
+\def\xl{\XLtype@\z@\x@l}
+\def\xlnl{\XLtype@\@ne\x@l}
+\def\x@l#1#2{\def\SUB@{#1}\def\SUP@{#2}\futurelet\next\xl@}
+\def\xl@{\X@count\thr@@
+ \ifx\next\bigodot\largeopx@\XLtype@{96}\else
+ \ifx\next\bigoplus\largeopx@\XLtype@{97}\else
+ \ifx\next\bigotimes\largeopx@\XLtype@{98}\else
+ \ifx\next\bigsqcup\largeopx@\XLtype@{99}\else
+ \ifx\next\bigcup\largeopx@\XLtype@{100}\else
+ \ifx\next\bigcap\largeopx@\XLtype@{101}\else
+ \ifx\next\biguplus\largeopx@\XLtype@{102}\else
+ \ifx\next\bigwedge\largeopx@\XLtype@{103}\else
+ \ifx\next\bigvee\largeopx@\XLtype@{104}\else
+ \ifx\next\sum\largeopx@\XLtype@{105}\else
+ \ifx\next\prod\largeopx@\XLtype@{106}\else
+ \ifx\next\coprod\largeopx@\XLtype@{107}\else
+ \ifx\next\int\largeintx@\XLtype@{108}\else
+ \ifx\next\oint\largeintx@\XLtype@{109}\else
+ \ifx\next\bigcupprod\largeopx@\XLtype@{110}\else
+ \ifx\next\bigcapprod\largeopx@\XLtype@{111}\else
+ \ifx\next\cwoint\largeintx@\XLtype@{112}\else
+ \ifx\next\awoint\largeintx@\XLtype@{113}\else
+ \ifx\next\cwint\largeintx@\XLtype@{114}\else
+ \ifx\next\iint\largeintx@\XLtype@{115}\else
+ \ifx\next\iiint\largeintx@\XLtype@{116}\else
+ \ifx\next\oiint\largeintx@\XLtype@{117}\else
+ \ifx\next\oiiint\largeintx@\XLtype@{118}\else
+ \PackageError{mtpro}%
+   {Invalid use of \protect\xl}%
+   {\protect\xl\space can be applied to `large operators' only.}%
+ \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\next@}
+%    \end{macrocode}
+%    \begin{macrocode}
+\def\XL{\XLtype@\z@\X@L}
+\def\XLNL{\XLtype@\@ne\X@L}
+\def\X@L#1#2{\def\SUB@{#1}\def\SUP@{#2}\futurelet\next\XL@}
+\def\XL@{\X@count\z@
+ \ifx\next\bigodot\largeopx@\XLtype@0\else
+ \ifx\next\bigoplus\largeopx@\XLtype@1\else
+ \ifx\next\bigotimes\largeopx@\XLtype@2\else
+ \ifx\next\bigsqcup\largeopx@\XLtype@3\else
+ \ifx\next\bigcup\largeopx@\XLtype@4\else
+ \ifx\next\bigcap\largeopx@\XLtype@5\else
+ \ifx\next\biguplus\largeopx@\XLtype@6\else
+ \ifx\next\bigwedge\largeopx@\XLtype@7\else
+ \ifx\next\bigvee\largeopx@\XLtype@8\else
+ \ifx\next\sum\largeopx@\XLtype@9\else
+ \ifx\next\prod\largeopx@\XLtype@{10}\else
+ \ifx\next\coprod\largeopx@\XLtype@{11}\else
+ \ifx\next\int\largeintx@\XLtype@{12}\else
+ \ifx\next\oint\largeintx@\XLtype@{13}\else
+ \ifx\next\bigcupprod\largeopx@\XLtype@{14}\else
+ \ifx\next\bigcapprod\largeopx@\XLtype@{15}\else
+ \ifx\next\cwoint\largeintx@\XLtype@{16}\else
+ \ifx\next\awoint\largeintx@\XLtype@{17}\else
+ \ifx\next\cwint\largeintx@\XLtype@{18}\else
+ \ifx\next\iint\largeintx@\XLtype@{19}\else
+ \ifx\next\iiint\largeintx@\XLtype@{20}\else
+ \ifx\next\oiint\largeintx@\XLtype@{21}\else
+ \ifx\next\oiiint\largeintx@\XLtype@{22}\else
+\PackageError{mtpro}%
+  {Invalid use of \protect\XL}%
+  {\protect\XL\space can be applied to `large operators' only.}%
+ \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\next@}
+%    \end{macrocode}
+%    \begin{macrocode}
+\def\XXL{\XLtype@\z@\XX@L}
+\def\XXLNL{\XLtype@\@ne\XX@L}
+\def\XX@L#1#2{\def\SUB@{#1}\def\SUP@{#2}\futurelet\next\XXL@}
+\def\XXL@{\X@count\@ne
+ \ifx\next\bigodot\largeopx@\XLtype@{48}\else
+ \ifx\next\bigoplus\largeopx@\XLtype@{49}\else
+ \ifx\next\bigotimes\largeopx@\XLtype@{50}\else
+ \ifx\next\bigsqcup\largeopx@\XLtype@{51}\else
+ \ifx\next\bigcup\largeopx@\XLtype@{52}\else
+ \ifx\next\bigcap\largeopx@\XLtype@{53}\else
+ \ifx\next\biguplus\largeopx@\XLtype@{54}\else
+ \ifx\next\bigwedge\largeopx@\XLtype@{55}\else
+ \ifx\next\bigvee\largeopx@\XLtype@{56}\else
+ \ifx\next\sum\largeopx@\XLtype@{57}\else
+ \ifx\next\prod\largeopx@\XLtype@{58}\else
+ \ifx\next\coprod\largeopx@\XLtype@{59}\else
+ \ifx\next\int\largeintx@\XLtype@{60}\else
+ \ifx\next\oint\largeintx@\XLtype@{61}\else
+ \ifx\next\bigcupprod\largeopx@\XLtype@{62 \char64}\else
+ \ifx\next\bigcapprod\largeopx@\XLtype@{63 \char65}\else
+ \ifx\next\cwoint\largeintx@\XLtype@{66}\else
+ \ifx\next\awoint\largeintx@\XLtype@{67}\else
+ \ifx\next\cwint\largeintx@\XLtype@{68}\else
+ \ifx\next\iint\largeintx@\XLtype@{69}\else
+ \ifx\next\iiint\largeintx@\XLtype@{70}\else
+ \ifx\next\oiint\largeintx@\XLtype@{71}\else
+ \ifx\next\oiiint\largeintx@\XLtype@{72}\else
+ \PackageError{mtpro}%
+   {Invalid use of \protect\XXL}%
+   {\protect\XXL\space can be applied to `large operators' only.}%
+ \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\next@}
+%    \end{macrocode}
+%    \begin{macrocode}
+\def\XXXL{\XLtype@\z@\XXX@L}
+\def\XXXLNL{\XLtype@\@ne\XXX@L}
+\def\XXX@L#1#2{\def\SUB@{#1}\def\SUP@{#2}\futurelet\next\XXXL@}
+\def\XXXL@{\X@count\tw@
+ \ifx\next\bigodot\largeopxxx@\XLtype@0\else
+ \ifx\next\bigoplus\largeopxxx@\XLtype@1\else
+ \ifx\next\bigotimes\largeopxxx@\XLtype@2\else
+ \ifx\next\bigsqcup\largeopxxx@\XLtype@3\else
+ \ifx\next\bigcup\largeopxxx@\XLtype@4\else
+ \ifx\next\bigcap\largeopxxx@\XLtype@5\else
+ \ifx\next\biguplus\largeopxxx@\XLtype@6\else
+ \ifx\next\bigwedge\largeopxxx@\XLtype@7\else
+ \ifx\next\bigvee\largeopxxx@\XLtype@8\else
+ \ifx\next\sum\largeopxxx@\XLtype@9\else
+ \ifx\next\prod\largeopxxx@\XLtype@{10}\else
+ \ifx\next\coprod\largeopxxx@\XLtype@{11}\else
+ \ifx\next\int\largeintxxx@\XLtype@{12}\else
+ \ifx\next\oint\largeintxxx@\XLtype@{13}\else
+%    \end{macrocode}
+% XXXL \cmd{\bigcupprod} is too wide for PostScript, so it is split into parts
+% in positions 14 and 16; similarly \cmd{\bigcapprod} is in positions 15 and 17.
+%    \begin{macrocode}
+ \ifx\next\bigcupprod\largeopxxx@\XLtype@{14 \char16}\else
+ \ifx\next\bigcapprod\largeopxxx@\XLtype@{15 \char17}\else
+ \ifx\next\cwoint\largeintxxx@\XLtype@{18}\else
+ \ifx\next\awoint\largeintxxx@\XLtype@{19}\else
+ \ifx\next\cwint\largeintxxx@\XLtype@{20}\else
+ \ifx\next\iint\largeintxxx@\XLtype@{21}\else
+ \ifx\next\iiint\largeintxxx@\XLtype@{22}\else
+ \ifx\next\oiint\largeintxxx@\XLtype@{23}\else
+ \ifx\next\oiiint\largeintxxx@\XLtype@{24}\else
+ \def\next@{\PackageError{mtpro}%
+   {Invalid use of \protect\XXXL}%
+   {\protect\XXXL\space can be applied to `large operators' only.}}%
+ \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\next@}
+%    \end{macrocode}
+%
+%
+%
+% \subsection{Math font sizes}
+%
+% \mtpro, unlike most other Type~1 font families,
+% has several design sizes.  As a result, we can 
+% make the subscripts and superscripts (almost) as small as 
+% with standard \TeX.
+%    \begin{macrocode}
+\def\defaultscriptratio{.7}
+\def\defaultscriptscriptratio{.55}
+\DeclareMathSizes{5}{5}{5}{5}
+\DeclareMathSizes{6}{6}{5}{5}
+\DeclareMathSizes{7}{7}{5}{5}
+\DeclareMathSizes{8}{8}{6}{5}
+\DeclareMathSizes{9}{9}{7}{5.5}
+\DeclareMathSizes{\@xpt}{\@xpt}{7}{5.5}
+\DeclareMathSizes{\@xipt}{\@xipt}{8}{6}
+\DeclareMathSizes{\@xiipt}{\@xiipt}{8}{6}
+\DeclareMathSizes{\@xivpt}{\@xivpt}{\@xpt}{7}
+\DeclareMathSizes{\@xviipt}{\@xviipt}{\@xiipt}{\@xpt}
+\DeclareMathSizes{\@xxpt}{\@xxpt}{\@xivpt}{\@xiipt}
+\DeclareMathSizes{\@xxvpt}{\@xxvpt}{\@xxpt}{\@xviipt}
+%    \end{macrocode}
+%
+%
+% \subsection{Encoding-specific text commands}
+%
+% Some encoding-specific commands default to the OML or OMS encoding.
+% As these encodings are not used with 
+% \mtpro, we need to change the defaults.
+%
+% These ones used to default to OML:
+%    \begin{macrocode}
+\DeclareTextSymbolDefault{\textless}{MPY1}
+\DeclareTextSymbolDefault{\textgreater}{MPY1}
+\DeclareTextAccentDefault{\t}{MPY2}
+%    \end{macrocode}
+% After re-declaring the default encoding we must not forget to
+% declare the very symbol, otherwise calling the command will
+% generate a loop. Or to quote David:
+% \begin{quote}
+%  Hmm, otherwise you waste an hour or two staring at |\tracingall|
+%     output trying to work out what the heck is happening.
+% \end{quote}
+%    \begin{macrocode}
+\DeclareTextSymbol{\textless}{MPY1}{`\<}
+\DeclareTextSymbol{\textgreater}{MPY1}{`\>}
+\DeclareTextAccent{\t}{MPY2}{65}
+%    \end{macrocode}
+%
+% These ones used to default to OMS:
+%    \begin{macrocode}
+\DeclareTextSymbolDefault{\textasteriskcentered}{MPY2}
+\DeclareTextSymbolDefault{\textbackslash}{MPY2}
+\DeclareTextSymbolDefault{\textbar}{MPY2}
+\DeclareTextSymbolDefault{\textbraceleft}{MPY2}
+\DeclareTextSymbolDefault{\textbraceright}{MPY2}
+\DeclareTextSymbolDefault{\textbullet}{MPY2}
+\DeclareTextSymbolDefault{\textperiodcentered}{MPY2}
+\DeclareTextAccentDefault{\textcircled}{MPY2}
+\DeclareTextSymbol{\textasteriskcentered}{MPY2}{3}
+\DeclareTextSymbol{\textbackslash}{MPY2}{110}
+\DeclareTextSymbol{\textbar}{MPY2}{106}
+\DeclareTextSymbol{\textbraceleft}{MPY2}{102}
+\DeclareTextSymbol{\textbraceright}{MPY2}{103}
+\DeclareTextSymbol{\textbullet}{MPY2}{15}
+\DeclareTextSymbol{\textperiodcentered}{MPY2}{1}
+\DeclareTextCommand{\textcircled}{MPY2}[1]{{%
+   \ooalign{%
+      \hfil \raise .07ex\hbox {\upshape#1}\hfil \crcr
+      \char13}}}
+%    \end{macrocode}
+% The remaining symbols need \emph{not} be redefined,
+% if the \Lpack{textcomp} package is also loaded.
+%    \begin{macrocode}
+\@ifpackageloaded{textcomp}{}{%
+  \DeclareTextSymbolDefault{\textdagger}{MPY1}
+  \DeclareTextSymbolDefault{\textdaggerdbl}{MPY1}
+  \DeclareTextSymbolDefault{\textsection}{MPY1}
+  \DeclareTextSymbolDefault{\textparagraph}{MPY1}
+  \DeclareTextSymbolDefault{\textyen}{MPY2}
+  \DeclareTextSymbol{\textdagger}{MPY1}{"8E}
+  \DeclareTextSymbol{\textdaggerdbl}{MPY1}{"8F}
+  \DeclareTextSymbol{\textsection}{MPY1}{"90}
+  \DeclareTextSymbol{\textparagraph}{MPY1}{"91}
+%    \end{macrocode}
+% A default \cmd{\textyen} symbol can be made available, 
+% now that it is provided in the MPY2 encoding:
+%    \begin{macrocode}
+  \DeclareTextSymbol{\textyen}{MPY2}{176}}  
+%    \end{macrocode}
+%
+% \subsection{Encoding-specific math commands}
+% \cmd{\mathsterling} and \cmd{\mathunderscore}  come from the `operators' font.
+% The default definitions supplied by \LaTeX{} match OT1,
+% so the commands must be redefined, if the encoding is LY1 or T1.
+%    \begin{macrocode}
+\def\@tempa{LY1}
+\ifx\encodingdefault\@tempa
+    \DeclareMathSymbol{\mathsterling}{\mathord}{operators}{163}
+    \let\mathunderscore\@undefined
+    \DeclareMathSymbol{\mathunderscore}{\mathord}{operators}{95}
+\else
+  \def\@tempa{T1}
+  \ifx\encodingdefault\@tempa
+    \DeclareMathSymbol\mathsterling{\mathord}{operators}{191}
+    \let\mathunderscore\@undefined
+    \DeclareMathSymbol\mathunderscore{\mathord}{operators}{95}
+  \fi
+\fi
+%    \end{macrocode}
+%
+%
+% \subsection{Subscript correction}
+%
+% We provide a definition for |_| as active character. This definition
+% in itself is not changing \LaTeX's behavior, as by default |_| has
+% catcode 8, i.e., subscript character. Only if we change this catcode
+% or if we change the |\mathcode| of |_| \TeX{} is going to look at it.
+%    \begin{macrocode}
+\begingroup
+ \catcode`\_=13
+ \gdef_#1{\sb{\test@sb#1}}
+\endgroup
+%    \end{macrocode}
+%
+% The |\test@sb| gets passed the argument of a subscript and tests with
+% |\@ifnextchar| if the first non-space token  is a \texttt{f}.
+% If not it will look at |\@let@token| (set by |\@ifnextchar|) to see
+% if it is perhaps \texttt{j}, \texttt{p}, \texttt{t} etc.\ In each case 
+% it will add an appropriate kern.  The kerning values were adopted
+% from \texttt{mtp.tex}.
+%
+% Notice that this will fail if an old \LaTeX{} is used, as the old
+% definition of |\@ifnextchar| does not use |\@let@token| but
+% |\@tempa|.
+% However, the worst that would happen is that the kern is not inserted,
+% and we request a \LaTeX{} not older than 1997/06/01, anyway.
+%    \begin{macrocode}
+\def\test@sb{%
+  \@ifnextchar f%
+    {\mkern-\thr@@ mu}%
+    {\ifx\@let@token j\mkern-\tw@ mu\else
+      \ifx\@let@token p\mkern-\tw@ mu\else
+      \ifx\@let@token t\mkern\@ne mu\else
+      \ifx\@let@token y\mkern-\@ne mu\else
+      \ifx\@let@token A\mkern-\tw@ mu\else
+      \ifx\@let@token B\mkern-\@ne mu\else
+      \ifx\@let@token D\mkern-\@ne mu\else
+      \ifx\@let@token H\mkern-\@ne mu\else
+      \ifx\@let@token I\mkern-\@ne mu\else
+      \ifx\@let@token K\mkern-\@ne mu\else
+      \ifx\@let@token L\mkern-\@ne mu\else
+      \ifx\@let@token M\mkern-\@ne mu\else
+      \ifx\@let@token P\mkern-\@ne mu\else
+      \ifx\@let@token X\mkern-\tw@ mu\else
+     \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
+     \fi}}
+%    \end{macrocode}
+%
+% Finally we set the |\mathcode| of |_| to `active'. However, as long
+% as its |\catcode| is not changed, this |\mathcode| is never looked at;
+% in other words: we can now turn the feature on and off by changing the
+% |\catcode| to |12|, which is done in the options code above.
+%    \begin{macrocode}
+\mathcode`\_=\string"8000
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%</mtpro>
+%    \end{macrocode}
+%
+% \subsection{Internal changes and fixes}
+% (This section lists only those changes that are not yet documented in
+% section~\ref{sec:changes}.)
+%
+% Version 3.3 as of 2004-05-21:
+% \begin{itemize}
+% \item
+%    Macros for extra-large operators adapted to the latest version of the
+%    fonts.
+% \item 
+%    Macros fo extensible delimiters, roots and braces fixed, so as
+%    to work properly with \cmd{over}.
+% \end{itemize}
+% Version 3.0 as of 2004-01-07:
+% \begin{itemize}
+% \item 
+%    Hex numbers that clash with \Lpack{german.sty} replaced with
+%    decimal numbers.
+% \item
+%    When \cmd{\mathbold} is undefined, it is made really |\@undefined|
+%    now, rather than |\relax|, so that any attempt to use it will result
+%    in an error message.
+% \item 
+%    As to the further changes see section~\ref{sec:changes}.
+% \end{itemize}
+% Version 2.0.16 as of 2003-12-12:
+% \begin{itemize}
+% \item
+%   The undocumented options \Lopt{T1}, \Lopt{OT1} and \Lopt{LY1}
+%   have been abolished.  The internal macro \cmd{\operator@encoding}
+%   is no longer neeed and all occurrences have been replaced with 
+%   \cmd{\encodingdefault}
+% \item
+%   The math symbols \cmd{\dagger}, \cmd{\ddagger}, \cmd{\mathsection}
+%   and \cmd{\mathparagraph} are now implemented `as usual'; they need
+%   no longer be taken from a text companion font.  The related option
+%   \Lopt{noTS1} is a no-op now; I have deliberately not removed it,
+%   because it might have been used in existing documents.
+% \item 
+%   The default encoding for the text symbols 
+%   \cmd{\textdagger}, \cmd{\textdaggerdbl}, \cmd{\textsection}
+%   and \cmd{\textparagraph} is simply changed to MPY1, unless the 
+%   \Lpack{textcomp} package has been loaded before.  Thus, we make
+%   sure that they are taken from \mtpro, if they are not provided
+%   in the current text font.
+% \item
+%    The font series for the \cmd{\mathbf} alphabet is now |b| rather
+%    than |bf|.  Rationale: Times and similar font families use to
+%    substitute |b| for |bf|, anyway, so we avoid a lot of unnecessary
+%    NFSS computing.
+% \item
+%   \cmd{\upOmega} is of type \cmd{\mathord} now, to make sure that
+%    it is always upright.  In particular, this avoids problems with 
+%    the packages \Lpack{gensymb} and \Lpack{units}.
+% \item 
+%    The duplicate definition of \cmd{\varkappa} has been removed.
+% \item 
+%    The dots-generating macros \cmd{\vdots} and \cmd{\ddots} are
+%    no longer redefined, if the package \Lpack{mathdots} is detected.
+%    Loading \Lpack{mathdots} still afterwards would
+%    simply overwrite the macros once again and is not a problem.
+% \item
+%    The \cmd{\mathbold} alphabet, which used to be present in the  
+%    old `Y\&Y' version of the package, has been added again.  It is 
+%    defined only, if the package is loaded with the new option
+%    \Lpack{boldalphabet}.  Without the option, all Greek letters are
+%    defined as type \cmd{\mathord} so as to ensure against unexpected
+%    behavior.
+% \item
+%    Creating the package file with the additional DocStrip option
+%    |mtt| will include the font definitions for the family |mtt|
+%    into the package file.  In this case you need not generate  
+%    the font definition files additionally.
+% \end{itemize}
+%
+% 
+% \section{The font definitions for the family \texttt{mtt}}
+% 
+% The |MPY1| encoding is similar to the |OML| encoding.
+%    \begin{macrocode}
+%<*MPY1mtt|mtt>
+\DeclareFontFamily{MPY1}{mtt}{\skewchar\font45}
+\DeclareFontShape{MPY1}{mtt}{m}{it}{<-7> mtmif <7-9> mtmis <9-> mtmit}{}
+\DeclareFontShape{MPY1}{mtt}{b}{it}{<-7> mtbmif <7-9> mtbmis <9-> mtbmit}{}
+%</MPY1mtt|mtt>
+%    \end{macrocode}
+%
+% The |MPY2| encoding corresponds to the |OMS| encoding,
+% except for a small number of slots.  
+%    \begin{macrocode}
+%<*MPY2mtt|mtt>
+\DeclareFontFamily{MPY2}{mtt}{\skewchar\font48}
+\DeclareFontShape{MPY2}{mtt}{m}{n}{<-7> mtsyf <7-9> mtsys <9-> mtsyt}{}
+\DeclareFontShape{MPY2}{mtt}{b}{n}{<-7> mtbsyf <7-9> mtbsys <9-> mtbsyt}{}
+\DeclareFontShape{MPY2}{mtt}{eb}{n}{<-7> mthsyf <7-9> mthsys <9-> mthsyt}{}
+%</MPY2mtt|mtt>
+%    \end{macrocode}
+%
+% The `extension symbol' font is similar to the Computer Modern \texttt{cmex} 
+% font; however, it contains additional symbols.
+% One more encoding just for this reason:
+%    \begin{macrocode}
+%<*MPY3mtt|mtt>
+\DeclareFontFamily{MPY3}{mtt}{}
+\DeclareFontShape{MPY3}{mtt}{m}{n}{<->mtexa}{}
+\DeclareFontShape{MPY3}{mtt}{b}{n}{<->mtbexa}{}
+\DeclareFontShape{MPY3}{mtt}{eb}{n}{<->mthexa}{}
+%</MPY3mtt|mtt>
+%    \end{macrocode}
+%
+% There is also a bold upright font, which is used for the |\mbf|
+% alphabet.  It contains letters and digits only, so we assign `U'
+% as the encoding.
+%    \begin{macrocode}
+%<*Umtt|mtt>
+\DeclareFontFamily{U}{mtt}{\skewchar\font45}
+\DeclareFontShape{U}{mtt}{b}{n}{<-7> mtmbf <7-9> mtmbs <9-> mtmbt}{}% (MJ)
+%</Umtt|mtt>
+%    \end{macrocode}
+%
+%
+%
+% \section{The \texttt{.fd} file for LucidaNewMath-Symbols}
+% The \texttt{.fd} file generated here should equal the one
+% from FMi's \Lpack{mathtime} bundle.
+% Two alternative versions with KB-style or Y\&Y-style
+% font names are provided.
+% We need to adjust the size of the  fonts, 
+% when they are used in conjunction with Times.
+%    \begin{macrocode}
+%<*OMSlby>
+\@ifundefined{LucidaScale}{\def\LucidaScale{0.9}}{}
+\DeclareFontFamily{OMS}{lby}{\skewchar\font48}
+%<yy>\DeclareFontShape{OMS}{lby}{m}{n}{<->s * [\LucidaScale]lbms}{}
+%<yy>\DeclareFontShape{OMS}{lby}{b}{n}{<->s * [\LucidaScale]lbmns}{}
+%<kb>\DeclareFontShape{OMS}{lby}{m}{n}{<->s * [\LucidaScale]hlcry}{}
+%<kb>\DeclareFontShape{OMS}{lby}{b}{n}{<->s * [\LucidaScale]hlcdy}{}
+%</OMSlby>
+%    \end{macrocode}
+%
+%
+%
+% \section{The \texttt{.fd} file for \mtplus Script}
+% The script alphabet from the \mtplus font set
+% may be useful in conjunction with \mtpro, too.
+% The \texttt{.fd} file generated here should equal the one
+% from FMi's \Lpack{mathtime} bundle.
+%    \begin{macrocode}
+%<*Umtms>
+\DeclareFontFamily{U}{mtms}{\skewchar\font42}
+\DeclareFontShape{U}{mtms}{m}{n}{<->mtms}{}
+\DeclareFontShape{U}{mtms}{b}{n}{<->mtmsb}{}
+%</Umtms>
+%    \end{macrocode}
+% 
+% \Finale

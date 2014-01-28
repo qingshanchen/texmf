@@ -1,0 +1,20 @@
+%%
+%% This is file `umtms.fd',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% mtpro.dtx  (with options: `Umtms')
+%% 
+%% Copyright 1996 1997 Frank Mittelbach and David Carlisle.
+%% Copyright 2001--2004 Frank Mittelbach, David Carlisle and Walter Schmidt
+\ProvidesFile{umtms.fd}%
+ [2004/01/07 v3.0 %
+ Math Time Plus Script (FMi)%
+]
+\DeclareFontFamily{U}{mtms}{\skewchar\font42}
+\DeclareFontShape{U}{mtms}{m}{n}{<->mtms}{}
+\DeclareFontShape{U}{mtms}{b}{n}{<->mtmsb}{}
+\endinput
+%%
+%% End of file `umtms.fd'.

@@ -1,0 +1,34 @@
+%% mtpb.ins 2005/01/24 (WaS)
+
+\input docstrip
+
+\ifx\generate\undefined
+  \Msg{**********************************************}
+  \Msg{*}
+  \Msg{* This installation script requires docstrip}
+  \Msg{* version 2.4 or later.}
+  \Msg{*}
+  \Msg{* An older version of docstrip has been found.}
+  \Msg{*}
+  \Msg{**********************************************}
+  \errhelp{Obtain an up-to-date version of LaTeX2e.}
+  \errmessage{Obsolete docstrip in input path}
+  \batchmode
+  \csname @@end\endcsname\end
+\fi
+
+%\usedir{tex/latex/pctex} 
+
+\preamble
+\endpreamble
+\askforoverwritetrue
+
+% Create a .sty file with separate .fd files:
+
+\generate{\file{mtpb.sty}{\from{mtpb.dtx}{mtpb}}
+          \file{umtscr.fd} {\from{mtpb.dtx}{umtscr}}
+          \file{umtfra.fd} {\from{mtpb.dtx}{umtfra}}
+}
+
+\endbatchfile
+

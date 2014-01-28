@@ -1,0 +1,82 @@
+%%
+%% This is file `mtpb.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% mtpb.dtx  (with options: `mtpb')
+%% 
+%% Copyright 2005 Walter Schmidt
+\NeedsTeXFormat{LaTeX2e}[1997/06/01]
+\ProvidesPackage{mtpb}%
+ [2005/01/30 v1.1 %
+ MathTimePro Supplement B support (WaS)%
+]
+\RequirePackage{mtpro}
+\DeclareOption{mtpcal}{\let\mathcal=a}
+\DeclareOption{mtpscr}{\let\mathscr=a}
+\DeclareOption{mtpfrak}{\let\mathfrak=p}
+\DeclareMathSymbol{\imath}{\mathalpha}{letters}{"7B}
+\DeclareMathSymbol{\jmath}{\mathalpha}{letters}{"7C}
+\newcommand{\altC}{%
+  \PackageWarning{mtpb}{Invalid use of \protect\altC}C}
+\newcommand{\altG}{%
+  \PackageWarning{mtpb}{Invalid use of \protect\altG}G}
+\newcommand{\altL}{%
+  \PackageWarning{mtpb}{Invalid use of \protect\altL}L}
+\newcommand{\altQ}{%
+  \PackageWarning{mtpb}{Invalid use of \protect\altQ}Q}
+\newcommand{\altY}{%
+  \PackageWarning{mtpb}{Invalid use of \protect\altY}Y}
+\newcommand{\altZ}{%
+  \PackageWarning{mtpb}{Invalid use of \protect\altZ}Z}
+\newcommand{\altr}{%
+  \PackageWarning{mtpb}{Invalid use of \protect\altr}r}
+\newcommand{\altx}{%
+  \PackageWarning{mtpb}{Invalid use of \protect\altx}x}
+\newcommand{\alty}{%
+  \PackageWarning{mtpb}{Invalid use of \protect\alty}y}
+\newcommand{\altz}{%
+  \PackageWarning{mtpb}{Invalid use of \protect\altz}z}
+\newcommand{\MTPsetupScript}{%
+  \let\altC=\MTP@C
+  \let\altG=\MTP@G
+  \let\altL=\MTP@L
+  \let\altQ=\MTP@Q
+  \let\altY=\MTP@Y
+  \let\altZ=\MTP@Z
+  \let\altr=\MTP@r
+  \let\altz=\MTP@z}
+\newcommand{\MTPsetupFrak}{%
+  \let\altY=\MTP@Y
+  \let\altx=\MTP@x
+  \let\alty=\MTP@y}
+\DeclareMathSymbol{\MTP@C}{\mathalpha}{letters}{'003}
+\DeclareMathSymbol{\MTP@G}{\mathalpha}{letters}{'007}
+\DeclareMathSymbol{\MTP@L}{\mathalpha}{letters}{'014}
+\DeclareMathSymbol{\MTP@Q}{\mathalpha}{letters}{'021}
+\DeclareMathSymbol{\MTP@Y}{\mathalpha}{letters}{'031}
+\DeclareMathSymbol{\MTP@Z}{\mathalpha}{letters}{'032}
+\DeclareMathSymbol{\MTP@r}{\mathalpha}{letters}{'062}
+\DeclareMathSymbol{\MTP@x}{\mathalpha}{letters}{'070}
+\DeclareMathSymbol{\MTP@y}{\mathalpha}{letters}{'071}
+\DeclareMathSymbol{\MTP@z}{\mathalpha}{letters}{'072}
+\DeclareMathAlphabet{\MTPScript}  {U}{mtscr}{m}{it}
+\SetMathAlphabet{\MTPScript}{bold}{U}{mtscr}{b}{it}
+\DeclareMathAlphabet{\MTPbScript} {U}{mtscr}{b}{it}
+\DeclareMathAlphabet{\MTPFrak}  {U}{mtfra}{m}{n}
+\SetMathAlphabet{\MTPFrak}{bold}{U}{mtfra}{b}{n}
+\ProcessOptions
+\ifx\mathcal a
+  \def\mathcal#1{{\MTPsetupScript\MTPScript{#1}}}
+  \def\mathbcal#1{{\MTPsetupScript\MTPbScript{#1}}}
+\fi
+\ifx\mathscr a
+  \def\mathscr#1{{\MTPsetupScript\MTPScript{#1}}}
+\fi
+\ifx\mathfrak p
+  \def\mathfrak#1{{\MTPsetupFrak\MTPFrak{#1}}}
+\fi
+\endinput
+%%
+%% End of file `mtpb.sty'.

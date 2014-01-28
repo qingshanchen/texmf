@@ -1,0 +1,20 @@
+%%
+%% This is file `umtsya.fd',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% mtpams.dtx  (with options: `umtsya')
+%% 
+%% Copyright 2004, 2005 Walter Schmidt
+\ProvidesFile{umtsya.fd}%
+ [2005/01/31 v4.1 %
+ MathTimePro AMS Symbols (WaS)%
+]
+\DeclareFontFamily{U}{mtsya}{}%
+\DeclareFontShape{U}{mtsya}{m}{n}{<-7>mtsyaf<7-9>mtsyas<9->mtsyat}{}%
+\DeclareFontShape{U}{mtsya}{b}{n}{<-7>mtbsyaf<7-9>mtbsyas<9->mtbsyat}{}%
+\DeclareFontShape{U}{mtsya}{eb}{n}{<-7>mthsyaf<7-9>mthsyas<9->mthsyat}{}%
+\endinput
+%%
+%% End of file `umtsya.fd'.

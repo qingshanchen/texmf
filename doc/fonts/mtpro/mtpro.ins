@@ -1,0 +1,43 @@
+%% mtpro.ins 4.0 2004/09/14 (WaS)
+
+\input docstrip
+
+\ifx\generate\undefined
+  \Msg{**********************************************}
+  \Msg{*}
+  \Msg{* This installation script requires docstrip}
+  \Msg{* version 2.4 or later.}
+  \Msg{*}
+  \Msg{* An older version of docstrip has been found.}
+  \Msg{*}
+  \Msg{**********************************************}
+  \errhelp{Obtain an up-to-date version of LaTeX2e.}
+  \errmessage{Obsolete docstrip in input path}
+  \batchmode
+  \csname @@end\endcsname\end
+\fi
+
+%\usedir{tex/latex/pctex} 
+
+\preamble
+\endpreamble
+\askforoverwritetrue
+
+% Create a .sty file with separate .fd files:
+
+\generate{\file{mtpro.sty} {\from{mtpro.dtx}{mtpro}}
+          \file{mpy1mtt.fd}{\from{mtpro.dtx}{MPY1mtt}}
+          \file{mpy2mtt.fd}{\from{mtpro.dtx}{MPY2mtt}}
+          \file{mpy3mtt.fd}{\from{mtpro.dtx}{MPY3mtt}}
+          \file{umtt.fd}   {\from{mtpro.dtx}{Umtt}}
+%          \file{omslby.fd} {\from{mtpro.dtx}{OMSlby,kb}}  % should already exist, if you
+%          \file{umtms.fd}  {\from{mtpro.dtx}{Umtms}}      % have got the MathTime fonts
+}
+
+% Alternatively, 
+% create mtpro.sty file with font definitions included:
+
+% \generate{\file{mtpro.sty} {\from{mtpro.dtx}{mtpro,mtt}}
+% }
+
+\endbatchfile

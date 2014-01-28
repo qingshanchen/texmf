@@ -1,0 +1,26 @@
+%%
+%% This is file `t1trjn.fd',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% trajan.dtx  (with options: `fdt1')
+%% 
+%%  Copyright 1999 Peter R. Wilson
+%% 
+%%  This program is provided under the terms of the
+%%  LaTeX Project Public License distributed from CTAN
+%%  archives in directory macros/latex/base/lppl.txt.
+%% 
+%% Author: Peter Wilson (CUA and NIST)
+%%         now at: peter.r.wilson@boeing.com
+%% 
+\DeclareFontFamily{T1}{trjn}{}
+  \DeclareFontShape{T1}{trjn}{m}{n}{ <-> trjnr10 }{}
+  \DeclareFontShape{T1}{trjn}{bx}{n}{ <-> sub trjn/m/n }{}
+  \DeclareFontShape{T1}{trjn}{b}{n}{ <-> sub trjn/m/n }{}
+  \DeclareFontShape{T1}{trjn}{m}{sl}{ <-> trjnsl10 }{}
+  \DeclareFontShape{T1}{trjn}{m}{it}{ <-> sub trjn/m/sl }{}
+\endinput
+%%
+%% End of file `t1trjn.fd'.

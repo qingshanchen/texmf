@@ -1,0 +1,45 @@
+StartFontMetrics 2.0
+Version 1.4
+Notice (c) 2004 Paul Pichaureau, under the gpl licence.
+FullName MathDesign GM Regular Italic T1 10
+FamilyName MathDesign-GM
+Weight Regular
+ItalicAngle 16
+IsFixedPitch false
+UnderlinePosition -98
+UnderlineThickness 54
+FontBBox  -32 -492 1008 750
+EncodingScheme FontSpecific
+CapHeight 689
+XHeight 425
+Ascender 773
+Descender -278
+StdVW 72
+StartCharMetrics 20
+C 2 ; WX 504 ; N circumflex ; B 260 531 563 707 ;
+C 3 ; WX 504 ; N tilde ; B 138 469 691 666 ;
+C 24 ; WX 403 ; N perthousandzero ; B 84 -20 419 356 ;
+C 26 ; WX 336 ; N dotlessj ; B 0 0 0 0 ;
+C 40 ; WX 333 ; N parenleft ; B 86 -259 498 750 ;
+C 41 ; WX 333 ; N parenright ; B -24 -259 388 750 ;
+C 43 ; WX 758 ; N plus ; B 104 -91 795 583 ;
+C 47 ; WX 478 ; N slash ; B -32 -259 651 750 ;
+C 60 ; WX 758 ; N less ; B 135 -56 845 548 ;
+C 61 ; WX 758 ; N equal ; B 67 86 832 406 ;
+C 62 ; WX 758 ; N greater ; B 55 -56 764 548 ;
+C 91 ; WX 416 ; N bracketleft ; B 52 -259 575 750 ;
+C 92 ; WX 478 ; N backslash ; B 258 -259 361 750 ;
+C 93 ; WX 402 ; N bracketright ; B -32 -259 491 750 ;
+C 123 ; WX 422 ; N braceleft ; B 126 -259 567 750 ;
+C 124 ; WX 254 ; N bar ; B 20 -258 375 750 ;
+C 125 ; WX 422 ; N braceright ; B -4 -259 437 750 ;
+C 141 ; WX 982 ; N Ng ; B -13 -492 1008 492 ;
+C 173 ; WX 982 ; N ng ; B -13 -492 1008 492 ;
+EndCharMetrics
+StartKernData
+StartKernPairs 0
+EndKernPairs
+EndKernData
+StartComposites
+EndComposites
+EndFontMetrics

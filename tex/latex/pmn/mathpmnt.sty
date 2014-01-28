@@ -1,0 +1,253 @@
+%%
+%% This is file `mathpmnt.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% mathpmnt.dtx  (with options: `package')
+%% 
+%% IMPORTANT NOTICE:
+%% 
+%% For the copyright see the source file.
+%% 
+%% Any modified versions of this file must be renamed
+%% with new filenames distinct from mathpmnt.sty.
+%% 
+%% For distribution of the original source see the terms
+%% for copying and modification in the file mathpmnt.dtx.
+%% 
+%% This generated file may be distributed as long as the
+%% original source files, as listed above, are part of the
+%% same distribution. (The sources need not necessarily be
+%% in the same archive or directory.)
+\ProvidesPackage{mathpmnt}%
+           [2004/04/13 v2.1 (WaS)]
+\DeclareOption{lf}{%
+    \renewcommand\rmdefault{pmnx}}
+\DeclareOption{osf}{%
+    \renewcommand\rmdefault{pmnj}}
+\DeclareOption{uprightGreek}{\let\Gamma=u}
+\DeclareOption{slantedGreek}{\let\Gamma=s}
+\DeclareOption{nobb}{\let\mathbb=\relax}
+\DeclareOption{pazobb}{\let\mathbb=p}
+\DeclareOption{nofrak}{\let\mathfrak=\relax}
+\DeclareOption{eufrak}{\let\mathfrak=e}
+\DeclareOption{errorshow}{%
+   \def\@font@info#1{%
+         \GenericInfo{(Font)\@spaces\@spaces\@spaces\space\space}%
+                     {LaTeX Font Info: \space\space\space#1}}%
+    \def\@font@warning#1{%
+         \GenericInfo{(Font)\@spaces\@spaces\@spaces\space\space}%
+                        {LaTeX Font Warning: #1}}}
+\DeclareOption{warningshow}{%
+   \def\@font@info#1{%
+         \GenericInfo{(Font)\@spaces\@spaces\@spaces\space\space}%
+                     {LaTeX Font Info: \space\space\space#1}}%
+    \def\@font@warning#1{%
+         \GenericWarning{(Font)\@spaces\@spaces\@spaces\space\space}%
+                        {LaTeX Font Warning: #1}}}
+\DeclareOption{nofontinfo}{%
+   \let\@font@info\@gobble
+   \let\@font@warning\@gobble}
+\ExecuteOptions{%
+  lf,uprightGreek,nobb,nofrak,lf,errorshow}
+\ProcessOptions\relax
+\DeclareFontEncoding{LMY1}{}{}
+\DeclareFontEncoding{LMY2}{}{}
+\DeclareFontEncoding{MY3}{}{}
+\DeclareFontSubstitution{LMY1}{zpmn}{m}{it}
+\DeclareFontSubstitution{LMY2}{zpmn}{m}{n}
+\DeclareFontSubstitution{MY3}{mtt}{m}{n}
+\DeclareSymbolFont{operators}    {T1}{pmnx}{m}{n}
+\DeclareSymbolFont{letters}      {LMY1}{zpmn}{m}{it}
+\DeclareSymbolFont{symbols}      {LMY2}{zpmn}{m}{n}
+\DeclareSymbolFont{largesymbols} {MY3}{mtt}{m}{n}
+\SetSymbolFont{operators}{bold}  {T1}{pmnx}{b}{n}
+\SetSymbolFont{letters}  {bold}  {LMY1}{zpmn}{b}{it}
+\SetSymbolFont{symbols}  {bold}  {LMY2}{zpmn}{b}{n}
+\DeclareMathAlphabet{\mathbf}{T1}{pmnx}{b}{n}%
+\DeclareMathAlphabet{\mathsf}{T1}{\sfdefault}{m}{n}
+\DeclareMathAlphabet{\mathit}{T1}{pmnx}{m}{it}
+\DeclareMathAlphabet{\mathtt}{T1}{\ttdefault}{m}{n}
+\SetMathAlphabet{\mathsf}{bold}  {T1}{\sfdefault}{bx}{n}
+\SetMathAlphabet{\mathit}{bold}  {T1}{pmnx}{b}{it}
+\DeclareMathSymbol{,}{\mathpunct}{operators}{44}
+\DeclareMathSymbol{.}{\mathord}{operators}{46}
+\DeclareMathSymbol{:}{\mathrel}{symbols}{86}
+\DeclareMathSymbol{[}{\mathopen}{symbols}{84}
+\DeclareMathSymbol{]}{\mathclose}{symbols}{85}
+\DeclareMathSymbol{(}{\mathopen}{letters}{46} % was 028
+\DeclareMathSymbol{)}{\mathclose}{letters}{47} % was 029
+\DeclareMathDelimiter{(}{letters}{46}{largesymbols}{0}
+\DeclareMathDelimiter{)}{letters}{47}{largesymbols}{1}
+\DeclareMathSymbol{\triangleleft}{\mathbin}{symbols}{71}  % was 12F
+\DeclareMathSymbol{\triangleright}{\mathbin}{symbols}{70} % was 12E
+\DeclareMathSymbol{\comp}{\mathbin}{symbols}{66}       % new?
+\DeclareMathSymbol{\setdif}{\mathbin}{symbols}{88}     % new
+\DeclareMathSymbol{\cupprod}{\mathbin}{symbols}{89}    % new
+\DeclareMathSymbol{\capprod}{\mathbin}{symbols}{90}    % new
+\DeclareMathSymbol{+}{\mathbin}{symbols}{67}           % was 02B
+\DeclareMathSymbol{=}{\mathrel}{symbols}{68}           % was 03D
+\DeclareMathSymbol{\leftharpoonup}{\mathrel}{symbols}{"88}
+\DeclareMathSymbol{\leftharpoondown}{\mathrel}{symbols}{"89}
+\DeclareMathSymbol{\rightharpoonup}{\mathrel}{symbols}{"8A}
+\DeclareMathSymbol{\rightharpoondown}{\mathrel}{symbols}{"8B}
+\DeclareMathSymbol{\lhook}{\mathrel}{symbols}{"8C}
+\DeclareMathSymbol{\rhook}{\mathrel}{symbols}{"8D}
+\ifx\Gamma s
+\let\Gamma\@undefined
+\DeclareMathSymbol\Gamma    {\mathord}{letters}{0}
+\DeclareMathSymbol\Delta    {\mathord}{letters}{1}
+\DeclareMathSymbol\Theta    {\mathord}{letters}{2}
+\DeclareMathSymbol\Lambda   {\mathord}{letters}{3}
+\DeclareMathSymbol\Xi       {\mathord}{letters}{4}
+\DeclareMathSymbol\Pi       {\mathord}{letters}{5}
+\DeclareMathSymbol\Sigma    {\mathord}{letters}{6}
+\DeclareMathSymbol\Upsilon  {\mathord}{letters}{7}
+\DeclareMathSymbol\Phi      {\mathord}{letters}{8}
+\DeclareMathSymbol\Psi      {\mathord}{letters}{9}
+\DeclareMathSymbol\Omega    {\mathord}{letters}{10}
+\else
+\let\Gamma\@undefined
+\DeclareMathSymbol\Gamma  {\mathord}{letters}{48}
+\DeclareMathSymbol\Delta  {\mathord}{letters}{49}
+\DeclareMathSymbol\Theta  {\mathord}{letters}{50}
+\DeclareMathSymbol\Lambda {\mathord}{letters}{51}
+\DeclareMathSymbol\Xi     {\mathord}{letters}{52}
+\DeclareMathSymbol\Pi     {\mathord}{letters}{53}
+\DeclareMathSymbol\Sigma  {\mathord}{letters}{54}
+\DeclareMathSymbol\Upsilon{\mathord}{letters}{55}
+\DeclareMathSymbol\Phi    {\mathord}{letters}{56}
+\DeclareMathSymbol\Psi    {\mathord}{letters}{57}
+\DeclareMathSymbol\Omega  {\mathord}{letters}{127}
+\fi
+\DeclareMathSymbol{\alpha}{\mathord}{letters}{11}
+\DeclareMathSymbol{\beta}{\mathord}{letters}{12}
+\DeclareMathSymbol{\gamma}{\mathord}{letters}{13}
+\DeclareMathSymbol{\delta}{\mathord}{letters}{14}
+\DeclareMathSymbol{\epsilon}{\mathord}{letters}{15}
+\DeclareMathSymbol{\zeta}{\mathord}{letters}{16}
+\DeclareMathSymbol{\eta}{\mathord}{letters}{17}
+\DeclareMathSymbol{\theta}{\mathord}{letters}{18}
+\DeclareMathSymbol{\iota}{\mathord}{letters}{19}
+\DeclareMathSymbol{\kappa}{\mathord}{letters}{20}
+\DeclareMathSymbol{\lambda}{\mathord}{letters}{21}
+\DeclareMathSymbol{\mu}{\mathord}{letters}{22}
+\DeclareMathSymbol{\nu}{\mathord}{letters}{23}
+\DeclareMathSymbol{\xi}{\mathord}{letters}{24}
+\DeclareMathSymbol{\pi}{\mathord}{letters}{25}
+\DeclareMathSymbol{\rho}{\mathord}{letters}{26}
+\DeclareMathSymbol{\sigma}{\mathord}{letters}{27}
+\DeclareMathSymbol{\tau}{\mathord}{letters}{28}
+\DeclareMathSymbol{\upsilon}{\mathord}{letters}{29}
+\DeclareMathSymbol{\phi}{\mathord}{letters}{30}
+\DeclareMathSymbol{\chi}{\mathord}{letters}{31}
+\DeclareMathSymbol{\psi}{\mathord}{letters}{32}
+\DeclareMathSymbol{\omega}{\mathord}{letters}{33}
+\DeclareMathSymbol{\varepsilon}{\mathord}{letters}{34}
+\DeclareMathSymbol{\vartheta}{\mathord}{letters}{35}
+\DeclareMathSymbol{\varpi}{\mathord}{letters}{36}
+\DeclareMathSymbol{\varphi}{\mathord}{letters}{39}
+\DeclareMathSymbol{\varrho}{\mathord}{letters}{37}
+\DeclareMathSymbol{\varsigma}{\mathord}{letters}{38}
+\DeclareMathSymbol{\hslash}{\mathord}{letters}{128} % new
+\DeclareRobustCommand\hbar{\hslash%
+  \PackageWarning{mathpmnt}{%
+    Symbol \protect\hbar\space not available;\MessageBreak
+    \protect\hslash\space will be used instead}}
+\def\angle{{\vbox{\ialign{$\m@th\scriptstyle##$\crcr
+     \not\mathrel{\mkern14mu}\crcr
+     \noalign{\nointerlineskip}
+     \mkern2.5mu\leaders\hrule height.34pt\hfill\mkern2.5mu\crcr}}}}
+\DeclareMathAccent{\vec}{\mathord}{symbols}{69}
+\DeclareMathAccent{\grave}{\mathord}{symbols}{74}
+\DeclareMathAccent{\acute}{\mathord}{symbols}{75}
+\DeclareMathAccent{\check}{\mathord}{symbols}{76}
+\DeclareMathAccent{\breve}{\mathord}{symbols}{77}
+\DeclareMathAccent{\bar}{\mathord}{symbols}{78}
+\DeclareMathAccent{\hat}{\mathord}{symbols}{79}
+\DeclareMathAccent{\dot}{\mathord}{symbols}{80}
+\DeclareMathAccent{\tilde}{\mathord}{symbols}{81}
+\DeclareMathAccent{\ddot}{\mathord}{symbols}{82}
+\DeclareMathAccent{\widebar}{\mathord}{symbols}{83}  % new
+\AtBeginDocument{%
+  \@ifpackageloaded{amsmath}{\def\accentclass@{0}}{}%
+}
+\DeclareMathSymbol\upGamma  {\mathord}{letters}{48}
+\DeclareMathSymbol\upDelta  {\mathord}{letters}{49}
+\DeclareMathSymbol\upTheta  {\mathord}{letters}{50}
+\DeclareMathSymbol\upLambda {\mathord}{letters}{51}
+\DeclareMathSymbol\upXi     {\mathord}{letters}{52}
+\DeclareMathSymbol\upPi     {\mathord}{letters}{53}
+\DeclareMathSymbol\upSigma  {\mathord}{letters}{54}
+\DeclareMathSymbol\upUpsilon{\mathord}{letters}{55}
+\DeclareMathSymbol\upPhi    {\mathord}{letters}{56}
+\DeclareMathSymbol\upPsi    {\mathord}{letters}{57}
+\DeclareMathSymbol\upOmega  {\mathord}{letters}{127}
+\DeclareMathSymbol\upalpha{\mathord}{letters}{139}
+\DeclareMathSymbol\upbeta {\mathord}{letters}{140}
+\DeclareMathSymbol\upgamma{\mathord}{letters}{141}
+\DeclareMathSymbol\updelta{\mathord}{letters}{142}
+\DeclareMathSymbol\upepsilon{\mathord}{letters}{143}
+\DeclareMathSymbol\upzeta {\mathord}{letters}{144}
+\DeclareMathSymbol\upeta  {\mathord}{letters}{145}
+\DeclareMathSymbol\uptheta{\mathord}{letters}{146}
+\DeclareMathSymbol\upiota {\mathord}{letters}{147}
+\DeclareMathSymbol\upkappa{\mathord}{letters}{148}
+\DeclareMathSymbol\uplambda{\mathord}{letters}{149}
+\DeclareMathSymbol\upmu   {\mathord}{letters}{150}
+\DeclareMathSymbol\upnu   {\mathord}{letters}{151}
+\DeclareMathSymbol\upxi   {\mathord}{letters}{152}
+\DeclareMathSymbol\uppi   {\mathord}{letters}{153}
+\DeclareMathSymbol\uprho  {\mathord}{letters}{154}
+\DeclareMathSymbol\upsigma{\mathord}{letters}{155}
+\DeclareMathSymbol\uptau  {\mathord}{letters}{156}
+\DeclareMathSymbol\upupsilon{\mathord}{letters}{157}
+\DeclareMathSymbol\upphi  {\mathord}{letters}{158}
+\DeclareMathSymbol\upchi  {\mathord}{letters}{159}
+\DeclareMathSymbol\uppsi  {\mathord}{letters}{160}
+\DeclareMathSymbol\upomega{\mathord}{letters}{161}
+\DeclareMathSymbol\upvarepsilon{\mathord}{letters}{162}
+\DeclareMathSymbol\upvartheta{\mathord}{letters}{163}
+\DeclareMathSymbol\upvarpi{\mathord}{letters}{164}
+\DeclareMathSymbol\upvarrho{\mathord}{letters}{165}
+\DeclareMathSymbol\upvarsigma{\mathord}{letters}{166}
+\DeclareMathSymbol\upvarphi{\mathord}{letters}{167}
+\DeclareFontFamily{U}{eus}{\skewchar\font'60}%
+\DeclareFontShape{U}{eus}{m}{n}{<->s*[.95]eusm10}{}
+\DeclareFontShape{U}{eus}{b}{n}{<->s*[.95]eusb10}{}
+\DeclareMathAlphabet{\mathcal} {U}{eus}{m}{n}
+\SetMathAlphabet{\mathcal}{bold}{U}{eus}{b}{n}
+\ifx\mathbb p
+  \let\mathbb\relax
+  \DeclareFontFamily{T1}{fplmbb}{}
+  \DeclareFontShape{T1}{fplmbb}{m}{n}{<->s*[.92]fplmbb}{}
+  \DeclareMathAlphabet\mathbb{T1}{fplmbb}{m}{n}
+\fi
+\ifx\mathfrak e
+  \let\mathfrak\relax
+  \DeclareFontFamily{U}{euf}{}%
+  \DeclareFontShape{U}{euf}{m}{n}{<->s*[.95]eufm10}{}%
+  \DeclareFontShape{U}{euf}{b}{n}{<->s*[.95]eufb10}{}%
+  \DeclareMathAlphabet{\mathfrak}{U}{euf}{m}{n}
+  \SetMathAlphabet{\mathfrak}{bold}{U}{euf}{b}{n}
+\fi
+\medmuskip=3.6mu plus 1mu minus 1mu % was 4mu plus 2mu minus 4mu
+\thickmuskip=4.5mu plus 4.5mu       % was 5mu plus 5 mu
+\def\defaultscriptratio{.76}
+\def\defaultscriptscriptratio{.6}
+\DeclareMathSizes{5}     {6}   {6}  {6}
+\DeclareMathSizes{6}     {6}   {6}  {6}
+\DeclareMathSizes{7}     {6.8} {6}  {6}
+\DeclareMathSizes{8}     {8}   {6.8}{6}
+\DeclareMathSizes{9}     {9}   {7.6}{6}
+\DeclareMathSizes{10}   {10}   {7.6}{6}
+\DeclareMathSizes{10.95}{10.95}{7.6}{6}
+\DeclareMathSizes{12}   {12}   {9}  {7}
+\DeclareMathSizes{14.4} {14.4} {10} {8}
+\DeclareMathSizes{17.28}{17.28}{12} {9}
+\DeclareMathSizes{20.74}{20.74}{14.4}{10}
+\DeclareMathSizes{24.88}{24.88}{17.28}{12}
+\endinput
+%%
+%% End of file `mathpmnt.sty'.

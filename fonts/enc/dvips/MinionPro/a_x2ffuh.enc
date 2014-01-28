@@ -1,0 +1,60 @@
+% THIS FILE WAS AUTOMATICALLY GENERATED -- DO NOT EDIT
+
+%%AutoEnc_x2ffuhzkanw2u4mhipvnedufee
+% Encoding created by otftotfm on Thu Nov 10 09:34:46 2005
+% Command line follows encoding
+/AutoEnc_x2ffuhzkanw2u4mhipvnedufee [
+%00
+  /Gamma /Delta /Theta /Lambda /Xi /Pi /Sigma /Upsilon
+  /Phi /Psi /Omega /alpha /beta /gamma /delta /afii10101
+%10
+  /zeta /eta /theta /iota /kappa /lambda /mu /nu
+  /xi /pi /rho /sigma /tau /upsilon /uni03D5 /chi
+%20
+  /psi /omega /epsilon /uni03D1 /uni03D6 /rho /uni03C2 /phi
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%30
+  /uniF643 /uniF644 /uniF645 /uniF646 /uniF647 /uniF648 /uniF649 /uniF64A
+  /uniF64B /uniF64C /period /comma /less /slash /greater /.notdef
+%40
+  /partialdiff /A /B /C /D /E /F /G
+  /H /I /J /K /L /M /N /O
+%50
+  /P /Q /R /S /T /U /V /W
+  /X /Y /Z /.notdef /.notdef /.notdef /.notdef /.notdef
+%60
+  /afii61289 /a /b /c /d /e /f /g
+  /h /i /j /k /l /m /n /o
+%70
+  /p /q /r /s /t /u /v /w
+  /x /y /z /dotlessi /.notdef /.notdef /.notdef /circumflex.cyr
+%80
+  /integral /hbar /uniEFD5 /uni03F0 /uni03D0 /afii10095 /afii10073 /eth
+  /lozenge /uniF638 /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%90
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%A0
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%B0
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%C0
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%D0
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%E0
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%F0
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /space
+] def
+% Command line: 'otftotfm -q --tfm-directory=./tfm --vf-directory=./vf
+% --encoding-directory=./dvips --no-type1 --no-updmap --no-dotlessj
+% --warn-missing -fkern -L 40 --math-spacing=255 -fonum -ftnum -e
+% enc/mn-Regular-oml.enckern otf/MinionPro-Regular.otf
+% MinionPro-Regular-tosf-oml'

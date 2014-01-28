@@ -1,0 +1,22 @@
+%Filename: mdbmdugm.fd
+%Created by: tex makevp
+%Created using fontinst v1.926
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{mdbmdugm.fd}
+   [2005/05/03 Fontinst v1.926 font definitions for MDB/mdugm.]
+
+\DeclareFontFamily{MDB}{mdugm}{}
+
+\DeclareFontShape{MDB}{mdugm}{m}{n}{
+   <-> mdugmrmb
+}{}
+
+\DeclareFontShape{MDB}{mdugm}{b}{n}{
+   <-> mdugmmmb
+}{}
+
+\DeclareFontShape{MDB}{mdugm}{bx}{n}{<->ssub * mdugm/b/n}{}
+
+\endinput

@@ -1,0 +1,872 @@
+%%
+%% This is file `trjnromanu.mf',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% trajan.dtx  (with options: `maj')
+%% 
+%%  Copyright 1999 Peter R. Wilson
+%% 
+%%  This program is provided under the terms of the
+%%  LaTeX Project Public License distributed from CTAN
+%%  archives in directory macros/latex/base/lppl.txt.
+%% 
+%% Author: Peter Wilson (CUA and NIST)
+%%         now at: peter.r.wilson@boeing.com
+%% 
+
+def checkthin=
+if thin-currentbreadth<eps: thin:=currentbreadth+eps; fi;
+if thin-currentbreadth<eps: thin:=currentbreadth+eps; fi enddef;
+
+pair xeps, yeps; xeps=(eps,0); yeps=(0,eps);
+numeric tail_corr; tail_corr=1/8;
+numeric cap_jut_factor; cap_jut_factor=8/7;
+
+numeric pcshiftx#; % x value of LHS of Trajan box wrt origin of char box
+define_pixels(pcshiftx);
+
+
+cmchar "Trajan's letter A";
+beginchar("A", 2u#+side#, cap_height#, 0);
+adjust_fit(cap_serif_fit#, cap_serif_fit#);
+pcshiftx := u;
+y100 = h/2; x100 = pcshiftx+y100;  % center point
+top y3= top y2=h;
+  % for left leg
+numeric alpha[]; alpha1=(h++(0.5h - cap_jut))/(h);
+penpos1(alpha1*medium,0); penpos2(alpha1*medium,0);
+  % and for the right leg
+alpha2=(h++(0.5h - cap_jut))/(h);
+penpos3(alpha2*thick,0); penpos4(alpha2*thick,0);
+lft x1l=pcshiftx+cap_jut; rt x4r=x1l+h-2cap_jut;
+bot y1=bot y4=0;
+x3r=x2l = 0.5h + pcshiftx;
+z0=whatever[z1r,z2r]=whatever[z3l,z4l];
+  % draw the legs
+fill z0--diag_end(0,4l,1,1,4r,3r)--z3r..z2l--diag_end(2l,1l,1,1,1r,0)
+  --z0..cycle;  % diagonals
+  % now for the bar
+top y5r=top y6r=hround(h/2 - medium);
+top y5r-bot y5l=top y6r-bot y6l=medium;
+penpos5(whatever, angle(z2-z1)); penpos6(whatever, angle(z3-z4));
+z5=whatever[z1,z2]; z6=whatever[z3,z4];
+penstroke z5e--z6e; % bar line
+if serifs:
+ bracket:=10/7 bracket; cap_jut:=cap_jut_factor*cap_jut;
+ pickup tiny.nib; numeric jut_factor;
+ jut_factor:=3/4;
+ serif(1,2,a,sadj*serif_darkness,-cap_jut);
+ serif(4,3,d,sadj*serif_darkness, cap_jut);
+ bracket:=jut_factor*bracket;
+ serif(1,2,b,sadj*serif_darkness,jut_factor*cap_jut);
+ serif(4,3,c,sadj*serif_darkness,-jut_factor*cap_jut);
+fi
+proofpcbb(100, y100, y100);
+penlabels(0,1,2,3,4,5,6,100); endchar;
+
+
+cmchar "Trajan's letter B";
+beginchar("B",u#+0.625side#+o#, cap_height#, 0);
+adjust_fit(cap_serif_fit#,0); pickup tiny.nib;
+pcshiftx := 0.5u;
+y100=h/2; x100=pcshiftx+y100;  % square center
+numeric alpha; alpha := 0.75;
+pos1(thick,0); pos2(thick,0); lft x1l=lft x2l=pcshiftx+cap_jut;
+ bot y2=0; top y1=h;
+filldraw stroke z1e--z2e; % vertical stem
+pos3(thin,-90); pos5(thick,0); pos7(thin,90);
+z3r=z2;
+y4l=y3l; x4l=x3l+2thick; y4r=y3r; x4r=x4l;
+z4=0.5[z4l,z4r];
+y7l=y100+thin; x7=x1;
+y6l=y7l; x6l=x4l-0.5thick; top y6r- bot y6l= thin; x6r=x6l;
+z6=0.5[z6l,z6r];
+rt x5r=w-pcshiftx;   % bottom bowl takes max space
+y5=0.5[y7l,y2];
+filldraw stroke z3e--z4e..pulled_arc.e(4,5)&pulled_arc.e(5,6)..z6e--z7e;
+pos7'(thin,-90); pos8(alpha*thick,0); pos10(thin,90);
+z7'=z7; z6'=z6;
+x6'r=x6r; x6'l=x6l; y6'r=y7'r; y6'l=y7'l;
+z10r=z1;
+x9r=x6'r; x9l=x6'l; y9r=y10r; top y9r-bot y9l=thin;
+z9=0.5[z9r,z9l];
+rt x8r=x100+o; y8=0.5[y7l,y1];
+filldraw stroke z7'e--z6'e..pulled_arc.e(6',8)&pulled_arc.e(8,9)..z9e--z10e;
+
+if serifs:
+  serif(1,2,a, sadj*serif_darkness,-cap_jut); % top LL
+  serif(2,1,b, sadj*serif_darkness,-cap_jut); % bottom LL
+  numeric tempa_, tempb_; tempa_=slab; tempb_=bracket;
+  slab:=thin; bracket:=cap_jut;
+  serif(2,1,c,serif_darkness,cap_jut); % bottom LR
+  slab:=tempa_; bracket:=tempb_;
+fi
+proofpcbb(100, y100, y100);
+penlabels(1,2,3,4,5,6,7,8,9,10,11,12,100);
+penlabels(6',7'); endchar;
+
+
+cmchar "Trajan's letter C";
+beginchar("C",2u#+side#-thick#, cap_height#, 0);
+adjust_fit(0, 0); pickup tiny.nib;
+pcshiftx := u;
+y100 = h/2; x100 = pcshiftx + y100;        % center point
+numeric alpha; alpha=w-u-thick;
+numeric beta; beta=pcshiftx+(side-thick);  % rightmost Xcoord of letter
+pos2(thin, 90); x2=x100; top y2r=h+o;      % topmost point
+pos3(thick,180); lft z3r=(pcshiftx,y100);  % leftmost point
+pos4(thin, 270); x4=x2+thick; bot y4r=-o;  % bottommost point
+pos0(thick,0); lft z0l=(w+thick-2pcshiftx,h/2);
+path p, p', line.u, line.b; line.u=(alpha,1.5h)--(alpha,h/2);
+ line.b=(.5[alpha,x0],0)--(.5[alpha,x0],h/2);
+p=pulled_arc.r(0,2)&pulled_arc.r(2,3)&pulled_arc.r(3,4)
+  &pulled_arc.r(4,0)&cycle;
+p'=pulled_arc.l(0,2)&pulled_arc.l(2,3)&pulled_arc.l(3,4)
+  &pulled_arc.l(4,0)&cycle;
+z'1l=line.u intersectionpoint p'; z'1r=line.u intersectionpoint p;
+z1r = (beta, h-thin); z1l = (x1r, y1r-1.5thick);
+z1 = 0.5[z1r, z1l];
+z'5l=line.b intersectionpoint p'; z'5r=line.b intersectionpoint p;
+z5l = (x1, 2thick); z5r = (x1-thin, medium); z5 = 0.5[z5l,z5r];
+ % adjust to have a better opening
+numeric slope_factor; slope_factor=3/4;
+filldraw
+ z1r{-1,slope_factor}...{left}z2r..pulled_arc.r(2,3)&
+ pulled_arc.r(3,4)..{right}z4r..tension 0.9..z5r--
+ reverse
+  (z1l{z2-z4}..{left}z2l..pulled_arc.l(2,3)&pulled_arc.l(3,4)..{right}z4l..z5l)
+ ..(z1l+(eps,0))--(z1r+(eps,0))..cycle;
+proofpcbb(100, y100, y100);
+penlabels(0,1,2,3,4,5,100); endchar;
+
+
+cmchar "Trajan's letter D";
+beginchar("D", u#+side#, cap_height#, 0);
+adjust_fit(cap_serif_fit#,0);
+pcshiftx:=0.5u;
+y100=h/2; x100=pcshiftx+y100;  % square center
+pickup tiny.nib; pos1(thick,0); pos2(thick,0);
+lft x1l=.5u+cap_jut; x2=x1; bot y2=0; top y1=h;
+filldraw stroke z1e--z2e; % stem
+pos3(thin, 90); pos5(thick, 0); pos7(5/4thin, -90);
+x3=x7=x1; top y3r=h; bot y7r=0;
+y5=good.y h/2;
+rt x5r=w-pcshiftx;
+x4r=x6r=hround(w/2); top y4r=h; bot y6r=0;
+bot y4l=vround(h-thin); top y6l=vround 5/4thin;
+x4l=x6l;  2(lft x5l-x4l)=y4l-y6l;
+z4=.5[z4l, z4r]; z6=.5[z6l, z6r];
+filldraw stroke z3e{right}...pulled_super_arc.e(4,5,eta)&
+  pulled_super_arc.e(5,6,eta)...{left}z7e; % lobe
+if serifs:
+  serif(1, 2, a, serif_darkness, -cap_jut);
+  serif(2, 1, b, serif_darkness, -cap_jut);
+  numeric temp_; temp_=slab; slab:=5/4thin;
+  serif(2, 1, c, serif_darkness, cap_jut);
+  slab:=temp_;
+fi
+proofpcbb(100, y100, y100);
+penlabels(1,2,3,4,5,6,7,100); endchar;
+
+
+cmchar "Trajan's letter E";
+beginchar("E", u#+0.5side#+medium#, cap_height#,0);
+adjust_fit(cap_serif_fit#,0);
+pcshiftx := 0.5u;
+y100=h/2; x100=pcshiftx+y100;  % center point
+pickup tiny.nib;
+pos1(thick,0); pos2(thick,0);
+lft x1l=lft x2l=pcshiftx+cap_jut; top y1=h; bot y2=0;
+filldraw stroke z1e--z2e; % stem
+pickup crisp.nib; % prepare for arms and serifs
+pos3(medium,90); pos4(dslab,0);
+x1=x3; top y3r=h; rt x4l=x100;
+ bot y4=vround(h-vstretch*thick);
+arm(3,4,d,serif_darkness,0); % top arm and beak
+pos5(thin,-90); pos0(thin,90); pos6(dslab,0); pos7(dslab,0);
+x5=x0=x1; y5=y0=hround(h/2); rt x6r=rt x7r= rt x4l - medium;
+top y6-bot y7= thin+2thick; y5=.5[y6,y7];
+arm(5,6,e,sadj*eta,0); arm(0,7,f,sadj*eta,0);  % middle arm and beaks
+pos8(medium,-90); pos9(dslab,0); x8=x2; bot y8r=0;
+rt x9r=hround(x4l+medium);
+y9=1.5thick;
+foot(8,9,g,serif_darkness,medium); % lower arm
+if serifs:
+  serif(1,2,a,sadj*serif_darkness,-cap_jut);
+  serif(2,1,b,sadj*serif_darkness,-cap_jut);
+  temp_:=slab; slab:=medium; tmp_:=bracket; bracket:=cap_jut+medium;
+  serif(2,1,c,serif_darkness,cap_jut);
+  slab:=temp_; bracket:=tmp_;
+fi
+proofpcbb(100, y100, y100);
+penlabels(0,1,2,3,4,5,6,7,8,9,100); endchar; % end of "E"
+
+
+cmchar "Trajan's letter F";
+beginchar("F", u#+0.5side#, cap_height#,0);
+adjust_fit(cap_serif_fit#,0);
+pcshiftx := 0.5u;
+y100=h/2; x100=pcshiftx+y100;  % square center
+pickup tiny.nib;
+pos1(thick,0); pos2(thick,0);
+lft x1l=lft x2l=pcshiftx+cap_jut; top y1=h; bot y2=0;
+filldraw stroke z1e--z2e; % stem
+pickup crisp.nib; % prepare for arms and serifs
+pos3(medium,90); pos4(dslab,0);
+x1=x3; top y3r=h; rt x4l= x100;
+ bot y4=vround(h-if monospace: 2 fi vstretch*thick);
+arm(3,4,d,serif_darkness,0); % top arm and beak
+pos5(thin,-90); pos0(thin,90); pos6(dslab,0); pos7(dslab,0);
+x5=x0=x1; y5=y0=hround(h/2); rt x6r=rt x7r= rt x4l-medium;
+top y6-bot y7= thin+2thick; y5=.5[y6,y7];
+arm(5,6,e,eta,0); arm(0,7,f,eta,0);  % middle arm and beaks
+if serifs:
+ serif(1,2,a,sadj*serif_darkness,-cap_jut);
+ serif(2,1,b,sadj*serif_darkness,-cap_jut);
+ serif(2,1,c,serif_darkness, cap_jut);
+ fi
+proofpcbb(100, y100,y100);
+penlabels(0,1,2,3,4,5,6,7,100); endchar; % end of "F"
+
+
+cmchar "Trajan's letter G";
+beginchar("G",2u#+side#-thick#+cap_jut#, cap_height#, 0);
+adjust_fit(0, cap_serif_fit#);
+pcshiftx := u;
+y100=h/2; x100=pcshiftx+y100;   % square center
+pickup tiny.nib;
+numeric alpha; alpha=w-pcshiftx-thick-cap_jut;
+numeric beta; beta= pcshiftx+side-thick; % rightmost Xcoord of letter (w/o serifs)
+pos2(thin, 90); x2=x100; top y2r=h+o;     % topmost pen position
+pos3(thick,180); lft z3r=(pcshiftx,y100); % leftmost point
+pos4(thin, 270); x4=x2+thick; bot y4r=-o; % bottommost point
+pos0(thick,0); lft z0l=(x100+0.5side-thick,y100);
+path p, p', line.u, line.b; line.u=(alpha,1.5h)--(alpha,h/2);
+ line.b=(.5[alpha,x0],0)--(.5[alpha,x0],h/2);
+p=pulled_arc.r(0,2)&pulled_arc.r(2,3)&pulled_arc.r(3,4)
+  &pulled_arc.r(4,0)&cycle;
+p'=pulled_arc.l(0,2)&pulled_arc.l(2,3)&pulled_arc.l(3,4)
+  &pulled_arc.l(4,0)&cycle;
+z'1l=line.u intersectionpoint p'; z'1r=line.u intersectionpoint p;
+z1r=(beta, h-thin); z1l=(x1r,y1r-1.5thick);
+z1=0.5[z1r,z1l];
+z'5l=line.b intersectionpoint p'; z'5r=line.b intersectionpoint p;
+z5l = (x1+0.1thin, 2thick); z5r=(x5l,medium);
+z5=0.5[z5r,z5l];
+ % readjust to have a better opening in CDTT
+numeric slope_factor; slope_factor=3/4;
+path p,p',line.o, line.i;
+p=z1r{-1,slope_factor}..{left}pulled_arc.r(2,3)&
+ pulled_arc.r(3,4){right}..tension 0.9..z5r;
+p'= reverse
+  (z1l{z2-z4}..{left}z2l..pulled_arc.l(2,3)&pulled_arc.l(3,4)..{right}z4l..z5l);
+pos7(thick,0);
+x7r=x1; y7r=7/2thick;
+numeric counter; counter=0;
+forever:
+ counter:=counter+1;
+ line.o:=z7r--(x7r,-2o); line.i:=(z7r-(thick,0))--(x7r-thick,-2o);
+ numeric t[],tt[];
+ (t1,tt1)=p intersectiontimes line.o; (t2,tt2)=p' intersectiontimes line.i;
+ exitif t1*t2>0; forsuffixes $$=l, r: x7$$:=x7$$-.1u; endfor
+ x7:=x7-.1u; endfor
+x6r=x7r; x6l=x7l; bot y6r=ypart point t1 of p; bot y6l=ypart point t2 of p';
+z6=.5[z6r,z6l];
+p:= subpath(0,t1) of p..(z6r-xeps+yeps)--(z6l+xeps+yeps)..
+ subpath(t2,infinity) of p'..(z1l+xeps)--cycle;
+filldraw p;
+filldraw z6l--z7l--z7r--z6r--cycle;
+if serifs:
+  serif(7,6,a,sadj*serif_darkness,-cap_jut);
+  serif(7,6,b,sadj*serif_darkness, cap_jut);
+fi
+proofpcbb(100, y100, y100);
+penlabels(0,1,2,3,4,5,6,7,100); endchar;
+
+
+cmchar "Trajan's letter H";
+beginchar("H", u#+side#, cap_height#,0);
+adjust_fit(cap_serif_fit#, cap_serif_fit#);
+pcshiftx := u/2;
+y100 = h/2; x100 = pcshiftx + y100;  % center point
+pickup tiny.nib;
+forsuffixes t=1,2,3,4: pos.t(thick,0); endfor
+lft x1l=lft x2l=pcshiftx+cap_jut; bot y2=0; top y1=h;
+filldraw stroke z1e--z2e;            % left vertical stem
+rt x3r= rt x4r=x1l+h-2cap_jut; y3=y1; y4=y2;
+filldraw stroke z3e--z4e;            % right vertical stem
+pos5(medium, 90); pos6(medium,90);
+x5=.5[x1r,x1l]; x6=.5[x3l,x3r]; bot y5r=bot y6r=h/2;
+filldraw stroke z5e--z6e;            % horizontal crossbar
+if serifs:
+ serif(1,2,a,sadj*serif_darkness,-cap_jut); % top LL
+ serif(1,2,b,sadj*serif_darkness,cap_jut);  % top LR
+ serif(2,1,c,sadj*serif_darkness,-cap_jut); % bottom LL
+ serif(2,1,d,sadj*serif_darkness,cap_jut);  % bottom LR
+ serif(3,4,e,sadj*serif_darkness,-cap_jut); % top RL
+ serif(3,4,f,sadj*serif_darkness,cap_jut);  % top RR
+ serif(4,3,g,sadj*serif_darkness,-cap_jut); % bottom RL
+ serif(4,3,h,sadj*serif_darkness,cap_jut);  % bottom RR
+fi
+proofpcbb(100, y100, y100);
+labels(1,2,3,4,5,6,100); endchar;
+
+
+cmchar "Trajan's letter I";
+beginchar("I", u#+2cap_jut#+thick#, cap_height#,0);
+adjust_fit(cap_serif_fit#, cap_serif_fit#);
+pcshiftx := u/2;
+y100 = h/2; x100 = pcshiftx + cap_jut + 0.5cap_stem;  % center point
+pickup tiny.nib; checkthin; pos1(cap_stem,0); pos2(cap_stem,0);
+x1=x2=hround(w/2); top y1=h; bot y2=0;
+filldraw stroke z1e--z2e; % vertical stem
+if serifs:
+  serif(1, 2, a, sadj*serif_darkness, -cap_jut);
+  serif(1, 2, b, sadj*serif_darkness, cap_jut); % top lft,rt
+  serif(2, 1, c, sadj*serif_darkness, -cap_jut);
+  serif(2, 1, d, sadj*serif_darkness, cap_jut); % bot lft,rt
+fi
+proofpcbb(100, y100, y100);
+penlabels(1, 2, 100); endchar;
+
+
+cmchar "Trajan's letter J";
+beginchar("J",u#+2.5thick#+cap_jut#, cap_height#, 2thick#);
+adjust_fit(0, cap_serif_fit#); pickup tiny.nib;
+pcshiftx := u/2;
+y100 = h/2; x100 = pcshiftx + 2.5thick;   % center point
+pos1(thick,0); pos2(thick,0); pos3(0.5thin, -90);
+top y1=h; rt x1r=w-pcshiftx-cap_jut; x2=x1; bot y2=0;
+lft x3=x1-2thick; bot y3r=-d;
+filldraw stroke z1e--z2e{down}..{left}z3e;
+if serifs:
+ serif(1,2,a,sadj*serif_darkness,-cap_jut);
+ serif(1,2,b,sadj*serif_darkness,cap_jut);
+fi
+proofpcbb(100, y100, y100);
+penlabels(1,2,3,100); endchar;
+
+
+cmchar "Trajan's letter K";
+beginchar("K", u#+0.875side#, cap_height#,0);
+adjust_fit(cap_serif_fit#,0); pickup tiny.nib;
+pcshiftx := 0.5u;
+y100=h/2; x100=pcshiftx+y100;  % square center
+pos1(thick,0); pos2(thick,0);
+lft x1l=lft x2l=pcshiftx+cap_jut;
+ top y1=h; bot y2=0;
+ filldraw stroke z1e--z2e; % left stem
+numeric alpha; alpha=(h++(h/2))/(h);
+pos3(alpha*medium,0); pos4(alpha*medium,0);
+x4l=x1r; y4=y100;
+x3l=x100+medium; y3=h;
+pos5(alpha*thick,0); pos6(alpha*thick,0);
+z5l=z4l;
+x6l=x3l+cap_jut; y6=0;
+z0=whatever[z6r,z5r]=whatever[z3r,z4r];   % notch point
+filldraw z4l--z3l--z3r--z0--z6r--z6l--cycle;
+if serifs:
+ serif(1,2,a,sadj*serif_darkness,-cap_jut);
+ serif(1,2,b,sadj*serif_darkness,cap_jut);
+ serif(2,1,c,sadj*serif_darkness,-cap_jut);
+ serif(2,1,d,sadj*serif_darkness,cap_jut);
+ numeric old_jut, old_brack; old_jut=cap_jut; old_brack=bracket;
+ bracket:=.5old_brack;cap_jut:=.5old_jut;
+ serif(3,4,e,serif_darkness,-cap_jut);
+ bracket:=2old_brack; cap_jut:=2old_jut;
+ serif(3,4,f,.6serif_darkness, 0.5cap_jut);
+ bracket:=.5old_brack;cap_jut:=.5old_jut;
+ serif(6,5,g,serif_darkness,-cap_jut);
+ bracket:=2old_brack; cap_jut:=2old_jut;
+ serif(6,5,h,.6serif_darkness, 0.5cap_jut);
+ cap_jut:=old_jut; bracket:=old_brack;
+fi
+proofpcbb(100, y100, y100);
+penlabels(0,1,2,3,4,5,6,100); endchar;
+
+
+cmchar "Trajan's letter L";
+beginchar("L", u#+0.5side#+medium#, cap_height#,0);
+adjust_fit(cap_serif_fit#,0);
+pcshiftx := 0.5u;
+y100=h/2; x100=pcshiftx+y100;  % square center
+pickup tiny.nib;
+pos1(thick,0); pos2(thick,0);
+lft x1l=lft x2l=pcshiftx+cap_jut; top y1=h; bot y2=0;
+filldraw stroke z1e--z2e; % stem
+pickup crisp.nib; % prepare for lower arm
+pos8(medium,-90); pos9(dslab,0); x8=x2; bot y8r=0;
+rt x9r=hround(x100+medium);
+y9=1.5thick;
+foot(8,9,g,serif_darkness,medium); % lower arm
+if serifs:
+  serif(1,2,a,sadj*serif_darkness,-cap_jut);
+  serif(2,1,b,sadj*serif_darkness,-cap_jut);
+  serif(1,2,d,serif_darkness,cap_jut);
+  temp_:=slab; slab:=medium; tmp_:=bracket; bracket:=thick+medium;
+  serif(2,1,c,serif_darkness,thick);
+  slab:=temp_; bracket:=tmp_;
+fi
+proofpcbb(100, y100, y100);
+penlabels(0,1,2,3,4,5,6,7,8,9,100); endchar; % end of "L"
+
+
+cmchar"Trajan's letter M";
+beginchar("M", u#+2cap_jut#+side#, cap_height#, 0);
+adjust_fit(cap_serif_fit#, cap_serif_fit#); pickup tiny.nib;
+pcshiftx := 0.5u+cap_jut;
+y100=h/2; x100=pcshiftx+y100;     % square center
+pos1(medium,0); pos2(medium,0); % left leg
+  lft x1l=pcshiftx+cap_jut; top y1=h; bot y2=0;
+  lft x2l = pcshiftx;
+pos3(thick,0); pos4(thick,0);   % right leg
+  x4r=pcshiftx+h; top y3=h; bot y4=0;
+  x3r=x4r-cap_jut;
+numeric long, short, hypot, alpha; long=side; short=1/2side;
+hypot=long++short; alpha=hypot/long;
+pos5(alpha*thick,0); pos6(alpha*thick,0);  % left inner
+  z5r=z1l; bot lft z6l=(x100,0);
+pos7(alpha*medium,0); pos8(alpha*medium,0); % right inner
+  z8l=z3r; bot rt z7r=z6l;
+z0=whatever[z5r,z6r]=whatever[z7l,z8l];  % bottom notch
+z10=whatever[z5l,z6l]=whatever[z1r,z2r]; % left notch
+z11=whatever[z7r,z8r]=whatever[z3l,z4l]; % right notch
+filldraw z5r--z0--z8l--z3r--z4r--z4l--z11--z6l--z10--z2r--z2l--z1l--cycle;
+if serifs:
+ serif(2,1,a,sadj*serif_darkness,-cap_jut); % left leg
+ serif(2,1,e,sadj*serif_darkness,cap_jut);
+ serif(4,3,d,sadj*serif_darkness, cap_jut); % right leg
+ serif(4,3,f,sadj*serif_darkness,-cap_jut);
+fi
+proofpcbb(100, y100, y100);
+penlabels(0,1,2,3,4,5,6,7,8,10,11,100); endchar;
+
+
+cmchar "Trajan's letter N";
+beginchar("N", u#+side#, cap_height#,0);
+adjust_fit(cap_serif_fit#, cap_serif_fit#); pickup tiny.nib;
+pcshiftx := u/2;
+y100 = h/2; x100 = pcshiftx + y100;   % center point
+numeric long, short, hypot, alpha; long=h; short=h;
+hypot=long++short; alpha=hypot/long;
+numeric legw; legw = 3/4thick;
+pos1(legw,0); pos2(legw,0); lft x1l=lft x2l=pcshiftx+cap_jut; top y1=h; bot y2=0;
+pos3(legw,0); pos4(legw,0); x3=x4; rt x3r=w-pcshiftx-cap_jut; y3=y1; y4=y2;
+pos 5(alpha*thick,0); pos6(alpha*thick,0);
+z5r=z1l; z6l=z4r; z0=whatever[z1r,z2r]=whatever[z5l,z6l]; % under notch point
+z0'=whatever[z5r,z6r]=whatever[z3l,z4l];
+filldraw z1l--z2l--z2r--z0--z6l--z3r--z3l--z0'--cycle;
+if serifs:
+ % bottom of left stem
+ serif(2,1,b,sadj*serif_darkness,-cap_jut);
+ serif(2,1,c,sadj*serif_darkness,cap_jut);
+  % top of right stem
+ serif(3,4,d,sadj*serif_darkness,-cap_jut);
+ serif(3,4,e,sadj*serif_darkness,cap_jut);
+fi
+proofpcbb(100, y100, y100);
+penlabels(0,0',1,2,3,4,5,6,100); endchar;
+
+
+cmchar "Trajan's letter O";
+beginchar("O", 2u#+side#, cap_height#, 0);
+adjust_fit(0,0); pair trajan[];
+pcshiftx := u;
+y100=h/2; x100=pcshiftx+y100;    % square center
+x2r=pcshiftx; x4r=x2r+h; y1r=h+o; y3r=-o;
+z100=.5[z5,z6]; numeric axis_angle;
+trajan1=(x2r+0.25h,y1r); trajan2=(x4r, 0.75h);
+trajan3=(x2r, 0.25h); trajan4=(x2r+0.75h, y3r);
+axis_angle=angle(trajan2-trajan3);
+z5-z6=(thick,0)rotated axis_angle;
+y2r=y6; y4r=y5; x1r=x5; x3r=x6;
+forsuffixes $=1,2,3,4: z$=.5[z$l,z$r]; endfor
+x1l=x3r; y1l-y6=y6-y3r; x5-x2l=x4r-x5; y2l=y4r;
+x3l=x1r; y1r-y5=y5-y3l; x4l-x6=x6-x2r; y4l=y2r;
+path p,p';
+p=pulled_arc.r(1,2)&reverse pulled_arc.r(3,2)&
+  pulled_arc.r(3,4)&reverse pulled_arc.r(1,4)&cycle; % outer
+path anti_diag; anti_diag=z100--trajan1;
+z21r=p intersectionpoint anti_diag; penpos21(thin, axis_angle+90);
+x43r=w-x21r; y43r=h-y21r; penpos43(thin, axis_angle+270);
+path diag; diag=z100--trajan2;
+z41r=diag intersectionpoint p; penpos41(thick, axis_angle);
+x32r=w-x41r; y32r=h-y41r; penpos32(thick, axis_angle+180);
+p'= z1l{left}..z21l..z2l{down}..z32l..
+    z3l{right}..z43l..
+    z4l{up}..z41l..{left}cycle;  % inner
+fill p; unfill p';
+proofpcbb(100, y100, y100);
+penlabels(0,1,2,3,4,5,6,21,32,43,41,100); endchar;
+
+
+cmchar "Trajan's letter P";
+beginchar("P", u#+0.5side#+thick#, cap_height#, 0);
+adjust_fit(cap_serif_fit#, 0);
+pcshiftx := 0.5u;
+y100=h/2; x100=pcshiftx+y100;    % square center
+pickup tiny.nib;
+pos1(thick,0); pos2(thick,0);
+  top lft z1l=(pcshiftx+cap_jut,h); bot lft z2l=(pcshiftx+cap_jut,0);
+filldraw stroke z1e--z2e; % vertical stem
+pos3(thin,90); pos4(thin,90); pos5(thick,0);
+pos6(thin,-90);
+top y3r=top y4r=h; x3=x1; x4=x1r+thick; filldraw stroke z3e--z4e;
+x6=x4; y6=hround(h/2);
+lft x5l=x100; y5=.75h;
+pos7(0.5thin,-90);
+y7=y6+0.5thin; x7=.25[rt x1r, x6];
+filldraw stroke pulled_super_arc.e(4,5,eta)&pulled_super_arc.e(5,6,eta)
+ ..z7e; % lobe
+if serifs:
+ serif(1,2,a,sadj*serif_darkness,-cap_jut);
+ serif(2,1,b,sadj*serif_darkness,-cap_jut);
+ serif(2,1,c,sadj*serif_darkness,cap_jut);
+fi
+proofpcbb(100, y100, y100);
+penlabels(1,2,3,4,5,6,7,100); endchar;
+
+
+cmchar "Trajan's letter Q";
+beginchar("Q", 2u#+side#, cap_height#, 0);
+adjust_fit(0,0); pair trajan[];
+pcshiftx := u;
+y100=h/2; x100=pcshiftx+y100;    % square center
+x2r=pcshiftx; x4r=x2r+h; y1r=h+o; y3r=-o;
+z100=.5[z5,z6]; numeric axis_angle;
+trajan1=(x2r+0.25h,y1r); trajan2=(x4r, 0.75h);
+trajan3=(x2r, 0.25h); trajan4=(x2r+0.75h, y3r);
+axis_angle=angle(trajan2-trajan3);
+z5-z6=(thick,0)rotated axis_angle;
+y2r=y6; y4r=y5; x1r=x5; x3r=x6;
+forsuffixes $=1,2,3,4: z$=.5[z$l,z$r]; endfor
+x1l=x3r; y1l-y6=y6-y3r; x5-x2l=x4r-x5; y2l=y4r;
+x3l=x1r; y1r-y5=y5-y3l; x4l-x6=x6-x2r; y4l=y2r;
+path p,p';
+p=pulled_arc.r(1,2)&reverse pulled_arc.r(3,2)&
+  pulled_arc.r(3,4)&reverse pulled_arc.r(1,4)&cycle; % outer
+path anti_diag; anti_diag=z100--trajan1;
+z21r=p intersectionpoint anti_diag; penpos21(thin, axis_angle+90);
+x43r=w-x21r; y43r=h-y21r; penpos43(thin, axis_angle+270);
+path diag; diag=z100--trajan2;
+z41r=diag intersectionpoint p; penpos41(thick, axis_angle);
+x32r=w-x41r; y32r=h-y41r; penpos32(thick, axis_angle+180);
+p'= z1l{left}..z21l..z2l{down}..z32l..
+    z3l{right}..z43l..
+    z4l{up}..z41l..{left}cycle;  % inner
+fill p; unfill p';
+
+numeric alpha; alpha:=0.4;
+z10=z43;
+z10l=z10-(alpha*thick,alpha*thick); z10r=z10+(alpha*thick,alpha*thick);
+z11l=(x4r,-0.175h); z11r=z11l+(0,thick);
+z13l=(x4r+0.375h,-0.25h); z13r=z13l+(0,medium);
+z12l=(x4r+0.875h,-0.125h); z12r=z12l+(0,0.5thin);
+filldraw z10r..z11r..z13r..z12r--z12l..z13l..z11l..z10l--cycle;
+proofpcbb(100, y100, y100);
+penlabels(1,2,3,4,5,6,10,11,12,13,14,15,21,32,41,43,100); endchar;
+
+
+cmchar "Trajan's letter R";
+beginchar("R", u#+side#, cap_height#,0);
+adjust_fit(cap_serif_fit#,0);
+pcshiftx := 0.5u;
+y100=h/2; x100=pcshiftx+y100;    % square center
+pickup tiny.nib; pos1(thick,0); pos2(thick,0);
+top lft z1l=(pcshiftx+cap_jut,h); bot lft z2l=(pcshiftx+cap_jut,0);
+filldraw stroke z1e--z2e; % vertical stem
+pos3(thin,90); pos4(thin,90); pos5(thick,0);
+pos6(thin, -90);
+top y3r=top y4r=h; x3=x1; x4=x1r+thick;
+x6=x4; y6=hround(h/2 - medium);
+lft x5l=x100; y5=.5[y4,y6];
+pos7(thin, -90);
+y7=y6; x7=x3;
+filldraw stroke z3e--pulled_super_arc.e(4,5,eta)&
+ pulled_super_arc.e(5,6,eta)..z7e; % lobe
+numeric half_letter_width; 2half_letter_width+1/2u=w;
+if serifs: half_letter_width:=half_letter_width+1/2u;
+ else: half_letter_width:=half_letter_width-1.6thin; fi
+path p; p=pulled_super_arc.r(5,6,eta)..z7r;
+z0r=p intersectionpoint ((half_letter_width,0)--(half_letter_width,h));
+path circ_; circ_= (((halfcircle scaled 2thick) rotated 180) shifted z0r);
+z0l= p intersectionpoint circ_;
+z0'=(.45[half_letter_width,w],0);
+numeric tail_angle; tail_angle=angle(z0l-z0');
+penpos8(thick, tail_angle-90); z8l=whatever[z0', z0l];
+ x8=1/5[half_letter_width,w];
+penpos9(2/3thick,tail_angle-90); z9r=whatever[z0r, z8r];
+ x9r=.5[half_letter_width, w];
+penpos10(0.5thin,90);
+z10r=(w,-0.5thin);
+fill z0l--z8l...{right}z10l--z10r{-w,1/4h}..z9r--z0r--cycle; % tail
+if serifs:
+ serif(1,2,a,sadj*serif_darkness,-cap_jut);
+ serif(2,1,b,sadj*serif_darkness,-cap_jut);
+ serif(2,1,c,sadj*serif_darkness,cap_jut); fi
+proofpcbb(100, y100, y100);
+penlabels(0,1,2,3,4,5,6,7,8,9,10,100); labels(0'); endchar;
+
+
+cmchar "Trajan's letter S";
+beginchar("S", 2u#+1/2side#, cap_height#, 0);
+adjust_fit(0,0); pickup tiny.nib;
+pcshiftx := u;
+y100 = h/2; x100 = w/2;    % square center
+pair trajan[]; % points to contain corner coords of Trajan square
+ypart trajan3=ypart trajan4=0; ypart trajan1= ypart trajan2=h;
+xpart trajan1=xpart trajan3; xpart trajan4= xpart trajan2= xpart trajan3+side;
+xpart trajan3=x100-0.5side;
+numeric slope, diag_angle; diag_angle=angle(trajan2-trajan3);
+slope=-0.75h/(xpart trajan4-xpart trajan3);
+pos0(thick,diag_angle);
+x0=w/2; y0=h/2;
+lft x3l=pcshiftx+o;
+rt x3r=lft x3l+5/6thick;
+pos2(thin,-diag_angle); top y2l=h;
+if x0-x3r>thick:
+  x2l=x0;
+else:
+  x2l=x0r; slope:=-1/2;
+fi
+ellipse_set(2l,3l,4l,0l); ellipse_set(2r,3r,4r,0r);
+pos7(thin,-diag_angle); x7r=x0; bot y7r=0;
+rt x6r=w-pcshiftx;  lft x6l=rt x6r-5/6thick;
+ellipse_set(7l,6l,5l,0l); ellipse_set(7r,6r,5r,0r);
+pos1(max(currentbreadth+eps,5/6 thick),-90);
+top y1l=h-thin; x1=x6r-o;
+pos8(1.5thick,-90);
+lft x8r=pcshiftx; bot y8r=medium;
+filldraw z1l..z2l{left}..{down}z3l..z4l--z5l..{down}z6l..{left}z7l..z8l
+ --z8r..{right}z7r..{up}z6r..z5r--z4r..{up}z3r..{right}z2r..z1r--cycle;
+proofpcbb(100, y100, y100);
+penlabels(0,1,2,3,4,5,6,7,8,100); endchar;
+
+
+cmchar "Trajan's letter T";
+beginchar("T",2u#+0.8side#, cap_height#,0);
+adjust_fit(cap_serif_fit#,0); pickup tiny.nib;
+pcshiftx := u;
+y100=h/2; x100=pcshiftx+y100;     % square center
+pos1(thick,0); pos2(thick,0); 0.5[x1r,x1l]=0.5[x2r,x2l]=w/2;
+top y1=h-thin; bot y2=0;
+filldraw stroke z1e--z2e; % central stem
+numeric top_bar; top_bar=0.4side;  % half length of top bar
+pos3(medium,90); pos4(dslab,0);
+x1=x3; y3r=y1; rt x4l=x1+top_bar;
+  bot y4=vround(y1- vstretch*(medium+cap_jut));
+arm(3,4,c,sadj*serif_darkness,0);
+x5=x1-top_bar;
+y5=h;
+pos8(medium,90);
+x8r=0.3[x5,x1]; y8r=0.125[y3r,y5];
+x6=x5-thin; y6=h-medium-cap_jut;
+x7=x6+0.75cap_jut; y7=y3l;
+x9=0.4[x6,x7]; y9=0.7[y6,y7];
+filldraw z3r--z1l{left}..z8r..z5--z6{z5-z6}..z9..z7..z8l..z3l--cycle;
+if serifs:
+  serif(2,1,a,sadj*serif_darkness,-cap_jut);
+  serif(2,1,b,sadj*serif_darkness,cap_jut);
+fi
+proofpcbb(100, y100, y100);
+penlabels(1,2,3,4,5,6,7,8,100); endchar;
+
+
+cmchar "Trajan's letter U";
+beginchar("U", u#+side#, cap_height#,0);
+adjust_fit(cap_serif_fit#, cap_serif_fit#);
+pcshiftx:=0.5u;
+y100=h/2; x100=pcshiftx+y100;  % square center
+pickup tiny.nib;
+x101=pcshiftx; y101=h; x102=x101+h; y102=0; % square corners
+pos5(thick,0); pos6(thick,0);
+rt x5r= rt x6r= pcshiftx+h-cap_jut;
+top y5=h; bot y6=0;
+filldraw stroke z5e--z6e;  % leg
+pos1(thick,0); pos2(thick,0);
+pos3(medium,-90); pos4(thin,0);
+lft x1l= hround(pcshiftx+cap_jut); x2=x1;
+top y1=h;
+y2=0.35h;
+x3=x100; bot y3r=0;
+z4l=whatever[z101,z102]=whatever[z5l,z6l];
+filldraw z1r--z2r{down}..z3l..z4l--z4r..z3r..z2l{up}--z1l--cycle;
+if serifs:
+  serif(1,2,a,sadj*serif_darkness,-cap_jut); % top LL
+  serif(1,2,b,sadj*serif_darkness,cap_jut);  % top LR
+  serif(5,6,c,sadj*serif_darkness,-cap_jut); % top RL
+  serif(5,6,d,sadj*serif_darkness,cap_jut);  % top RR
+  serif(6,5,f,sadj*serif_darkness,cap_jut);  % bottom RR
+fi
+proofpcbb(100, y100, y100);
+penlabels(1,2,3,4,5,6,100); endchar;
+
+
+cmchar "Trajan's letter V";
+beginchar("V",u#+side#, cap_height#, 0);
+adjust_fit(cap_serif_fit#, cap_serif_fit#); pickup tiny.nib;
+pcshiftx := 0.5u;
+y100=h/2; x100=pcshiftx+y100;    % square center
+numeric alpha; alpha=((0.5h-cap_jut)++(h))/(h);
+pos1(alpha*thick,0); pos2(alpha*thick,0);
+pos3(alpha*medium,0); pos4(alpha*medium,0);
+top y1=top y4=h; lft x1l=pcshiftx+cap_jut; x4r=x1l+side-2cap_jut;
+lft x2l=hround(pcshiftx+0.5side); x3r=x2l; bot y2=bot y3=0;
+z0=whatever[z1r,z2r]=whatever[z3l,z4l]; % notch point
+filldraw z0--diag_end(0,4l,1,1,4r,3r)--z2l
+ --diag_end(2l,1l,1,1,1r,0)--cycle;
+if serifs:
+ bracket:=cap_jut_factor*bracket; cap_jut:=cap_jut_factor*cap_jut;
+ pickup tiny.nib; numeric jut_factor;
+ jut_factor=3/4;
+ serif(1,2,a,sadj*serif_darkness,-cap_jut); % top LL
+ serif(4,3,d,sadj*serif_darkness,cap_jut);  % top RR
+ bracket:=jut_factor*bracket;
+ serif(1,2,b,sadj*serif_darkness, jut_factor*cap_jut); % top LR
+ serif(4,3,c,sadj*serif_darkness,-jut_factor*cap_jut); % top RL
+fi
+proofpcbb(100, y100, y100);
+penlabels(0,1,2,3,4,100); endchar;
+
+
+cmchar "Trajan's letter W";
+beginchar("W", u#+1.375side#, cap_height#, 0);
+adjust_fit(cap_serif_fit#, cap_serif_fit#); pickup tiny.nib;
+pcshiftx := 0.5u;
+y100=h/2; x100=pcshiftx+y100;    % square center
+numeric alpha; alpha=((0.5h-cap_jut)++(h))/(h);
+numeric beta; beta := 0.375;
+pos1(alpha*thick,0); pos2(alpha*thick,0);
+pos3(alpha*medium,0); pos4(alpha*medium,0);
+top y1=top y4=h; lft x1l=pcshiftx+cap_jut; x4r=x1l+side-2cap_jut;
+lft x2l=hround(pcshiftx+0.5side); x3r=x2l; bot y2=bot y3=0;
+z0=whatever[z1r,z2r]=whatever[z3l,z4l]; % notch point
+filldraw z0--diag_end(0,4l,1,1,4r,3r)--z2l
+ --diag_end(2l,1l,1,1,1r,0)--cycle;
+pos5(alpha*thick,0); pos6(alpha*thick,0);
+pos7(alpha*medium,0); pos8(alpha*medium,0);
+z5=(x1+beta*h,y1); z6=(x2+beta*h,y2);
+z7=(x3+beta*h,y3); z8=(x4+beta*h,y4);
+z10=(x0+beta*h,y0);
+filldraw z10--diag_end(10,8l,1,1,8r,7r)--z6l
+ --diag_end(6l,5l,1,1,5r,10)--cycle;
+
+if serifs:
+ bracket:=cap_jut_factor*bracket; cap_jut:=cap_jut_factor*cap_jut;
+ pickup tiny.nib; numeric jut_factor;
+ jut_factor=3/4;
+ serif(1,2,a,sadj*serif_darkness,-cap_jut); % top LL left V
+ serif(4,3,d,sadj*serif_darkness,cap_jut);  % top RR left V
+ serif(5,6,f,sadj*serif_darkness,-cap_jut); % top LL right V
+ serif(8,7,k,sadj*serif_darkness,cap_jut);  % top RR right V
+
+ bracket:=jut_factor*bracket;
+ serif(1,2,b,sadj*serif_darkness, jut_factor*cap_jut); % top LR left V
+ serif(4,3,c,sadj*serif_darkness,-jut_factor*cap_jut); % top RL left V
+ serif(5,6,g,sadj*serif_darkness, jut_factor*cap_jut); % top LR right V
+ serif(8,7,j,sadj*serif_darkness,-jut_factor*cap_jut); % top RL right V
+fi
+proofpcbb(100, y100, y100);
+penlabels(0,,1,2,3,4,5,6,7,8,10,100); endchar;
+
+
+cmchar "Trajan's letter X";
+beginchar("X", u#+0.5side#+thick#+2cap_jut#, cap_height#, 0);
+adjust_fit(cap_serif_fit#, cap_serif_fit#);
+pcshiftx := 0.5u;
+y100=h/2; x100=pcshiftx+y100;    % center of square
+numeric alpha; alpha=((0.5h-cap_jut)++(h))/(h);
+pos1(alpha*thick,0); pos2(alpha*thick,0);
+top y1=h; lft x1l=hround(pcshiftx+cap_jut);
+bot y2=0; lft x2l=hround(pcshiftx+0.5side+cap_jut);
+penpos3(alpha*medium,0); penpos4(alpha*medium,0);
+y3=y1; lft x3l=h/2+cap_jut;
+y4=y2; lft x4l=pcshiftx+cap_jut;
+filldraw z1l--z1r--z2r--z2l--cycle; % draw the thick limb
+filldraw z3l--z3r--z4r--z4l--cycle; % draw the other limb
+if serifs:
+ bracket:=cap_jut_factor*bracket; cap_jut:=cap_jut_factor*cap_jut;
+ pickup tiny.nib; numeric jut_factor;
+ jut_factor=3/4;
+ serif(1,2,a,serif_darkness,-cap_jut);    % outer serifs
+ serif(2,1,d,serif_darkness,cap_jut);
+ serif(3,4,f,serif_darkness,cap_jut);
+ serif(4,3,g,serif_darkness,-cap_jut);
+ bracket:=jut_factor*bracket;
+ serif(1,2,b,sadj*serif_darkness,.75cap_jut);  % inner serifs
+ serif(2,1,c,sadj*serif_darkness,-.75cap_jut);
+ serif(3,4,e,sadj*serif_darkness,-.75cap_jut);
+ serif(4,3,h,sadj*serif_darkness,.75cap_jut);
+fi
+proofpcbb(100, y100, y100);
+penlabels(1,2,3,4,100); endchar;
+
+
+cmchar "Trajan's letter Y";
+beginchar("Y", u#+0.875side#, cap_height#, 0);
+adjust_fit(cap_serif_fit#, cap_serif_fit#); pickup pencircle scaled 0pt;
+pcshiftx := 0.5u;
+y100=h/2; x100=pcshiftx+y100;       % center of square
+numeric alpha, long, short, hypot; long=h/2;
+short=0.5side-thick-cap_jut;
+ hypot=long++short; alpha=hypot/long;
+penpos1(alpha*thick,0);
+lft x1l=pcshiftx+cap_jut;
+top y1=h;
+penpos4(alpha*medium,0); y4=y1; x4r=w-pcshiftx-cap_jut;
+penpos5(thick,0); penpos6(thick,0);
+rt x5r= rt x6r=x100;
+y6=0; y5=h;
+penpos2(alpha*thick,0);
+x2l=x6l; y2=y100;
+penpos3(alpha*medium,0);
+x3r=x6r; y3=y100+thin;
+z0=whatever[z1r, z2r]=whatever[z3l,z4l]; % notch point
+filldraw z1r--z0--z4l--z4r--z3r--z6r--z6l--z2l--z1l--cycle;
+if serifs:
+ numeric jut_factor;
+ serif(6,5,e,sadj*serif_darkness,-cap_jut); % stem L
+ serif(6,5,f,sadj*serif_darkness,cap_jut);  % stem R
+ bracket:=cap_jut_factor*bracket; cap_jut:=cap_jut_factor*cap_jut;
+ jut_factor=3/4;
+ % top outer serifs
+ serif(1,2,a,serif_darkness,-cap_jut);serif(4,3,d,serif_darkness,cap_jut);
+ bracket:=jut_factor*bracket;
+ % top inner serifs
+ serif(1,2,b,sadj*serif_darkness,0.6cap_jut);
+ serif(4,3,c,sadj*serif_darkness,-0.6cap_jut);
+ fi
+proofpcbb(100, y100, y100);
+penlabels(0,1,2,3,4,5,6,100); endchar; % End of "Y"
+
+
+cmchar "Trajan's letter Z";
+beginchar("Z", 2u#+0.75side#+medium#, cap_height#,0);
+adjust_fit(0, 0); pickup tiny.nib;
+pcshiftx := u;
+y100=h/2; x100=pcshiftx+y100;    % center of square
+numeric alpha, long, short, hypot;
+long=h; short=h/2-thick; hypot=long++short;
+alpha=hypot/long;
+pos1(medium,90); pos2(medium,90); pos3(alpha*thick, 0);
+pos4(alpha*thick, 0);
+rt x3r=w-u; top y3=h; x4l=w-x3r; bot y4=0;
+top y1r=h; lft x1=u; y2=y1; rt x2=x3;
+filldraw stroke z1e--z2e; % top bar
+filldraw stroke z3e--z4e; % diagonal
+pos8(medium,-90); pos9(dslab,0); x8=x4; bot y8r=0;
+rt x9r=hround(x100+0.25h+medium);
+y9=1.5thick;
+foot(8,9,g,serif_darkness,medium); % lower arm
+
+if serifs:
+ pickup crisp.nib; % prepare for arms and serifs
+ pos5(medium, 90); pos6(dslab,180); z5=z2; lft x6r=u;
+ bot y6=h-vstretch*thick;
+ arm(5,6,a,serif_darkness,0); % upper dropped serif
+fi
+proofpcbb(100, y100, y100);
+penlabels(1,2,3,4,5,6,7,8,9,100); endchar;
+

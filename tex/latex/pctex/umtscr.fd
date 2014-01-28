@@ -1,0 +1,19 @@
+%%
+%% This is file `umtscr.fd',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% mtpb.dtx  (with options: `umtscr')
+%% 
+%% Copyright 2005 Walter Schmidt
+\ProvidesFile{umtscr.fd}%
+ [2005/01/30 v1.1 %
+ MathTimePro Script A (WaS)%
+]
+\DeclareFontFamily{U}{mtscr}{}%
+\DeclareFontShape{U}{mtscr}{m}{it}{<-7>mtmsf<7-9>mtmss<9->mtmst}{}%
+\DeclareFontShape{U}{mtscr}{b}{it}{<-7>mtbmsf<7-9>mtbmss<9->mtbmst}{}%
+\endinput
+%%
+%% End of file `umtscr.fd'.

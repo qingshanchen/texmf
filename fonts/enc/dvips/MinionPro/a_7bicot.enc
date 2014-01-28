@@ -1,0 +1,60 @@
+% THIS FILE WAS AUTOMATICALLY GENERATED -- DO NOT EDIT
+
+%%AutoEnc_7bicotvltr5x5di5q5azump5ya
+% Encoding created by otftotfm on Thu Nov 10 09:45:05 2005
+% Command line follows encoding
+/AutoEnc_7bicotvltr5x5di5q5azump5ya [
+%00
+  /grave /acute /circumflex /tilde /dieresis /hungarumlaut /ring /caron
+  /breve /macron /dotaccent /cedilla /ogonek /quotesinglbase /guilsinglleft /guilsinglright
+%10
+  /quotedblleft /quotedblright /quotedblbase /guillemotleft /guillemotright /endash /emdash /f_f_t
+  /f_j /dotlessi /f_f_j /f_f /f_i /f_l /f_f_i /f_f_l
+%20
+  /f_t /exclam /quotedbl /uniF650 /uniF653 /uniF642 /ampersand /quoteright
+  /parenleft /parenright /asterisk /plus /comma /hyphen /period /slash
+%30
+  /uniF643 /uniF644 /uniF645 /uniF646 /uniF647 /uniF648 /uniF649 /uniF64A
+  /uniF64B /uniF64C /colon /semicolon /less /equal /greater /question
+%40
+  /at /A.swash /B.swash /C.swash /D.swash /E.swash /F.swash /G.swash
+  /H.swash /I.swash /J.swash /K.swash /L.swash /M.swash /N.swash /O.swash
+%50
+  /P.swash /Q.swash /R.swash /S.swash /T.swash /U.swash /V.swash /W.swash
+  /X.swash /Y.swash /Z.swash /bracketleft /backslash /bracketright /asciicircum /underscore
+%60
+  /quoteleft /a /b /c /d /e /f /g
+  /h /i /j /k /l /m /n /o
+%70
+  /p /q /r /s /t /u /v /w
+  /x /y /z /braceleft /bar /braceright /asciitilde /hyphen
+%80
+  /Abreve.swash /Aogonek.swash /Cacute.swash /Ccaron.swash /Dcaron.swash /Ecaron.swash /Eogonek.swash /Gbreve.swash
+  /Lacute.swash /Lcaron.swash /Lslash /Nacute.swash /Ncaron.swash /Eng.swash /Ohungarumlaut.swash /Racute.swash
+%90
+  /Rcaron.swash /Sacute.swash /Scaron.swash /uni015E.swash /Tcaron.swash /Tcommaaccent.swash /Uhungarumlaut.swash /Uring.swash
+  /Ydieresis.swash /Zacute.swash /Zcaron.swash /Zdotaccent.swash /IJ.swash /Idotaccent.swash /dcroat /section
+%A0
+  /abreve /aogonek /cacute /ccaron /dcaron /ecaron /eogonek /gbreve
+  /lacute /lcaron /lslash /nacute /ncaron /eng /ohungarumlaut /racute
+%B0
+  /rcaron /sacute /scaron /uni015F /tcaron /tcommaaccent /uhungarumlaut /uring
+  /ydieresis /zacute /zcaron /zdotaccent /ij /exclamdown /questiondown /T_h.swash
+%C0
+  /Agrave.swash /Aacute.swash /Acircumflex.swash /Atilde.swash /Adieresis.swash /Aring.swash /AE /Ccedilla.swash
+  /Egrave.swash /Eacute.swash /Ecircumflex.swash /Edieresis.swash /Igrave.swash /Iacute.swash /Icircumflex.swash /Idieresis.swash
+%D0
+  /Eth.swash /Ntilde.swash /Ograve.swash /Oacute.swash /Ocircumflex.swash /Otilde.swash /Odieresis.swash /OE
+  /Oslash.swash /Ugrave.swash /Uacute.swash /Ucircumflex.swash /Udieresis.swash /Yacute.swash /Thorn /.notdef
+%E0
+  /agrave /aacute /acircumflex /atilde /adieresis /aring /ae /ccedilla
+  /egrave /eacute /ecircumflex /edieresis /igrave /iacute /icircumflex /idieresis
+%F0
+  /eth /ntilde /ograve /oacute /ocircumflex /otilde /odieresis /oe
+  /oslash /ugrave /uacute /ucircumflex /udieresis /yacute /thorn /germandbls
+] def
+% Command line: 'otftotfm -q --tfm-directory=./tfm --vf-directory=./vf
+% --encoding-directory=./dvips --no-type1 --no-updmap --no-dotlessj
+% --warn-missing -fkern -fliga -fonum -ftnum --include-alternates *.swash
+% -faalt -e enc/mn-It-t1.enckern otf/MinionPro-It.otf
+% MinionPro-It-tosf-swash-t1'

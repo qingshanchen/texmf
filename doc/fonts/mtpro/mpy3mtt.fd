@@ -1,0 +1,21 @@
+%%
+%% This is file `mpy3mtt.fd',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% mtpro.dtx  (with options: `MPY3mtt')
+%% 
+%% Copyright 1996 1997 Frank Mittelbach and David Carlisle.
+%% Copyright 2001--2004 Frank Mittelbach, David Carlisle and Walter Schmidt
+\ProvidesFile{mpy3mtt.fd}%
+ [2004/09/14 v4.0%
+ MathTimePro Encoding 3 (WaS)%
+]
+\DeclareFontFamily{MPY3}{mtt}{}
+\DeclareFontShape{MPY3}{mtt}{m}{n}{<->mtexa}{}
+\DeclareFontShape{MPY3}{mtt}{b}{n}{<->mtbexa}{}
+\DeclareFontShape{MPY3}{mtt}{eb}{n}{<->mthexa}{}
+\endinput
+%%
+%% End of file `mpy3mtt.fd'.

@@ -1,0 +1,21 @@
+%%
+%% This is file `omslby.fd',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% mtpro.dtx  (with options: `OMSlby,kb')
+%% 
+%% Copyright 1996 1997 Frank Mittelbach and David Carlisle.
+%% Copyright 2001--2004 Frank Mittelbach, David Carlisle and Walter Schmidt
+\ProvidesFile{omslby.fd}%
+ [2004/01/07 v3.0 %
+ Lucida New Math Symbols (FMi)%
+]
+\@ifundefined{LucidaScale}{\def\LucidaScale{0.9}}{}
+\DeclareFontFamily{OMS}{lby}{\skewchar\font48}
+\DeclareFontShape{OMS}{lby}{m}{n}{<->s * [\LucidaScale]hlcry}{}
+\DeclareFontShape{OMS}{lby}{b}{n}{<->s * [\LucidaScale]hlcdy}{}
+\endinput
+%%
+%% End of file `omslby.fd'.

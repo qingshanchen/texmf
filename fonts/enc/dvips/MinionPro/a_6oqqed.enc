@@ -1,0 +1,60 @@
+% THIS FILE WAS AUTOMATICALLY GENERATED -- DO NOT EDIT
+
+%%AutoEnc_6oqqedmy4fe7mz3nsj2hckl2jd
+% Encoding created by otftotfm on Thu Nov 10 09:45:52 2005
+% Command line follows encoding
+/AutoEnc_6oqqedmy4fe7mz3nsj2hckl2jd [
+%00
+  /Gamma /Delta /Theta /Lambda /Xi /Pi /Sigma /Upsilon
+  /Phi /Psi /Omega /f_f /f_i /f_l /f_f_i /f_f_l
+%10
+  /dotlessi /.notdef /grave /acute /caron /breve /macron /ring
+  /cedilla /germandbls /ae /oe /oslash /AE /OE /Oslash.swash
+%20
+  /.notdef /exclam /quotedblright /numbersign.fitted /sterling.fitted /percent /ampersand /quoteright
+  /parenleft /parenright /asterisk /plus /comma /hyphen /period /slash
+%30
+  /uniF639 /uniF6DC /uniF63A /uniF63B /uniF63C /uniF63D /uniF63E /uniF63F
+  /uniF640 /uniF641 /colon /semicolon /exclamdown /equal /questiondown /question
+%40
+  /at /A.swash /B.swash /C.swash /D.swash /E.swash /F.swash /G.swash
+  /H.swash /I.swash /J.swash /K.swash /L.swash /M.swash /N.swash /O.swash
+%50
+  /P.swash /Q.swash /R.swash /S.swash /T.swash /U.swash /V.swash /W.swash
+  /X.swash /Y.swash /Z.swash /bracketleft /quotedblleft /bracketright /circumflex /dotaccent
+%60
+  /quoteleft /a /b /c /d /e /f /g
+  /h /i /j /k /l /m /n /o
+%70
+  /p /q /r /s /t /u /v /w
+  /x /y /z /endash /emdash /hungarumlaut /tilde /dieresis
+%80
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%90
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%A0
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%B0
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%C0
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%D0
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%E0
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%F0
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+] def
+% Command line: 'otftotfm -q --tfm-directory=./tfm --vf-directory=./vf
+% --encoding-directory=./dvips --no-type1 --no-updmap --no-dotlessj
+% --warn-missing -fkern -L 40 -flnum -fpnum --unicoding dollar =: sterling
+% --include-alternates *.swash -faalt -e enc/mn-It-l1-ot1.enckern
+% otf/MinionPro-It.otf MinionPro-It-lf-swash-l1-ot1'

@@ -1,0 +1,93 @@
+StartFontMetrics 2.0
+FontName XTAMT
+FullName XTAMT
+FamilyName MonotypeXtracts
+Weight Normal
+Notice Copyright (C) The Monotype Corporation 1991-2002. 
+ItalicAngle 0
+IsFixedPitch false
+UnderlinePosition -133
+UnderlineThickness 20
+Version 1.000
+EncodingScheme FontSpecific
+FontBBox -20 -214 1067 721
+CapHeight 675
+XHeight 446
+Descender -212
+Ascender 717
+StartCharMetrics 73
+C 32 ; WX 500 ; N space ; B 0 0 0 0 ; 
+C 33 ; WX 271 ; N exclam ; B 80 -14 196 702 ; 
+C 40 ; WX 333 ; N parenleft ; B 44 -212 318 717 ; 
+C 41 ; WX 333 ; N parenright ; B 15 -212 289 717 ; 
+C 44 ; WX 271 ; N comma ; B 62 -167 207 99 ; 
+C 46 ; WX 271 ; N period ; B 80 -14 191 97 ; 
+C 48 ; WX 500 ; N zero ; B 40 -12 459 671 ; 
+C 49 ; WX 500 ; N one ; B 120 0 375 675 ; 
+C 50 ; WX 500 ; N two ; B 36 0 465 671 ; 
+C 51 ; WX 500 ; N three ; B 64 -12 427 671 ; 
+C 52 ; WX 500 ; N four ; B 24 0 466 671 ; 
+C 53 ; WX 500 ; N five ; B 69 -12 443 661 ; 
+C 54 ; WX 500 ; N six ; B 54 -12 458 675 ; 
+C 55 ; WX 500 ; N seven ; B 49 -12 453 661 ; 
+C 56 ; WX 500 ; N eight ; B 65 -12 432 675 ; 
+C 57 ; WX 500 ; N nine ; B 45 -12 448 675 ; 
+C 63 ; WX 385 ; N question ; B 23 -14 365 702 ; 
+C 65 ; WX 756 ; N A ; B 48 0 689 689 ; 
+C 66 ; WX 737 ; N B ; B 68 0 721 675 ; 
+C 67 ; WX 671 ; N C ; B 62 -15 726 690 ; 
+C 68 ; WX 823 ; N D ; B 68 0 799 675 ; 
+C 69 ; WX 784 ; N E ; B 68 0 767 675 ; 
+C 70 ; WX 684 ; N F ; B 78 0 767 675 ; 
+C 71 ; WX 748 ; N G ; B 71 -15 723 690 ; 
+C 72 ; WX 828 ; N H ; B 68 0 936 675 ; 
+C 73 ; WX 480 ; N I ; B 63 0 520 675 ; 
+C 74 ; WX 574 ; N J ; B 88 -15 641 675 ; 
+C 75 ; WX 838 ; N K ; B 68 0 856 675 ; 
+C 76 ; WX 760 ; N L ; B 48 0 685 675 ; 
+C 77 ; WX 989 ; N M ; B 48 0 1067 675 ; 
+C 78 ; WX 781 ; N N ; B 48 -16 865 675 ; 
+C 79 ; WX 774 ; N O ; B 122 -15 783 690 ; 
+C 80 ; WX 689 ; N P ; B 88 0 737 675 ; 
+C 81 ; WX 869 ; N Q ; B 130 -211 791 690 ; 
+C 82 ; WX 805 ; N R ; B 68 0 754 675 ; 
+C 83 ; WX 634 ; N S ; B 68 -15 651 690 ; 
+C 84 ; WX 617 ; N T ; B 82 0 733 675 ; 
+C 85 ; WX 705 ; N U ; B 86 -15 784 675 ; 
+C 86 ; WX 613 ; N V ; B 104 -16 760 675 ; 
+C 87 ; WX 880 ; N W ; B 96 -15 1029 675 ; 
+C 88 ; WX 748 ; N X ; B 48 0 843 675 ; 
+C 89 ; WX 587 ; N Y ; B 79 0 724 675 ; 
+C 90 ; WX 803 ; N Z ; B 68 0 789 675 ; 
+C 91 ; WX 271 ; N bracketleft ; B 59 -212 257 687 ; 
+C 93 ; WX 271 ; N bracketright ; B 14 -212 212 687 ; 
+C 97 ; WX 528 ; N a ; B 14 -12 474 457 ; 
+C 98 ; WX 500 ; N b ; B 24 -12 469 717 ; 
+C 99 ; WX 426 ; N c ; B 32 -12 409 457 ; 
+C 100 ; WX 547 ; N d ; B 40 -12 575 717 ; 
+C 101 ; WX 453 ; N e ; B 32 -12 422 457 ; 
+C 103 ; WX 576 ; N g ; B 29 -205 550 457 ; 
+C 104 ; WX 553 ; N h ; B 24 -12 479 717 ; 
+C 105 ; WX 308 ; N i ; B 42 -12 274 657 ; 
+C 106 ; WX 465 ; N j ; B 40 -214 486 657 ; 
+C 107 ; WX 546 ; N k ; B 16 -12 545 717 ; 
+C 108 ; WX 299 ; N l ; B 40 -12 305 717 ; 
+C 109 ; WX 822 ; N m ; B 12 -12 745 457 ; 
+C 110 ; WX 543 ; N n ; B 12 -12 470 457 ; 
+C 111 ; WX 484 ; N o ; B 26 -12 451 457 ; 
+C 112 ; WX 631 ; N p ; B 40 -212 599 457 ; 
+C 113 ; WX 495 ; N q ; B 20 -212 473 457 ; 
+C 114 ; WX 384 ; N r ; B 44 0 386 457 ; 
+C 115 ; WX 408 ; N s ; B 16 -12 385 457 ; 
+C 116 ; WX 274 ; N t ; B 36 -12 291 568 ; 
+C 117 ; WX 573 ; N u ; B 40 -12 493 457 ; 
+C 120 ; WX 568 ; N x ; B 20 -12 542 457 ; 
+C 121 ; WX 561 ; N y ; B 40 -214 551 457 ; 
+C 122 ; WX 443 ; N z ; B 16 0 447 446 ; 
+C 123 ; WX 308 ; N braceleft ; B 42 -12 231 457 ; 
+C 124 ; WX 500 ; N bar ; B 48 -212 452 702 ; 
+C 125 ; WX 500 ; N braceright ; B 67 -212 433 721 ; 
+C 126 ; WX 385 ; N asciitilde ; B 18 -193 368 697 ; 
+C 127 ; WX 448 ; N DEL ; B -20 -212 470 687 ; 
+EndCharMetrics
+EndFontMetrics

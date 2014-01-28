@@ -1,0 +1,19 @@
+%%
+%% This is file `umthrb.fd',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% mtpams.dtx  (with options: `umthrb')
+%% 
+%% Copyright 2004, 2005 Walter Schmidt
+\ProvidesFile{umthrb.fd}%
+ [2005/01/31 v4.1 %
+ MathTimePro Holey Roman Bold (WaS)%
+]
+\DeclareFontFamily{U}{mthrb}{}%
+\DeclareFontShape{U}{mthrb}{m}{n}{<-7>mthrbf<7-9>mthrbs<9->mthrbt}{}%
+\DeclareFontShape{U}{mthrb}{b}{n}{<-7>mthrbdf<7-9>mthrbds<9->mthrbdt}{}%
+\endinput
+%%
+%% End of file `umthrb.fd'.

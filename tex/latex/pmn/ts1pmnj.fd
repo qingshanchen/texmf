@@ -1,0 +1,39 @@
+\ProvidesFile{ts1pmnj.fd}
+   [2003/12/01 Fontinst v1.926 font definitions for TS1/pmnj.]
+
+\DeclareFontFamily{TS1}{pmnj}{}
+
+\DeclareFontShape{TS1}{pmnj}{m}{n}{
+   <-17> pmnr9c
+   <17-> pmnrd9c
+}{}
+
+\DeclareFontShape{TS1}{pmnj}{m}{it}{
+   <-17> pmnri9c
+   <17-> pmnrid9c
+}{}
+
+\DeclareFontShape{TS1}{pmnj}{sb}{n}{
+   <-> pmns9c
+}{}
+
+\DeclareFontShape{TS1}{pmnj}{sb}{it}{
+   <-> pmnsi9c
+}{}
+
+\DeclareFontShape{TS1}{pmnj}{b}{n}{
+   <-> pmnb9c
+}{}
+
+\DeclareFontShape{TS1}{pmnj}{b}{it}{
+   <-> pmnbi9c
+}{}
+
+\DeclareFontShape{TS1}{pmnj}{m}{sl}{<->ssub * pmnj/m/it}{}
+\DeclareFontShape{TS1}{pmnj}{sb}{sl}{<->ssub * pmnj/sb/it}{}
+\DeclareFontShape{TS1}{pmnj}{b}{sl}{<->ssub * pmnj/b/it}{}
+\DeclareFontShape{TS1}{pmnj}{bx}{sl}{<->ssub * pmnj/b/it}{}
+\DeclareFontShape{TS1}{pmnj}{bx}{n}{<->ssub * pmnj/b/n}{}
+\DeclareFontShape{TS1}{pmnj}{bx}{it}{<->ssub * pmnj/b/it}{}
+
+\endinput

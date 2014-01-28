@@ -1,0 +1,63 @@
+============================================================
+
+           Using the Adobe Aldus fonts with LaTeX
+
+============================================================
+                                                  2003-07-14
+                                              Walter Schmidt
+                                      <w-a-schmidt@arcor.de>
+
+
+Within LaTeX, the Adobe Aldus font family caries the names
+"pasx" and "pasj".  "pasx" provides regular digits, whereas
+"pasj" has oldstyle digits as the default ones.  For
+instance, the command
+
+  \renewcommand{\rmdefault}{pasj}
+
+makes LaTeX use Adobe Aldus with oldstyle digits as the
+default roman font family.  Note that Aldus does not include
+any bold fonts!
+
+|  Notice that Aldus is supported with T1 (european) and
+|  TS1 (textcompanion) encoding only, so you should issue
+|  the commands
+|
+|    \usepackage[T1]{fontenc}
+|    \usepackage{textcomp}
+|
+|  in the document preamble.  The obsolete OT1 encoding,
+|  which is still the default with LaTeX, is _not_
+|  supported.
+
+
+As to math typesetting, it is recommended to use the 
+Euler fonts through the package eulervm.sty, which should be
+loaded with the option "small":
+
+  \renewcommand{\rmdefault}{pasx}
+  \usepackage[small]{eulervm}
+
+Or, if you prefer oldstyle digits in text mode:
+
+  \renewcommand{\rmdefault}{pasj}
+  \usepackage[small,euler-digits]{eulervm}
+
+
+NFSS classification of the text fonts
+-------------------------------------
+
+  family  series  shape(s)  
+  -------------------------
+  pasx    m       n, it, sc
+  pasj    m       n, it, sc
+
+Available encodings are T1 (European) and TS1 (Text
+Companion).  The obsolete OT1 encoding is not supported.
+The TS1 encoding comprises only those symbols, that are also
+part of the ISO-Adobe character set.  Notice that there is
+no Euro symbol.
+
+
+== finis
+

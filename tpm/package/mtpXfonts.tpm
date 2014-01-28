@@ -1,0 +1,284 @@
+<!DOCTYPE rdf:RDF SYSTEM "../tpm.dtd">
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:TPM="http://pctex.com/">
+  <rdf:Description about="http://pctex.com">
+    <TPM:Name>mtpXfonts</TPM:Name>
+    <TPM:Date>2004/10/22 16:23:41</TPM:Date>
+    <TPM:Version>4.0</TPM:Version>
+    <TPM:Creator>pctex</TPM:Creator>
+    <TPM:Title>
+MathTime Pro Plus fonts (non-free).
+    </TPM:Title>
+    <TPM:Description>
+The mtpfonts package contains the non-free
+MathTime Pro fonts, 
+Supplement A fonts (Times-compatible AMS
+msam and msbm fonts, Blackboard Bold, Holey
+Roman Bold, and more), and 
+Supplement B fonts (Times-compatible Math
+Script and Math Fraktur fonts)
+developed by Publish or Perish, Inc. and
+marketed by Personal TeX, Inc. www.pctex.com
+    </TPM:Description>
+    <TPM:Flags/>
+    <TPM:RunFiles size="1000000">
+texmf/tpm/package/mtpXfonts.tpm
+texmf/doc/fonts/mtpro/AMTLicense.txt
+texmf/doc/fonts/mtpro/guide.pdf
+texmf/doc/fonts/mtpro/MTPAguide.pdf
+texmf/doc/fonts/mtpro/mtpams.dtx
+texmf/doc/fonts/mtpro/mtpams.ins
+texmf/doc/fonts/mtpro/mtpams.pdf
+texmf/doc/fonts/mtpro/mtpb.dtx
+texmf/doc/fonts/mtpro/mtpb.ins
+texmf/doc/fonts/mtpro/mtpb.pdf
+texmf/doc/fonts/mtpro/MTPBguide.pdf
+texmf/doc/fonts/mtpro/mtpro.dtx
+texmf/doc/fonts/mtpro/mtpro.ins
+texmf/doc/fonts/mtpro/mtpro.pdf
+texmf/doc/fonts/mtpro/Test_latex.pdf
+texmf/doc/fonts/mtpro/Test_latex.tex
+texmf/dvips/mtpro/mtpro.map
+texmf/dvips/mtpro/mtproa.map
+texmf/dvips/mtpro/mtprob.map
+texmf/fonts/afm/pctex/mtpro/mnbmis.afm
+texmf/fonts/afm/pctex/mtpro/mnbmit.afm
+texmf/fonts/afm/pctex/mtpro/mnmbf.afm
+texmf/fonts/afm/pctex/mtpro/mnmbs.afm
+texmf/fonts/afm/pctex/mtpro/mnmbt.afm
+texmf/fonts/afm/pctex/mtpro/mnmif.afm
+texmf/fonts/afm/pctex/mtpro/mnmis.afm
+texmf/fonts/afm/pctex/mtpro/mnmit.afm
+texmf/fonts/afm/pctex/mtpro/mtbexa.afm
+texmf/fonts/afm/pctex/mtpro/mtbmif.afm
+texmf/fonts/afm/pctex/mtpro/mtbsyf.afm
+texmf/fonts/afm/pctex/mtpro/mtbsys.afm
+texmf/fonts/afm/pctex/mtpro/mtbsyt.afm
+texmf/fonts/afm/pctex/mtpro/mtexa.afm
+texmf/fonts/afm/pctex/mtpro/mtexe.afm
+texmf/fonts/afm/pctex/mtpro/mtexf.afm
+texmf/fonts/afm/pctex/mtpro/mtexg.afm
+texmf/fonts/afm/pctex/mtpro/mthexa.afm
+texmf/fonts/afm/pctex/mtpro/mthmif.afm
+texmf/fonts/afm/pctex/mtpro/mthmis.afm
+texmf/fonts/afm/pctex/mtpro/mthmit.afm
+texmf/fonts/afm/pctex/mtpro/mthsyf.afm
+texmf/fonts/afm/pctex/mtpro/mthsys.afm
+texmf/fonts/afm/pctex/mtpro/mthsyt.afm
+texmf/fonts/afm/pctex/mtpro/mtsyf.afm
+texmf/fonts/afm/pctex/mtpro/mtsys.afm
+texmf/fonts/afm/pctex/mtpro/mtsyt.afm
+texmf/fonts/afm/pctex/mtpro/xtamt.afm
+texmf/fonts/afm/pctex/mtpro/xtbmt.afm
+texmf/fonts/afm/pctex/mtpro/xtcmt.afm
+texmf/fonts/afm/pctex/mtpro/xtdmt.afm
+texmf/fonts/afm/pctex/mtpro/xtemt.afm
+texmf/fonts/afm/pctex/mtpro/xtfmt.afm
+texmf/fonts/afm/pctex/mtpro/xtgmt.afm
+texmf/fonts/afm/pctex/mtpro/xthmt.afm
+texmf/fonts/map/dvips/mtpro/mtpro.map
+texmf/fonts/map/dvips/mtpro/mtproa.map
+texmf/fonts/map/dvips/mtpro/mtprob.map
+texmf/fonts/tfm/pctex/mtpro/mnbmis.tfm
+texmf/fonts/tfm/pctex/mtpro/mnbmit.tfm
+texmf/fonts/tfm/pctex/mtpro/mnmbf.tfm
+texmf/fonts/tfm/pctex/mtpro/mnmbfr.tfm
+texmf/fonts/tfm/pctex/mtpro/mnmbs.tfm
+texmf/fonts/tfm/pctex/mtpro/mnmbt.tfm
+texmf/fonts/tfm/pctex/mtpro/mnmif.tfm
+texmf/fonts/tfm/pctex/mtpro/mnmis.tfm
+texmf/fonts/tfm/pctex/mtpro/mnmit.tfm
+texmf/fonts/tfm/pctex/mtpro/mtbbbdf.tfm
+texmf/fonts/tfm/pctex/mtpro/mtbbbds.tfm
+texmf/fonts/tfm/pctex/mtpro/mtbbbdt.tfm
+texmf/fonts/tfm/pctex/mtpro/mtbbbf.tfm
+texmf/fonts/tfm/pctex/mtpro/mtbbbs.tfm
+texmf/fonts/tfm/pctex/mtpro/mtbbbt.tfm
+texmf/fonts/tfm/pctex/mtpro/mtbexa.tfm
+texmf/fonts/tfm/pctex/mtpro/mtbmff.tfm
+texmf/fonts/tfm/pctex/mtpro/mtbmfs.tfm
+texmf/fonts/tfm/pctex/mtpro/mtbmft.tfm
+texmf/fonts/tfm/pctex/mtpro/mtbmif.tfm
+texmf/fonts/tfm/pctex/mtpro/mtbmis.tfm
+texmf/fonts/tfm/pctex/mtpro/mtbmit.tfm
+texmf/fonts/tfm/pctex/mtpro/mtbmsf.tfm
+texmf/fonts/tfm/pctex/mtpro/mtbmss.tfm
+texmf/fonts/tfm/pctex/mtpro/mtbmst.tfm
+texmf/fonts/tfm/pctex/mtpro/mtbsyaf.tfm
+texmf/fonts/tfm/pctex/mtpro/mtbsyas.tfm
+texmf/fonts/tfm/pctex/mtpro/mtbsyat.tfm
+texmf/fonts/tfm/pctex/mtpro/mtbsyf.tfm
+texmf/fonts/tfm/pctex/mtpro/mtbsys.tfm
+texmf/fonts/tfm/pctex/mtpro/mtbsyt.tfm
+texmf/fonts/tfm/pctex/mtpro/mtexa.tfm
+texmf/fonts/tfm/pctex/mtpro/mtexe.tfm
+texmf/fonts/tfm/pctex/mtpro/mtexf.tfm
+texmf/fonts/tfm/pctex/mtpro/mtexg.tfm
+texmf/fonts/tfm/pctex/mtpro/mthexa.tfm
+texmf/fonts/tfm/pctex/mtpro/mthmif.tfm
+texmf/fonts/tfm/pctex/mtpro/mthmis.tfm
+texmf/fonts/tfm/pctex/mtpro/mthmit.tfm
+texmf/fonts/tfm/pctex/mtpro/mthrbdf.tfm
+texmf/fonts/tfm/pctex/mtpro/mthrbds.tfm
+texmf/fonts/tfm/pctex/mtpro/mthrbdt.tfm
+texmf/fonts/tfm/pctex/mtpro/mthrbf.tfm
+texmf/fonts/tfm/pctex/mtpro/mthrbs.tfm
+texmf/fonts/tfm/pctex/mtpro/mthrbt.tfm
+texmf/fonts/tfm/pctex/mtpro/mthsyaf.tfm
+texmf/fonts/tfm/pctex/mtpro/mthsyas.tfm
+texmf/fonts/tfm/pctex/mtpro/mthsyat.tfm
+texmf/fonts/tfm/pctex/mtpro/mthsyf.tfm
+texmf/fonts/tfm/pctex/mtpro/mthsys.tfm
+texmf/fonts/tfm/pctex/mtpro/mthsyt.tfm
+texmf/fonts/tfm/pctex/mtpro/mtmbf.tfm
+texmf/fonts/tfm/pctex/mtpro/mtmbs.tfm
+texmf/fonts/tfm/pctex/mtpro/mtmbt.tfm
+texmf/fonts/tfm/pctex/mtpro/mtmff.tfm
+texmf/fonts/tfm/pctex/mtpro/mtmfs.tfm
+texmf/fonts/tfm/pctex/mtpro/mtmft.tfm
+texmf/fonts/tfm/pctex/mtpro/mtmif.tfm
+texmf/fonts/tfm/pctex/mtpro/mtmis.tfm
+texmf/fonts/tfm/pctex/mtpro/mtmit.tfm
+texmf/fonts/tfm/pctex/mtpro/mtmsf.tfm
+texmf/fonts/tfm/pctex/mtpro/mtmss.tfm
+texmf/fonts/tfm/pctex/mtpro/mtmst.tfm
+texmf/fonts/tfm/pctex/mtpro/mtsyaf.tfm
+texmf/fonts/tfm/pctex/mtpro/mtsyas.tfm
+texmf/fonts/tfm/pctex/mtpro/mtsyat.tfm
+texmf/fonts/tfm/pctex/mtpro/mtsyf.tfm
+texmf/fonts/tfm/pctex/mtpro/mtsys.tfm
+texmf/fonts/tfm/pctex/mtpro/mtsyt.tfm
+texmf/fonts/tfm/pctex/mtpro/mtxl.tfm
+texmf/fonts/tfm/pctex/mtpro/mtxxxl.tfm
+texmf/fonts/tfm/pctex/mtpro/xtamt.tfm
+texmf/fonts/tfm/pctex/mtpro/xtbmt.tfm
+texmf/fonts/tfm/pctex/mtpro/xtcmt.tfm
+texmf/fonts/tfm/pctex/mtpro/xtdmt.tfm
+texmf/fonts/tfm/pctex/mtpro/xtemt.tfm
+texmf/fonts/tfm/pctex/mtpro/xtfmt.tfm
+texmf/fonts/tfm/pctex/mtpro/xtgmt.tfm
+texmf/fonts/tfm/pctex/mtpro/xthmt.tfm
+texmf/fonts/tfm/pctex/mtpro/xtimt.tfm
+texmf/fonts/type1/pctex/mtpro/mnbmis.pfb
+texmf/fonts/type1/pctex/mtpro/mnbmit.pfb
+texmf/fonts/type1/pctex/mtpro/mnmbf.pfb
+texmf/fonts/type1/pctex/mtpro/mnmbs.pfb
+texmf/fonts/type1/pctex/mtpro/mnmbt.pfb
+texmf/fonts/type1/pctex/mtpro/mnmif.pfb
+texmf/fonts/type1/pctex/mtpro/mnmis.pfb
+texmf/fonts/type1/pctex/mtpro/mnmit.pfb
+texmf/fonts/type1/pctex/mtpro/mtbbbdf.pfb
+texmf/fonts/type1/pctex/mtpro/mtbbbds.pfb
+texmf/fonts/type1/pctex/mtpro/mtbbbdt.pfb
+texmf/fonts/type1/pctex/mtpro/mtbbbf.pfb
+texmf/fonts/type1/pctex/mtpro/mtbbbs.pfb
+texmf/fonts/type1/pctex/mtpro/mtbbbt.pfb
+texmf/fonts/type1/pctex/mtpro/mtbexa.pfb
+texmf/fonts/type1/pctex/mtpro/mtbmff.pfb
+texmf/fonts/type1/pctex/mtpro/mtbmfs.pfb
+texmf/fonts/type1/pctex/mtpro/mtbmft.pfb
+texmf/fonts/type1/pctex/mtpro/mtbmif.pfb
+texmf/fonts/type1/pctex/mtpro/mtbmsf.pfb
+texmf/fonts/type1/pctex/mtpro/mtbmss.pfb
+texmf/fonts/type1/pctex/mtpro/mtbmst.pfb
+texmf/fonts/type1/pctex/mtpro/mtbsyaf.pfb
+texmf/fonts/type1/pctex/mtpro/mtbsyas.pfb
+texmf/fonts/type1/pctex/mtpro/mtbsyat.pfb
+texmf/fonts/type1/pctex/mtpro/mtbsyf.pfb
+texmf/fonts/type1/pctex/mtpro/mtbsys.pfb
+texmf/fonts/type1/pctex/mtpro/mtbsyt.pfb
+texmf/fonts/type1/pctex/mtpro/mtexa.pfb
+texmf/fonts/type1/pctex/mtpro/mtexe.pfb
+texmf/fonts/type1/pctex/mtpro/mtexf.pfb
+texmf/fonts/type1/pctex/mtpro/mtexg.pfb
+texmf/fonts/type1/pctex/mtpro/mthexa.pfb
+texmf/fonts/type1/pctex/mtpro/mthmif.pfb
+texmf/fonts/type1/pctex/mtpro/mthmis.pfb
+texmf/fonts/type1/pctex/mtpro/mthmit.pfb
+texmf/fonts/type1/pctex/mtpro/mthrbdf.pfb
+texmf/fonts/type1/pctex/mtpro/mthrbds.pfb
+texmf/fonts/type1/pctex/mtpro/mthrbdt.pfb
+texmf/fonts/type1/pctex/mtpro/mthrbf.pfb
+texmf/fonts/type1/pctex/mtpro/mthrbs.pfb
+texmf/fonts/type1/pctex/mtpro/mthrbt.pfb
+texmf/fonts/type1/pctex/mtpro/mthsyaf.pfb
+texmf/fonts/type1/pctex/mtpro/mthsyas.pfb
+texmf/fonts/type1/pctex/mtpro/mthsyat.pfb
+texmf/fonts/type1/pctex/mtpro/mthsyf.pfb
+texmf/fonts/type1/pctex/mtpro/mthsys.pfb
+texmf/fonts/type1/pctex/mtpro/mthsyt.pfb
+texmf/fonts/type1/pctex/mtpro/mtmff.pfb
+texmf/fonts/type1/pctex/mtpro/mtmfs.pfb
+texmf/fonts/type1/pctex/mtpro/mtmft.pfb
+texmf/fonts/type1/pctex/mtpro/mtmsf.pfb
+texmf/fonts/type1/pctex/mtpro/mtmss.pfb
+texmf/fonts/type1/pctex/mtpro/mtmst.pfb
+texmf/fonts/type1/pctex/mtpro/mtsyaf.pfb
+texmf/fonts/type1/pctex/mtpro/mtsyas.pfb
+texmf/fonts/type1/pctex/mtpro/mtsyat.pfb
+texmf/fonts/type1/pctex/mtpro/mtsyf.pfb
+texmf/fonts/type1/pctex/mtpro/mtsys.pfb
+texmf/fonts/type1/pctex/mtpro/mtsyt.pfb
+texmf/fonts/type1/pctex/mtpro/mtxl.pfb
+texmf/fonts/type1/pctex/mtpro/mtxxxl.pfb
+texmf/fonts/type1/pctex/mtpro/xtamt.pfb
+texmf/fonts/type1/pctex/mtpro/xtbmt.pfb
+texmf/fonts/type1/pctex/mtpro/xtcmt.pfb
+texmf/fonts/type1/pctex/mtpro/xtdmt.pfb
+texmf/fonts/type1/pctex/mtpro/xtemt.pfb
+texmf/fonts/type1/pctex/mtpro/xtfmt.pfb
+texmf/fonts/type1/pctex/mtpro/xtgmt.pfb
+texmf/fonts/type1/pctex/mtpro/xthmt.pfb
+texmf/fonts/type1/pctex/mtpro/xtimt.pfb
+texmf/fonts/vf/pctex/mtpro/mtbmis.vf
+texmf/fonts/vf/pctex/mtpro/mtbmit.vf
+texmf/fonts/vf/pctex/mtpro/mtmbf.vf
+texmf/fonts/vf/pctex/mtpro/mtmbs.vf
+texmf/fonts/vf/pctex/mtpro/mtmbt.vf
+texmf/fonts/vf/pctex/mtpro/mtmif.vf
+texmf/fonts/vf/pctex/mtpro/mtmis.vf
+texmf/fonts/vf/pctex/mtpro/mtmit.vf
+texmf/tex/latex/pctex/mpy1mtt.fd
+texmf/tex/latex/pctex/mpy2mtt.fd
+texmf/tex/latex/pctex/mpy3mtt.fd
+texmf/tex/latex/pctex/mtpams.sty
+texmf/tex/latex/pctex/mtpb.sty
+texmf/tex/latex/pctex/mtpro.sty
+texmf/tex/latex/pctex/omslby.fd
+texmf/tex/latex/pctex/umtbbb.fd
+texmf/tex/latex/pctex/umtfra.fd
+texmf/tex/latex/pctex/umthrb.fd
+texmf/tex/latex/pctex/umtms.fd
+texmf/tex/latex/pctex/umtscr.fd
+texmf/tex/latex/pctex/umtsya.fd
+texmf/tex/latex/pctex/umtt.fd
+texmf/tex/plain/pctex/mtp.tex
+texmf/tex/plain/pctex/mtpa.tex
+texmf/tex/plain/pctex/mtpb.tex
+texmf/tex/plain/pctex/mtpb.tex
+texmf/tex/plain/pctex/mtph.tex
+templates/LaTeX Article MTPro - Custom Page.tex
+templates/LaTeX Article MTPro - Header and Footer.tex
+templates/LaTeX Article MTPro - Using Color.tex
+templates/LaTeX Article MTPro.tex
+templates/LaTeX Book MTPro.tex
+templates/LaTeX Letter MTPro.tex
+templates/LaTeX Report MTPro.tex
+templates/Plain MTPro.tex
+    </TPM:RunFiles>
+    <TPM:DocFiles xmlns:TPM="http://pctex.com/" size="135000">
+texmf/doc/fonts/mtpro/guide.pdf
+texmf/doc/fonts/mtpro/mtpro.pdf
+texmf/doc/fonts/mtpro/MTPAguide.pdf
+texmf/doc/fonts/mtpro/mtpams.pdf
+texmf/doc/fonts/mtpro/MTPBguide.pdf
+texmf/doc/fonts/mtpro/mtpb.pdf
+    </TPM:DocFiles>
+    <TPM:Provides>mtpfonts</TPM:Provides>
+    <TPM:Requires/>
+    <TPM:Installation>
+      <TPM:Execute function="addMap" mode="mixed" parameter="mtpro.map"/>
+      <TPM:Execute function="addMap" mode="mixed" parameter="mtproa.map"/>
+      <TPM:Execute function="addMap" mode="mixed" parameter="mtprob.map"/>
+    </TPM:Installation>
+  </rdf:Description>
+</rdf:RDF>

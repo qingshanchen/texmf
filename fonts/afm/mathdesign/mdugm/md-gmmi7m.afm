@@ -1,0 +1,89 @@
+StartFontMetrics 2.0
+Version 1.4
+Notice (c) 2004 Paul Pichaureau, under the gpl licence.
+FullName MathDesign GM Medium Italic MathItalic 10
+FamilyName MathDesign-GM
+Weight Medium
+ItalicAngle 16
+IsFixedPitch false
+UnderlinePosition -98
+UnderlineThickness 54
+FontBBox  -25 -328 946 810
+EncodingScheme FontSpecific
+CapHeight 689
+XHeight 432
+Ascender 772
+Descender -269
+StdVW 97
+StartCharMetrics 64
+C 0 ; WX 654 ; N Gamma ; B 25 0 775 684 ;
+C 1 ; WX 820 ; N Delta ; B 31 0 788 721 ;
+C 2 ; WX 759 ; N Theta ; B 40 -20 746 709 ;
+C 3 ; WX 680 ; N Lambda ; B 18 0 672 721 ;
+C 4 ; WX 741 ; N Xi ; B 32 0 813 689 ;
+C 5 ; WX 831 ; N Pi ; B 25 0 908 689 ;
+C 6 ; WX 793 ; N Sigma ; B 46 0 860 689 ;
+C 7 ; WX 568 ; N Upsilon ; B 15 0 702 709 ;
+C 8 ; WX 637 ; N Phi ; B 11 0 626 689 ;
+C 9 ; WX 587 ; N Psi ; B 2 0 694 689 ;
+C 10 ; WX 768 ; N Omega ; B 34 0 803 709 ;
+C 11 ; WX 583 ; N alpha ; B 58 -19 555 451 ;
+C 12 ; WX 770 ; N beta ; B 9 -300 706 792 ;
+C 13 ; WX 470 ; N gamma ; B 40 -289 543 452 ;
+C 14 ; WX 661 ; N delta ; B 71 -19 685 794 ;
+C 15 ; WX 516 ; N epsilon ; B 87 -19 446 452 ;
+C 16 ; WX 439 ; N zeta ; B 56 -228 577 787 ;
+C 17 ; WX 548 ; N eta ; B 52 -280 491 451 ;
+C 18 ; WX 578 ; N theta ; B 66 -19 549 792 ;
+C 19 ; WX 285 ; N iota ; B 47 -19 241 441 ;
+C 20 ; WX 624 ; N kappa ; B 48 -20 592 452 ;
+C 21 ; WX 572 ; N lambda ; B 55 -19 562 792 ;
+C 22 ; WX 720 ; N mu ; B 65 -280 670 452 ;
+C 23 ; WX 366 ; N nu ; B 44 -19 419 469 ;
+C 24 ; WX 495 ; N xi ; B 56 -228 601 794 ;
+C 25 ; WX 692 ; N pi ; B 77 -19 670 432 ;
+C 26 ; WX 608 ; N rho ; B 8 -328 547 452 ;
+C 27 ; WX 591 ; N sigma ; B 59 -19 598 433 ;
+C 28 ; WX 558 ; N tau ; B 59 -19 564 432 ;
+C 29 ; WX 534 ; N upsilon ; B 71 -20 461 461 ;
+C 30 ; WX 734 ; N phi ; B 65 -300 669 797 ;
+C 31 ; WX 614 ; N chi ; B 16 -289 666 451 ;
+C 32 ; WX 741 ; N psi ; B 90 -300 666 797 ;
+C 33 ; WX 815 ; N omega ; B 57 -19 774 456 ;
+C 34 ; WX 510 ; N epsilon1 ; B 51 -19 431 451 ;
+C 35 ; WX 700 ; N theta1 ; B 42 -19 701 792 ;
+C 36 ; WX 910 ; N pi1 ; B 51 -19 946 432 ;
+C 37 ; WX 653 ; N rho1 ; B 24 -292 582 452 ;
+C 38 ; WX 479 ; N sigma1 ; B 61 -228 493 452 ;
+C 39 ; WX 619 ; N phi1 ; B 64 -300 592 457 ;
+C 40 ; WX 988 ; N harpoonleftup ; B 46 192 943 418 ;
+C 41 ; WX 988 ; N harpoonleftdown ; B 46 48 943 274 ;
+C 42 ; WX 988 ; N harpoonrightup ; B 46 48 943 274 ;
+C 43 ; WX 988 ; N harpoonrightdown ; B 46 192 943 418 ;
+C 44 ; WX 286 ; N hookrightchar ; B 46 192 240 534 ;
+C 45 ; WX 286 ; N hookleftchar ; B 45 192 241 534 ;
+C 46 ; WX 484 ; N triangleright ; B 61 -8 462 474 ;
+C 47 ; WX 484 ; N triangleleft ; B 22 -8 423 474 ;
+C 60 ; WX 764 ; N less ; B 74 -83 690 549 ;
+C 61 ; WX 484 ; N slash ; B 46 -284 438 750 ;
+C 62 ; WX 764 ; N greater ; B 74 -83 690 549 ;
+C 63 ; WX 484 ; N star ; B -25 -17 509 490 ;
+C 64 ; WX 497 ; N partialdiff ; B 68 -19 633 792 ;
+C 91 ; WX 357 ; N flat ; B 46 -20 311 751 ;
+C 92 ; WX 372 ; N natural ; B 63 -307 309 810 ;
+C 93 ; WX 372 ; N sharp ; B 46 -302 326 805 ;
+C 94 ; WX 988 ; N slurbelow ; B 49 125 939 351 ;
+C 95 ; WX 988 ; N slurabove ; B 49 115 939 342 ;
+C 96 ; WX 534 ; N lscript ; B 9 -30 447 783 ;
+C 124 ; WX 336 ; N dotlessj ; B 0 0 0 0 ;
+C 125 ; WX 731 ; N weierstrass ; B 40 -289 638 452 ;
+C 126 ; WX 504 ; N vector ; B 208 546 675 794 ;
+C 127 ; WX 280 ; N tie ; B 291 583 695 772 ;
+EndCharMetrics
+StartKernData
+StartKernPairs 0
+EndKernPairs
+EndKernData
+StartComposites
+EndComposites
+EndFontMetrics

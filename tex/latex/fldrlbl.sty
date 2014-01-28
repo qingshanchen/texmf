@@ -1,0 +1,34 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{fldrlbl}[2007/05/16 fldrlbl package created by Marius Kleiner]
+\RequirePackage{fullpage}
+\RequirePackage{calc}
+\renewcommand\labelitemi{\normalfont\UseTextSymbol{OMS}{\textbullet}}
+\newcommand\@lastline{}
+\newcommand\lastline[1]{\def\@lastline{#1}}
+% First we define an fmbox environment to make a framed minipage of given width
+% and height
+\newsavebox{\fmbox}
+\newenvironment{fmpage}[2]
+{\begin{lrbox}{\fmbox}\begin{minipage}[t][#1-2\fboxsep-2\fboxrule]%
+  {#2-2\fboxsep-2\fboxrule}}
+  {\end{minipage}\end{lrbox}\fbox{\usebox{\fmbox}}}
+% The next environment creates the actual label by putting title and an itemized
+% list into a framed box
+\newenvironment{folderlabel}[3]
+{\begin{fmpage}{#1}{#2}
+  \vspace{2cm}
+  \begin{center}
+    {\Huge\sffamily #3}
+  \end{center}
+  \vspace{1cm}
+  \raggedright
+  \begin{itemize}\sffamily}
+      {\end{itemize}\vfill\begin{center}\sffamily\@lastline\end{center}%
+          \vspace{1ex}\end{fmpage}}
+
+\newcommand\folderhigh[3]{%
+\begin{fmpage}{#1}{#2}
+  \vfil
+  {\centering\Huge\sffamily#3\par}
+\vfil
+\end{fmpage}}

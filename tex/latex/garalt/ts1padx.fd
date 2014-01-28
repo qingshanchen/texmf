@@ -1,0 +1,51 @@
+%Filename: ts1padx.fd
+%Created by: tex makepadl
+%Created using fontinst v1.929
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{ts1padx.fd}
+   [2006/03/10 Fontinst v1.929 font definitions for TS1/padx.]
+
+\DeclareFontFamily{TS1}{padx}{}
+
+\DeclareFontShape{TS1}{padx}{m}{n}{
+   <-> padr9c
+}{}
+
+\DeclareFontShape{TS1}{padx}{m}{it}{
+   <-> padri9c
+}{}
+
+\DeclareFontShape{TS1}{padx}{sb}{n}{
+   <-> pads9c
+}{}
+
+\DeclareFontShape{TS1}{padx}{sb}{it}{
+   <-> padsi9c
+}{}
+
+\DeclareFontShape{TS1}{padx}{b}{n}{
+   <-> padb9c
+}{}
+
+\DeclareFontShape{TS1}{padx}{b}{it}{
+   <-> padbi9c
+}{}
+
+\DeclareFontShape{TS1}{padx}{m}{ar}{
+   <-> padra9c
+}{}
+
+\DeclareFontShape{TS1}{padx}{m}{ai}{
+   <-> padria9c
+}{}
+
+\DeclareFontShape{TS1}{padx}{m}{sl}{<->ssub * padx/m/it}{}
+\DeclareFontShape{TS1}{padx}{sb}{sl}{<->ssub * padx/sb/it}{}
+\DeclareFontShape{TS1}{padx}{b}{sl}{<->ssub * padx/sb/sl}{}
+\DeclareFontShape{TS1}{padx}{bx}{sl}{<->ssub * padx/b/sl}{}
+\DeclareFontShape{TS1}{padx}{bx}{n}{<->ssub * padx/b/n}{}
+\DeclareFontShape{TS1}{padx}{bx}{it}{<->ssub * padx/b/it}{}
+
+\endinput

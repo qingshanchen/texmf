@@ -1,0 +1,19 @@
+%%
+%% This is file `umtfra.fd',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% mtpb.dtx  (with options: `umtfra')
+%% 
+%% Copyright 2005 Walter Schmidt
+\ProvidesFile{umtfra.fd}%
+ [2005/01/30 v1.1 %
+ MathTimePro Fraktur (WaS)%
+]
+\DeclareFontFamily{U}{mtfra}{}%
+\DeclareFontShape{U}{mtfra}{m}{n}{<-7>mtmff<7-9>mtmfs<9->mtmft}{}%
+\DeclareFontShape{U}{mtfra}{b}{n}{<-7>mtbmff<7-9>mtbmfs<9->mtbmft}{}%
+\endinput
+%%
+%% End of file `umtfra.fd'.

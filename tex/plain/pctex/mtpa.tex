@@ -1,0 +1,757 @@
+% MTPA.TEX  VERSION 1.0  (August 2004)
+% COPYRIGHT (C) 2004 BY PUBLISH OR PERISH, INC.
+
+\expandafter\edef\csname qqcode\string @\endcsname{\the\catcode`\"}
+\expandafter\edef\csname atcode\string @\endcsname{\the\catcode`\@}
+
+\expandafter\ifx\csname s\string @b\string @\endcsname\relax
+ \errmessage{File mtp.tex must be \string\input\space first}\fi
+\catcode`\@=11
+\catcode`\"=12   
+
+\def\loadhrbAt@#1#2#3{%
+ \alloc@@8\fam\chardef\sixt@@n\mthrb@
+ \edef\mthrb@@{\hexnumber@\mthrb@}
+ \dimen@#1\relax\PSZ@
+ \FONT@{mthrbt}\nextiii@\textfont\mthrb@\next@
+ \dimen@#2\relax\PSZ@
+ \FONT@{mthrbs}\nextiii@\scriptfont\mthrb@\next@
+ \dimen@#3\relax\PSZ@
+ \FONT@{mthrbf}\nextiii@\scriptscriptfont\mthrb@\next@
+ \def\hrb{\futurelet\next\hrb@}%
+ \def\hrb@{\ifx\next\imath\def\next@####1{\mathchar"0\mthrb@@7B}%
+ \else\ifx\next\jmath\def\next@####1{\mathchar"0\mthrb@@7C}%
+ \else\def\next@####1{\fam\mthrb@####1}\fi\fi
+ \next@}
+}
+\def\loadhrb{\loadhrbAt@\tMTPsize\sMTPsize\fMTPsize}
+
+\def\loadhrbdAt@#1#2#3{%
+ \alloc@@8\fam\chardef\sixt@@n\mthrbd@
+ \edef\mthrbd@@{\hexnumber@\mthrbd@}%
+ \dimen@#1\relax\PSZ@
+ \FONT@{mthrbdt}\nextiii@\textfont\mthrbd@\next@
+ \dimen@#2\relax\PSZ@
+ \FONT@{mthrbds}\nextiii@\scriptfont\mthrbd@\next@
+ \dimen@#3\relax\PSZ@
+ \FONT@{mthrbdf}\nextiii@\scriptscriptfont\mthrbd@\next@
+ \def\hrbd{\futurelet\next\hrbd@}%
+ \def\hrbd@{\ifx\next\imath\def\next@####1{\mathchar"0\mthrbd@@7B}%
+ \else\ifx\next\jmath\def\next@####1{\mathchar"0\mthrbd@@7C}%
+ \else\def\next@####1{\fam\mthrbd@\relax\next}\fi\fi
+ \next@}
+}
+\def\loadhrbd{\loadhrbdAt@\tMTPsize\sMTPsize\fMTPsize}
+
+\def\loadbbbAt@#1#2#3{%
+ \alloc@@8\fam\chardef\sixt@@n\mtbbb@
+ \edef\mtbbb@@{\hexnumber@\mtbbb@}%
+ \dimen@#1\relax\PSZ@
+ \FONT@{mtbbbt}\nextiii@\textfont\mtbbb@\next@
+ \dimen@#2\relax\PSZ@
+ \FONT@{mtbbbs}\nextiii@\scriptfont\mtbbb@\next@
+ \dimen@#3\relax\PSZ@
+ \FONT@{mtbbbf}\nextiii@\scriptscriptfont\mtbbb@\next@
+ \def\bbb{\futurelet\next\bbb@}%
+ \def\bbb@{\ifx\next\imath\def\next@####1{\mathchar"0\mtbbb@@7B}%
+ \else\ifx\next\jmath\def\next@####1{\mathchar"0\mtbbb@@7C}%
+ \else\def\next@####1{\fam\mtbbb@\relax\next}\fi\fi
+ \next@}
+}
+\def\loadbbb{\loadbbbAt@\tMTPsize\sMTPsize\fMTPsize}
+
+\def\loadbbbdAt@#1#2#3{%
+ \alloc@@8\fam\chardef\sixt@@n\mtbbbd@
+ \edef\mtbbbd@@{\hexnumber@\mtbbbd@}%
+ \dimen@#1\relax\PSZ@
+ \FONT@{mtbbbdt}\nextiii@\textfont\mtbbbd@\next@
+ \dimen@#2\relax\PSZ@
+ \FONT@{mtbbbds}\nextiii@\scriptfont\mtbbbd@\next@
+ \dimen@#3\relax\PSZ@
+ \FONT@{mtbbbdf}\nextiii@\scriptscriptfont\mtbbbd@\next@
+ \def\bbbd{\futurelet\next\bbbd@}%
+ \def\bbbd@{\ifx\next\imath\def\next@####1{\mathchar"0\mtbbbd@@7B}%
+ \else\ifx\next\jmath\def\next@####1{\mathchar"0\mtbbbd@@7C}%
+ \else\def\next@####1{\fam\mtbbbd@\relax\next}\fi\fi
+ \next@}
+}
+\def\loadbbbd{\loadbbbdAt@\tMTPsize\sMTPsize\fMTPsize}
+
+
+\def\loadsyaAt@#1#2#3{%
+ \alloc@@8\fam\chardef\sixt@@n\mtsya@
+ \edef\mtsya@@{\hexnumber@\mtsya@}%
+ \dimen@#1\relax\PSZ@
+ \FONT@{mtsyat}\nextiii@\textfont\mtsya@\next@
+ \dimen@#2\relax\PSZ@
+ \FONT@{mtsyas}\nextiii@\scriptfont\mtsya@\next@
+ \dimen@#3\relax\PSZ@
+ \FONT@{mtsyaf}\nextiii@\scriptscriptfont\mtsya@\next@
+ \syadefs@}
+
+\def\EloadsyaAt@#1#2#3{%
+ \dimen@#1\relax\PSZ@
+ \FONT@{mtsyat}\nextiii@\let\mtsya@t\next@
+ \dimen@#2\relax\PSZ@
+ \FONT@{mtsyas}\nextiii@\let\mtsya@s\next@
+ \dimen@#3\relax\PSZ@
+ \FONT@{mtsyaf}\nextiii@\let\mtsya@f\next@
+ \Esyadefs@}
+
+\def\mtsyadef@#1#2#3#4 {\mathchardef#1="#2\mtsya@@#3#4}
+
+\def\getclass@#1{\ifcase#1\let\next@\relax\or\let\next@\mathop\or\let\next@\mathbin\or
+  \let\next@\mathrel\or\let\next@\mathopen\or\let\next@\mathclose\or\let\next@\mathpunct\fi}
+
+\def\Emtsyadef@#1#2#3#4 {\def#1{\getclass@#2%
+ \mathchoice{\next@{\hbox{\mtsya@t\char"#3#4}}}{\next@{\hbox{\mtsya@t\char"#3#4}}}%
+  {\next@{\hbox{\mtsya@s\char"#3#4}}}{\next@{\hbox{\mtsya@f\char"#3#4}}}}}
+
+\def\syadefs@{\def\ulcorner{\delimiter"4\mtsya@@70\mtsya@@70 }%
+ \def\urcorner{\delimiter"5\mtsya@@71\mtsya@@71 }%
+ \def\llcorner{\delimiter"4\mtsya@@78\mtsya@@78 }%
+ \def\lrcorner{\delimiter"5\mtsya@@79\mtsya@@79 }%
+ \def\checkmark{\ifmmode\mathchar"\mtsya@@58\else\mathhexbox\mtsya@@58\fi}%
+ \def\circledR{\ifmmode\mathchar"\mtsya@@72\else\mathhexbox\mtsya@@72\fi}%
+ \def\maltese{\ifmmode\mathchar"\mtsya@@7A\else\mathhexbox\mtsya@@7A\fi}%
+ \mtsyadef@\midshaft039
+ \mtsyadef@\rarrowhead04B
+ \mtsyadef@\larrowhead04C
+ \mtsyadef@\dashleftarrow0DB
+ \mtsyadef@\dashrightarrow0DC
+ \let\dasharrow\dashrightarrow
+ \mtsyadef@\Diamond0DE
+ \mtsyadef@\leadsto0DD
+ \mtsyadef@\boxdot200
+ \mtsyadef@\boxplus201
+ \mtsyadef@\boxtimes202
+ \mtsyadef@\square003
+ \mtsyadef@\blacksquare004
+ \mtsyadef@\centerdot205
+ \mtsyadef@\lozenge006
+ \mtsyadef@\blacklozenge007
+ \mtsyadef@\circlearrowright308
+ \mtsyadef@\circlearrowleft309
+ \mtsyadef@\leftrightharpoons30B
+ \mtsyadef@\boxminus20C
+ \mtsyadef@\Vdash30D
+ \mtsyadef@\Vvdash30E
+ \mtsyadef@\vDash30F
+ \mtsyadef@\twoheadrightarrow310
+ \mtsyadef@\twoheadleftarrow311
+ \mtsyadef@\leftleftarrows312
+ \mtsyadef@\rightrightarrows313
+ \mtsyadef@\upuparrows314
+ \mtsyadef@\downdownarrows315
+ \mtsyadef@\upharpoonright316
+ \let\restriction\upharpoonright
+ \mtsyadef@\downharpoonright317
+ \mtsyadef@\upharpoonleft318
+ \mtsyadef@\downharpoonleft319
+ \mtsyadef@\rightarrowtail31A
+ \mtsyadef@\leftarrowtail31B
+ \mtsyadef@\leftrightarrows31C
+ \mtsyadef@\rightleftarrows31D
+ \mtsyadef@\Lsh31E
+ \mtsyadef@\Rsh31F
+ \mtsyadef@\rightsquigarrow320
+ \mtsyadef@\leftrightsquigarrow321
+ \mtsyadef@\looparrowleft322
+ \mtsyadef@\looparrowright323
+ \mtsyadef@\circeq324
+ \mtsyadef@\succsim325
+ \mtsyadef@\gtrsim326
+ \mtsyadef@\gtrapprox327
+ \mtsyadef@\multimap328
+ \mtsyadef@\therefore329
+ \mtsyadef@\because32A
+ \mtsyadef@\doteqdot32B
+ \let\Doteq\doteqdot
+ \mtsyadef@\triangleq32C
+ \mtsyadef@\precsim32D
+ \mtsyadef@\lesssim32E
+ \mtsyadef@\lessapprox32F
+ \mtsyadef@\eqslantless330
+ \mtsyadef@\eqslantgtr331
+ \mtsyadef@\curlyeqprec332
+ \mtsyadef@\curlyeqsucc333
+ \mtsyadef@\preccurlyeq334
+ \mtsyadef@\leqq335
+ \mtsyadef@\leqslant336
+ \mtsyadef@\lessgtr337
+ \mtsyadef@\backprime038
+ \mtsyadef@\risingdotseq33A
+ \mtsyadef@\fallingdotseq33B
+ \mtsyadef@\succcurlyeq33C
+ \mtsyadef@\geqq33D
+ \mtsyadef@\geqslant33E
+ \mtsyadef@\gtrless33F
+ \mtsyadef@\sqsubset340
+ \mtsyadef@\sqsupset341
+ \mtsyadef@\vartriangleright342
+ \mtsyadef@\vartriangleleft343
+ \mtsyadef@\trianglerighteq344
+ \mtsyadef@\trianglelefteq345
+ \mtsyadef@\bigstar046
+ \mtsyadef@\between347
+ \mtsyadef@\blacktriangledown048
+ \mtsyadef@\blacktriangleright349
+ \mtsyadef@\blacktriangleleft34A
+ \mtsyadef@\vartriangle34D
+ \mtsyadef@\blacktriangle04E
+ \mtsyadef@\triangledown04F
+ \mtsyadef@\eqcirc350
+ \mtsyadef@\lesseqgtr351
+ \mtsyadef@\gtreqless352
+ \mtsyadef@\lesseqqgtr353
+ \mtsyadef@\gtreqqless354
+ \mtsyadef@\Rrightarrow356
+ \mtsyadef@\Lleftarrow357
+ \mtsyadef@\veebar259
+ \mtsyadef@\barwedge25A
+ \mtsyadef@\doublebarwedge25B
+ \mtsyadef@\measuredangle05D
+ \mtsyadef@\sphericalangle05E
+ \mtsyadef@\varpropto35F
+ \mtsyadef@\smallsmile360
+ \mtsyadef@\smallfrown361
+ \mtsyadef@\Subset362
+ \mtsyadef@\Supset363
+ \mtsyadef@\Cup264
+ \let\doublecup\Cup
+ \mtsyadef@\Cap265
+ \let\doublecap\Cap
+ \mtsyadef@\curlywedge266
+ \mtsyadef@\curlyvee267
+ \mtsyadef@\leftthreetimes268
+ \mtsyadef@\rightthreetimes269
+ \mtsyadef@\subseteqq36A
+ \mtsyadef@\supseteqq36B
+ \mtsyadef@\bumpeq36C
+ \mtsyadef@\Bumpeq36D
+ \mtsyadef@\lll36E
+ \let\llless\lll
+ \mtsyadef@\ggg36F
+ \let\gggtr\ggg
+ \mtsyadef@\circledS073
+ \mtsyadef@\pitchfork374
+ \mtsyadef@\dotplus275
+ \mtsyadef@\backsim376
+ \mtsyadef@\backsimeq377
+ \mtsyadef@\complement07B
+ \mtsyadef@\intercal27C
+ \mtsyadef@\circledcirc27D
+ \mtsyadef@\circledast27E
+ \mtsyadef@\circleddash27F
+ \mtsyadef@\lvertneqq380
+ \mtsyadef@\gvertneqq381
+ \mtsyadef@\nleq382
+ \mtsyadef@\ngeq383
+ \mtsyadef@\nless384
+ \mtsyadef@\ngtr385
+ \mtsyadef@\nprec386
+ \mtsyadef@\nsucc387
+ \mtsyadef@\lneqq388
+ \mtsyadef@\gneqq389
+ \mtsyadef@\nleqslant38A
+ \mtsyadef@\ngeqslant38B
+ \mtsyadef@\lneq38C
+ \mtsyadef@\gneq38D
+ \mtsyadef@\npreceq38E
+ \mtsyadef@\nsucceq38F
+ \mtsyadef@\precnsim390
+ \mtsyadef@\succnsim391
+ \mtsyadef@\lnsim392
+ \mtsyadef@\gnsim393
+ \mtsyadef@\nleqq394
+ \mtsyadef@\ngeqq395
+ \mtsyadef@\precneqq396
+ \mtsyadef@\succneqq397
+ \mtsyadef@\precnapprox398
+ \mtsyadef@\succnapprox399
+ \mtsyadef@\lnapprox39A
+ \mtsyadef@\gnapprox39B
+ \mtsyadef@\nsim39C
+ \mtsyadef@\ncong39D
+ \mtsyadef@\diagup09E
+ \mtsyadef@\diagdown09F
+ \mtsyadef@\varsubsetneq3A0
+ \mtsyadef@\varsupsetneq3A1
+ \mtsyadef@\nsubseteqq3A2
+ \mtsyadef@\nsupseteqq3A3
+ \mtsyadef@\subsetneqq3A4
+ \mtsyadef@\supsetneqq3A5
+ \mtsyadef@\varsubsetneqq3A6
+ \mtsyadef@\varsupsetneqq3A7
+ \mtsyadef@\subsetneq3A8
+ \mtsyadef@\supsetneq3A9
+ \mtsyadef@\nsubseteq3AA
+ \mtsyadef@\nsupseteq3AB
+ \mtsyadef@\nparallel3AC
+ \mtsyadef@\nmid3AD
+ \mtsyadef@\nshortmid3AE
+ \mtsyadef@\nshortparallel3AF
+ \mtsyadef@\nvdash3B0
+ \mtsyadef@\nVdash3B1
+ \mtsyadef@\nvDash3B2
+ \mtsyadef@\nVDash3B3
+ \mtsyadef@\ntrianglerighteq3B4
+ \mtsyadef@\ntrianglelefteq3B5
+ \mtsyadef@\ntriangleleft3B6
+ \mtsyadef@\ntriangleright3B7
+ \mtsyadef@\nleftarrow3B8
+ \mtsyadef@\nrightarrow3B9
+ \mtsyadef@\nLeftarrow3BA
+ \mtsyadef@\nRightarrow3BB
+ \mtsyadef@\nLeftrightarrow3BC
+ \mtsyadef@\nleftrightarrow3BD
+ \mtsyadef@\divideontimes2BE 
+ \mtsyadef@\varnothing0BF 
+ \mtsyadef@\nexists0C0
+ \mtsyadef@\Finv0C1
+ \mtsyadef@\Game0C2
+ \mtsyadef@\mho0C3
+ \mtsyadef@\eth0C4
+ \mtsyadef@\eqsim3C5
+ \mtsyadef@\beth0C6  
+ \mtsyadef@\gimel0C7
+ \mtsyadef@\daleth0C8
+ \mtsyadef@\lessdot3C9
+ \mtsyadef@\gtrdot3CA
+ \mtsyadef@\ltimes2CB
+ \mtsyadef@\rtimes2CC
+ \mtsyadef@\shortmid3CD
+ \mtsyadef@\shortparallel3CE
+ \let\smallsetminus=\setdif
+ \mtsyadef@\thicksim3CF
+ \mtsyadef@\thickapprox3D0
+ \mtsyadef@\approxeq3D1
+ \mtsyadef@\succapprox3D2
+ \mtsyadef@\precapprox3D3
+ \mtsyadef@\curvearrowleft3D4
+ \mtsyadef@\curvearrowright3D5
+ \mtsyadef@\backepsilon3D6
+ \mtsyadef@\nsqsubset3D7
+ \mtsyadef@\nsqsupset3D8
+ \mtsyadef@\nsqsubseteq3D9
+ \mtsyadef@\nsqsupseteq3DA
+}
+
+\def\Esyadefs@{%
+ \def\ulcorner{\mathopen{\hbox{\mtsya@t\char"70}}}%
+ \def\urcorner{\mathclose{\hbox{\mtsya@t\char"71}}}%
+ \def\llcorner{\mathopen{\hbox{\mtsya@t\char"78}}}%
+ \def\lrcorner{\mathclose{\hbox{\mtsya@t\char"79}}}%
+ \Emtsyadef@\checkmark@058
+ \def\checkmark{\ifmmode\checkmark@\else\hbox{$\m@th\checkmark@$}\fi}%
+ \Emtsyadef@\circledR@072
+ \def\circledR{\ifmmode\circledR@\else\hbox{$\m@th\circledR@$}\fi}%
+ \Emtsyadef@\maltese@07A
+ \def\maltese{\ifmmode\maltese@\else\hbox{$\m@th\maltese@$}\fi}%
+ \Emtsyadef@\midshaft039
+ \Emtsyadef@\rarrowhead04B
+ \Emtsyadef@\larrowhead04C
+ \Emtsyadef@\dashleftarrow0DB
+ \Emtsyadef@\dashrightarrow0DC
+ \let\dasharrow\dashrightarrow
+ \Emtsyadef@\boxdot200
+ \Emtsyadef@\boxplus201
+ \Emtsyadef@\boxtimes202
+ \Emtsyadef@\square003
+ \Emtsyadef@\blacksquare004
+ \Emtsyadef@\centerdot205
+ \Emtsyadef@\lozenge006
+ \Emtsyadef@\blacklozenge007
+ \Emtsyadef@\circlearrowright308
+ \Emtsyadef@\circlearrowleft309
+ \Emtsyadef@\leftrightharpoons30B
+ \Emtsyadef@\boxminus20C
+ \Emtsyadef@\Vdash30D
+ \Emtsyadef@\Vvdash30E
+ \Emtsyadef@\vDash30F
+ \Emtsyadef@\twoheadrightarrow310
+ \Emtsyadef@\twoheadleftarrow311
+ \Emtsyadef@\leftleftarrows312
+ \Emtsyadef@\rightrightarrows313
+ \Emtsyadef@\upuparrows314
+ \Emtsyadef@\downdownarrows315
+ \Emtsyadef@\upharpoonright316
+ \let\restriction\upharpoonright
+ \Emtsyadef@\downharpoonright317
+ \Emtsyadef@\upharpoonleft318
+ \Emtsyadef@\downharpoonleft319
+ \Emtsyadef@\rightarrowtail31A
+ \Emtsyadef@\leftarrowtail31B
+ \Emtsyadef@\leftrightarrows31C
+ \Emtsyadef@\rightleftarrows31D
+ \Emtsyadef@\Lsh31E
+ \Emtsyadef@\Rsh31F
+ \Emtsyadef@\rightsquigarrow320
+ \Emtsyadef@\leftrightsquigarrow321
+ \Emtsyadef@\looparrowleft322
+ \Emtsyadef@\looparrowright323
+ \Emtsyadef@\circeq324
+ \Emtsyadef@\succsim325
+ \Emtsyadef@\gtrsim326
+ \Emtsyadef@\gtrapprox327
+ \Emtsyadef@\multimap328
+ \Emtsyadef@\therefore329
+ \Emtsyadef@\because32A
+ \Emtsyadef@\doteqdot32B
+ \let\Doteq\doteqdot
+ \Emtsyadef@\triangleq32C
+ \Emtsyadef@\precsim32D
+ \Emtsyadef@\lesssim32E
+ \Emtsyadef@\lessapprox32F
+ \Emtsyadef@\eqslantless330
+ \Emtsyadef@\eqslantgtr331
+ \Emtsyadef@\curlyeqprec332
+ \Emtsyadef@\curlyeqsucc333
+ \Emtsyadef@\preccurlyeq334
+ \Emtsyadef@\leqq335
+ \Emtsyadef@\leqslant336
+ \Emtsyadef@\lessgtr337
+ \Emtsyadef@\backprime038
+ \Emtsyadef@\risingdotseq33A
+ \Emtsyadef@\fallingdotseq33B
+ \Emtsyadef@\succcurlyeq33C
+ \Emtsyadef@\geqq33D
+ \Emtsyadef@\geqslant33E
+ \Emtsyadef@\gtrless33F
+ \Emtsyadef@\sqsubset340
+ \Emtsyadef@\sqsupset341
+ \Emtsyadef@\vartriangleright342
+ \Emtsyadef@\vartriangleleft343
+ \Emtsyadef@\trianglerighteq344
+ \Emtsyadef@\trianglelefteq345
+ \Emtsyadef@\bigstar046
+ \Emtsyadef@\between347
+ \Emtsyadef@\blacktriangledown048
+ \Emtsyadef@\blacktriangleright349
+ \Emtsyadef@\blacktriangleleft34A
+ \Emtsyadef@\vartriangle34D
+ \Emtsyadef@\blacktriangle04E
+ \Emtsyadef@\triangledown04F
+ \Emtsyadef@\eqcirc350
+ \Emtsyadef@\lesseqgtr351
+ \Emtsyadef@\gtreqless352
+ \Emtsyadef@\lesseqqgtr353
+ \Emtsyadef@\gtreqqless354
+ \Emtsyadef@\Rrightarrow356
+ \Emtsyadef@\Lleftarrow357
+ \Emtsyadef@\veebar259
+ \Emtsyadef@\barwedge25A
+ \Emtsyadef@\doublebarwedge25B
+ \Emtsyadef@\measuredangle05D
+ \Emtsyadef@\sphericalangle05E
+ \Emtsyadef@\varpropto35F
+ \Emtsyadef@\smallsmile360
+ \Emtsyadef@\smallfrown361
+ \Emtsyadef@\Subset362
+ \Emtsyadef@\Supset363
+ \Emtsyadef@\Cup264
+ \let\doublecup\Cup
+ \Emtsyadef@\Cap265
+ \let\doublecap\Cap
+ \Emtsyadef@\curlywedge266
+ \Emtsyadef@\curlyvee267
+ \Emtsyadef@\leftthreetimes268
+ \Emtsyadef@\rightthreetimes269
+ \Emtsyadef@\subseteqq36A
+ \Emtsyadef@\supseteqq36B
+ \Emtsyadef@\bumpeq36C
+ \Emtsyadef@\Bumpeq36D
+ \Emtsyadef@\lll36E
+ \let\llless\lll
+ \Emtsyadef@\ggg36F
+ \let\gggtr\ggg
+ \Emtsyadef@\circledS073
+ \Emtsyadef@\pitchfork374
+ \Emtsyadef@\dotplus275
+ \Emtsyadef@\backsim376
+ \Emtsyadef@\backsimeq377
+ \Emtsyadef@\complement07B
+ \Emtsyadef@\intercal27C
+ \Emtsyadef@\circledcirc27D
+ \Emtsyadef@\circledast27E
+ \Emtsyadef@\circleddash27F
+ \Emtsyadef@\lvertneqq380
+ \Emtsyadef@\gvertneqq381
+ \Emtsyadef@\nleq382
+ \Emtsyadef@\ngeq383
+ \Emtsyadef@\nless384
+ \Emtsyadef@\ngtr385
+ \Emtsyadef@\nprec386
+ \Emtsyadef@\nsucc387
+ \Emtsyadef@\lneqq388
+ \Emtsyadef@\gneqq389
+ \Emtsyadef@\nleqslant38A
+ \Emtsyadef@\ngeqslant38B
+ \Emtsyadef@\lneq38C
+ \Emtsyadef@\gneq38D
+ \Emtsyadef@\npreceq38E
+ \Emtsyadef@\nsucceq38F
+ \Emtsyadef@\precnsim390
+ \Emtsyadef@\succnsim391
+ \Emtsyadef@\lnsim392
+ \Emtsyadef@\gnsim393
+ \Emtsyadef@\nleqq394
+ \Emtsyadef@\ngeqq395
+ \Emtsyadef@\precneqq396
+ \Emtsyadef@\succneqq397
+ \Emtsyadef@\precnapprox398
+ \Emtsyadef@\succnapprox399
+ \Emtsyadef@\lnapprox39A
+ \Emtsyadef@\gnapprox39B
+ \Emtsyadef@\nsim39C
+ \Emtsyadef@\ncong39D
+ \Emtsyadef@\diagup09E
+ \Emtsyadef@\diagdown09F
+ \Emtsyadef@\varsubsetneq3A0
+ \Emtsyadef@\varsupsetneq3A1
+ \Emtsyadef@\nsubseteqq3A2
+ \Emtsyadef@\nsupseteqq3A3
+ \Emtsyadef@\subsetneqq3A4
+ \Emtsyadef@\supsetneqq3A5
+ \Emtsyadef@\varsubsetneqq3A6
+ \Emtsyadef@\varsupsetneqq3A7
+ \Emtsyadef@\subsetneq3A8
+ \Emtsyadef@\supsetneq3A9
+ \Emtsyadef@\nsubseteq3AA
+ \Emtsyadef@\nsupseteq3AB
+ \Emtsyadef@\nparallel3AC
+ \Emtsyadef@\nmid3AD
+ \Emtsyadef@\nshortmid3AE
+ \Emtsyadef@\nshortparallel3AF
+ \Emtsyadef@\nvdash3B0
+ \Emtsyadef@\nVdash3B1
+ \Emtsyadef@\nvDash3B2
+ \Emtsyadef@\nVDash3B3
+ \Emtsyadef@\ntrianglerighteq3B4
+ \Emtsyadef@\ntrianglelefteq3B5
+ \Emtsyadef@\ntriangleleft3B6
+ \Emtsyadef@\ntriangleright3B7
+ \Emtsyadef@\nleftarrow3B8
+ \Emtsyadef@\nrightarrow3B9
+ \Emtsyadef@\nLeftarrow3BA
+ \Emtsyadef@\nRightarrow3BB
+ \Emtsyadef@\nLeftrightarrow3BC
+ \Emtsyadef@\nleftrightarrow3BD
+ \Emtsyadef@\divideontimes2BE
+ \Emtsyadef@\varnothing0BF
+ \Emtsyadef@\nexists0C0
+ \Emtsyadef@\Finv0C1
+ \Emtsyadef@\Game0C2
+ \Emtsyadef@\mho0C3
+ \Emtsyadef@\eth0C4
+ \Emtsyadef@\eqsim3C5
+ \Emtsyadef@\beth0C6
+ \Emtsyadef@\gimel0C7
+ \Emtsyadef@\daleth0C8
+ \Emtsyadef@\lessdot3C9
+ \Emtsyadef@\gtrdot3CA
+ \Emtsyadef@\ltimes2CB
+ \Emtsyadef@\rtimes2CC
+ \Emtsyadef@\shortmid3CD
+ \Emtsyadef@\shortparallel3CE
+ \let\smallsetminus=\setdif
+ \Emtsyadef@\thicksim3CF
+ \Emtsyadef@\thickapprox3D0
+ \Emtsyadef@\approxeq3D1
+ \Emtsyadef@\succapprox3D2
+ \Emtsyadef@\precapprox3D3
+ \Emtsyadef@\curvearrowleft3D4
+ \Emtsyadef@\curvearrowright3D5
+ \Emtsyadef@\backepsilon3D6
+ \Emtsyadef@\nsqsubset3D7
+ \Emtsyadef@\nsqsupset3D8
+ \Emtsyadef@\nsqsubseteq3D9
+ \Emtsyadef@\nsqsupseteq3DA
+}
+
+\def\loadsya{\loadsyaAt@\tMTPsize\sMTPsize\fMTPsize}
+\def\Eloadsya{\EloadsyaAt@\tMTPsize\sMTPsize\fMTPsize}
+
+\def\bma@@#1"#2#3#4#5\bma@@{\def\next@{#5}%
+ \ifx\next@\empty
+  \mathchar"0\mtbsya@@#3#4\relax
+ \else
+  \mathchar"#2\mtbsya@@#4#5\relax
+ \fi}
+\def\Ebma@@#1"#2#3#4\Ebma@@{\mathchoice{\hbox{\mtbsya@t\char"#2#3}}{\hbox{\mtbsya@t\char"#2#3}}%
+   {\hbox{\mtbsya@s\char"#2#3}}{\hbox{\mtbsya@f\char"#2#3}}}
+\def\hma@@#1"#2#3#4#5\hma@@{\def\next@{#5}%
+ \ifx\next@\empty
+  \mathchar"0\mthsya@@#3#4\relax
+ \else
+  \mathchar"#2\mthsya@@#4#5\relax
+ \fi}
+\def\Ehma@@#1"#2#3#4\Ehma@@{\mathchoice{\hbox{\mthsya@t\char"#2#3}}{\hbox{\mthsya@t\char"#2#3}}%
+  {\hbox{\mthsya@s\char"#2#3}}{\hbox{\mthsya@f\char"#2#3}}}
+
+\def\loadbsyaAt@#1#2#3{%
+ \alloc@@8\fam\chardef\sixt@@n\mtbsya@
+ \edef\mtbsya@@{\hexnumber@\mtbsya@}%
+ \dimen@#1\relax\PSZ@
+ \FONT@{mtbsyat}\nextiii@\textfont\mtbsya@\next@
+ \dimen@#2\relax\PSZ@
+ \FONT@{mtbsyas}\nextiii@\scriptfont\mtbsya@\next@
+ \dimen@#3\relax\PSZ@
+ \FONT@{mtbsyaf}\nextiii@\scriptscriptfont\mtbsya@\next@
+ \let\boldmath@=\boldmath
+ \def\boldmath{\boldmath@
+  \textfont\mtsya@\the\textfont\mtbsya@
+ \scriptfont\mtsya@\the\scriptfont\mtbsya@
+  \scriptscriptfont\mtsya@\the\scriptscriptfont\mtbsya@
+ }%
+ \def\bma{\futurelet\next\bma@}%
+ \def\bma@{%
+  \ifx\next\ulcorner
+   \def\next@\ulcorner{\delimiter"4\mtbsya@@70\mtbsya@@70 }%
+  \else\ifx\next\urcorner
+   \def\next@\urcorner{\delimiter"5\mtbsya@@71\mtbsya@@71 }%
+  \else\ifx\next\llcorner
+   \def\next@\llcorner{\delimiter"4\mtbsya@@78\mtbsya@@78 }%
+  \else\ifx\next\lrcorner
+   \def\next@\lrcorner{\delimiter"5\mtbsya@@79\mtbsya@@79 }%
+  \else\ifx\next\checkmark
+   \def\next@\checkmark{\ifmmode\mathchar"\mtbsya@@58\else\mathhexbox\mtbsya@@58\fi}%
+  \else\ifx\next\circledR
+   \def\next@\circledR{\ifmmode\mathchar"\mtbsya@@72\else\mathhexbox\mtbsya@@72\fi}%
+  \else\ifx\next\maltese
+   \def\next@\maltese{\ifmmode\mathchar"\mtbsya@@7A\else\mathhexbox\mtbsya@@7A\fi}%
+  \else\ifx\next\smallsetminus
+   \def\next@\smallsetminus{\mathchar"2\mtbsy@@58}%
+  \else\ifx\next\rightleftharpoons
+   \def\next@\rightleftharpoons{\mathchar"3\mtbsy@@95}%
+  \else
+   \def\next@####1{\expandafter\bma@@\meaning####1\bma@@}%
+  \fi\fi\fi\fi\fi\fi\fi\fi\fi\next@}%
+}
+\def\loadbsya{\loadbsyaAt@\tMTPsize\sMTPsize\fMTPsize}
+
+\def\loadhsyaAt@#1#2#3{%
+ \alloc@@8\fam\chardef\sixt@@n\mthsya@
+ \edef\mthsya@@{\hexnumber@\mthsya@}%
+ \dimen@#1\relax\PSZ@
+ \FONT@{mthsyat}\nextiii@\textfont\mthsya@\next@
+ \dimen@#2\relax\PSZ@
+ \FONT@{mthsyas}\nextiii@\scriptfont\mthsya@\next@
+ \dimen@#3\relax\PSZ@
+ \FONT@{mthsyaf}\nextiii@\scriptscriptfont\mthsya@\next@
+ \let\heavymath@=\heavymath
+ \def\heavymath{\heavymath@
+  \textfont\mtsya@\the\textfont\mthsya@
+  \scriptfont\mtsya@\the\scriptfont\mthsya@
+  \scriptscriptfont\mtsya@\the\scriptscriptfont\mthsya@
+ }%
+ \def\hma{\futurelet\next\hma@}%
+ \def\hma@{%
+  \ifx\next\ulcorner
+   \def\next@\ulcorner{\delimiter"4\mthsya@@70\mthsya@@70 }%
+  \else\ifx\next\urcorner
+   \def\next@\urcorner{\delimiter"5\mthsya@@71\mthsya@@71 }%
+  \else\ifx\next\llcorner
+   \def\next@\llcorner{\delimiter"4\mthsya@@78\mthsya@@78 }%
+  \else\ifx\next\lrcorner
+   \def\next@\lrcorner{\delimiter"5\mthsya@@79\mthsya@@79 }%
+  \else\ifx\next\checkmark
+   \def\next@\checkmark{\ifmmode\mathchar"\mthsya@@58\else\mathhexbox\mthsya@@58\fi}%
+  \else\ifx\next\circledR
+   \def\next@\circledR{\ifmmode\mathchar"\mthsya@@72\else\mathhexbox\mthsya@@72\fi}%
+  \else\ifx\next\maltese
+   \def\next@\maltese{\ifmmode\mathchar"\mthsya@@7A\else\mathhexbox\mthsya@@7A\fi}%
+  \else\ifx\next\smallsetminus
+   \def\next@\smallsetminus{\mathchar"2\mthsy@@58}%
+  \else\ifx\next\rightleftharpoons
+   \def\next@\rightleftharpoons{\mathchar"3\mthsya@@95}%
+  \else
+   \def\next@####1{\expandafter\hma@@\meaning####1\hma@@}%
+  \fi\fi\fi\fi\fi\fi\fi\fi\fi\next@}%
+}
+\def\loadhsya{\loadhsyaAt@\tMTPsize\sMTPsize\fMTPsize}
+
+\def\EloadbsyaAt@#1#2#3{%
+ \dimen@#1\relax\PSZ@
+ \FONT@{mtbsyat}\nextiii@\let\mtbsya@t\next@
+ \dimen@#2\relax\PSZ@
+ \FONT@{mtbsyas}\nextiii@\let\mtbsya@s\next@
+ \dimen@#3\relax\PSZ@
+ \FONT@{mtbsyaf}\nextiii@\let\mtbsya@f\next@
+ \let\boldmath@=\boldmath
+ \def\boldmath{\boldmath@
+   \let\mtsya@t\mtbsya@t
+   \let\mtsya@s\mtbsya@s
+   \let\mtsya@f\mtbsya@f
+ }%
+ \def\bma{\futurelet\next\bma@}%
+ \def\bma@{%
+  \ifx\next\ulcorner
+   \def\next@\ulcorner{\mathopen{\hbox{\mtbsya@t\char"70}}}%
+  \else\ifx\next\urcorner
+   \def\next@\urcorner{\mathclose{\hbox{\mtbsya@t\char"71}}}%
+  \else\ifx\next\llcorner
+   \def\next@\llcorner{\mathopen{\hbox{\mtbsya@t\char"78}}}%
+  \else\ifx\next\lrcorner
+   \def\next@\lrcorner{\mathclose{\hbox{\mtbsya@t\char"79}}}%
+  \else\ifx\next\checkmark
+   \def\next@\checkmark{\ifmmode\bma\checkmark@\else\hbox{$\m@th\checkmark@$}\fi}%
+  \else\ifx\next\circledR
+   \def\next@\circledR{\ifmmode\bma\circledR@\else\hbox{$\m@th\circledR@$}\fi}%
+  \else\ifx\next\maltese
+   \def\next@\maltese{\ifmmode\bma\maltese@\else\hbox{$\m@th\maltese@$}\fi}%
+  \else\ifx\next\smallsetminus
+   \def\next@\smallsetminus{\mathchar"2\mtbsy@@58}%
+  \else\ifx\next\rightleftharpoons
+   \def\next@\rightleftharpoons{\mathchar"3\mtbsy@@95}%
+  \else
+   \def\next@####1{\expandafter\Ebma@@\meaning####1\Ebma@@}%
+  \fi\fi\fi\fi\fi\fi\fi\fi\fi\next@}%
+}
+
+
+\def\Eloadbsya{\EloadbsyaAt@\tMTPsize\sMTPsize\fMTPsize}
+
+\def\EloadhsyaAt@#1#2#3{%
+ \dimen@#1\relax\PSZ@
+ \FONT@{mthsyat}\nextiii@\let\mthsya@t\next@
+ \dimen@#2\relax\PSZ@
+ \FONT@{mthsyas}\nextiii@\let\mthsya@s\next@
+ \dimen@#3\relax\PSZ@
+ \FONT@{mthsyaf}\nextiii@\let\mthsya@f\next@
+ \let\heavymath@=\heavymath
+ \def\heavymath{\heavymath@
+   \let\mtsya@t\mthsya@t
+   \let\mtsya@s\mthsya@s
+   \let\mtsya@f\mthsya@f
+ }%
+ \def\hma{\futurelet\next\hma@}%
+ \def\hma@{%
+  \ifx\next\ulcorner
+   \def\next@\ulcorner{\mathopen{\hbox{\mthsya@t\char"70}}}%
+  \else\ifx\next\urcorner
+   \def\next@\urcorner{\mathclose{\hbox{\mthsya@t\char"71}}}%
+  \else\ifx\next\llcorner
+   \def\next@\llcorner{\mathopen{\hbox{\mthsya@t\char"78}}}%
+  \else\ifx\next\lrcorner
+   \def\next@\lrcorner{\mathclose{\hbox{\mthsya@t\char"79}}}%
+  \else\ifx\next\checkmark
+   \def\next@\checkmark{\ifmmode\bma\checkmark@\else\hbox{$\m@th\checkmark@$}\fi}%
+  \else\ifx\next\circledR
+   \def\next@\circledR{\ifmmode\bma\circledR@\else\hbox{$\m@th\circledR@$}\fi}%
+  \else\ifx\next\maltese
+   \def\next@\maltese{\ifmmode\bma\maltese@\else\hbox{$\m@th\maltese@$}\fi}%
+  \else\ifx\next\smallsetminus
+   \def\next@\smallsetminus{\mathchar"2\mthsy@@58}%
+  \else\ifx\next\rightleftharpoons
+   \def\next@\rightleftharpoons{\mathchar"3\mthsy@@95}%
+  \else
+  \def\next@####1{\expandafter\Ehma@@\meaning####1\Ehma@@}%
+  \fi\fi\fi\fi\fi\fi\fi\fi\fi\next@}%
+}
+
+\def\Eloadhsya{\EloadhsyaAt@\tMTPsize\sMTPsize\fMTPsize}
+
+
+\catcode`\"=\qqcode@
+\catcode`\@=\atcode@

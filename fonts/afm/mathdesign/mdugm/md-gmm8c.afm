@@ -1,0 +1,48 @@
+StartFontMetrics 2.0
+Version 1.4
+Notice (c) 2004 Paul Pichaureau, under the gpl licence.
+FullName MathDesign GM Medium TS1 10
+FamilyName MathDesign-GM
+Weight Medium
+ItalicAngle 0
+IsFixedPitch false
+UnderlinePosition -98
+UnderlineThickness 54
+FontBBox  -216 -312 943 778
+EncodingScheme FontSpecific
+CapHeight 689
+XHeight 436
+Ascender 777
+Descender -270
+StdVW 111
+StartCharMetrics 23
+C 24 ; WX 988 ; N arrowleft ; B 46 47 943 419 ;
+C 25 ; WX 988 ; N arrowright ; B 46 47 943 419 ;
+C 61 ; WX 764 ; N minus ; B 74 192 690 274 ;
+C 77 ; WX 708 ; N Omegainv ; B 34 -18 674 690 ;
+C 87 ; WX 708 ; N Omega ; B 34 0 674 707 ;
+C 94 ; WX 484 ; N arrowup ; B 55 -312 428 778 ;
+C 95 ; WX 484 ; N arrowdown ; B 55 -312 428 778 ;
+C 99 ; WX 484 ; N divorced ; B -216 -120 700 586 ;
+C 100 ; WX 484 ; N died ; B 46 -35 428 658 ;
+C 109 ; WX 484 ; N married ; B -104 14 588 452 ;
+C 134 ; WX 484 ; N bardbl ; B 69 -287 414 753 ;
+C 136 ; WX 484 ; N bullet ; B 46 37 438 429 ;
+C 158 ; WX 484 ; N openbullet ; B 46 37 438 429 ;
+C 172 ; WX 652 ; N logicalnot ; B 45 134 607 401 ;
+C 177 ; WX 764 ; N plusminus ; B 46 -20 718 654 ;
+C 181 ; WX 576 ; N mu ; B 56 -278 607 456 ;
+C 183 ; WX 260 ; N periodcentered ; B 47 150 213 316 ;
+C 184 ; WX 764 ; N referencemark ; B 81 -68 683 534 ;
+C 187 ; WX 830 ; N radical ; B 101 -204 871 753 ;
+C 191 ; WX 817 ; N euro ; B 29 -18 748 682 ;
+C 214 ; WX 764 ; N multiply ; B 115 -34 649 500 ;
+C 246 ; WX 764 ; N divide ; B 46 -68 718 534 ;
+EndCharMetrics
+StartKernData
+StartKernPairs 0
+EndKernPairs
+EndKernData
+StartComposites
+EndComposites
+EndFontMetrics

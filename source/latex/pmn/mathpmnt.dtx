@@ -1,0 +1,579 @@
+% \CheckSum{563}
+% \iffalse
+%
+% file `mathpmnt.dtx'.
+% Copyright (c) 2003 Walter Schmidt
+%
+% This program may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.2
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.2 or later is part of all distributions of LaTeX
+% version 1999/12/01 or later.
+%
+% This program consists of the files mathpmnt.dtx and mathpmnt.ins
+%
+%
+%<*driver>
+\ProvidesFile{mathpmnt.dtx}
+%</driver>
+%
+%<package>\ProvidesPackage{mathpmnt}%
+           [2004/04/13 v2.1 (WaS)]
+%
+%<*driver>
+\documentclass{ltxdoc}    
+\OnlyDescription
+\begin{document}
+   \DocInput{mathpmnt.dtx}
+\end{document}
+%</driver>
+%
+% \fi
+%
+% \renewcommand{\labelitemi}{$\triangleright$}
+% \newcommand\Lopt[1]{\textsf{#1}}
+% \let\Lpack\Lopt
+%
+% \GetFileInfo{mathpmnt.dtx}
+% \title{The \Lpack{mathpmnt} package for use with \LaTeXe}
+% \author{Walter Schmidt\thanks{\texttt{w.a.schmidt@gmx.net}}}
+% \date{\fileversion{} -- \filedate}
+%
+% \maketitle
+%
+% \section{Overview and requirements}
+% The macro package \Lpack{mathpmnt} and the related virtual fonts
+% provide a solution to typeset mathematics in a style that suits the
+% Adobe Minion text fonts.  The virtual fonts are based on Adobe's
+% Minion fonts in Type1 format and on Y\&Y's MathTime fonts.
+% Using this package requires
+% \begin{itemize}
+%   \item Adobe's Minion and Minion Expert fonts in Type1 format and
+%   the related TeX support files; 
+%   \item Y\&Y's MathTime and MathTime Plus fonts, and
+%   a working \LaTeX{} support for these.
+% \end{itemize}
+% While the basic MathTime font set alone is not sufficient, 
+% not \emph{all} of the `Plus' collection is needed.
+% Actually, the following fonts will be used by the \Lpack{mathpmnt}
+% package:
+% \begin{itemize}
+%   \item from the MathTime collection: RMTMI, MTEX
+%   \item from the MathTime Plus collection:  RMTMIB, MTSYN, MTSYB, MTGU, MTGUB
+% \end{itemize}
+% Notice that the free Belleek fonts (a MathTime substitute) are neither
+% suitable nor sufficient to use the \Lpack{mathpmnt} package!
+%
+% The package is shipped in conjunction with a set of \TeX{} support files 
+% for the Minion text fonts.
+%
+%
+% \section{Usage}
+% Loading the macro package \Lpack{mathpmnt}
+% \begin{verse}
+%   |\usepackage|\oarg{options}|{mathpmnt}|
+% \end{verse}
+% changes the default roman font family
+% to Adobe Minion and makes \LaTeX{} use the virtual `mathpmnt' fonts 
+% for math.
+%
+% The following sections describe the
+% particular features of the package and the additional options that
+% control its behavior.
+% 
+% \subsection{Text fonts}
+% By default, the package changes the default roman font family
+% (|\rmdefault|) to |pmnx|, i.e.\ Adobe Minion with normal digits.
+% In math mode, the same font family will be used for numbers,
+% function names and the |\mathrm|, |\mathbf| and |\mathit| alphabets.
+% By specifying the package option \Lopt{osf} the font family |pmnj|
+% can be selected instead, so that oldstyle digits are used -- only in
+% the text, but not in the formulas.
+% 
+% The font metrics that accompany the macro package support the Minion
+% text fonts with T1 and TS1 (text companion) encoding only, so you 
+% should issue the additional commands
+% \begin{verse}
+%   |\usepackage[T1]{fontenc}|\\
+%   |\usepackage{textcomp}| .  
+% \end{verse}
+%
+% The math alphabets |\mathsf| and |\mathtt|
+% are mapped to the default sans~serif and typewriter text font families
+% by evaluating the macros |\sfdefault| and |\ttdefault|
+% when \Lpack{mathpmnt} gets loaded.
+% Thus, if you redefine the default font families,
+% this should be done \emph{before} loading of \Lpack{mathpmnt}.
+%
+% All above-mentioned math alphabets will be used with T1 encoding.
+% 
+% \subsection{Greek letters}
+% With \TeX{} or \LaTeX{} uppercase Greek letters in math mode
+% are usually typeset as upright, despite they are usually meant to designate
+% variables.  This violates clearly the
+% International Standards ISO31-0:1992 to ISO31-13:1992.
+% The \Lpack{mathpmnt} package provides an option \Lopt{slantedGreek}, which
+% causes uppercase Greek to be typeset as slanted.
+%
+% Besides, a full upright Greek alphabet is available, too:
+% It is \emph{always} upright, regardless of the option \Lopt{slantedGreek}.
+%  The lower-case letters  are accessible through the macros 
+% |\upalpha|, |\upbeta| etc, while the upper-case letter are named 
+% |\upGamma|, |\upDelta| and so on.
+% 
+% \subsection{Additional math alphabets}
+% \label{sec:alphabets}
+% Using additional math fonts, such as the AMS fonts, with Minion
+% may be difficult, because they are likely to look too
+% large in comparison to Minion.  That's why two potentially  useful
+% math alphabets are declared in the package and can be activated 
+% optionally.
+% \begin{description}
+%   \item[Blackboard Bold] 
+% Loading the  package with the option \Lopt{pazobb}
+% makes a `blackboard bold' math alphabet \cmd{\mathbb} available.
+% Upper-case letters and the digit 1 are taken from the Pazo math fonts 
+% and are scaled appropriately to match Minion.
+%   \item[Fraktur]
+% Loading the package with the option \Lopt{eufrak} makes Euler Fraktur
+% (scaled appropriately) available as a math alphabet named |\mathfrak|.
+% \end{description}
+%
+% \subsection{Additional and missing symbols}
+% The \Lpack{mathpmnt} package provides a few additional math symbols,
+% which are not defined with standard \LaTeX:
+%
+% |\cupprod|  and |\capprod| are similar to $\smile$ and $\frown$,
+% but look more appropriate for the `cup-product' and `cap-product'.
+% |\comp| is similar to |\circ|, but is less dark.
+% |\setdif| is a sort of backslash, useful for the difference of sets.
+% All these symbols are typeset as binary operators.
+% 
+% The \Lpack{mathpmnt} virtual fonts include also a ready-made
+% |\hslash|, i.e. a slashed $h$.  Notice, however, that there is no 
+% corresponding |\hbar|.
+%
+%
+% \section{Known bugs and problems}
+% \begin{itemize}
+%   \item The packages \Lpack{amsfonts} or \Lpack{amssymb} cannot be used 
+%   with \Lpack{mathpmnt}.
+%   The style of the symbols would not match Minion and MathTime, 
+%   and the code would clash with \Lpack{mathpmnt}.  
+%   See section~\ref{sec:alphabets}
+%   how to use a doublestroke and a Fraktur alphabet.
+%   \item \Lpack{mathpmnt} already  uses Euler Script  for |\mathcal|, 
+%   so loading of the \Lpack{euscript}  package is pointless.
+%   \item \LaTeX{} uses the dot from the text font for the macros
+%   |\ddots| and |\vdots|.  Using Minion and MathTime, this dot symbol
+%   differs from the `math' dot used for |\ldots| and |\cdots|.
+%   Loading the package \Lpack{mathdots} improves the default definitions
+%   of the dots-generating macros and fixes this problem.
+%   Make sure to use version~0.4 or better of \Lpack{mathdots}!
+%   \item In contrast to the standard CM fonts, the virtual \Lpack{mathpmnt} fonts
+%   do not provide any Greek letters in the math alphabet |\mathrm|.
+%   Applying this math alphabet command to Greek letters
+%   will result in garbage output.
+% \end{itemize}
+%
+%
+% \section{Option summary}
+% This section lists all options of the \Lpack{mathpmnt} package.
+% Options that correspond to the default behavior of the package are
+% marked by an asterisk and need normally not to be specified.
+%
+% \begin{description}
+% \item[\Lopt{lf}*] Changes the default roman font family to |pmnx|.
+% \item[\Lopt{osf}] Changes the default roman font family to |pmnj|.
+% \item[\Lopt{uprightGreek}*] Makes upper-case Greek letters in math mode
+% upright.
+% \item[\Lopt{slantedGreek}] Makes upper-case Greek letters in math mode
+% slanted.
+% \item[\Lopt{nobb}*] No blackboard bold alphabet is declared.
+% \item[\Lopt{pazobb}] Sets up Pazo as blackboard bold math alphabet |\mathbb|
+% \item[\Lopt{nofrak}*] No Fraktur alphabet is declared
+% \item[\Lopt{eufrak}] Sets up Euler Fraktur as calligraphic math alphabet |\mathfrak|.
+% \end{description}
+% This package makes a lot of font re-assignments. Normally these
+% generate warning messages on the terminal; however, getting so many
+% messages would be distracting, so a further three options control the
+% font tracing. Even more control may be obtained by loading the
+% \Lpack{tracefnt} package.
+% \begin{description}
+% \item[\Lopt{errorshow}*] Only show font \emph{errors} on the terminal.
+%   Warnings are just sent to the log file.
+% \item[\Lopt{warningshow}] Show font warnings on the terminal. This
+%   corresponds to the usual \LaTeX\ behavior.
+% \item[\Lopt{nofontinfo}] Suppress all font warnings, even from the log file.
+% \end{description}
+%
+%
+% \StopEventually{%
+% \section{Credits}
+% The fine-tuning of the virtual math fonts was adopted from Aloysius G. Helminck's
+% fontinst script \texttt{fontmmtt.tex}.
+%
+% The code of the macro package \Lpack{mathpmnt} was -- to a large part -- adopted
+% from the \Lpack{mathtime} package (Frank Mittelbach, David Carlisle), because
+% the encoding of the math fonts is almost identical.
+% 
+% }
+% 
+%
+% \section{Implementation}
+% \subsection{Options}
+% We start with declaring and processing of the options.
+%    \begin{macrocode}
+%<*package>
+\DeclareOption{lf}{%
+    \renewcommand\rmdefault{pmnx}}
+\DeclareOption{osf}{%
+    \renewcommand\rmdefault{pmnj}}
+\DeclareOption{uprightGreek}{\let\Gamma=u}
+\DeclareOption{slantedGreek}{\let\Gamma=s}
+\DeclareOption{nobb}{\let\mathbb=\relax}
+\DeclareOption{pazobb}{\let\mathbb=p}
+\DeclareOption{nofrak}{\let\mathfrak=\relax}
+\DeclareOption{eufrak}{\let\mathfrak=e}
+\DeclareOption{errorshow}{%
+   \def\@font@info#1{%
+         \GenericInfo{(Font)\@spaces\@spaces\@spaces\space\space}%
+                     {LaTeX Font Info: \space\space\space#1}}%
+    \def\@font@warning#1{%
+         \GenericInfo{(Font)\@spaces\@spaces\@spaces\space\space}%
+                        {LaTeX Font Warning: #1}}}
+\DeclareOption{warningshow}{%
+   \def\@font@info#1{%
+         \GenericInfo{(Font)\@spaces\@spaces\@spaces\space\space}%
+                     {LaTeX Font Info: \space\space\space#1}}%
+    \def\@font@warning#1{%
+         \GenericWarning{(Font)\@spaces\@spaces\@spaces\space\space}%
+                        {LaTeX Font Warning: #1}}}
+\DeclareOption{nofontinfo}{%
+   \let\@font@info\@gobble
+   \let\@font@warning\@gobble}
+\ExecuteOptions{%
+  lf,uprightGreek,nobb,nofrak,lf,errorshow}
+\ProcessOptions\relax
+%    \end{macrocode}
+%
+% \subsection{Setting up the math fonts}
+% We use non-standard  encodings for the `letters', `symbols'
+% and `largesmbols' math fonts.  
+% LMY1 is the same as Y\&Y's MY1, except for |\hbar| in slot~128.
+% LMY2 is the same as Y\&Y's MY2, except for |\section|, |\dagger|,
+% |\daggerdbl| and |\paragraph| in slots $120\dots123$.
+% For the `largesymbols' we use the same font family as \Lpack{mathtime.sty}
+%
+% The use of LMY1 and LMY2 has the advantage of a clear separation between 
+% text and math fonts.
+% The drawback is, however, that there is no room for a |\mathcal| alphabet
+% in the LMY2 encoding, so we will have to consume one additional math font 
+% family for it.
+%    \begin{macrocode}
+\DeclareFontEncoding{LMY1}{}{}
+\DeclareFontEncoding{LMY2}{}{}
+\DeclareFontEncoding{MY3}{}{}
+\DeclareFontSubstitution{LMY1}{zpmn}{m}{it}
+\DeclareFontSubstitution{LMY2}{zpmn}{m}{n}
+\DeclareFontSubstitution{MY3}{mtt}{m}{n}
+%    \end{macrocode}
+%    \begin{macrocode}
+\DeclareSymbolFont{operators}    {T1}{pmnx}{m}{n}
+\DeclareSymbolFont{letters}      {LMY1}{zpmn}{m}{it}
+\DeclareSymbolFont{symbols}      {LMY2}{zpmn}{m}{n}
+\DeclareSymbolFont{largesymbols} {MY3}{mtt}{m}{n}
+\SetSymbolFont{operators}{bold}  {T1}{pmnx}{b}{n}
+\SetSymbolFont{letters}  {bold}  {LMY1}{zpmn}{b}{it}
+\SetSymbolFont{symbols}  {bold}  {LMY2}{zpmn}{b}{n} 
+\DeclareMathAlphabet{\mathbf}{T1}{pmnx}{b}{n}%
+\DeclareMathAlphabet{\mathsf}{T1}{\sfdefault}{m}{n}
+\DeclareMathAlphabet{\mathit}{T1}{pmnx}{m}{it}
+\DeclareMathAlphabet{\mathtt}{T1}{\ttdefault}{m}{n}
+\SetMathAlphabet{\mathsf}{bold}  {T1}{\sfdefault}{bx}{n}
+\SetMathAlphabet{\mathit}{bold}  {T1}{pmnx}{b}{it}
+%    \end{macrocode}
+% 
+% \subsection{Setting up the math symbols}
+% Period and comma come from `operators' now. 
+% (|\colon| and semicolon keep their default definitions.)
+%    \begin{macrocode}
+\DeclareMathSymbol{,}{\mathpunct}{operators}{44}
+\DeclareMathSymbol{.}{\mathord}{operators}{46}
+%    \end{macrocode}
+% The definitions of many other symbols are to be changed, too,
+% wrt.\ the changed math font encoding:
+%    \begin{macrocode}
+\DeclareMathSymbol{:}{\mathrel}{symbols}{86}
+\DeclareMathSymbol{[}{\mathopen}{symbols}{84}
+\DeclareMathSymbol{]}{\mathclose}{symbols}{85}
+\DeclareMathSymbol{(}{\mathopen}{letters}{46} % was 028
+\DeclareMathSymbol{)}{\mathclose}{letters}{47} % was 029
+\DeclareMathDelimiter{(}{letters}{46}{largesymbols}{0}
+\DeclareMathDelimiter{)}{letters}{47}{largesymbols}{1}
+\DeclareMathSymbol{\triangleleft}{\mathbin}{symbols}{71}  % was 12F
+\DeclareMathSymbol{\triangleright}{\mathbin}{symbols}{70} % was 12E
+\DeclareMathSymbol{\comp}{\mathbin}{symbols}{66}       % new?
+\DeclareMathSymbol{\setdif}{\mathbin}{symbols}{88}     % new
+\DeclareMathSymbol{\cupprod}{\mathbin}{symbols}{89}    % new
+\DeclareMathSymbol{\capprod}{\mathbin}{symbols}{90}    % new
+\DeclareMathSymbol{+}{\mathbin}{symbols}{67}           % was 02B
+\DeclareMathSymbol{=}{\mathrel}{symbols}{68}           % was 03D
+\DeclareMathSymbol{\leftharpoonup}{\mathrel}{symbols}{"88}
+\DeclareMathSymbol{\leftharpoondown}{\mathrel}{symbols}{"89}
+\DeclareMathSymbol{\rightharpoonup}{\mathrel}{symbols}{"8A}
+\DeclareMathSymbol{\rightharpoondown}{\mathrel}{symbols}{"8B}
+\DeclareMathSymbol{\lhook}{\mathrel}{symbols}{"8C}
+\DeclareMathSymbol{\rhook}{\mathrel}{symbols}{"8D}
+%    \end{macrocode}
+% Make |\Gamma|, |\Delta| etc.\ slanted by default\dots
+%    \begin{macrocode}
+\ifx\Gamma s
+\let\Gamma\@undefined
+\DeclareMathSymbol\Gamma    {\mathord}{letters}{0}
+\DeclareMathSymbol\Delta    {\mathord}{letters}{1}
+\DeclareMathSymbol\Theta    {\mathord}{letters}{2}
+\DeclareMathSymbol\Lambda   {\mathord}{letters}{3}
+\DeclareMathSymbol\Xi       {\mathord}{letters}{4}
+\DeclareMathSymbol\Pi       {\mathord}{letters}{5}
+\DeclareMathSymbol\Sigma    {\mathord}{letters}{6}
+\DeclareMathSymbol\Upsilon  {\mathord}{letters}{7}
+\DeclareMathSymbol\Phi      {\mathord}{letters}{8}
+\DeclareMathSymbol\Psi      {\mathord}{letters}{9}
+\DeclareMathSymbol\Omega    {\mathord}{letters}{10}
+\else
+%    \end{macrocode}
+% \dots or make them upright:
+%    \begin{macrocode}
+\let\Gamma\@undefined
+\DeclareMathSymbol\Gamma  {\mathord}{letters}{48}
+\DeclareMathSymbol\Delta  {\mathord}{letters}{49}
+\DeclareMathSymbol\Theta  {\mathord}{letters}{50}
+\DeclareMathSymbol\Lambda {\mathord}{letters}{51}
+\DeclareMathSymbol\Xi     {\mathord}{letters}{52}
+\DeclareMathSymbol\Pi     {\mathord}{letters}{53}
+\DeclareMathSymbol\Sigma  {\mathord}{letters}{54}
+\DeclareMathSymbol\Upsilon{\mathord}{letters}{55}
+\DeclareMathSymbol\Phi    {\mathord}{letters}{56}
+\DeclareMathSymbol\Psi    {\mathord}{letters}{57}
+\DeclareMathSymbol\Omega  {\mathord}{letters}{127}
+\fi
+%    \end{macrocode}
+% Lower-case Greek must be of type |\mathord| wrt/ |\mathbold|:
+%    \begin{macrocode}
+\DeclareMathSymbol{\alpha}{\mathord}{letters}{11}
+\DeclareMathSymbol{\beta}{\mathord}{letters}{12}
+\DeclareMathSymbol{\gamma}{\mathord}{letters}{13}
+\DeclareMathSymbol{\delta}{\mathord}{letters}{14}
+\DeclareMathSymbol{\epsilon}{\mathord}{letters}{15}
+\DeclareMathSymbol{\zeta}{\mathord}{letters}{16}
+\DeclareMathSymbol{\eta}{\mathord}{letters}{17}
+\DeclareMathSymbol{\theta}{\mathord}{letters}{18}
+\DeclareMathSymbol{\iota}{\mathord}{letters}{19}
+\DeclareMathSymbol{\kappa}{\mathord}{letters}{20}
+\DeclareMathSymbol{\lambda}{\mathord}{letters}{21}
+\DeclareMathSymbol{\mu}{\mathord}{letters}{22}
+\DeclareMathSymbol{\nu}{\mathord}{letters}{23}
+\DeclareMathSymbol{\xi}{\mathord}{letters}{24}
+\DeclareMathSymbol{\pi}{\mathord}{letters}{25}
+\DeclareMathSymbol{\rho}{\mathord}{letters}{26}
+\DeclareMathSymbol{\sigma}{\mathord}{letters}{27}
+\DeclareMathSymbol{\tau}{\mathord}{letters}{28}
+\DeclareMathSymbol{\upsilon}{\mathord}{letters}{29}
+\DeclareMathSymbol{\phi}{\mathord}{letters}{30}
+\DeclareMathSymbol{\chi}{\mathord}{letters}{31}
+\DeclareMathSymbol{\psi}{\mathord}{letters}{32}
+\DeclareMathSymbol{\omega}{\mathord}{letters}{33}
+\DeclareMathSymbol{\varepsilon}{\mathord}{letters}{34}
+\DeclareMathSymbol{\vartheta}{\mathord}{letters}{35}
+\DeclareMathSymbol{\varpi}{\mathord}{letters}{36}
+\DeclareMathSymbol{\varphi}{\mathord}{letters}{39}
+\DeclareMathSymbol{\varrho}{\mathord}{letters}{37}
+\DeclareMathSymbol{\varsigma}{\mathord}{letters}{38}
+%    \end{macrocode}
+% There is a ready-made |\hslash|, but there is no |\hbar|: 
+%    \begin{macrocode}
+\DeclareMathSymbol{\hslash}{\mathord}{letters}{128} % new
+\DeclareRobustCommand\hbar{\hslash%
+  \PackageWarning{mathpmnt}{%
+    Symbol \protect\hbar\space not available;\MessageBreak
+    \protect\hslash\space will be used instead}}
+%    \end{macrocode}
+%    \begin{macrocode}
+\def\angle{{\vbox{\ialign{$\m@th\scriptstyle##$\crcr
+     \not\mathrel{\mkern14mu}\crcr
+     \noalign{\nointerlineskip}
+     \mkern2.5mu\leaders\hrule height.34pt\hfill\mkern2.5mu\crcr}}}}
+%    \end{macrocode}
+%
+% \subsection{Math accents}
+% Accents come from the `symbols' font now:
+%    \begin{macrocode}
+\DeclareMathAccent{\vec}{\mathord}{symbols}{69}
+\DeclareMathAccent{\grave}{\mathord}{symbols}{74}
+\DeclareMathAccent{\acute}{\mathord}{symbols}{75}
+\DeclareMathAccent{\check}{\mathord}{symbols}{76}
+\DeclareMathAccent{\breve}{\mathord}{symbols}{77}
+\DeclareMathAccent{\bar}{\mathord}{symbols}{78}
+\DeclareMathAccent{\hat}{\mathord}{symbols}{79}
+\DeclareMathAccent{\dot}{\mathord}{symbols}{80}
+\DeclareMathAccent{\tilde}{\mathord}{symbols}{81}
+\DeclareMathAccent{\ddot}{\mathord}{symbols}{82}
+\DeclareMathAccent{\widebar}{\mathord}{symbols}{83}  % new
+%    \end{macrocode}
+% In case \Lpack{amsmath} is loaded additionally, 
+% we make sure that
+% things like |\mathrm{\hat{A}}| don't result in garbage:
+%    \begin{macrocode}
+\AtBeginDocument{%
+  \@ifpackageloaded{amsmath}{\def\accentclass@{0}}{}%
+}
+%    \end{macrocode}
+% (Is this really needed?)
+%
+% \subsection{Upright Greek}
+% A full upright Greek alphabet, with the lower-case letters
+% actually taken from MTGU:
+%    \begin{macrocode}
+\DeclareMathSymbol\upGamma  {\mathord}{letters}{48}
+\DeclareMathSymbol\upDelta  {\mathord}{letters}{49}
+\DeclareMathSymbol\upTheta  {\mathord}{letters}{50}
+\DeclareMathSymbol\upLambda {\mathord}{letters}{51}
+\DeclareMathSymbol\upXi     {\mathord}{letters}{52}
+\DeclareMathSymbol\upPi     {\mathord}{letters}{53}
+\DeclareMathSymbol\upSigma  {\mathord}{letters}{54}
+\DeclareMathSymbol\upUpsilon{\mathord}{letters}{55}
+\DeclareMathSymbol\upPhi    {\mathord}{letters}{56}
+\DeclareMathSymbol\upPsi    {\mathord}{letters}{57}
+\DeclareMathSymbol\upOmega  {\mathord}{letters}{127}
+\DeclareMathSymbol\upalpha{\mathord}{letters}{139}
+\DeclareMathSymbol\upbeta {\mathord}{letters}{140}
+\DeclareMathSymbol\upgamma{\mathord}{letters}{141}
+\DeclareMathSymbol\updelta{\mathord}{letters}{142}
+\DeclareMathSymbol\upepsilon{\mathord}{letters}{143}
+\DeclareMathSymbol\upzeta {\mathord}{letters}{144}
+\DeclareMathSymbol\upeta  {\mathord}{letters}{145}
+\DeclareMathSymbol\uptheta{\mathord}{letters}{146}
+\DeclareMathSymbol\upiota {\mathord}{letters}{147}
+\DeclareMathSymbol\upkappa{\mathord}{letters}{148}
+\DeclareMathSymbol\uplambda{\mathord}{letters}{149}
+\DeclareMathSymbol\upmu   {\mathord}{letters}{150}
+\DeclareMathSymbol\upnu   {\mathord}{letters}{151}
+\DeclareMathSymbol\upxi   {\mathord}{letters}{152}
+\DeclareMathSymbol\uppi   {\mathord}{letters}{153}
+\DeclareMathSymbol\uprho  {\mathord}{letters}{154}
+\DeclareMathSymbol\upsigma{\mathord}{letters}{155}
+\DeclareMathSymbol\uptau  {\mathord}{letters}{156}
+\DeclareMathSymbol\upupsilon{\mathord}{letters}{157}
+\DeclareMathSymbol\upphi  {\mathord}{letters}{158}
+\DeclareMathSymbol\upchi  {\mathord}{letters}{159}
+\DeclareMathSymbol\uppsi  {\mathord}{letters}{160}
+\DeclareMathSymbol\upomega{\mathord}{letters}{161}
+\DeclareMathSymbol\upvarepsilon{\mathord}{letters}{162}
+\DeclareMathSymbol\upvartheta{\mathord}{letters}{163}
+\DeclareMathSymbol\upvarpi{\mathord}{letters}{164}
+\DeclareMathSymbol\upvarrho{\mathord}{letters}{165}
+\DeclareMathSymbol\upvarsigma{\mathord}{letters}{166}
+\DeclareMathSymbol\upvarphi{\mathord}{letters}{167}
+%    \end{macrocode}
+%
+% \subsection{Further math alphabets}
+% Calligraphic, using Euler Script:
+%    \begin{macrocode}
+\DeclareFontFamily{U}{eus}{\skewchar\font'60}%
+\DeclareFontShape{U}{eus}{m}{n}{<->s*[.95]eusm10}{}
+\DeclareFontShape{U}{eus}{b}{n}{<->s*[.95]eusb10}{}
+\DeclareMathAlphabet{\mathcal} {U}{eus}{m}{n}
+\SetMathAlphabet{\mathcal}{bold}{U}{eus}{b}{n}
+%    \end{macrocode}
+% Blackboard Bold, using Pazo:
+%    \begin{macrocode}
+\ifx\mathbb p
+  \let\mathbb\relax
+  \DeclareFontFamily{T1}{fplmbb}{}
+  \DeclareFontShape{T1}{fplmbb}{m}{n}{<->s*[.92]fplmbb}{}
+  \DeclareMathAlphabet\mathbb{T1}{fplmbb}{m}{n}
+\fi
+%    \end{macrocode}
+% Euler Fraktur:
+%    \begin{macrocode}
+\ifx\mathfrak e
+  \let\mathfrak\relax
+  \DeclareFontFamily{U}{euf}{}%
+  \DeclareFontShape{U}{euf}{m}{n}{<->s*[.95]eufm10}{}%
+  \DeclareFontShape{U}{euf}{b}{n}{<->s*[.95]eufb10}{}%
+  \DeclareMathAlphabet{\mathfrak}{U}{euf}{m}{n}
+  \SetMathAlphabet{\mathfrak}{bold}{U}{euf}{b}{n}
+\fi
+%    \end{macrocode}
+%
+% \subsection{Spacing}
+% The white space around operators is slightly reduced:
+%    \begin{macrocode}
+\medmuskip=3.6mu plus 1mu minus 1mu % was 4mu plus 2mu minus 4mu
+\thickmuskip=4.5mu plus 4.5mu       % was 5mu plus 5 mu
+%    \end{macrocode}
+%
+% \subsection{Math sizes}
+% MathTime and Minion have no particular small design sizes.
+% For such fonts the default ratios (0.7 and 0.5) produce
+% unreadably small superscripts.
+%    \begin{macrocode}
+\def\defaultscriptratio{.76}
+\def\defaultscriptscriptratio{.6}
+%    \end{macrocode}
+%
+% These default ratios are not used for any sizes that have been
+% explicitly declared, so redeclare the sizes used by the standard
+% classes. At least for the lower sizes this is important as we don't
+% want to end up with a 5pt font being reduced even further.
+% 
+% The table has been adopted from the \Lpack{mathtime} package:
+%    \begin{macrocode}
+\DeclareMathSizes{5}     {6}   {6}  {6}
+\DeclareMathSizes{6}     {6}   {6}  {6}
+\DeclareMathSizes{7}     {6.8} {6}  {6}
+\DeclareMathSizes{8}     {8}   {6.8}{6}
+\DeclareMathSizes{9}     {9}   {7.6}{6}
+\DeclareMathSizes{10}   {10}   {7.6}{6}
+\DeclareMathSizes{10.95}{10.95}{7.6}{6}
+\DeclareMathSizes{12}   {12}   {9}  {7}
+\DeclareMathSizes{14.4} {14.4} {10} {8}
+\DeclareMathSizes{17.28}{17.28}{12} {9}
+\DeclareMathSizes{20.74}{20.74}{14.4}{10}
+\DeclareMathSizes{24.88}{24.88}{17.28}{12}
+%    \end{macrocode}
+%    \begin{macrocode}
+%</package>
+%    \end{macrocode}
+%
+%
+% \Finale
+%
+%
+% \iffalse
+%
+% The next line of code prevents DocStrip from adding the
+% character table to the generated files(s).
+\endinput
+%
+% \fi
+%
+%% \CharacterTable
+%%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%%   Digits        \0\1\2\3\4\5\6\7\8\9
+%%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%%   Dollar        \$     Percent       \%     Ampersand     \&
+%%   Acute accent  \'     Left paren    \(     Right paren   \)
+%%   Asterisk      \*     Plus          \+     Comma         \,
+%%   Minus         \-     Point         \.     Solidus       \/
+%%   Colon         \:     Semicolon     \;     Less than     \<
+%%   Equals        \=     Greater than  \>     Question mark \?
+%%   Commercial at \@     Left bracket  \[     Backslash     \\
+%%   Right bracket \]     Circumflex    \^     Underscore    \_
+%%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%%   Right brace   \}     Tilde         \~}
+%%

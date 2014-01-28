@@ -1,0 +1,60 @@
+% THIS FILE WAS AUTOMATICALLY GENERATED -- DO NOT EDIT
+
+%%AutoEnc_te2qlknhk4nqnz34faokrjhtlf
+% Encoding created by otftotfm on Thu Nov 10 09:39:45 2005
+% Command line follows encoding
+/AutoEnc_te2qlknhk4nqnz34faokrjhtlf [
+%00
+  /grave.cap /acute.cap /uniEFF7 /uniEFF5 /dieresis.cap /hungarumlaut.cap /uniEFF3 /caron.cap
+  /uniEFEE /macron.cap /uniEFED /uniEFF2 /uniEFF1 /quotesinglbase /exclam /asterisk
+%10
+  /question /C /quotedblbase /bracketleft /bracketright /.notdef /.notdef /.notdef
+  /Zdotaccent.sc /a.end /circumflex.cyr /circumflex.cyrcap /circumflex.cyr /circumflex.cyrcap /bar /.notdef
+%20
+  /.notdef /uniF655 /uniF661 /exclamdown /dollar /endash /questiondown /quotesingle
+  /.notdef /.notdef /.notdef /.notdef /comma /.notdef /period /fraction
+%30
+  /uniF643 /uniF644 /uniF645 /uniF646 /uniF647 /uniF648 /uniF649 /uniF64A
+  /uniF64B /uniF64C /.notdef /.notdef /.notdef /minus /.notdef /.notdef
+%40
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%50
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /Omega
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%60
+  /grave /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%70
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /asciitilde /.notdef
+%80
+  /breve /caron /hungarumlaut /space_uni030F.cap /dagger /daggerdbl /.notdef /perthousand
+  /bullet /.notdef /dollar /cent /florin /colonmonetary /.notdef /.notdef
+%90
+  /.notdef /peseta /lira /.notdef /.notdef /.notdef /uni25A0 /trademark
+  /.notdef /paragraph /.notdef /afii61352 /.notdef /estimated /.notdef /.notdef
+%A0
+  /.notdef /.notdef /cent /sterling /currency /yen /brokenbar /section
+  /dieresis /copyright /ordfeminine /.notdef /logicalnot /.notdef /registered /macron
+%B0
+  /degree /plusminus /two.superior /three.superior /acute /mu /paragraph /periodcentered
+  /.notdef /one.superior /ordmasculine /radical /onequarter /onehalf /threequarters /Euro
+%C0
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%D0
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /multiply /.notdef
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%E0
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+%F0
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /divide /.notdef
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+] def
+% Command line: 'otftotfm -q --tfm-directory=./tfm --vf-directory=./vf
+% --encoding-directory=./dvips --no-type1 --no-updmap --no-dotlessj
+% --warn-missing -fkern -ftnum --subs-filter=<Number> -fonum
+% --subs-filter=!<Number> -flnum --unicoding dong =: blacksquare -e
+% enc/mn-It-ts1.enckern otf/MinionPro-It.otf MinionPro-It-tlf-ts1'

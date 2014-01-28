@@ -1,0 +1,808 @@
+% \iffalse
+%% Copyright 2004, 2005 Walter Schmidt
+%<*dtx>
+          \ProvidesFile{mtpams.dtx}
+%</dtx>
+%<mtpams>\NeedsTeXFormat{LaTeX2e}[1997/06/01]
+%<mtpams>\ProvidesPackage{mtpams}
+%<umtsya>\ProvidesFile{umtsya.fd}%
+%<umtbbb>\ProvidesFile{umtbbb.fd}%
+%<umthrb>\ProvidesFile{umthrb.fd}%
+%<driver>\ProvidesFile{mtpams.drv}
+% \fi
+%         \ProvidesFile{mtpams.dtx}
+ [2005/01/31 v4.1 %
+%<mtpams> MathTimePro Supplement A support (WaS)%
+%<umtsya> MathTimePro AMS Symbols (WaS)%
+%<umtbbb> MathTimePro Blackboard Bold (WaS)%
+%<umthrb> MathTimePro Holey Roman Bold (WaS)%
+]
+%
+% \iffalse
+%
+%<*driver>
+\documentclass[11pt]{ltxdoc}
+\usepackage[T1]{fontenc}
+\OnlyDescription
+%
+% *** We are using Times, Helvetica and MathTime Professional at 11pt. ***
+% ***            Do NOT change this through ltxdoc.cfg!                ***
+\usepackage[scaled=0.92]{helvet}
+\renewcommand{\rmdefault}{ptm}
+\usepackage{mtpro,mtpams}
+%
+\usepackage{xspace}
+\newcommand*{\Lpack}[1]{\textsf{#1}}
+\newcommand*{\Lopt}[1]{\textsf{#1}}
+\renewcommand{\labelitemi}{$\triangleright$}
+\newcommand{\mathtime}{{\itshape MathT\kern-.05em\i me}\xspace}
+\newcommand{\mtpro}{{\itshape MathT\kern-.05em\i meProfes\-sional\/}\xspace}
+% the (La)TeX logos for use with Times-Roman
+\def\ptmTeX{T\kern-.1667em\lower.5ex\hbox{E}\kern-.075emX\@}
+\makeatletter
+\DeclareRobustCommand{\ptmLaTeX}{L\kern-.255em
+        {\setbox0\hbox{T}%
+         \vbox to\ht0{\hbox{%
+                            \csname S@\f@size\endcsname
+                            \fontsize\sf@size\z@
+                            \math@fontsfalse\selectfont
+                            A}%
+                      \vss}%
+        }%
+        \kern-.10em
+        \TeX}
+\setlength{\@fptop}{0\p@ \@plus 1fil}
+\setlength{\@fpsep}{8\p@ \@plus 2fil}
+\setlength{\@fpbot}{0\p@\@plus 2fil}
+\addtolength{\floatsep}{6pt}
+\makeatother
+\renewcommand{\floatpagefraction}{.6}
+\renewcommand{\textfraction}{.1}
+\renewcommand{\topfraction}{.8}
+\renewcommand{\bottomfraction}{.5}
+\let\TeX=\ptmTeX
+\let\LaTeX=\ptmLaTeX
+\font\hrbfont=mthrbt at 10.95pt
+\font\bbbfont=mtbbbt at 10.95pt
+\font\hrbdfont=mthrbdt at 10.95pt
+\font\bbbdfont=mtbbbdt at 10.95pt
+\begin{document}
+\DocInput{mtpams.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \CheckSum{825}
+%
+% \GetFileInfo{mtpams.dtx}
+%
+% \title{Using the \mtpro \\ Font Supplement A\\ with \LaTeX \thanks{This 
+%          document refers to version \fileversion\ 
+%          of the macro package \Lpack{mtpams}, to be used with the
+%          updated fonts from Supplement A.}}
+%
+% \date{\filedate}
+% \author{Walter Schmidt}
+% \maketitle
+%
+% \sloppy
+%
+%
+% \section{Introduction}
+%
+% Font Supplement A for the \mtpro fonts is designed to provide Times-compatible versions
+% of the various operators on the AMS's \texttt{msam} and \texttt{msbm} fonts
+% and the so-called \LaTeX\ symbols, as well as several different `blackboard bold' fonts.
+%
+% The macro package \Lpack{mtpams} can be regarded as the counterpart to the 
+% packages \Lpack{amssymb} and \Lpack{latexsym}.  While the latter are to be used in conjunction 
+% with the Computer Modern math fonts, \Lpack{mtpams} provides, roughly speaking, the same 
+% functionality for the \mtpro fonts, i.e., making additional math symbols available,
+% and providing a mathematical `blackboard bold' alphabet.
+%
+% In contrast to \Lpack{amssymb}, however, the package does \emph{not} implement
+% a mathematical fraktur alphabet \cmd{\mathfrak}.  A fraktur font which blends
+% well with Times is provided in the \mtpro Supplement~B collection and can be used
+% through the related macro package \Lpack{mtpb}.  Alternatively, load the 
+% standard package \Lpack{eufrak}  to use the free `Euler Fraktur' typeface.
+%
+% The package \Lpack{mtpams} is to be used in conjunction with version~4 of the
+% package \Lpack{mtpro}, which should be loaded \emph{first}:
+% \begin{verse}
+%   |\usepackage|\oarg{options}|{mtpro}|\\
+%   |\usepackage|\oarg{options}|{mtpams}|
+% \end{verse}
+% Otherwise, \Lpack{mtpro} gets loaded automatically, and you cannot pass any
+% package options to it.
+% 
+% 
+% 
+% \section{Blackboard Bold}
+% The package \Lpack{mtpams} makes a `blackboard bold' math alphabet
+% available with the name \cmd{\mathbb}.  
+% Two different varieties of `blackboard bold'  fonts are provided:
+% 
+% The first version, \mathtime \textbf{h}oley \textbf{r}oman \textbf{b}old, is a
+% `bold open' font, formed by
+% hollowing out bold letters:
+% \begin{center}
+% \hrbfont
+% ABCDEFGHIJKLMNOPQRSTUVWXYZ\\
+% abcdefghi\symbol{"7B}j\symbol{"7C}klmnopqrstuvwxyz0123456789
+% \end{center}
+% By contrast, the \mathtime \textbf{b}lackboard \textbf{b}old font 
+% is the sort of
+% alphabet that one might actually write on a blackboard:
+% \begin{center}
+% \bbbfont
+% ABCDEFGHIJKLMNOPQRSTUVWXYZ\\\
+% abcdefghi\symbol{"7B}j\symbol{"7C}klmnopqrstuvwxyz0123456789
+% \end{center}
+% 
+% Or you might prefer one of the dark versions, \textbf{h}oley \textbf{r}oman 
+% \textbf{d}ark:
+% \begin{center}
+% \hrbdfont
+% ABCDEFGHIJKLMNOPQRSTUVWXYZ\\
+% abcdefghi\symbol{"7B}j\symbol{"7C}klmnopqrstuvwxyz0123456789
+% \end{center}
+% or \textbf{b}lackboard \textbf{b}old \textbf{d}ark:
+% \begin{center}
+% \bbbdfont
+% ABCDEFGHIJKLMNOPQRSTUVWXYZ\\\
+% abcdefghi\symbol{"7B}j\symbol{"7C}klmnopqrstuvwxyz0123456789
+% \end{center}
+%
+% The font that will actually be used for \cmd{\mathbb} is selected through a
+% package option:
+% \begin{description}
+% \item[\Lopt{mtphrb}] holey roman bold
+% \item[\Lopt{mtpbb}] blackboard bold (default)
+% \item[\Lopt{mtphrd}] holey roman dark
+% \item[\Lopt{mtpbbd}] blackboard bold dark
+% \end{description}
+%
+% 
+% \section{New symbols}
+% \subsection{Ordinary symbols}
+% Most of the new symbols are binary operators or
+% relations, but first we have a group of various ordinary symbols, 
+% shown in table~\ref{tab:ord}.
+% \cmd{\checkmark}, \cmd{\maltese} and \cmd{\circledR} are sort
+% of special, since they can be used both in text mode and in math mode.
+%
+% \begin{table}[hbtp]
+% \centering
+% \begin{tabular}{ll@{\quad}ll}
+% $\backprime    $ &\cmd{\backprime}    & $\varnothing       $ &\cmd{\varnothing}\\
+% $\vartriangle  $ &\cmd{\vartriangle}  & $\blacktriangle    $ &\cmd{\blacktriangle}\\
+% $\triangledown $ &\cmd{\triangledown} & $\blacktriangledown$ &\cmd{\blacktriangledown}\\
+% $\square       $ &\cmd{\square}       & $\blacksquare      $ &\cmd{\blacksquare}\\
+% $\lozenge      $ &\cmd{\lozenge}      & $\blacklozenge     $ &\cmd{\blacklozenge}\\
+% $\Diamond      $ &\cmd{\Diamond}      & $\bigstar          $ &\cmd{\bigstar}\\
+% $\measuredangle$ &\cmd{\measuredangle}& $\sphericalangle   $ &\cmd{\sphericalangle}\\
+% $\nexists      $ &\cmd{\nexists}      & $\complement       $ &\cmd{\complement}\\
+% $\mho          $ &\cmd{\mho}          & $\eth              $ &\cmd{\eth}\\
+% $\Finv         $ &\cmd{\Finv}         & $\Game             $ &\cmd{\Game}\\
+% $\diagup       $ &\cmd{\diagup}       & $\diagdown         $ &\cmd{\diagdown}\\
+% $\beth         $ &\cmd{\beth}         & $\gimel            $ &\cmd{\gimel}\\
+% $\daleth       $ &\cmd{\daleth}       & $\checkmark        $ &\cmd{\checkmark}\\
+% $\maltese      $ &\cmd{\maltese}      & $\circledR         $ &\cmd{\circledR}\\
+%                  &                    & $\circledS         $ &\cmd{\circledS}\\
+% \end{tabular}
+% \caption{Ordinary symbols.} \label{tab:ord}
+% \end{table}
+%
+% For technical reasons, the AMS symbols $\yen$ (\cmd{\yen}), 
+% $\digamma$ (\cmd{\digamma}), and $\hslash$ (\cmd{\hslash}),
+% have been placed on the latest versions of the \mtpro basic fonts, 
+% along with the $\hbar$ (\cmd{hbar})  already appearing there, and their 
+% definitions appear in the macro package \Lpack{mtpro} from v4.0 on, 
+% so you don't need the supplementary fonts to use them. 
+%
+% $\Diamond$ (\cmd{\Diamond}) appears in the
+% so-called \LaTeX\ symbols, and you may prefer its shape over $\lozenge$.
+%
+% \subsection{Delimiters}
+% Table~\ref{tab:del} shows  four special delimiters (which occur in only one size).
+% \begin{table}[hbtp]
+% \centering
+% \begin{tabular}{ll@{\quad}ll}
+% $\ulcorner$ & \cmd{\ulcorner} & $ \urcorner$ &\cmd{\urcorner}\\
+% $\llcorner$ & \cmd{\llcorner} & $ \lrcorner$ &\cmd{\lrcorner}\\
+% \end{tabular}
+% \caption{Delimiters}\label{tab:del}
+% \end{table}
+%
+% \subsection{Binary operators}
+% Table~\ref{tab:binop} shows the additional binary operator symbols
+% that are made available with the package \Lpack{mtpams}.
+% The macro \cmd{\smallsetminus} is actually just a synonym for
+% \cmd{\setdif} on the \mtpro basic fonts.
+%
+% \begin{table}[hbtp]
+% \centering
+% \begin{tabular}{ll@{\quad}ll}
+% $\dotplus       $ &\cmd{\dotplus}                &$\smallsetminus  $ &\cmd{\smallsetminus}\\
+% $\ltimes        $ &\cmd{\ltimes}                 &$\rtimes         $ &\cmd{\rtimes}\\
+% $\Cap           $ &\cmd{\Cap} ,\cmd{\doublecap}  &$\Cup            $ &\cmd{\Cup},\cmd{\doublecup}\\
+% $\leftthreetimes$ &\cmd{\leftthreetimes}         &$\rightthreetimes$ &\cmd{\rightthreetimes}\\
+% $\barwedge      $ &\cmd{\barwedge}               &$\veebar         $ &\cmd{\veebar}\\
+% $\doublebarwedge$ &\cmd{\doublebarwedge}         \\
+% $\curlywedge    $ &\cmd{\curlywedge}             &$\curlyvee       $ &\cmd{\curlyvee}\\
+% $\boxplus       $ &\cmd{\boxplus}                &$\boxminus       $ &\cmd{\boxminus}\\
+% $\boxtimes      $ &\cmd{\boxtimes}               &$\boxdot         $ &\cmd{\boxdot}\\
+% $\circleddash   $ &\cmd{\circleddash}            &$\circledast     $ &\cmd{\circledast}\\
+% $\circledcirc   $ &\cmd{\circledcirc}            &$\divideontimes  $ &\cmd{\divideontimes}\\
+% $\centerdot     $ &\cmd{\centerdot}              &$\intercal       $ &\cmd{\intercal}\\
+% \end{tabular}
+% \caption{Binary operators}\label{tab:binop}
+% \end{table}
+%
+% \subsection{Binary relations}
+% In table \ref{tab:binrel}, note that $\sqsubset$ (\cmd{\sqsubset}) and $\sqsupset$
+% (\cmd{\sqsupset}) are new symbols, while the more complicated $\sqsubseteq$
+% (\cmd{\sqsubseteq}) and $\sqsupseteq$ (\cmd{\sqsupseteq}) already exist
+% on the basic fonts!
+%
+% Note also that $\smallsmile$ (\cmd{\smallsmile}) and $\smallfrown$
+% (\cmd{\smallfrown}) are different from the symbols $\cupprod$ (\cmd{\cupprod}) and
+% $\capprod$ (\cmd{\capprod}), and that the old $\models$ (\cmd{\models})
+% is different from $\vDash$ (\cmd{\vDash}).
+%
+% \begin{table}[hbtp]
+% \centering
+% \begin{tabular}{ll@{\quad}ll}
+% $\leqq              $ &\cmd{\leqq}                   &$\geqq              $ &\cmd{\geqq}\\
+% $\leqslant          $ &\cmd{\leqslant}               &$\geqslant          $ &\cmd{\geqslant}\\
+% $\eqslantless       $ &\cmd{\eqslantless}            &$\eqslantgtr        $ &\cmd{\eqslantgtr}\\
+% $\lesssim           $ &\cmd{\lesssim}                &$\gtrsim            $ &\cmd{\gtrsim}\\
+% $\lessapprox        $ &\cmd{\lessapprox}             &$\gtrapprox         $ &\cmd{\gtrapprox}\\
+% $\approxeq          $ &\cmd{\approxeq}               \\
+% $\lessdot           $ &\cmd{\lessdot}                &$\gtrdot            $ &\cmd{\gtrdot}\\
+% $\lll               $ &\cmd{\lll}, \cmd{\llless}     &$\ggg               $ &\cmd{\ggg}, \cmd{\gggtr}\\
+% $\lessgtr           $ &\cmd{\lessgtr}                &$\gtrless           $ &\cmd{\gtrless}\\
+% $\lesseqgtr         $ &\cmd{\lesseqgtr}              &$\gtreqless         $ &\cmd{\gtreqless}\\
+% $\lesseqqgtr        $ &\cmd{\lesseqqgtr}             &$\gtreqqless        $ &\cmd{\gtreqqless}\\
+% $\doteqdot          $ &\cmd{\doteqdot}, \cmd{\Doteq} &$\eqcirc            $ &\cmd{\eqcirc}\\
+% $\fallingdotseq     $ &\cmd{\fallingdotseq}          &$\risingdotseq      $ &\cmd{\risingdotseq}\\
+% $\circeq            $ &\cmd{\circeq}                 &$\triangleq         $ &\cmd{\triangleq}\\
+% $\backsim           $ &\cmd{\backsim}                &$\thicksim          $ &\cmd{\thicksim}\\
+% $\backsimeq         $ &\cmd{\backsimeq}              &$\thickapprox       $ &\cmd{\thickapprox}\\
+% $\subseteqq         $ &\cmd{\subseteqq}              &$\supseteqq         $ &\cmd{\supseteqq}\\
+% $\Subset            $ &\cmd{\Subset}                 &$\Supset            $ &\cmd{\Supset}\\
+% $\sqsubset          $ &\cmd{\sqsubset}               &$\sqsupset          $ &\cmd{\sqsupset}\\
+% $\preccurlyeq       $ &\cmd{\preccurlyeq}            &$\succcurlyeq       $ &\cmd{\succcurlyeq}\\
+% $\curlyeqprec       $ &\cmd{\curlyeqprec}            &$\curlyeqsucc       $ &\cmd{\curlyeqsucc}\\
+% $\precsim           $ &\cmd{\precsim}                &$\succsim           $ &\cmd{\succsim}\\
+% $\precapprox        $ &\cmd{\precapprox}             &$\succapprox        $ &\cmd{\succapprox}\\
+% $\vartriangleleft   $ &\cmd{\vartriangleleft}        &$\vartriangleright  $ &\cmd{\vartriangleright}\\
+% $\trianglelefteq    $ &\cmd{\trianglelefteq}         &$\trianglerighteq   $ &\cmd{\trianglerighteq}\\
+% $\blacktriangleleft $ &\cmd{\blacktriangleleft}      &$\blacktriangleright$ &\cmd{\blacktriangleright}\\
+% $\vDash             $ &\cmd{\vDash}                  &$\Vdash             $ &\cmd{\Vdash}\\
+% $\Vvdash            $ &\cmd{\Vvdash}                 \\
+% $\smallsmile        $ &\cmd{\smallsmile}             &$\smallfrown        $ &\cmd{\smallfrown}\\
+% $\shortmid          $ &\cmd{\shortmid}               &$\shortparallel     $ &\cmd{\shortparallel}\\
+% $\bumpeq            $ &\cmd{\bumpeq}                 &$\Bumpeq            $ &\cmd{\Bumpeq}\\
+% $\therefore         $ &\cmd{\therefore}              &$\because           $ &\cmd{\because}\\
+% $\between           $ &\cmd{\between}                &$\pitchfork         $ &\cmd{\pitchfork}\\
+% $\varpropto         $ &\cmd{\varpropto}              &$\backepsilon       $ &\cmd{\backepsilon}\\
+% \end{tabular}
+% \caption{Binary relations}\label{tab:binrel}
+% \end{table}
+%
+% \subsection{Negated relations}
+% Negated relation symbols are summarized in table~\ref{tab:negrel}.
+% Symbols in brackets already appear on the basic \Lpack{mtpro} fonts.
+% (Whereas, with Computer Modern, they are provided only by the extra
+% AMS symbol fonts.)
+% Note that
+% $\nsim$ (\cmd{\nsim}) from the font supplement is definitely different from
+% $\notsim$ (\cmd{\notsim}) from the basic fonts.
+%
+% Symbols that are marked with an asterisk do not exist in the 
+% traditional (Computer Modern) AMS fonts.
+%
+% \begin{table}[hbtp]
+% \centering
+% \begin{tabular}{ll@{\quad}ll}
+% $\nless        $ &[\cmd{\nless}]        &$\ngtr          $ &[\cmd{\ngtr}]\\
+% $\nleq         $ &[\cmd{\nleq}]         &$\ngeq          $ &[\cmd{\ngeq}]\\
+% $\nleqslant    $ &\cmd{\nleqslant}      &$\ngeqslant     $ &\cmd{\ngeqslant}\\
+% $\nleqq        $ &\cmd{\nleqq}          &$\ngeqq         $ &\cmd{\ngeqq}\\
+% $\lneq         $ &\cmd{\lneq}           &$\gneq          $ &\cmd{\gneq}\\
+% $\lneqq        $ &\cmd{\lneqq}          &$\gneqq         $ &\cmd{\gneqq}\\
+% $\lvertneqq    $ &\cmd{\lvertneqq}      &$\gvertneqq     $ &\cmd{\gvertneqq}\\
+% $\lnsim        $ &\cmd{\lnsim}          &$\gnsim         $ &\cmd{\gnsim}\\
+% $\lnapprox     $ &\cmd{\lnapprox}       &$\gnapprox      $ &\cmd{\gnapprox}\\
+% $\nprec        $ &[\cmd{\nprec}]        &$\nsucc         $ &[\cmd{\nsucc}] \\
+% $\npreceq      $ &[\cmd{\npreceq}]      &$\nsucceq       $ &[\cmd{\nsucceq}]\\
+% $\precneqq     $ &\cmd{\precneqq}       &$\succneqq      $ &\cmd{\succneqq}\\
+% $\precnsim     $ &\cmd{\precnsim}       &$\succnsim      $ &\cmd{\succnsim}\\
+% $\precnapprox  $ &\cmd{\precnapprox}    &$\succnapprox   $ &\cmd{\succnapprox}\\
+% $\nsim         $ &\cmd{\nsim}           &$\ncong         $ &[\cmd{\ncong}]\\
+% $\nshortmid    $ &\cmd{\nshortmid}      &$\nshortparallel$ &\cmd{\nshortparallel}\\
+% $\nmid         $ &\cmd{\nmid}           &$\nparallel     $ &\cmd{\nparallel}\\
+% $\nvdash       $ &\cmd{\nvdash}         &$\nvDash        $ &\cmd{\nvDash}\\
+% $\nVdash       $ &\cmd{\nVdash}         &$\nVDash        $ &\cmd{\nVDash}\\
+% $\ntriangleleft$ &\cmd{\ntriangleleft}  &$\ntriangleright$ &\cmd{\ntriangleright}\\
+% $\nsubseteq    $ &[\cmd{\nsubseteq}]    &$\nsupseteq     $ &[\cmd{\nsupseteq}]\\
+% $\nsubseteqq   $ &\cmd{\nsubseteqq}     &$\nsupseteqq    $ &\cmd{\nsupseteqq}\\
+% $\subsetneq    $ &\cmd{\subsetneq}      &$\supsetneq     $ &\cmd{\supsetneq}\\
+% $\varsubsetneq $ &\cmd{\varsubsetneq}   &$\varsupsetneq  $ &\cmd{\varsupsetneq}\\
+% $\subsetneqq   $ &\cmd{\subsetneqq}     &$\supsetneqq    $ &\cmd{\supsetneqq}\\
+% $\varsubsetneqq$ &\cmd{\varsubsetneqq}  &$\varsupsetneqq $ &\cmd{\varsupsetneqq}\\
+% $\nsqsubset    $ &\cmd{\nsqsubset}*     &$\nsqsupset     $ &\cmd{\nsqsupset}*\\
+% $\nsqsubseteq  $ &[\cmd{\nsqsubseteq}]* &$\nsqsupseteq   $ &[\cmd{\nsqsupseteq}]*\\
+% \end{tabular}
+% \caption{Negated relations.  Symbols in square brackets are provided already
+% by the basic \mtpro fonts.  Symbols marked by an asterisk do not exist on the
+% Computer Modern AMS fonts.} \label{tab:negrel}
+% \end{table}
+%
+% \subsection{Arrows}
+%
+% The arrows from table~\ref{tab:arrows} are of type \cmd{\mathrel}.
+% It should be noted that $\rightleftharpoons$
+% (\cmd{\rightleftharpoons}) is already provided by the \mtpro
+% basic fonts.  
+% The arrow $\leadsto$ (\cmd{\leadsto}) appears in the `\LaTeX\ symbols', 
+% and its shape is more common than $\rightsquigarrow$ from the AMS fonts.
+% A number of arrows are also provided in negated form, see table~\ref{tab:negarrows}.
+%
+% \cmd{\rarrowhead}, \cmd{\larrowhead}, and \cmd{\midshaft} (which are not
+% given names in the AMS fonts) can be used to construct longer dashed arrows. 
+% For example
+% \begin{verse}
+% |\mathrel{\midshaft\midshaft\midshaft\rarrowhead}|
+% \end{verse}
+% can be used to produce the arrow in the formula
+% \[
+% A\mathrel{\midshaft\midshaft\midshaft\rarrowhead}B.
+% \]
+%
+%
+% \begin{table}[hbtp]
+% \centering
+% \begin{tabular}{ll@{\quad}ll}
+% $\dashrightarrow   $ &\cmd{\dashrightarrow}, \cmd{\dasharrow}   &$\dashleftarrow      $ &\cmd{\dashleftarrow}\\
+% $\larrowhead       $ &\cmd{\larrowhead}*                        &$\rarrowhead         $ &\cmd{\rarrowhead}*\\
+% $\midshaft         $ &\cmd{\midshaft}*                          \\
+% $\leftleftarrows   $ &\cmd{\leftleftarrows}                     &$\rightrightarrows   $ &\cmd{\rightrightarrows}\\
+% $\leftrightarrows  $ &\cmd{\leftrightarrows}                    &$\rightleftarrows    $ &\cmd{\rightleftarrows}\\
+% $\Lleftarrow       $ &\cmd{\Lleftarrow}                         &$\Rrightarrow        $ &\cmd{\Rrightarrow}\\
+% $\twoheadleftarrow $ &\cmd{\twoheadleftarrow}                   &$\twoheadrightarrow  $ &\cmd{\twoheadrightarrow}\\
+% $\leftarrowtail    $ &\cmd{\leftarrowtail}                      &$\rightarrowtail     $ &\cmd{\rightarrowtail}\\
+% $\looparrowleft    $ &\cmd{\looparrowleft}                      &$\looparrowright     $ &\cmd{\looparrowright}\\
+% $\leftrightharpoons$ &\cmd{\leftrightharpoons}                  &$\rightleftharpoons  $ &[\cmd{\rightleftharpoons}]\\
+% $\curvearrowleft   $ &\cmd{\curvearrowleft}                     &$\curvearrowright    $ &\cmd{\curvearrowright}\\
+% $\circlearrowleft  $ &\cmd{\circlearrowleft}                    &$\circlearrowright   $ &\cmd{\circlearrowright}\\
+% $\Lsh              $ &\cmd{\Lsh}                                &$\Rsh                $ &\cmd{\Rsh}\\
+% $\upuparrows       $ &\cmd{\upuparrows}                         &$\downdownarrows     $ &\cmd{\downdownarrows}\\
+% $\upharpoonright   $ &\cmd{\upharpoonright}, \cmd{\restriction} &$\upharpoonleft      $ &\cmd{\upharpoonleft}\\
+% $\downharpoonright $ &\cmd{\downharpoonright}                   &$\downharpoonleft    $ &\cmd{\downharpoonleft}\\
+% $\rightsquigarrow  $ &\cmd{\rightsquigarrow}                    &$\leadsto            $ &\cmd{\leadsto}\\
+% $\leftrightsquigarrow$ &\cmd{\leftrightsquigarrow}              &$\multimap           $ &\cmd{\multimap}\\
+% \end{tabular}
+% \caption{Arrows.  The symbol \cmd{\rightleftharpoons} is provided already
+% by the basic \mtpro fonts.  Symbols marked by an asterisk do not exist on the
+% Computer Modern fonts.} \label{tab:arrows}
+% \end{table}
+% 
+% \begin{table}[hbtp]
+% \centering
+% \begin{tabular}{ll@{\quad}ll}
+% $\nleftarrow$      &\cmd{\nleftarrow}      & $\nrightarrow$     &\cmd{\nrightarrow}\\
+% $\nLeftarrow$      &\cmd{\nLeftarrow}      & $\nRightarrow$     &\cmd{\nRightarrow}\\
+% $\nleftrightarrow$ &\cmd{\nleftrightarrow} & $\nLeftrightarrow$ &\cmd{\nLeftrightarrow}\\
+% \end{tabular}
+% \caption{Arrows (negated)} \label{tab:negarrows}
+% \end{table}
+% 
+%
+% \subsection{Alternative symbol names}
+% Several symbols are made available both under the names known introduced
+% by the AMS  and under the names known from \LaTeX~2.09 or 
+% from the \Lpack{latexsym} package;  see table~\ref{tab:lasy}.  
+% \begin{table}[hbtp]
+% \centering
+% \begin{tabular}{lll}
+%                      & AMS:                   & \Lpack{latexsym}:\\[.5ex]
+% $\square $           & \cmd{\square}          & \cmd{\Box}    \\
+% $\vartriangleleft $  & \cmd{\vartriangleleft} & \cmd{\lhd}    \\
+% $\trianglelefteq $   & \cmd{\trianglelefteq}  & \cmd{\unlhd}  \\
+% $\vartriangleright$  & \cmd{\vartriangleright}& \cmd{\rhd}    \\
+% $\trianglerighteq$   & \cmd{\trianglerighteq} & \cmd{\unrhd}  \\
+% $\bowtie$            & \cmd{\bowtie}          & \cmd{\Join}   \\
+% \end{tabular}
+% \caption{Alternative names for symbols}\label{tab:lasy}
+% \end{table}
+% 
+%
+% \section{Bold and heavy type}
+% Bold and `heavy' (extra-bold) versions of the new symbols are accessible via
+% the declaration \cmd{\boldmath} and through the commands \cmd{\bm} and \cmd{\hm}
+% of the package \Lpack{bm}.  To recognize the existence of heavy symbols, 
+% the package \Lpack{bm} must be loaded \emph{after} \Lpack{mtpams}.
+%
+% \cmd{\boldmath} and \cmd{\bm} also act on the `blackboard bold' and 
+% 'holey roman bold' fonts and yield the related `dark' font.
+% However, if you have already chosen one of the `dark' fonts for the \cmd{\mathbb}
+% alphabet (option \Lopt{mtpbbd} or \Lopt{mtphrd}), it will not be emboldened further.
+%
+%
+% \StopEventually{\par\vfill\noindent{\small
+% \mathtime is a trademark of Publish or Perish, Inc.
+% Times is a trademark of Linotype~AG and/or its subsidiaries.
+% \par}}
+%
+%
+% \clearpage
+% \section{The implementation of \Lpack{mtpams}}
+%
+% The package is to be used only in conjunction with \Lpack{mtpro}:
+%    \begin{macrocode}
+%<*mtpams>
+\RequirePackage{mtpro}[2004/09/14]
+%    \end{macrocode}
+%
+% We start  with the options.  The macro |\sqsubset| is used as a marker,  
+% since it will be redefined anyway.
+%    \begin{macrocode}
+\DeclareOption{mtpbb}{\let\sqsubset=b}
+\DeclareOption{mtpbbd}{\let\sqsubset=d}
+\DeclareOption{mtphrb}{\let\sqsubset=h}
+\DeclareOption{mtphrd}{\let\sqsubset=k}
+\ExecuteOptions{mtpbb}
+\ProcessOptions
+%    \end{macrocode}
+%
+% Now select the font to be used for \cmd{\sqsubset}, according to the option:
+%    \begin{macrocode}
+\ifx\sqsubset b
+  \DeclareMathAlphabet{\mathbb}   {U}{mtbbb}{m}{n}
+  \SetMathAlphabet{\mathbb}{bold} {U}{mtbbb}{b}{n}
+\fi
+\ifx\sqsubset d
+  \DeclareMathAlphabet{\mathbb}   {U}{mtbbb}{b}{n}
+\fi
+\ifx\sqsubset h
+  \DeclareMathAlphabet{\mathbb}   {U}{mthrb}{m}{n}
+  \SetMathAlphabet{\mathbb}{bold} {U}{mthrb}{b}{n}
+\fi
+\ifx\sqsubset k
+  \DeclareMathAlphabet{\mathbb}   {U}{mthrb}{b}{n}
+\fi
+%    \end{macrocode}
+%
+% We change the definitions of \cmd{\imath} and \cmd{\jmath} so that 
+% \cmd{\mathbb} acts on them:
+%    \begin{macrocode}
+\DeclareMathSymbol{\imath}{\mathalpha}{letters}{"7B}
+\DeclareMathSymbol{\jmath}{\mathalpha}{letters}{"7C}
+%    \end{macrocode}
+% Q: Is this dangerous?
+%
+%  Here come finally the definitions of the AMS symbols.
+%  First, set up a `symbol font' for them;
+%    \begin{macrocode}
+\DeclareSymbolFont{AMSa}{U}{mtsya}{m}{n}
+\SetSymbolFont{AMSa}{bold}{U}{mtsya}{b}{n}
+\ifx\mv@heavy\@undefined\else
+  \SetSymbolFont{AMSa}{heavy}{U}{mtsya}{eb}{n}
+\fi
+%    \end{macrocode}
+%
+% Macros that are declared as warnings in basic \LaTeX\ must be `deleted',
+% before we can re-declare them as math symbols:
+%    \begin{macrocode}
+\global\let\sqsubset\undefined
+\global\let\sqsupset\undefined
+\global\let\mho\undefined
+\global\let\Diamond\undefined
+\global\let\leadsto\undefined
+%    \end{macrocode}
+%
+% Now declare the actual symbols.  Symbols that are already defined
+% in the basic \mtpro fonts are commented out.  We start with those symbols
+% that come `normally' from the AMS `A' font.
+%
+% Three symbols can be used both in text and math mode:
+% we adopt their definitions from \Lpack{amssymb}:
+%    \begin{macrocode}
+\@ifundefined{checkmark}{%
+  \edef\checkmark{\noexpand\mathhexbox{\hexnumber@\symAMSa}58}
+}{}
+\@ifundefined{circledR}{%
+  \edef\circledR{\noexpand\mathhexbox{\hexnumber@\symAMSa}72}
+}{}
+\@ifundefined{maltese}{%
+  \edef\maltese{\noexpand\mathhexbox{\hexnumber@\symAMSa}7A}
+}{}
+%    \end{macrocode}
+% The remaining symbols can be used only in math mode:
+%    \begin{macrocode}
+\DeclareMathDelimiter{\ulcorner}{\mathopen} {AMSa}{"70}{AMSa}{"70}
+\DeclareMathDelimiter{\urcorner}{\mathclose}{AMSa}{"71}{AMSa}{"71}
+\DeclareMathDelimiter{\llcorner}{\mathopen} {AMSa}{"78}{AMSa}{"78}
+\DeclareMathDelimiter{\lrcorner}{\mathclose}{AMSa}{"79}{AMSa}{"79}
+\DeclareMathSymbol{\dashleftarrow}{\mathrel}{AMSa}{219}
+\DeclareMathSymbol{\dashrightarrow}{\mathrel}{AMSa}{220}
+\global\let\dasharrow\dashrightarrow
+\DeclareMathSymbol{\Diamond}       {\mathbin}{AMSa}{"DE}
+\DeclareMathSymbol{\leadsto}       {\mathbin}{AMSa}{"DD}
+\DeclareMathSymbol{\boxdot}       {\mathbin}{AMSa}{"00}
+\DeclareMathSymbol{\boxplus}      {\mathbin}{AMSa}{"01}
+\DeclareMathSymbol{\boxtimes}     {\mathbin}{AMSa}{"02}
+\DeclareMathSymbol{\square}       {\mathord}{AMSa}{"03}
+\DeclareMathSymbol{\blacksquare}  {\mathord}{AMSa}{"04}
+\DeclareMathSymbol{\centerdot}    {\mathbin}{AMSa}{"05}
+\DeclareMathSymbol{\lozenge}      {\mathord}{AMSa}{"06}
+\DeclareMathSymbol{\blacklozenge} {\mathord}{AMSa}{"07}
+\DeclareMathSymbol{\circlearrowright}   {\mathrel}{AMSa}{"08}
+\DeclareMathSymbol{\circlearrowleft}    {\mathrel}{AMSa}{"09}
+%\DeclareMathSymbol{\rightleftharpoons}{\mathrel}{AMSa}{"0A}
+\DeclareMathSymbol{\leftrightharpoons}  {\mathrel}{AMSa}{"0B}
+\DeclareMathSymbol{\boxminus}     {\mathbin}{AMSa}{"0C}
+\DeclareMathSymbol{\Vdash}        {\mathrel}{AMSa}{"0D}
+\DeclareMathSymbol{\Vvdash}       {\mathrel}{AMSa}{"0E}
+\DeclareMathSymbol{\vDash}        {\mathrel}{AMSa}{"0F}
+\DeclareMathSymbol{\twoheadrightarrow}  {\mathrel}{AMSa}{"10}
+\DeclareMathSymbol{\twoheadleftarrow}   {\mathrel}{AMSa}{"11}
+\DeclareMathSymbol{\leftleftarrows}     {\mathrel}{AMSa}{"12}
+\DeclareMathSymbol{\rightrightarrows}   {\mathrel}{AMSa}{"13}
+\DeclareMathSymbol{\upuparrows}         {\mathrel}{AMSa}{"14}
+\DeclareMathSymbol{\downdownarrows} {\mathrel}{AMSa}{"15}
+\DeclareMathSymbol{\upharpoonright} {\mathrel}{AMSa}{"16}
+\global\let\restriction\upharpoonright
+\DeclareMathSymbol{\downharpoonright}   {\mathrel}{AMSa}{"17}
+\DeclareMathSymbol{\upharpoonleft}  {\mathrel}{AMSa}{"18}
+\DeclareMathSymbol{\downharpoonleft}{\mathrel}{AMSa}{"19}
+\DeclareMathSymbol{\rightarrowtail} {\mathrel}{AMSa}{"1A}
+\DeclareMathSymbol{\leftarrowtail}  {\mathrel}{AMSa}{"1B}
+\DeclareMathSymbol{\leftrightarrows}{\mathrel}{AMSa}{"1C}
+\DeclareMathSymbol{\rightleftarrows}{\mathrel}{AMSa}{"1D}
+\DeclareMathSymbol{\Lsh}            {\mathrel}{AMSa}{"1E}
+\DeclareMathSymbol{\Rsh}            {\mathrel}{AMSa}{"1F}
+\DeclareMathSymbol{\rightsquigarrow}  {\mathrel}{AMSa}{"20}
+\DeclareMathSymbol{\leftrightsquigarrow}{\mathrel}{AMSa}{"21}
+\DeclareMathSymbol{\looparrowleft}  {\mathrel}{AMSa}{"22}
+\DeclareMathSymbol{\looparrowright} {\mathrel}{AMSa}{"23}
+\DeclareMathSymbol{\circeq}       {\mathrel}{AMSa}{"24}
+\DeclareMathSymbol{\succsim}      {\mathrel}{AMSa}{"25}
+\DeclareMathSymbol{\gtrsim}       {\mathrel}{AMSa}{"26}
+\DeclareMathSymbol{\gtrapprox}    {\mathrel}{AMSa}{"27}
+\DeclareMathSymbol{\multimap}     {\mathrel}{AMSa}{"28}
+\DeclareMathSymbol{\therefore}    {\mathrel}{AMSa}{"29}
+\DeclareMathSymbol{\because}      {\mathrel}{AMSa}{"2A}
+\DeclareMathSymbol{\doteqdot}     {\mathrel}{AMSa}{"2B}
+\global\let\Doteq\doteqdot
+\DeclareMathSymbol{\triangleq}    {\mathrel}{AMSa}{"2C}
+\DeclareMathSymbol{\precsim}      {\mathrel}{AMSa}{"2D}
+\DeclareMathSymbol{\lesssim}      {\mathrel}{AMSa}{"2E}
+\DeclareMathSymbol{\lessapprox}   {\mathrel}{AMSa}{"2F}
+\DeclareMathSymbol{\eqslantless}  {\mathrel}{AMSa}{"30}
+\DeclareMathSymbol{\eqslantgtr}   {\mathrel}{AMSa}{"31}
+\DeclareMathSymbol{\curlyeqprec}  {\mathrel}{AMSa}{"32}
+\DeclareMathSymbol{\curlyeqsucc}  {\mathrel}{AMSa}{"33}
+\DeclareMathSymbol{\preccurlyeq}  {\mathrel}{AMSa}{"34}
+\DeclareMathSymbol{\leqq}         {\mathrel}{AMSa}{"35}
+\DeclareMathSymbol{\leqslant}     {\mathrel}{AMSa}{"36}
+\DeclareMathSymbol{\lessgtr}      {\mathrel}{AMSa}{"37}
+\DeclareMathSymbol{\backprime}    {\mathord}{AMSa}{"38}
+\DeclareMathSymbol{\risingdotseq} {\mathrel}{AMSa}{"3A}
+\DeclareMathSymbol{\fallingdotseq}{\mathrel}{AMSa}{"3B}
+\DeclareMathSymbol{\succcurlyeq}  {\mathrel}{AMSa}{"3C}
+\DeclareMathSymbol{\geqq}         {\mathrel}{AMSa}{"3D}
+\DeclareMathSymbol{\geqslant}     {\mathrel}{AMSa}{"3E}
+\DeclareMathSymbol{\gtrless}      {\mathrel}{AMSa}{"3F}
+\DeclareMathSymbol{\sqsubset}    {\mathrel}{AMSa}{"40}
+\DeclareMathSymbol{\sqsupset}    {\mathrel}{AMSa}{"41}
+\DeclareMathSymbol{\vartriangleright}{\mathrel}{AMSa}{"42}
+\DeclareMathSymbol{\vartriangleleft} {\mathrel}{AMSa}{"43}
+\DeclareMathSymbol{\trianglerighteq} {\mathrel}{AMSa}{"44}
+\DeclareMathSymbol{\trianglelefteq}  {\mathrel}{AMSa}{"45}
+\DeclareMathSymbol{\bigstar}    {\mathord}{AMSa}{"46}
+\DeclareMathSymbol{\between}    {\mathrel}{AMSa}{"47}
+\DeclareMathSymbol{\blacktriangledown}  {\mathord}{AMSa}{"48}
+\DeclareMathSymbol{\blacktriangleright} {\mathrel}{AMSa}{"49}
+\DeclareMathSymbol{\blacktriangleleft}  {\mathrel}{AMSa}{"4A}
+\DeclareMathSymbol{\vartriangle}        {\mathrel}{AMSa}{"4D}
+\DeclareMathSymbol{\blacktriangle}      {\mathord}{AMSa}{"4E}
+\DeclareMathSymbol{\triangledown}       {\mathord}{AMSa}{"4F}
+\DeclareMathSymbol{\eqcirc}       {\mathrel}{AMSa}{"50}
+\DeclareMathSymbol{\lesseqgtr}    {\mathrel}{AMSa}{"51}
+\DeclareMathSymbol{\gtreqless}    {\mathrel}{AMSa}{"52}
+\DeclareMathSymbol{\lesseqqgtr}   {\mathrel}{AMSa}{"53}
+\DeclareMathSymbol{\gtreqqless}   {\mathrel}{AMSa}{"54}
+\DeclareMathSymbol{\Rrightarrow}  {\mathrel}{AMSa}{"56}
+\DeclareMathSymbol{\Lleftarrow}   {\mathrel}{AMSa}{"57}
+\DeclareMathSymbol{\veebar}       {\mathbin}{AMSa}{"59}
+\DeclareMathSymbol{\barwedge}     {\mathbin}{AMSa}{"5A}
+\DeclareMathSymbol{\doublebarwedge} {\mathbin}{AMSa}{"5B}
+%\DeclareMathSymbol{\angle}        {\mathord}{AMSa}{"5C}
+\DeclareMathSymbol{\measuredangle}  {\mathord}{AMSa}{"5D}
+\DeclareMathSymbol{\sphericalangle} {\mathord}{AMSa}{"5E}
+\DeclareMathSymbol{\varpropto}    {\mathrel}{AMSa}{"5F}
+\DeclareMathSymbol{\smallsmile}   {\mathrel}{AMSa}{"60}
+\DeclareMathSymbol{\smallfrown}   {\mathrel}{AMSa}{"61}
+\DeclareMathSymbol{\Subset}       {\mathrel}{AMSa}{"62}
+\DeclareMathSymbol{\Supset}       {\mathrel}{AMSa}{"63}
+\DeclareMathSymbol{\Cup}          {\mathbin}{AMSa}{"64}
+\global\let\doublecup\Cup
+\DeclareMathSymbol{\Cap}          {\mathbin}{AMSa}{"65}
+\global\let\doublecap\Cap
+\DeclareMathSymbol{\curlywedge}   {\mathbin}{AMSa}{"66}
+\DeclareMathSymbol{\curlyvee}     {\mathbin}{AMSa}{"67}
+\DeclareMathSymbol{\leftthreetimes} {\mathbin}{AMSa}{"68}
+\DeclareMathSymbol{\rightthreetimes}{\mathbin}{AMSa}{"69}
+\DeclareMathSymbol{\subseteqq}    {\mathrel}{AMSa}{"6A}
+\DeclareMathSymbol{\supseteqq}    {\mathrel}{AMSa}{"6B}
+\DeclareMathSymbol{\bumpeq}       {\mathrel}{AMSa}{"6C}
+\DeclareMathSymbol{\Bumpeq}       {\mathrel}{AMSa}{"6D}
+\DeclareMathSymbol{\lll}          {\mathrel}{AMSa}{"6E}
+\global\let\llless\lll
+\DeclareMathSymbol{\ggg}          {\mathrel}{AMSa}{"6F}
+\global\let\gggtr\ggg
+\DeclareMathSymbol{\circledS}     {\mathord}{AMSa}{"73}
+\DeclareMathSymbol{\pitchfork}    {\mathrel}{AMSa}{"74}
+\DeclareMathSymbol{\dotplus}      {\mathbin}{AMSa}{"75}
+\DeclareMathSymbol{\backsim}      {\mathrel}{AMSa}{"76}
+\DeclareMathSymbol{\backsimeq}    {\mathrel}{AMSa}{"77}
+\DeclareMathSymbol{\complement}   {\mathord}{AMSa}{"7B}
+\DeclareMathSymbol{\intercal}     {\mathbin}{AMSa}{"7C}
+\DeclareMathSymbol{\circledcirc}  {\mathbin}{AMSa}{"7D}
+\DeclareMathSymbol{\circledast}   {\mathbin}{AMSa}{"7E}
+\DeclareMathSymbol{\circleddash}  {\mathbin}{AMSa}{"7F}
+%    \end{macrocode}
+% Three symbols are not available on the CM AMS fonts; 
+% they can be used to build longer dashed arrows as explained above.
+%    \begin{macrocode}
+\DeclareMathSymbol{\midshaft}    {\mathord}{AMSa}{"39}
+\DeclareMathSymbol{\rarrowhead}  {\mathord}{AMSa}{"4B}
+\DeclareMathSymbol{\larrowhead}  {\mathord}{AMSa}{"4C}
+%    \end{macrocode}
+% The following symbols come normally from the `B' font.
+%    \begin{macrocode}
+\DeclareMathSymbol{\lvertneqq}    {\mathrel}{AMSa}{"80}
+\DeclareMathSymbol{\gvertneqq}    {\mathrel}{AMSa}{"81}
+%\DeclareMathSymbol{\nleq}         {\mathrel}{AMSa}{"82}
+%\DeclareMathSymbol{\ngeq}         {\mathrel}{AMSa}{"83}
+%\DeclareMathSymbol{\nless}        {\mathrel}{AMSa}{"84}
+%\DeclareMathSymbol{\ngtr}         {\mathrel}{AMSa}{"85}
+%\DeclareMathSymbol{\nprec}        {\mathrel}{AMSa}{"86}
+%\DeclareMathSymbol{\nsucc}        {\mathrel}{AMSa}{"87}
+\DeclareMathSymbol{\lneqq}        {\mathrel}{AMSa}{"88}
+\DeclareMathSymbol{\gneqq}        {\mathrel}{AMSa}{"89}
+\DeclareMathSymbol{\nleqslant}    {\mathrel}{AMSa}{"8A}
+\DeclareMathSymbol{\ngeqslant}    {\mathrel}{AMSa}{"8B}
+\DeclareMathSymbol{\lneq}         {\mathrel}{AMSa}{"8C}
+\DeclareMathSymbol{\gneq}         {\mathrel}{AMSa}{"8D}
+\DeclareMathSymbol{\npreceq}      {\mathrel}{AMSa}{"8E}
+\DeclareMathSymbol{\nsucceq}      {\mathrel}{AMSa}{"8F}
+\DeclareMathSymbol{\precnsim}     {\mathrel}{AMSa}{"90}
+\DeclareMathSymbol{\succnsim}     {\mathrel}{AMSa}{"91}
+\DeclareMathSymbol{\lnsim}        {\mathrel}{AMSa}{"92}
+\DeclareMathSymbol{\gnsim}        {\mathrel}{AMSa}{"93}
+\DeclareMathSymbol{\nleqq}        {\mathrel}{AMSa}{"94}
+\DeclareMathSymbol{\ngeqq}        {\mathrel}{AMSa}{"95}
+\DeclareMathSymbol{\precneqq}     {\mathrel}{AMSa}{"96}
+\DeclareMathSymbol{\succneqq}     {\mathrel}{AMSa}{"97}
+\DeclareMathSymbol{\precnapprox}  {\mathrel}{AMSa}{"98}
+\DeclareMathSymbol{\succnapprox}  {\mathrel}{AMSa}{"99}
+\DeclareMathSymbol{\lnapprox}     {\mathrel}{AMSa}{"9A}
+\DeclareMathSymbol{\gnapprox}     {\mathrel}{AMSa}{"9B}
+\DeclareMathSymbol{\nsim}         {\mathrel}{AMSa}{"9C}
+%\DeclareMathSymbol{\ncong}        {\mathrel}{AMSa}{"9D}
+\DeclareMathSymbol{\diagup}       {\mathord}{AMSa}{"9E}
+\DeclareMathSymbol{\diagdown}     {\mathord}{AMSa}{"9F}
+\DeclareMathSymbol{\varsubsetneq}   {\mathrel}{AMSa}{160}
+\DeclareMathSymbol{\varsupsetneq}   {\mathrel}{AMSa}{161}
+\DeclareMathSymbol{\nsubseteqq}     {\mathrel}{AMSa}{162}
+\DeclareMathSymbol{\nsupseteqq}     {\mathrel}{AMSa}{163}
+\DeclareMathSymbol{\subsetneqq}     {\mathrel}{AMSa}{164}
+\DeclareMathSymbol{\supsetneqq}     {\mathrel}{AMSa}{165}
+\DeclareMathSymbol{\varsubsetneqq}  {\mathrel}{AMSa}{166}
+\DeclareMathSymbol{\varsupsetneqq}  {\mathrel}{AMSa}{167}
+\DeclareMathSymbol{\subsetneq}      {\mathrel}{AMSa}{168}
+\DeclareMathSymbol{\supsetneq}      {\mathrel}{AMSa}{169}
+\DeclareMathSymbol{\nsubseteq}      {\mathrel}{AMSa}{170}
+\DeclareMathSymbol{\nsupseteq}      {\mathrel}{AMSa}{171}
+\DeclareMathSymbol{\nparallel}      {\mathrel}{AMSa}{172}
+\DeclareMathSymbol{\nmid}           {\mathrel}{AMSa}{173}
+\DeclareMathSymbol{\nshortmid}      {\mathrel}{AMSa}{174}
+\DeclareMathSymbol{\nshortparallel} {\mathrel}{AMSa}{175}
+\DeclareMathSymbol{\nvdash}         {\mathrel}{AMSa}{176}
+\DeclareMathSymbol{\nVdash}         {\mathrel}{AMSa}{177}
+\DeclareMathSymbol{\nvDash}         {\mathrel}{AMSa}{178}
+\DeclareMathSymbol{\nVDash}         {\mathrel}{AMSa}{179}
+\DeclareMathSymbol{\ntrianglerighteq}{\mathrel}{AMSa}{180}
+\DeclareMathSymbol{\ntrianglelefteq}{\mathrel}{AMSa}{181}
+\DeclareMathSymbol{\ntriangleleft}  {\mathrel}{AMSa}{182}
+\DeclareMathSymbol{\ntriangleright} {\mathrel}{AMSa}{183}
+\DeclareMathSymbol{\nleftarrow}     {\mathrel}{AMSa}{184}
+\DeclareMathSymbol{\nrightarrow}    {\mathrel}{AMSa}{185}
+\DeclareMathSymbol{\nLeftarrow}     {\mathrel}{AMSa}{186}
+\DeclareMathSymbol{\nRightarrow}    {\mathrel}{AMSa}{187}
+\DeclareMathSymbol{\nLeftrightarrow}{\mathrel}{AMSa}{188}
+\DeclareMathSymbol{\nleftrightarrow}{\mathrel}{AMSa}{189}
+\DeclareMathSymbol{\divideontimes}  {\mathbin}{AMSa}{190}
+\DeclareMathSymbol{\varnothing}     {\mathord}{AMSa}{191}
+\DeclareMathSymbol{\nexists}        {\mathord}{AMSa}{192}
+\DeclareMathSymbol{\Finv}           {\mathord}{AMSa}{193}
+\DeclareMathSymbol{\Game}           {\mathord}{AMSa}{194}
+\DeclareMathSymbol{\mho}            {\mathord}{AMSa}{195}
+\DeclareMathSymbol{\eth}            {\mathord}{AMSa}{196}
+\DeclareMathSymbol{\eqsim}          {\mathrel}{AMSa}{197}
+\DeclareMathSymbol{\beth}           {\mathord}{AMSa}{198}
+\DeclareMathSymbol{\gimel}          {\mathord}{AMSa}{199}
+\DeclareMathSymbol{\daleth}         {\mathord}{AMSa}{200}
+\DeclareMathSymbol{\lessdot}        {\mathbin}{AMSa}{201}
+\DeclareMathSymbol{\gtrdot}         {\mathbin}{AMSa}{202}
+\DeclareMathSymbol{\ltimes}         {\mathbin}{AMSa}{203}
+\DeclareMathSymbol{\rtimes}         {\mathbin}{AMSa}{204}
+\DeclareMathSymbol{\shortmid}       {\mathrel}{AMSa}{205}
+\DeclareMathSymbol{\shortparallel}  {\mathrel}{AMSa}{206}
+\let\smallsetminus=\setdif
+\DeclareMathSymbol{\thicksim}       {\mathrel}{AMSa}{207}
+\DeclareMathSymbol{\thickapprox}    {\mathrel}{AMSa}{208}
+\DeclareMathSymbol{\approxeq}       {\mathrel}{AMSa}{209}
+\DeclareMathSymbol{\succapprox}     {\mathrel}{AMSa}{210}
+\DeclareMathSymbol{\precapprox}     {\mathrel}{AMSa}{211}
+\DeclareMathSymbol{\curvearrowleft} {\mathrel}{AMSa}{212}
+\DeclareMathSymbol{\curvearrowright}{\mathrel}{AMSa}{213}
+%\DeclareMathSymbol{\digamma}        {\mathord}{AMSa}{"7A}
+%\DeclareMathSymbol{\varkappa}       {\mathord}{AMSa}{"7B}
+\newcommand{\Bbbk}{\mathbb{k}}
+%\DeclareMathSymbol{\hslash}         {\mathord}{AMSa}{"7D}
+%\DeclareMathSymbol{\hbar}           {\mathord}{AMSa}{"7E}
+\DeclareMathSymbol{\backepsilon}    {\mathrel}{AMSa}{214}
+\DeclareMathSymbol{\nsqsubset}      {\mathrel}{AMSa}{215}
+\DeclareMathSymbol{\nsqsupset}      {\mathrel}{AMSa}{216}
+%\DeclareMathSymbol{\nsqsubseteq}   {\mathrel}{AMSa}{217}
+%\DeclareMathSymbol{\nsqsupseteq}   {\mathrel}{AMSa}{218}
+%    \end{macrocode}
+% To make \Lpack{mtpams} fully compatible with \Lpack{amssymb}, certain symbols
+% must be given alternative names (which are known from \LaTeX~2.09 or from
+% the \Lpack{latexsym} package, respectively).
+%    \begin{macrocode}
+\let\Box\square
+\let\lhd\vartriangleleft
+\let\rhd\vartriangleright
+\let\unrhd\trianglerighteq
+\let\unlhd\trianglelefteq
+\let\Join\bowtie
+%</mtpams>
+%    \end{macrocode}
+%
+% \section{The font definition files}
+% \subsection{\mathtime Blackboard Bold}
+%    \begin{macrocode}
+%<*umtbbb>
+\DeclareFontFamily{U}{mtbbb}{}%
+\DeclareFontShape{U}{mtbbb}{m}{n}{<-7>mtbbbf<7-9>mtbbbs<9->mtbbbt}{}%
+\DeclareFontShape{U}{mtbbb}{b}{n}{<-7>mtbbbdf<7-9>mtbbbds<9->mtbbbdt}{}%
+%</umtbbb>
+%    \end{macrocode}
+%
+% \subsection{\mathtime Holey Roman Bold}
+%    \begin{macrocode}
+%<*umthrb>
+\DeclareFontFamily{U}{mthrb}{}%
+\DeclareFontShape{U}{mthrb}{m}{n}{<-7>mthrbf<7-9>mthrbs<9->mthrbt}{}%
+\DeclareFontShape{U}{mthrb}{b}{n}{<-7>mthrbdf<7-9>mthrbds<9->mthrbdt}{}%
+%</umthrb>
+%    \end{macrocode}
+%
+% \subsection{AMS symbols}
+%    \begin{macrocode}
+%<*umtsya>
+\DeclareFontFamily{U}{mtsya}{}%
+\DeclareFontShape{U}{mtsya}{m}{n}{<-7>mtsyaf<7-9>mtsyas<9->mtsyat}{}%
+\DeclareFontShape{U}{mtsya}{b}{n}{<-7>mtbsyaf<7-9>mtbsyas<9->mtbsyat}{}%
+\DeclareFontShape{U}{mtsya}{eb}{n}{<-7>mthsyaf<7-9>mthsyas<9->mthsyat}{}%
+%</umtsya>
+%    \end{macrocode}
+%
+% 
+% \Finale

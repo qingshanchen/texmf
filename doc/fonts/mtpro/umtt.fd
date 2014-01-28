@@ -1,0 +1,19 @@
+%%
+%% This is file `umtt.fd',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% mtpro.dtx  (with options: `Umtt')
+%% 
+%% Copyright 1996 1997 Frank Mittelbach and David Carlisle.
+%% Copyright 2001--2004 Frank Mittelbach, David Carlisle and Walter Schmidt
+\ProvidesFile{umtt.fd}%
+ [2004/09/14 v4.0%
+ MathTimePro Bold Encoding (MJ)%
+]
+\DeclareFontFamily{U}{mtt}{\skewchar\font45}
+\DeclareFontShape{U}{mtt}{b}{n}{<-7> mtmbf <7-9> mtmbs <9-> mtmbt}{}% (MJ)
+\endinput
+%%
+%% End of file `umtt.fd'.

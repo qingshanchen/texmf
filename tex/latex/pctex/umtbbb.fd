@@ -1,0 +1,19 @@
+%%
+%% This is file `umtbbb.fd',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% mtpams.dtx  (with options: `umtbbb')
+%% 
+%% Copyright 2004, 2005 Walter Schmidt
+\ProvidesFile{umtbbb.fd}%
+ [2005/01/31 v4.1 %
+ MathTimePro Blackboard Bold (WaS)%
+]
+\DeclareFontFamily{U}{mtbbb}{}%
+\DeclareFontShape{U}{mtbbb}{m}{n}{<-7>mtbbbf<7-9>mtbbbs<9->mtbbbt}{}%
+\DeclareFontShape{U}{mtbbb}{b}{n}{<-7>mtbbbdf<7-9>mtbbbds<9->mtbbbdt}{}%
+\endinput
+%%
+%% End of file `umtbbb.fd'.

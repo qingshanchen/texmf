@@ -1,0 +1,116 @@
+===========================================================
+
+               Using Adobe Minion with LaTeX
+
+============================================================
+                                                  2003-12-01
+                                              Walter Schmidt
+                                       <w.a.schmidt@gmx.net>
+
+
+Within LaTeX, Adobe Minion with SmallCaps and true
+oldstyle figures is mapped to the font families "pmnx" and
+"pmnj".  "pmnx" comes with regular digits, whereas "pmnj"
+has oldstyle digits as the default ones.  
+
+  \renewcommand{\rmdefault}{pmnj}
+
+makes LaTeX use Adobe Minion with oldstyle digits and true
+smallcaps as the default roman font family, whereas
+
+  \renewcommand{\rmdefault}{pmnx}
+  
+selects Minion with normal figures.
+
+|  Notice that Minion is supported with T1 (european) and
+|  TS1 (textcompanion) encoding only, so you should issue 
+|  the commands
+|
+|    \usepackage[T1]{fontenc}
+|    \usepackage{textcomp}
+|
+|  in the document preamble.  The obsolete OT1 encoding,
+|  which is still the default with LaTeX, is _not_
+|  supported.
+
+
+Minion Ornaments
+----------------
+The oranaments are mapped to the font family "pmn" and the
+encoding "U", so they can be used through the command
+\Pisymbol from the package pifont.sty.  The symbols are
+accessaible at positions 97...119 of the font.  For
+instance,
+
+  \usepackage{pifont}
+  ...
+  \Pisymbol{pmn}{111}
+
+gives the Aldus leaf.
+
+
+Kerning data
+------------
+The kerning tables supplid by Adobe are suitable for the
+English language only.  They do not cover accented letters,
+and they do not take care of typical letter pairs in
+non-English languages.  With the present set of TeX metrics
+I have -- to my best knowledge -- enhanced the kerning
+tables to fix the worst deficiencies for the German 
+language.  
+
+
+Suitable math fonts
+-------------------
+As to math typesetting, there are two alternatives:
+
+(1)
+Use the free Euler fonts through the package eulervm.sty:
+
+  \renewcommand{\rmdefault}{pmnx}
+  \usepackage[small]{eulervm}
+
+These fonts exhibit excellent typographical quality, 
+but their appearance is somewhat uncommon.  
+The Euler fonts, the package eulervm.sty and the related VFs
+are part of almost any decent LaTeX distribution.
+
+(2)
+Use the commercial MathTime and MathTime Plus fonts through
+the package mathpmnt and the related virtual fonts.  The
+packages takes care of redefining both \rmdefault and the
+math fonts:
+
+  \usepackage{mathpmnt}
+  
+This package and the virtual fonts are distributed in
+conjunction with the support files for the Minion text
+fonts.  See the file texmf/doc/latex/mathpmnt/mathpmnt.pdf
+for a detailed documentation
+
+
+
+NFSS classification of the text fonts
+-------------------------------------
+
+  encoding(s)  family  series  shape(s) 
+  ----------------------------------------------------------
+  T1, TS1      pmnx    m       n, sc, it, scit
+  T1, TS1      pmnx    sb      n, sc, it, scit
+  T1, TS1      pmnx    b       n, sc, it
+  T1, TS1      pmnj    m       n, sc, it, scit
+  T1, TS1      pmnj    sb      n, sc, it, scit
+  T1, TS1      pmnj    b       n, sc, it
+  U            pmn     m       n          (Minion Ornaments)
+
+Notice that the series m and sb comprise real smallcaps, 
+whereas the bold smallcaps are "faked".
+
+Only those text companion (TS1) symbols, that are also part
+of the ISO-Adobe character set, are available, plus the Euro
+symbol (which is actually faked).
+
+
+
+== finis
+

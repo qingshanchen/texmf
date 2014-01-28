@@ -1,0 +1,23 @@
+\def\th@plain{%
+%%  \let\thm@indent\noindent % no indent
+   \thm@headfont{\scshape}% heading font is small caps
+   \thm@notefont{}% same as heading font
+%%  \thm@headpunct{.}% add period after heading
+%%  \let\thm@swap\@gobble
+%%  \thm@preskip\topsep
+%%  \thm@postskip\thm@preskip
+  \slshape % body font
+}
+\def\th@definition{%
+  \thm@headfont{\scshape}% heading font is small caps
+  \thm@notefont{}% same as heading font
+  \normalfont % body font
+}
+\def\th@remark{%
+  \thm@headfont{\slshape}% heading font is slanted
+  \thm@notefont{}% same as heading font
+  \normalfont % body font
+  \thm@preskip\topsep
+  \divide\thm@preskip\tw@
+  \thm@postskip\thm@preskip
+}

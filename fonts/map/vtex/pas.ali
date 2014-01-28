@@ -1,0 +1,11 @@
+%1 = $PFM$
+%2 = $TEXMF$fonts/type1/adobe/aldus/
+
+@Aldus-Italic = pasri8a %2,1
+@Aldus-Italic-8r = pasri8r %2,1,r="8r",b="pasri8a"
+@Aldus-ItalicOsF = pasrij8a %2,1
+@Aldus-ItalicOsF-8r = pasrij8r %2,1,r="8r",b="pasrij8a"
+@Aldus-Roman = pasr8a %2,1
+@Aldus-Roman-8r = pasr8r %2,1,r="8r",b="pasr8a"
+@Aldus-RomanSC = pasrc8a %2,1
+@Aldus-RomanSC-8r = pasrc8r %2,1,r="8r",b="pasrc8a"

@@ -1,0 +1,107 @@
+StartFontMetrics 2.0
+FontName MTEXG
+FullName MTEXG
+FamilyName MathTime Professional
+Weight Normal
+Notice Copyright (C) 2000 Publish or Perish.
+ItalicAngle 0
+IsFixedPitch false
+UnderlinePosition -100
+UnderlineThickness 50
+Version 1.000
+EncodingScheme FontSpecific
+FontBBox 0 -3600 3662 155
+CapHeight 129
+XHeight 500
+Descender -1794
+Ascender 127
+StartCharMetrics 87
+C 32 ; WX 500 ; N space ; B 0 0 0 0 ; 
+C 33 ; WX 380 ; N exclam ; B 40 -2400 341 0 ; 
+C 34 ; WX 426 ; N quotedbl ; B 44 -2700 381 0 ; 
+C 35 ; WX 426 ; N numbersign ; B 45 -2700 382 0 ; 
+C 36 ; WX 471 ; N dollar ; B 48 -3000 421 0 ; 
+C 37 ; WX 471 ; N percent ; B 50 -3000 423 0 ; 
+C 38 ; WX 516 ; N ampersand ; B 53 -3300 461 0 ; 
+C 39 ; WX 516 ; N quotesingle ; B 55 -3300 463 0 ; 
+C 40 ; WX 561 ; N parenleft ; B 58 -3600 501 0 ; 
+C 41 ; WX 561 ; N parenright ; B 60 -3600 503 0 ; 
+C 49 ; WX 2002 ; N one ; B 2 72 2001 129 ; 
+C 50 ; WX 2168 ; N two ; B 2 72 2167 130 ; 
+C 51 ; WX 2334 ; N three ; B 2 72 2333 132 ; 
+C 52 ; WX 2500 ; N four ; B 2 72 2499 133 ; 
+C 53 ; WX 2666 ; N five ; B 2 72 2665 135 ; 
+C 54 ; WX 2832 ; N six ; B 2 72 2831 136 ; 
+C 55 ; WX 2998 ; N seven ; B 2 72 2997 138 ; 
+C 56 ; WX 3164 ; N eight ; B 2 72 3163 139 ; 
+C 57 ; WX 3330 ; N nine ; B 2 72 3329 141 ; 
+C 58 ; WX 3496 ; N colon ; B 2 72 3495 142 ; 
+C 59 ; WX 3662 ; N semicolon ; B 2 72 3661 144 ; 
+C 65 ; WX 2002 ; N A ; B 0 72 2003 141 ; 
+C 66 ; WX 2168 ; N B ; B 0 71 2168 142 ; 
+C 67 ; WX 2334 ; N C ; B 0 71 2334 144 ; 
+C 68 ; WX 2500 ; N D ; B 0 71 2500 145 ; 
+C 69 ; WX 2666 ; N E ; B 0 70 2666 147 ; 
+C 70 ; WX 2832 ; N F ; B 0 69 2832 148 ; 
+C 71 ; WX 2998 ; N G ; B 0 69 2998 149 ; 
+C 72 ; WX 3164 ; N H ; B 0 69 3164 150 ; 
+C 73 ; WX 3330 ; N I ; B 0 70 3330 153 ; 
+C 74 ; WX 3496 ; N J ; B 0 69 3496 154 ; 
+C 75 ; WX 3662 ; N K ; B 0 69 3662 155 ; 
+C 81 ; WX 2002 ; N Q ; B 2 72 2001 129 ; 
+C 82 ; WX 2168 ; N R ; B 2 72 2167 130 ; 
+C 83 ; WX 2334 ; N S ; B 2 72 2333 132 ; 
+C 84 ; WX 2500 ; N T ; B 2 72 2499 133 ; 
+C 85 ; WX 2666 ; N U ; B 2 72 2665 135 ; 
+C 86 ; WX 2832 ; N V ; B 2 72 2831 136 ; 
+C 87 ; WX 2998 ; N W ; B 2 72 2997 138 ; 
+C 88 ; WX 3164 ; N X ; B 2 72 3163 139 ; 
+C 89 ; WX 3330 ; N Y ; B 2 72 3329 141 ; 
+C 90 ; WX 3496 ; N Z ; B 2 72 3495 142 ; 
+C 91 ; WX 3662 ; N bracketleft ; B 2 72 3661 144 ; 
+C 98 ; WX 1836 ; N b ; B 2 72 1835 127 ; 
+C 101 ; WX 1836 ; N e ; B 0 75 1838 126 ; 
+C 112 ; WX 487 ; N p ; B 97 -1794 490 6 ; 
+C 113 ; WX 568 ; N q ; B 116 -2094 572 6 ; 
+C 114 ; WX 649 ; N r ; B 135 -2394 653 6 ; 
+C 115 ; WX 731 ; N s ; B 154 -2694 735 6 ; 
+C 116 ; WX 812 ; N t ; B 173 -2994 817 6 ; 
+C 117 ; WX 893 ; N u ; B 192 -3294 898 6 ; 
+C 118 ; WX 974 ; N v ; B 211 -3594 980 6 ; 
+C 122 ; WX 1836 ; N z ; B 2 72 1835 127 ; 
+C 160 ; WX 500 ; N nbspace ; B 0 0 0 0 ; 
+C 161 ; WX 209 ; N exclamdown ; B 71 -1796 206 -3 ; 
+C 162 ; WX 209 ; N cent ; B 3 -1797 138 -3 ; 
+C 163 ; WX 243 ; N sterling ; B 83 -2096 240 -3 ; 
+C 164 ; WX 243 ; N currency ; B 3 -2097 160 -3 ; 
+C 165 ; WX 278 ; N yen ; B 95 -2396 275 -3 ; 
+C 166 ; WX 278 ; N brokenbar ; B 3 -2397 183 -3 ; 
+C 167 ; WX 312 ; N section ; B 107 -2696 309 -3 ; 
+C 168 ; WX 312 ; N dieresis ; B 3 -2697 205 -3 ; 
+C 169 ; WX 346 ; N copyright ; B 118 -2996 343 -3 ; 
+C 170 ; WX 346 ; N ordfeminine ; B 3 -2997 228 -3 ; 
+C 173 ; WX 290 ; N minus ; B 29 -1800 260 0 ; 
+C 174 ; WX 290 ; N registered ; B 30 -1800 261 0 ; 
+C 175 ; WX 381 ; N macron ; B 130 -3296 378 -3 ; 
+C 176 ; WX 381 ; N degree ; B 3 -3297 251 -3 ; 
+C 177 ; WX 700 ; N plusminus ; B 7 -1794 693 6 ; 
+C 178 ; WX 700 ; N twosuperior ; B 7 -1794 693 6 ; 
+C 179 ; WX 811 ; N threesuperior ; B 7 -2094 804 6 ; 
+C 180 ; WX 811 ; N acute ; B 7 -2094 804 6 ; 
+C 181 ; WX 922 ; N mu ; B 7 -2394 915 6 ; 
+C 182 ; WX 922 ; N paragraph ; B 7 -2394 915 6 ; 
+C 183 ; WX 1033 ; N periodcentered ; B 7 -2694 1026 6 ; 
+C 184 ; WX 1033 ; N cedilla ; B 7 -2694 1026 6 ; 
+C 185 ; WX 1144 ; N onesuperior ; B 7 -2994 1137 6 ; 
+C 186 ; WX 1144 ; N ordmasculine ; B 7 -2994 1137 6 ; 
+C 187 ; WX 1255 ; N guillemotright ; B 7 -3294 1248 6 ; 
+C 188 ; WX 1255 ; N onequarter ; B 7 -3294 1248 6 ; 
+C 189 ; WX 1366 ; N onehalf ; B 7 -3594 1359 6 ; 
+C 190 ; WX 1366 ; N threequarters ; B 7 -3594 1359 6 ; 
+C 191 ; WX 415 ; N questiondown ; B 142 -3596 412 -3 ; 
+C 192 ; WX 415 ; N Agrave ; B 3 -3600 273 -3 ; 
+C 193 ; WX 335 ; N Aacute ; B 34 -2100 300 0 ; 
+C 194 ; WX 335 ; N Acircumflex ; B 35 -2100 301 0 ; 
+C 195 ; WX 380 ; N Atilde ; B 39 -2400 340 0 ; 
+EndCharMetrics
+EndFontMetrics

@@ -1,0 +1,21 @@
+%1 = $PFM$
+%2 = $TEXMF$fonts/type1/linotype/agaramon/
+
+@AGaramondLT-Bold = ladb8a %2,1
+@AGaramondLT-Bold-8r = padb8r %2,1,r="8r",b="ladb8a"
+@AGaramondLT-BoldItalic = ladbi8a %2,1
+@AGaramondLT-BoldItalic-8r = padbi8r %2,1,r="8r",b="ladbi8a"
+@AGaramondLT-Italic = ladri8a %2,1
+@AGaramondLT-Italic-8r = padri8r %2,1,r="8r",b="ladri8a"
+@AGaramondLT-Regular = ladr8a %2,1
+@AGaramondLT-Regular-8r = padr8r %2,1,r="8r",b="ladr8a"
+@AGaramondLT-Semibold = lads8a %2,1
+@AGaramondLT-Semibold-8r = pads8r %2,1,r="8r",b="lads8a"
+@AGaramondLT-SemiboldItalic = ladsi8a %2,1
+@AGaramondLT-SemiboldItalic-8r = padsi8r %2,1,r="8r",b="ladsi8a"
+@AGaramondExp-Bold = padb8x %2,1,b="ladb8x"
+@AGaramondExp-BoldItalic = padbi8x %2,1,b="ladbi8x"
+@AGaramondExp-Italic = padri8x %2,1,b="ladri8x"
+@AGaramondExp-Regular = padr8x %2,1,b="ladr8x"
+@AGaramondExp-Semibold = pads8x %2,1,b="lads8x"
+@AGaramondExp-SemiboldItalic = padsi8x %2,1,b="ladsi8x"

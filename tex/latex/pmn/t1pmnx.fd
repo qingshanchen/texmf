@@ -1,0 +1,64 @@
+\ProvidesFile{t1pmnx.fd}
+   [2003/12/01 Fontinst v1.926 font definitions for T1/pmnx.]
+
+\DeclareFontFamily{T1}{pmnx}{}
+
+\DeclareFontShape{T1}{pmnx}{m}{n}{
+   <-17> pmnr9e
+   <17-> pmnrd9e
+}{}
+
+\DeclareFontShape{T1}{pmnx}{m}{sc}{
+   <-17> pmnrc9e
+   <17-> pmnrcd9e
+}{}
+
+\DeclareFontShape{T1}{pmnx}{m}{it}{
+   <-17> pmnri9e
+   <17-> pmnrid9e
+}{}
+
+\DeclareFontShape{T1}{pmnx}{sb}{n}{
+   <-> pmns9e
+}{}
+
+\DeclareFontShape{T1}{pmnx}{sb}{sc}{
+   <-> pmnsc9e
+}{}
+
+\DeclareFontShape{T1}{pmnx}{sb}{it}{
+   <-> pmnsi9e
+}{}
+
+\DeclareFontShape{T1}{pmnx}{b}{n}{
+   <-> pmnb9e
+}{}
+
+\DeclareFontShape{T1}{pmnx}{b}{sc}{
+   <-> pmnbc9e
+}{}
+
+\DeclareFontShape{T1}{pmnx}{b}{it}{
+   <-> pmnbi9e
+}{}
+
+\DeclareFontShape{T1}{pmnx}{m}{scit}{
+   <-17> pmnric9e
+   <17-> pmnricd9e
+}{}
+
+\DeclareFontShape{T1}{pmnx}{sb}{scit}{
+   <-> pmnsic9e
+}{}
+
+\DeclareFontShape{T1}{pmnx}{m}{sl}{<->ssub * pmnx/m/it}{}
+\DeclareFontShape{T1}{pmnx}{sb}{sl}{<->ssub * pmnx/sb/it}{}
+\DeclareFontShape{T1}{pmnx}{b}{sl}{<->ssub * pmnx/b/it}{}
+\DeclareFontShape{T1}{pmnx}{bx}{sl}{<->ssub * pmnx/b/it}{}
+\DeclareFontShape{T1}{pmnx}{bx}{n}{<->ssub * pmnx/b/n}{}
+\DeclareFontShape{T1}{pmnx}{bx}{sc}{<->ssub * pmnx/b/sc}{}
+\DeclareFontShape{T1}{pmnx}{bx}{it}{<->ssub * pmnx/b/it}{}
+\DeclareFontShape{T1}{pmnx}{b}{scit}{<->sub * pmnx/b/it}{}
+\DeclareFontShape{T1}{pmnx}{bx}{scit}{<->sub * pmnx/b/it}{}
+
+\endinput

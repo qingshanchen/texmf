@@ -1,0 +1,21 @@
+%%
+%% This is file `mpy2mtt.fd',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% mtpro.dtx  (with options: `MPY2mtt')
+%% 
+%% Copyright 1996 1997 Frank Mittelbach and David Carlisle.
+%% Copyright 2001--2004 Frank Mittelbach, David Carlisle and Walter Schmidt
+\ProvidesFile{mpy2mtt.fd}%
+ [2004/09/14 v4.0%
+ MathTimePro Encoding 2 (WaS)%
+]
+\DeclareFontFamily{MPY2}{mtt}{\skewchar\font48}
+\DeclareFontShape{MPY2}{mtt}{m}{n}{<-7> mtsyf <7-9> mtsys <9-> mtsyt}{}
+\DeclareFontShape{MPY2}{mtt}{b}{n}{<-7> mtbsyf <7-9> mtbsys <9-> mtbsyt}{}
+\DeclareFontShape{MPY2}{mtt}{eb}{n}{<-7> mthsyf <7-9> mthsys <9-> mthsyt}{}
+\endinput
+%%
+%% End of file `mpy2mtt.fd'.

@@ -1,0 +1,40 @@
+\ProvidesPackage{xagaramon}[2004/08/04 Loading AGaramond Exp (WaS)]
+\RequirePackage{keyval}
+\newif\ifpad@osf
+\define@key{Pad}{scaled}[1.05]{%
+  \def\pad@Scale{#1}}
+\define@key{Pad}{osf}[true]{%
+  \csname pad@osf#1\endcsname}
+\def\ProcessOptionsWithKV#1{%
+  \let\@tempc\relax
+  \let\Pad@tempa\@empty
+  \@for\CurrentOption:=\@classoptionslist\do{%
+    \@ifundefined{KV@#1@\CurrentOption}%
+    {}%
+    {%
+      \edef\Pad@tempa{\Pad@tempa,\CurrentOption,}%
+      \@expandtwoargs\@removeelement\CurrentOption
+        \@unusedoptionlist\@unusedoptionlist
+    }%
+  }%
+  \edef\Pad@tempa{%
+    \noexpand\setkeys{#1}{%
+      \Pad@tempa\@ptionlist{\@currname.\@currext}%
+    }%
+  }%
+  \Pad@tempa
+  \let\CurrentOption\@empty
+}
+\ProcessOptionsWithKV{Pad}
+\AtEndOfPackage{%
+  \let\@unprocessedoptions\relax
+}
+\ifpad@osf
+  \renewcommand{\rmdefault}{padj}
+\else
+  \renewcommand{\rmdefault}{padx}
+\fi  
+\normalfont
+\endinput
+%%
+%% End of file `xagaramon.sty'.

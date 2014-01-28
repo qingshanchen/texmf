@@ -1,0 +1,17 @@
+%Filename: upmn.fd
+%Created by: tex inst
+%Created using fontinst v1.926
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{upmn.fd}
+   [2003/12/01 Fontinst v1.926 font definitions for U/pmn.]
+
+\DeclareFontFamily{U}{pmn}{}
+
+\DeclareFontShape{U}{pmn}{m}{n}{
+   <-> pmnrp
+}{}
+
+
+\endinput

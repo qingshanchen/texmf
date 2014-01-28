@@ -1,0 +1,35 @@
+%% mtpams.ins 4.1 2005/01/31 (WaS)
+
+\input docstrip
+
+\ifx\generate\undefined
+  \Msg{**********************************************}
+  \Msg{*}
+  \Msg{* This installation script requires docstrip}
+  \Msg{* version 2.4 or later.}
+  \Msg{*}
+  \Msg{* An older version of docstrip has been found.}
+  \Msg{*}
+  \Msg{**********************************************}
+  \errhelp{Obtain an up-to-date version of LaTeX2e.}
+  \errmessage{Obsolete docstrip in input path}
+  \batchmode
+  \csname @@end\endcsname\end
+\fi
+
+%\usedir{tex/latex/pctex} 
+
+\preamble
+\endpreamble
+\askforoverwritetrue
+
+% Create a .sty file with separate .fd files:
+
+\generate{\file{mtpams.sty}{\from{mtpams.dtx}{mtpams}}
+          \file{umtsya.fd} {\from{mtpams.dtx}{umtsya}}
+          \file{umtbbb.fd} {\from{mtpams.dtx}{umtbbb}}
+          \file{umthrb.fd} {\from{mtpams.dtx}{umthrb}}
+}
+
+\endbatchfile
+

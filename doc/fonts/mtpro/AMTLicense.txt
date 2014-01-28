@@ -1,0 +1,86 @@
+END-USER SOFTWARE PRODUCT LICENSE AGREEMENT
+
+MathTime (tm) Professional Fonts
+
+Read this license agreement carefully before agreeing to it.  You may
+use PCTeX with MathTime Professional Fonts ("Product") only if you
+agree to the following terms and conditions.  If you do not agree to
+the following terms and conditions, you must not use the Product.  The
+following are the terms and conditions to which you agree upon
+downloading the software:
+
+1. The Product contains font software which generates typeface designs
+("Font Software").  You may not alter Font Software for the purpose of adding any
+functionality which such Font Software did not have when delivered to you as
+part of the Product.  You may not embed Font Software into a document which is
+distributed as a commercial product in exchange for a fee or other
+consideration (for example, End-Users shall not embed Font Software into an
+electronic book that is offered to the public for a fee). 
+
+2. The Product may be used with your computer only and may not be
+reformatted or decompiled for any purpose.  The Product can only be used
+for your "Internal Use" and not for resale, sublicensing, or further
+distribution.  As used herein, "Internal Use" shall mean use in the
+course of your customary and ordinary business.  Internal Use shall
+not include any distribution whatsoever of the Product or any component
+thereof except that you may electronically distribute Internal Use
+documents created by the Product in a static graphic image or in an
+embedded electronic document which is distributed in a format that
+permits only the viewing and printing (and not the editing, altering,
+enhancing, or modifying) of such static graphic image or embedded
+document.  Internal Use shall not include any use of the Product by
+entities that are neither your authorized employees nor your
+authorized agents.  All such employees and agents shall be notified
+by you as to the terms and conditions of the End-User Agreement and
+shall agree to be bound by it.  As used herein, "Internal Use" shall
+occur when an individual is able to give commands (whether by
+keyboard or otherwise) that are followed by the Font Software, regardless of the
+location in which the Font Software resides.
+
+3. The Product may not be used to create any electronic document in which
+Licensed Type Software is embedded in a document in a format which may be
+edited, altered, enhanced, or modified by the recipient of such
+document.
+
+4. The Product may not be duplicated or copied except for one copy for
+archival purposes, program error verification or to replace defective
+media.  All copies must remain in your possession and bear the
+copyright notices contained on the original except that an archival
+copy may be placed for safekeeping in the hands of a third party that
+otherwise has no right to use such copy.  All archival copies placed
+in hands of a third party must contain all proprietary notices set
+forth on the original Product.
+
+5. No copies of the Product may be produced for any purpose other than
+those purposes expressly permited in paprgraph 2 above.
+
+6. This license does not transfer any right, title, or interest in
+the Product to you except as specifically set forth herein.  You are
+on notice that Personal TeX claims protection of this software
+product under copyright laws.  The Product may have been developed by
+an independent third party software supplier, which holds copyright
+or other proprietary rights to its software product.  You may be held
+responsible by this supplier for any infringement of such rights by
+you.
+
+7. Personal TeX reserves the right to terminate this license upon
+breach.  In the event of termination, you will be required to return
+all copies of this product or provide Personal TeX with a
+certificate of destruction of all copies.
+
+8. In the event you modify the Product or include it in any other
+software program, upon termination of this license, you agree either
+to remove the software product or any portion thereof from the
+modified program and return it to Personal TeX or to provide Personal
+TeX with a certificate of destruction thereof.
+
+9. If this product is acquired under the terms of a (i) GSA contract
+- use, reproduction or disclosure is subject to the restrictions set
+forth in the applicable ADP Schedule contract; (ii) DOD contract -
+use, duplication or disclosure by the Government is subject to
+restrictions set forth in subparagraph (c)(1)(ii) of 252.277-7013;
+(iii) Civilian agency contract - use, reproduction or disclosure is
+subject to 52.277-19(a) through (d) and restrictions set forth in the
+accompanying End User Agreement.  All rights reserved under the
+copyright laws of the United States.  Agfa Monotype Corporation, 985
+Busse Road, Elk Grove Village, Illinois 60007-2400 U.S.A.

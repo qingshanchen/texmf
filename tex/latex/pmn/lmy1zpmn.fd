@@ -1,0 +1,25 @@
+%Filename: lmy1zpmn.fd
+%Created by: tex fontpmnt
+%Created using fontinst v1.926
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{lmy1zpmn.fd}
+   [2003/10/28 Fontinst v1.926 font definitions for LMY1/zpmn.]
+
+\DeclareFontFamily{LMY1}{zpmn}{\skewchar \font =45}
+
+\DeclareFontShape{LMY1}{zpmn}{m}{it}{
+   <-> zpmnmi
+}{}
+
+\DeclareFontShape{LMY1}{zpmn}{b}{it}{
+   <-> zpmnmib
+}{}
+
+\DeclareFontShape{LMY1}{zpmn}{m}{sl}{<->ssub * zpmn/m/it}{}
+\DeclareFontShape{LMY1}{zpmn}{bx}{it}{<->ssub * zpmn/b/it}{}
+\DeclareFontShape{LMY1}{zpmn}{b}{sl}{<->ssub * zpmn/b/it}{}
+\DeclareFontShape{LMY1}{zpmn}{bx}{sl}{<->ssub * zpmn/b/sl}{}
+
+\endinput

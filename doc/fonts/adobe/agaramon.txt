@@ -1,0 +1,103 @@
+===========================================================
+        Using the Adobe AGaramond fonts with LaTeX
+============================================================
+                                                  2004-08-08
+                                              Walter Schmidt
+                                         w.a.schmidt@gmx.net
+
+
+Using Adobe Garamond with LaTeX is supported through the 
+macro package xagaramon.sty.  Loading the package
+
+  \usepackage{xagaramon}
+
+makes LaTeX use Adobe Garamond with normal digits as the
+default roman font family, whereas
+
+  \usepackage[osf]{xagaramon}
+  
+selects oldstyle digits.
+
+|  Notice that Garamond is supported with T1 (european) and
+|  TS1 (textcompanion) encoding only, so you should issue 
+|  the commands
+|
+|    \usepackage[T1]{fontenc}
+|    \usepackage{textcomp}
+|
+|  in the document preamble.  The obsolete OT1 encoding,
+|  which is still the default with LaTeX, is _not_
+|  supported.
+
+
+
+Optional scaling
+----------------
+Adobe Garamond looks smaller than other typefaces with the
+same nominal size.  This may lead to problems as far as
+blending with other fonts is concerned; furthermore, the
+default line spacing of the LaTeX document classes may be
+too large.  Loading the package xagaramon with the option
+
+  [scaled=...]
+
+causes Garamond to be scaled as indicated, for instance
+
+  \usepackage[scaled=1.04]{xagaramon}
+  
+will enlarge the font size by 4 percent.  When the keyword
+"scaled" is spacified alone, i.e.
+
+  \usepackage[scaled]{xagaramon}
+
+a scale of 1.05 is assumed.  This goes well with many other
+fonts and with the default line spacing of the LaTeX
+document classes.
+
+
+
+Math typesetting
+----------------
+Adobe Garamond can be used in conjunction with the Euler
+math fonts, i.e., with the macro package eulervm.sty.  It is
+recommended to enlarge Garamond by 5% as explained above.
+See the documenattion of the package eulervm.sty for further
+information!
+
+
+
+Kerning data
+------------
+The kerning tables supplied by Adobe are suitable for the
+English language only.  They do not cover accented letters,
+and they do not take care of typical letter pairs in
+non-English languages.  With the present set of TeX metrics
+I have -- to my best knowledge -- enhanced the kerning
+tables to fix at least the most severe deficiencies for the
+German language.
+
+
+
+NFSS classification of the text fonts
+-------------------------------------
+
+  encoding(s)  family  series  shape(s) 
+  --------------------------------------
+  T1, TS1      padx    m       n, sc, it
+  T1, TS1      padx    sb      n, sc, it
+  T1, TS1      padx    b       n, sc, it
+  T1, TS1      padj    m       n, sc, it
+  T1, TS1      padj    sb      n, sc, it
+  T1, TS1      padj    b       n, sc, it
+  
+Notice that the series m and sb comprise real smallcaps, 
+whereas the bold smallcaps are "faked".
+
+Only those text companion (TS1) symbols, that are also part
+of the ISO-Adobe character set, plus the Euro symbol, are
+available.
+
+
+
+== finis
+

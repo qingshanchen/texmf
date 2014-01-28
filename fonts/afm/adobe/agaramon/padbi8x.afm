@@ -1,0 +1,103 @@
+StartFontMetrics 2.0
+Comment UniqueID 37922
+FontName AGaramondExp-BoldItalic
+FullName Adobe Garamond Bold Italic Expert
+FamilyName Adobe Garamond
+Weight Bold
+ItalicAngle -18.5
+IsFixedPitch false
+UnderlinePosition -100
+UnderlineThickness 50
+Version 001.001
+Notice Copyright (c) 1989, 1992 Adobe Systems Incorporated.  All Rights Reserved.Adobe Garamond is a registered trademark of Adobe Systems Incorporated.
+EncodingScheme FontSpecific
+FontBBox -184 -269 996 715
+StartCharMetrics 86
+C 32 ; WX 260 ; N space ; B 0 0 0 0 ;
+C 36 ; WX 460 ; N dollaroldstyle ; B 29 -90 460 505 ;
+C 37 ; WX 400 ; N dollarsuperior ; B 98 183 476 690 ;
+C 40 ; WX 280 ; N parenleftsuperior ; B 157 179 436 700 ;
+C 41 ; WX 280 ; N parenrightsuperior ; B 41 180 321 700 ;
+C 42 ; WX 500 ; N twodotenleader ; B 25 -14 429 150 ;
+C 43 ; WX 500 ; N onedotenleader ; B 148 -14 302 150 ;
+C 44 ; WX 260 ; N comma ; B -21 -121 191 168 ;
+C 45 ; WX 320 ; N hyphen ; B 48 156 316 259 ;
+C 46 ; WX 260 ; N period ; B 32 -14 186 150 ;
+C 47 ; WX 100 ; N fraction ; B -184 -40 392 654 ;
+C 48 ; WX 500 ; N zerooldstyle ; B 67 -14 486 442 ;
+C 49 ; WX 380 ; N oneoldstyle ; B 0 -3 422 431 ;
+C 50 ; WX 473 ; N twooldstyle ; B 2 -3 455 442 ;
+C 51 ; WX 413 ; N threeoldstyle ; B -38 -188 392 442 ;
+C 52 ; WX 522 ; N fouroldstyle ; B -4 -186 494 442 ;
+C 53 ; WX 392 ; N fiveoldstyle ; B -21 -198 439 442 ;
+C 54 ; WX 508 ; N sixoldstyle ; B 72 -14 617 639 ;
+C 55 ; WX 479 ; N sevenoldstyle ; B 39 -198 542 431 ;
+C 56 ; WX 472 ; N eightoldstyle ; B 49 -14 518 621 ;
+C 57 ; WX 486 ; N nineoldstyle ; B 8 -198 472 442 ;
+C 58 ; WX 260 ; N colon ; B 32 -14 259 394 ;
+C 59 ; WX 260 ; N semicolon ; B -21 -121 259 394 ;
+C 60 ; WX 210 ; N commasuperior ; B 40 130 229 388 ;
+C 61 ; WX 750 ; N threequartersemdash ; B 4 173 772 242 ;
+C 62 ; WX 210 ; N periodsuperior ; B 99 240 223 373 ;
+C 65 ; WX 406 ; N asuperior ; B 84 240 472 552 ;
+C 66 ; WX 416 ; N bsuperior ; B 118 240 468 715 ;
+C 67 ; WX 400 ; N centsuperior ; B 137 198 499 677 ;
+C 68 ; WX 424 ; N dsuperior ; B 106 240 555 715 ;
+C 69 ; WX 340 ; N esuperior ; B 97 240 402 540 ;
+C 73 ; WX 247 ; N isuperior ; B 97 240 343 715 ;
+C 76 ; WX 237 ; N lsuperior ; B 97 240 358 715 ;
+C 77 ; WX 607 ; N msuperior ; B 91 240 659 540 ;
+C 78 ; WX 430 ; N nsuperior ; B 91 240 482 540 ;
+C 79 ; WX 380 ; N osuperior ; B 104 240 425 540 ;
+C 82 ; WX 325 ; N rsuperior ; B 94 240 413 540 ;
+C 83 ; WX 280 ; N ssuperior ; B 71 240 342 540 ;
+C 84 ; WX 268 ; N tsuperior ; B 102 240 366 601 ;
+C 86 ; WX 570 ; N ff ; B -164 -269 826 715 ;
+C 87 ; WX 556 ; N fi ; B -164 -269 611 715 ;
+C 88 ; WX 557 ; N fl ; B -164 -269 663 715 ;
+C 89 ; WX 828 ; N ffi ; B -164 -269 883 715 ;
+C 90 ; WX 829 ; N ffl ; B -164 -269 935 715 ;
+C 91 ; WX 280 ; N parenleftinferior ; B 80 -67 359 453 ;
+C 93 ; WX 280 ; N parenrightinferior ; B -35 -67 244 453 ;
+C 95 ; WX 280 ; N hyphensuperior ; B 125 415 358 479 ;
+C 123 ; WX 615 ; N colonmonetary ; B 97 -73 707 704 ;
+C 124 ; WX 395 ; N onefitted ; B 7 -3 430 644 ;
+C 125 ; WX 1013 ; N rupiah ; B 8 -253 996 628 ;
+C 162 ; WX 430 ; N centoldstyle ; B 65 -57 455 458 ;
+C 178 ; WX 520 ; N figuredash ; B 90 280 548 349 ;
+C 179 ; WX 280 ; N hypheninferior ; B 48 168 281 232 ;
+C 188 ; WX 840 ; N onequarter ; B 86 -40 799 654 ;
+C 189 ; WX 840 ; N onehalf ; B 76 -40 827 654 ;
+C 190 ; WX 840 ; N threequarters ; B 61 -40 818 654 ;
+C 192 ; WX 840 ; N oneeighth ; B 81 -40 820 654 ;
+C 193 ; WX 840 ; N threeeighths ; B 60 -40 846 654 ;
+C 194 ; WX 840 ; N fiveeighths ; B 65 -40 836 654 ;
+C 195 ; WX 840 ; N seveneighths ; B 147 -40 829 654 ;
+C 196 ; WX 840 ; N onethird ; B 79 -40 811 654 ;
+C 197 ; WX 840 ; N twothirds ; B 63 -40 821 654 ;
+C 200 ; WX 400 ; N zerosuperior ; B 126 240 470 640 ;
+C 201 ; WX 400 ; N onesuperior ; B 126 245 427 640 ;
+C 202 ; WX 400 ; N twosuperior ; B 71 245 450 640 ;
+C 203 ; WX 400 ; N threesuperior ; B 66 208 429 640 ;
+C 204 ; WX 400 ; N foursuperior ; B 100 245 474 673 ;
+C 205 ; WX 400 ; N fivesuperior ; B 80 209 472 640 ;
+C 206 ; WX 400 ; N sixsuperior ; B 128 240 513 663 ;
+C 207 ; WX 400 ; N sevensuperior ; B 157 213 516 635 ;
+C 208 ; WX 400 ; N eightsuperior ; B 114 240 458 640 ;
+C 209 ; WX 400 ; N ninesuperior ; B 77 210 467 640 ;
+C 210 ; WX 400 ; N zeroinferior ; B 49 -7 393 393 ;
+C 211 ; WX 400 ; N oneinferior ; B 49 -2 350 393 ;
+C 212 ; WX 400 ; N twoinferior ; B 1 -2 380 393 ;
+C 213 ; WX 400 ; N threeinferior ; B -2 -39 361 393 ;
+C 214 ; WX 400 ; N fourinferior ; B 23 -2 397 426 ;
+C 215 ; WX 400 ; N fiveinferior ; B 3 -37 395 393 ;
+C 216 ; WX 400 ; N sixinferior ; B 51 -7 436 416 ;
+C 217 ; WX 400 ; N seveninferior ; B 80 -33 439 388 ;
+C 218 ; WX 400 ; N eightinferior ; B 37 -7 381 393 ;
+C 219 ; WX 400 ; N nineinferior ; B 0 -37 390 393 ;
+C 220 ; WX 400 ; N centinferior ; B 60 -48 422 430 ;
+C 221 ; WX 400 ; N dollarinferior ; B 21 -63 399 443 ;
+C 222 ; WX 210 ; N periodinferior ; B 22 -7 146 126 ;
+C 223 ; WX 210 ; N commainferior ; B -36 -117 152 141 ;
+EndCharMetrics
+EndFontMetrics

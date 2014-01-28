@@ -1,0 +1,338 @@
+% \iffalse
+%% Copyright 2005 Walter Schmidt
+%<*dtx>
+          \ProvidesFile{mtpb.dtx}
+%</dtx>
+%<mtpb>\NeedsTeXFormat{LaTeX2e}[1997/06/01]
+%<mtpb>\ProvidesPackage{mtpb}%
+%<umtscr>\ProvidesFile{umtscr.fd}%
+%<umtfra>\ProvidesFile{umtfra.fd}%
+%<driver>\ProvidesFile{mtpb.drv}
+% \fi
+%         \ProvidesFile{mtpb.dtx}
+ [2005/01/30 v1.1 %
+%<mtpb> MathTimePro Supplement B support (WaS)%
+%<umtscr> MathTimePro Script A (WaS)%
+%<umtfra> MathTimePro Fraktur (WaS)%
+]
+%
+% \iffalse
+%
+%<*driver>
+\documentclass[11pt]{ltxdoc}
+\usepackage[T1]{fontenc}
+\OnlyDescription
+%
+% *** We are using Times, Helvetica and MathTime Professional at 11pt. ***
+% ***            Do NOT change this through ltxdoc.cfg!                ***
+\usepackage[scaled=0.92]{helvet}
+\renewcommand{\rmdefault}{ptm}
+\usepackage{mtpro}
+\usepackage[mtpscr,mtpfrak]{mtpb}
+\usepackage{bm}
+\usepackage{xspace}
+\usepackage{manfnt}
+\newcommand{\danger}{\marginpar[\hfill\textdbend]{\textdbend\hfill}}
+\newcommand*{\Lpack}[1]{\textsf{#1}}
+\newcommand*{\Lopt}[1]{\textsf{#1}}
+\renewcommand{\labelitemi}{$\triangleright$}
+\newcommand{\mathtime}{{\itshape MathT\kern-.05em\i me}\xspace}
+\newcommand{\mtpro}{{\itshape MathT\kern-.05em\i meProfes\-sional\/}\xspace}
+% the (La)TeX logos for use with Times-Roman
+\def\ptmTeX{T\kern-.1667em\lower.5ex\hbox{E}\kern-.075emX\@}
+\makeatletter
+\DeclareRobustCommand{\ptmLaTeX}{L\kern-.255em
+        {\setbox0\hbox{T}%
+         \vbox to\ht0{\hbox{%
+                            \csname S@\f@size\endcsname
+                            \fontsize\sf@size\z@
+                            \math@fontsfalse\selectfont
+                            A}%
+                      \vss}%
+        }%
+        \kern-.10em
+        \TeX}
+\setlength{\@fptop}{0\p@ \@plus 1fil}
+\setlength{\@fpsep}{8\p@ \@plus 2fil}
+\setlength{\@fpbot}{0\p@\@plus 2fil}
+\makeatother
+\renewcommand{\floatpagefraction}{.6}
+\renewcommand{\textfraction}{.1}
+\renewcommand{\topfraction}{.8}
+\renewcommand{\bottomfraction}{.5}
+\let\TeX=\ptmTeX
+\let\LaTeX=\ptmLaTeX
+\begin{document}
+\DocInput{mtpb.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \CheckSum{175}
+%
+% \GetFileInfo{mtpb.dtx}
+%
+% \title{Using the \mtpro \\ Font Supplement B\\ with \LaTeX \thanks{This 
+%          document refers to version \fileversion\ 
+%          of the macro package \Lpack{mtpb}.}}
+%
+% \date{\filedate}
+% \author{Walter Schmidt}
+% \maketitle
+%
+% \sloppy
+%
+%
+% \section{Typefaces}
+% The \mtpro Font Supplement B provides Times-compatible script 
+% and fraktur typefaces.
+% \begin{center}
+% \mtpro Math Script:\\[.7ex]
+% $\mathscr{ABC[\altC]DEFG[\altG]HIJKL[\altL]MNOPQ[\altQ]RSTUVWXY[\altY]Z[\altZ]}$\\
+% $ \mathscr{abcdefghi\imath j\jmath klmnopqr[\altr]stuvwxyz[\altz]}$
+% \end{center}
+% \begin{center}
+% \mtpro Math Fraktur:\\[.7ex]
+% $\mathfrak{ABCDEFGHIJKLMNOPQRSTUVWXY[\altY]Z}$\\
+% $ \mathfrak{abcdefghi\imath j\jmath klmnopqrstuvwx[\altx]y[\alty]z}$
+% \end{center}
+% Each typeface is available as a regular variant (shown above), and as a bold one.
+%
+% \section{The macro package \Lpack{mtpb}}
+% The package \Lpack{mtpb} serves to access these typefaces; 
+% it can be used only in conjunction with the
+% package \Lpack{mtpro}, which should be loaded first.
+% (Otherwise, \Lpack{mtpro} gets loaded automatically without any package options.)
+% \begin{verse}
+%   |\usepackage|\oarg{options}|{mtpro}|\\
+%   |\usepackage|\oarg{options}|{mtpb}|
+% \end{verse}
+% 
+% The package \Lpack{mtpb} lets you select precisely which of the above fonts to use, and how.
+% It must be loaded with at least one of the following options to have any effect:
+% \begin{description}
+% \item[\Lopt{mtpcal}]  assigns Math Script to the math alphabet \cmd{\mathcal},
+%   thus overwriting the default calligraphic typeface (CM~Calligraphic or Euler Script)
+% \item[\Lopt{mtpscr}]  assigns Math Script to a new math alphabet \cmd{\mathscr}, 
+%   while the behavior of \cmd{\mathcal} is unchanged
+% \item[\Lopt{mtpfrak}] assigns Math Fraktur to a new math alphabet \cmd{\mathfrak}
+% \end{description}
+%
+% The fonts comprise only the Latin alphabet (including \cmd{\imath} and \cmd{\jmath}),
+% so the related math alphabet commands 
+% such as \cmd{\mathcal} should \danger not be applied to Greek letters, numbers, or symbols.
+%
+% NB: The symbols \cmd{\Re} and \cmd{\Im} from the basic \mtpro
+% fonts are not exactly the same as the $\mathfrak{R}$ and $\mathfrak{I}$ from the 
+% Math Fraktur font. If you have loaded the \Lpack{mtpb} package, and would prefer 
+% to have \cmd{\Re} and \cmd{\Im} use the letters from the \cmd{\mathfrak} alphabet, 
+% just redefine these macros appropriately:
+% \begin{verse}
+%   |\renewcommand{\Re}{\mathfrak{R}}|\\
+%   |\renewcommand{\Im}{\mathfrak{I}}|\\
+% \end{verse}
+%
+%
+% \subsection{Bold type}
+% The corresponding bold fonts are accessible through the command \cmd{\bm},
+% which is provided by the macro package \Lpack{bm}.  For instance,
+% |\bm{\mathfrak{A}}| prints the letter $\bm{\mathfrak{A}}$ from the bold fraktur font.
+% Of course, also the declaration \cmd{\boldmath} is honored.
+%
+% The \Lpack{mtpro}-specific  command \cmd{\mathbcal}, too, works as expected 
+% and yields the bold series of the font assigned to \cmd{\mathcal}.
+%
+%
+% \subsection{Alternative letter shapes}
+% Several letters on the \mtpro Script and Fraktur fonts are available with alternative
+% shapes:
+% \smallskip
+%
+% \hfill
+% \begin{tabular}[t]{ll@{\qquad}ll}
+% \multicolumn{4}{c}{Script:}                                     \\
+% \texttt{C} & $\mathscr{C}$  &  \cmd{\altC} & $\mathscr{\altC}$  \\
+% \texttt{G} & $\mathscr{G}$  &  \cmd{\altG} & $\mathscr{\altG}$  \\
+% \texttt{L} & $\mathscr{L}$  &  \cmd{\altL} & $\mathscr{\altL}$  \\
+% \texttt{Q} & $\mathscr{Q}$  &  \cmd{\altQ} & $\mathscr{\altQ}$  \\
+% \texttt{Y} & $\mathscr{Y}$  &  \cmd{\altY} & $\mathscr{\altY}$  \\
+% \texttt{Z} & $\mathscr{Z}$  &  \cmd{\altZ} & $\mathscr{\altZ}$  \\
+% \texttt{r} & $\mathscr{r}$  &  \cmd{\altr} & $\mathscr{\altr}$  \\
+% \texttt{z} & $\mathscr{z}$  &  \cmd{\altz} & $\mathscr{\altz}$  \\[.5ex]
+% \end{tabular}
+% \hfill
+% \begin{tabular}[t]{ll@{\qquad}ll}
+% \multicolumn{4}{c}{Fraktur:}                                    \\
+% \texttt{Y} & $\mathfrak{Y}$  &  \cmd{\altY} & $\mathfrak{\altY}$\\
+% \texttt{x} & $\mathfrak{x}$  &  \cmd{\altx} & $\mathfrak{\altx}$\\
+% \texttt{y} & $\mathfrak{y}$  &  \cmd{\alty} & $\mathfrak{\alty}$
+% \end{tabular}
+% \hfill\mbox{}
+% \smallskip
+% 
+% \noindent The \cmd{\alt...} commands are to be used only in conjunction with
+% the \mtpro Script and Fraktur fonts, i.e., within the argument of an appropriate 
+% math alphabet command.  For instance, |\mathfrak{\altx}| yields $\mathfrak{\altx}$,
+% provided that \mtpro Fraktur is in fact assigned to \cmd{\mathfrak}.
+% When the commands are used with other fonts, a warning message is issued and the 
+% corresponding `normal' letter from the particular font is printed.
+%
+% \StopEventually{\par\vfill\noindent{\small
+% \mathtime is a trademark of Publish or Perish, Inc.
+% Times is a trademark of Linotype~AG and/or its subsidiaries.
+% \par}}
+%
+%
+% \clearpage
+% \section{The implementation of \Lpack{mtpb}}
+%
+% Normally, \Lpack{mtpb} is used in conjunction with \Lpack{mtpro}.
+% In this case we must make sure that \Lpack{mtpro} is loaded \emph{first}; 
+% otherwise, the options \Lopt{mtpcal} and \Lopt{mtpcalb} would not work,
+% because \Lpack{mtpro} would overwrite the definition of the \cmd{\mathcal}
+% alphabet once again.
+%    \begin{macrocode}
+%<*mtpb>
+\RequirePackage{mtpro}
+%    \end{macrocode}
+% Unfortunately, this prevents the use of \Lpack{mtpb} \danger \emph{without}
+% \Lpack{mtpro}---does this constitute a problem?
+%
+% The options determine, which fonts are to be used, and how.
+% The names of the math alphabets can be used as temporary variables,
+% since they will be redefined, anyway.  
+%    \begin{macrocode}
+\DeclareOption{mtpcal}{\let\mathcal=a}
+\DeclareOption{mtpscr}{\let\mathscr=a}
+\DeclareOption{mtpfrak}{\let\mathfrak=p}
+%    \end{macrocode}
+%
+% We change the definitions of \cmd{\imath} and \cmd{\jmath} so that
+% math alphabet commands acts on them:
+%    \begin{macrocode}
+\DeclareMathSymbol{\imath}{\mathalpha}{letters}{"7B}
+\DeclareMathSymbol{\jmath}{\mathalpha}{letters}{"7C}
+%    \end{macrocode}
+%
+% We provide default definitions of the commands for the alternative letters.
+% They expand to a warning message, followed by the `normal' letter:
+%    \begin{macrocode}
+\newcommand{\altC}{%
+  \PackageWarning{mtpb}{Invalid use of \protect\altC}C}
+\newcommand{\altG}{%
+  \PackageWarning{mtpb}{Invalid use of \protect\altG}G}
+\newcommand{\altL}{%
+  \PackageWarning{mtpb}{Invalid use of \protect\altL}L}
+\newcommand{\altQ}{%
+  \PackageWarning{mtpb}{Invalid use of \protect\altQ}Q}
+\newcommand{\altY}{%
+  \PackageWarning{mtpb}{Invalid use of \protect\altY}Y}
+\newcommand{\altZ}{%
+  \PackageWarning{mtpb}{Invalid use of \protect\altZ}Z}
+\newcommand{\altr}{%
+  \PackageWarning{mtpb}{Invalid use of \protect\altr}r}
+\newcommand{\altx}{%
+  \PackageWarning{mtpb}{Invalid use of \protect\altx}x}
+\newcommand{\alty}{%
+  \PackageWarning{mtpb}{Invalid use of \protect\alty}y}
+\newcommand{\altz}{%
+  \PackageWarning{mtpb}{Invalid use of \protect\altz}z}
+%    \end{macrocode}
+% Within the argument of \cmd{\mathscr} the following macro
+% will serve to redefine the above commands appropriately:
+%    \begin{macrocode}
+\newcommand{\MTPsetupScript}{%
+  \let\altC=\MTP@C
+  \let\altG=\MTP@G
+  \let\altL=\MTP@L
+  \let\altQ=\MTP@Q
+  \let\altY=\MTP@Y
+  \let\altZ=\MTP@Z
+  \let\altr=\MTP@r
+  \let\altz=\MTP@z}
+%    \end{macrocode}
+% Ditto for Fraktur:
+%    \begin{macrocode}
+\newcommand{\MTPsetupFrak}{%
+  \let\altY=\MTP@Y
+  \let\altx=\MTP@x
+  \let\alty=\MTP@y}
+%    \end{macrocode}
+% These are the macros to actually access the alternative letters:
+%    \begin{macrocode}
+\DeclareMathSymbol{\MTP@C}{\mathalpha}{letters}{'003}
+\DeclareMathSymbol{\MTP@G}{\mathalpha}{letters}{'007}
+\DeclareMathSymbol{\MTP@L}{\mathalpha}{letters}{'014}
+\DeclareMathSymbol{\MTP@Q}{\mathalpha}{letters}{'021}
+\DeclareMathSymbol{\MTP@Y}{\mathalpha}{letters}{'031}
+\DeclareMathSymbol{\MTP@Z}{\mathalpha}{letters}{'032}
+\DeclareMathSymbol{\MTP@r}{\mathalpha}{letters}{'062}
+\DeclareMathSymbol{\MTP@x}{\mathalpha}{letters}{'070}
+\DeclareMathSymbol{\MTP@y}{\mathalpha}{letters}{'071}
+\DeclareMathSymbol{\MTP@z}{\mathalpha}{letters}{'072}
+%    \end{macrocode}
+% NB: The choice of \texttt{letters} as the default font is arbitrary
+% and meaningless, since none of the predefined `symbol fonts' comprises the 
+% symbols in question.  All that counts here is the type \cmd{\mathalpha}.
+% 
+% Each typeface of the `Supplement B' collection is assigned a math alphabet,
+% which is, however, not to be used directly:
+%    \begin{macrocode}
+\DeclareMathAlphabet{\MTPScript}  {U}{mtscr}{m}{it}
+\SetMathAlphabet{\MTPScript}{bold}{U}{mtscr}{b}{it}
+\DeclareMathAlphabet{\MTPbScript} {U}{mtscr}{b}{it}
+%    \end{macrocode}
+% If you wonder what \cmd{\MTPbScript} is good for,
+% see the declaration of \cmd{\mathbcal} below!
+%    \begin{macrocode}
+\DeclareMathAlphabet{\MTPFrak}  {U}{mtfra}{m}{n}
+\SetMathAlphabet{\MTPFrak}{bold}{U}{mtfra}{b}{n}
+%    \end{macrocode}
+% NB: Just \emph{declaring} math alphabets does not yet consume 
+% any math font families!
+% 
+% According to the options, we finally define those commands, 
+% that will be visible to the user.
+% They expand to the math alphabets declared above, surrounded by a group
+% where the commands for the alternative letters are redefined appropriately:
+%    \begin{macrocode}
+\ProcessOptions
+\ifx\mathcal a
+  \def\mathcal#1{{\MTPsetupScript\MTPScript{#1}}}
+%    \end{macrocode}
+% The non-standard alphabet \cmd{\mathbcal} is declared in the \Lpack{mtpro} package.
+% When \cmd{\mathcal} is changed, \cmd{\mathbcal}, too, must be redefined accordingly.
+%    \begin{macrocode}
+  \def\mathbcal#1{{\MTPsetupScript\MTPbScript{#1}}}
+\fi
+\ifx\mathscr a
+  \def\mathscr#1{{\MTPsetupScript\MTPScript{#1}}}
+\fi
+\ifx\mathfrak p
+  \def\mathfrak#1{{\MTPsetupFrak\MTPFrak{#1}}}
+\fi
+%</mtpb>
+%    \end{macrocode}
+%
+%
+% \section{The font definition files}
+% \subsection{Script}
+%    \begin{macrocode}
+%<*umtscr>
+\DeclareFontFamily{U}{mtscr}{}%
+\DeclareFontShape{U}{mtscr}{m}{it}{<-7>mtmsf<7-9>mtmss<9->mtmst}{}%
+\DeclareFontShape{U}{mtscr}{b}{it}{<-7>mtbmsf<7-9>mtbmss<9->mtbmst}{}%
+%</umtscr>
+%    \end{macrocode}
+%
+%
+% \subsection{Fraktur}
+%    \begin{macrocode}
+%<*umtfra>
+\DeclareFontFamily{U}{mtfra}{}%
+\DeclareFontShape{U}{mtfra}{m}{n}{<-7>mtmff<7-9>mtmfs<9->mtmft}{}%
+\DeclareFontShape{U}{mtfra}{b}{n}{<-7>mtbmff<7-9>mtbmfs<9->mtbmft}{}%
+%</umtfra>
+%    \end{macrocode}
+% 
+% \Finale

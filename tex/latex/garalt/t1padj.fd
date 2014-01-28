@@ -1,0 +1,64 @@
+%Filename: t1padj.fd
+%Created by: tex makepadl
+%Created using fontinst v1.929
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{t1padj.fd}
+   [2006/03/10 Fontinst v1.929 font definitions for T1/padj.]
+
+\DeclareFontFamily{T1}{padj}{}
+
+\DeclareFontShape{T1}{padj}{m}{n}{
+   <-> padr9e
+}{}
+
+\DeclareFontShape{T1}{padj}{m}{it}{
+   <-> padri9e
+}{}
+
+\DeclareFontShape{T1}{padj}{m}{sc}{
+   <-> padrc9e
+}{}
+
+\DeclareFontShape{T1}{padj}{sb}{n}{
+   <-> pads9e
+}{}
+
+\DeclareFontShape{T1}{padj}{sb}{it}{
+   <-> padsi9e
+}{}
+
+\DeclareFontShape{T1}{padj}{sb}{sc}{
+   <-> padsc9e
+}{}
+
+\DeclareFontShape{T1}{padj}{b}{n}{
+   <-> padb9e
+}{}
+
+\DeclareFontShape{T1}{padj}{b}{it}{
+   <-> padbi9e
+}{}
+
+\DeclareFontShape{T1}{padj}{b}{sc}{
+   <-> padbc9e
+}{}
+
+\DeclareFontShape{T1}{padj}{m}{ar}{
+   <-> padra9e
+}{}
+
+\DeclareFontShape{T1}{padj}{m}{ai}{
+   <-> padria9e
+}{}
+
+\DeclareFontShape{T1}{padj}{m}{sl}{<->ssub * padj/m/it}{}
+\DeclareFontShape{T1}{padj}{sb}{sl}{<->ssub * padj/sb/it}{}
+\DeclareFontShape{T1}{padj}{b}{sl}{<->ssub * padj/sb/sl}{}
+\DeclareFontShape{T1}{padj}{bx}{sl}{<->ssub * padj/b/sl}{}
+\DeclareFontShape{T1}{padj}{bx}{n}{<->ssub * padj/b/n}{}
+\DeclareFontShape{T1}{padj}{bx}{it}{<->ssub * padj/b/it}{}
+\DeclareFontShape{T1}{padj}{bx}{sc}{<->ssub * padj/b/sc}{}
+
+\endinput

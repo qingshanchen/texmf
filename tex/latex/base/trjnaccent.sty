@@ -1,0 +1,32 @@
+%%
+%% for fonts that do not have accents, substitute roman accents
+%%
+\def\rmgrave#1{\ooalign{\hidewidth{%
+	\rmfamily\raisebox{0.55ex}{\char"12}}\hidewidth\crcr#1}}
+\def\rmacute#1{\ooalign{\hidewidth{%
+	\rmfamily\raisebox{0.55ex}{\char"13}}\hidewidth\crcr#1}}
+\def\rmv#1{\ooalign{\hidewidth{%
+	\rmfamily\raisebox{0.55ex}{\char"14}}\hidewidth\crcr#1}}
+\let\rmcheck=\trjnv
+\def\rmu#1{\ooalign{\hidewidth{%
+	\rmfamily\raisebox{0.55ex}{\char"15}}\hidewidth\crcr#1}}
+\let\rmbreve=\trjnu
+\def\rmmacron#1{\ooalign{\hidewidth{%
+	\rmfamily\raisebox{0.55ex}{\char"16}}\hidewidth\crcr#1}}
+\def\rmcircumflex#1{\ooalign{\hidewidth{%
+	\rmfamily\raisebox{0.55ex}{\char"5E}}\hidewidth\crcr#1}}
+\def\rmdot#1{\ooalign{\hidewidth{%
+	\rmfamily\raisebox{0.55ex}{\char"5F}}\hidewidth\crcr#1}}
+\def\rmH#1{\ooalign{\hidewidth{%
+	\rmfamily\raisebox{0.55ex}{\char"7D}}\hidewidth\crcr#1}}
+\let\rmHungarian=\trjnH
+\def\rmtilde#1{\ooalign{\hidewidth{%
+	\rmfamily\raisebox{0.55ex}{\char"7E}}\hidewidth\crcr#1}}
+\def\rmumlaut#1{\ooalign{\hidewidth{%
+	\rmfamily\smash{\raisebox{0.55ex}{\char"7F}}}\hidewidth\crcr#1}}
+\def\rmbar#1{\oalign{#1\crcr\hidewidth{%
+	\rmfamily\vbox to -.25ex{\hbox{\char"16}\vss}}\hidewidth}}
+\let\rmb=\trjnbar
+\def\rmcedilla#1{\ooalign{%
+	\hidewidth{\rmfamily\raisebox{0.05ex}{\char'30}}\hidewidth\crcr#1}}
+\let\rmc=\rmcedilla

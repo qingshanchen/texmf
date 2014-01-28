@@ -1,0 +1,70 @@
+\def\@sect#1#2#3#4#5#6[#7]#8{\ifnum #2>\c@secnumdepth
+     \def\@svsec{}\else 
+     \refstepcounter{#1}\edef\@svsec{\csname the#1\endcsname.\hskip .5em }\fi
+     \@tempskipa #5\relax
+      \ifdim \@tempskipa>\z@ 
+        \begingroup #6\relax
+          \@hangfrom{\hskip #3\relax\@svsec}{\interlinepenalty \@M #8\par}%
+        \endgroup
+       \csname #1mark\endcsname{#7}\addcontentsline
+         {toc}{#1}{\ifnum #2>\c@secnumdepth \else
+                      \protect\numberline{\csname the#1\endcsname}\fi
+                    #7}\else
+        \def\@svsechd{#6\hskip #3\@svsec #8\csname #1mark\endcsname
+                      {#7}\addcontentsline
+                           {toc}{#1}{\ifnum #2>\c@secnumdepth \else
+                             \protect\numberline{\csname the#1\endcsname}\fi
+                       #7}}\fi
+     \@xsect{#5}}
+\def\section{\@startsection {section}{1}{\z@}{-3.5ex plus -1ex minus 
+-.2ex}{2.3ex plus .2ex}{\normalsize\sc}}
+\def\subsection{\@startsection{subsection}{2}{\z@}{-3.25ex plus -1ex minus 
+-.2ex}{1.5ex plus .2ex}{\normalsize\sc}}
+\def\subsubsection{\@startsection{subsubsection}{3}{\z@}{-3.25ex plus 
+-1ex minus -.2ex}{1.5ex plus .2ex}{\normalsize\sc}}
+\def\paragraph{\@startsection
+{paragraph}{4}{\z@}{3.25ex plus 1ex minus .2ex}{-1em}{\normalsize\sc}}
+\def\subparagraph{\@startsection
+{subparagraph}{4}{\parindent}{3.25ex plus 1ex minus 
+.2ex}{-1em}{\normalsize\sc}}
+\def\@begintheorem#1#2{\sl \trivlist \item[\hskip \labelsep{\sc #1\ #2.}]}
+\def\@opargbegintheorem#1#2#3{\sl \trivlist
+      \item[\hskip \labelsep{\sc #1\ #2.\ (#3)}]}
+\def\leftthmnumber{%
+\gdef\@begintheorem##1##2{\sl \trivlist \item[\hskip \labelsep{\sc ##2. ##1.}]}
+\gdef\@opargbegintheorem##1##2##3{\sl \trivlist
+      \item[\hskip \labelsep{\sc ##2. ##1\ (##3).}]}}
+%\def\proof{\@ifnextchar[{\@proofa}{\@proof}}
+%\def\@proof{\par\smallskip\noindent{\sc Proof.\hspace{1ex}}}
+%\def\@proofa[#1]{\par\smallskip\noindent{\sc #1.\hspace{1ex}}}
+%\def\endproof{\hfill$\Box$\par\smallskip}
+\def\appendix{\par
+ \setcounter{section}{0}
+ \setcounter{subsection}{0}
+ \def\thesection{\Alph{section}}}
+\def\secappendix{\par\setcounter{subsection}{0}
+	\def\thesubsection{\thesection.\Alph{subsection}}}
+\let\old@section=\section
+\def\section{\def\thesubsection{\thesection.\arabic{subsection}}\old@section}
+\@ifundefined{thechapter}{}{
+	\def\thechapter{\arabic{chapter}}
+	\def\chapappendix{\par\setcounter{section}{0}
+		\def\thesection{\thechapter.\Alph{section}}}
+	\let\old@chapter=\chapter
+	\def\chapter{\def\thesection{\thechapter.\arabic{section}}\old@chapter}
+}
+\def\abstract{\if@twocolumn
+\section*{Abstract}
+\else \small
+\begin{center}
+{\normalfont\sc Abstract\vspace{-.5em}\vspace{0pt}}
+\end{center}
+\quotation
+\fi}
+\def\endabstract{\if@twocolumn\else\endquotation\fi}
+
+\def\ps@draft{\let\@mkboth\@gobbletwo
+	\let\@oddhead\@empty
+	\def\@oddfoot{\reset@font\rm Draft as of \today\hfil\thepage}
+	\let\@evenhead\@empty
+	\let\@evenfoot\@oddfoot}

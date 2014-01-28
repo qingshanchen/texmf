@@ -1,0 +1,22 @@
+%Filename: omsmdugm.fd
+%Created by: tex makevp
+%Created using fontinst v1.926
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{omsmdugm.fd}
+   [2005/05/03 Fontinst v1.926 font definitions for OMS/mdugm.]
+
+\DeclareFontFamily{OMS}{mdugm}{\skewchar \font =48}
+
+\DeclareFontShape{OMS}{mdugm}{m}{n}{
+   <-> mdugmr7y
+}{}
+
+\DeclareFontShape{OMS}{mdugm}{b}{n}{
+   <-> mdugmm7y
+}{}
+
+\DeclareFontShape{OMS}{mdugm}{bx}{n}{<->ssub * mdugm/b/n}{}
+
+\endinput

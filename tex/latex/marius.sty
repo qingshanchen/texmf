@@ -1,0 +1,17 @@
+% Package created 2006/10/19 by Marius Kleiner <marius.kleiner@epfl.ch>
+%
+% This package is (normally) included from all my latex files. It has some
+% frequently used definitions and loads some packages
+%
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{marius}[2006/10/19 Standard stuff package by MK]
+
+% Commands
+\newcommand{\ie}{\emph{i.e.}}
+\newcommand{\eg}{\emph{e.g.}}
+\newcommand{\abbr}[1]{{\rm \textsc{\MakeLowercase{#1}}}}
+
+% Font stuff (set T1 encoding and load accompanying fonts)
+\RequirePackage[T1]{fontenc}
+\RequirePackage{lmodern}
+\RequirePackage{textcomp}

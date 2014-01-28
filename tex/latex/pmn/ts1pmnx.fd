@@ -1,0 +1,45 @@
+%Filename: ts1pmnx.fd
+%Created by: tex inst
+%Created using fontinst v1.926
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{ts1pmnx.fd}
+   [2003/12/01 Fontinst v1.926 font definitions for TS1/pmnx.]
+
+\DeclareFontFamily{TS1}{pmnx}{}
+
+\DeclareFontShape{TS1}{pmnx}{m}{n}{
+   <-17> pmnr9c
+   <17-> pmnrd9c
+}{}
+
+\DeclareFontShape{TS1}{pmnx}{m}{it}{
+   <-17> pmnri9c
+   <17-> pmnrid9c
+}{}
+
+\DeclareFontShape{TS1}{pmnx}{sb}{n}{
+   <-> pmns9c
+}{}
+
+\DeclareFontShape{TS1}{pmnx}{sb}{it}{
+   <-> pmnsi9c
+}{}
+
+\DeclareFontShape{TS1}{pmnx}{b}{n}{
+   <-> pmnb9c
+}{}
+
+\DeclareFontShape{TS1}{pmnx}{b}{it}{
+   <-> pmnbi9c
+}{}
+
+\DeclareFontShape{TS1}{pmnx}{m}{sl}{<->ssub * pmnx/m/it}{}
+\DeclareFontShape{TS1}{pmnx}{sb}{sl}{<->ssub * pmnx/sb/it}{}
+\DeclareFontShape{TS1}{pmnx}{b}{sl}{<->ssub * pmnx/b/it}{}
+\DeclareFontShape{TS1}{pmnx}{bx}{sl}{<->ssub * pmnx/b/it}{}
+\DeclareFontShape{TS1}{pmnx}{bx}{n}{<->ssub * pmnx/b/n}{}
+\DeclareFontShape{TS1}{pmnx}{bx}{it}{<->ssub * pmnx/b/it}{}
+
+\endinput

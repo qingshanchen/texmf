@@ -1,0 +1,1818 @@
+% MTP.TEX  VERSION 4.0 (September 2004)
+% COPYRIGHT (C) 1992, 1993, 2000, 2002, 2004 BY PUBLISH OR PERISH, INC.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Comments in boxes, like this, are for those designing their own style files. %%
+%% The first two lines of mtp.tex save the initial category codes of " and @.   %%
+%% They may be deleted in your own style file, since you presumably know them.  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\expandafter\edef\csname qqcode\string @\endcsname{\the\catcode`\"}
+\expandafter\edef\csname atcode\string @\endcsname{\the\catcode`\@}
+
+% We used \csname...\endcsname and \string @, because we can't make @ a letter
+% until we've stored its old category code.
+
+% Prevent file from being read twice, by testing if \s@b@ hasn't yet been defined
+% (and subsequently let \s@b@ be type 8 _ ). 
+
+\expandafter\ifx\csname s\string @b\string @\endcsname\relax\else\endinput\fi
+\catcode`\@=11
+\catcode`\"=12   
+\catcode`\_=8
+\let\s@b@=_
+
+% We need _ active in math, so it can insert corrections in some subscripts.
+% \space@ is a token that has been let equal to a space.
+
+\def\space@.{\futurelet\space@\relax}
+\space@. %  % We must have the space after the period, not a new line.
+\catcode`\_=12
+\mathcode`\_="8000
+\begingroup
+ \catcode`\_=\active
+ \gdef_#1{\s@b@{\futurelet\next\s@b@@#1}}
+\endgroup
+\def\s@b@@{%
+ \ifx\next\space@\def\next@. {\futurelet\next\s@b@@}\else
+  \def\next@.{%
+   \ifx\next f\mkern-\thr@@ mu\else
+   \ifx\next j\mkern-\tw@ mu\else
+   \ifx\next p\mkern-\tw@ mu\else
+   \ifx\next t\mkern\@ne mu\else
+   \ifx\next y\mkern-\@ne mu\else
+   \ifx\next A\mkern-\tw@ mu\else
+   \ifx\next B\mkern-\@ne mu\else
+   \ifx\next D\mkern-\@ne mu\else
+   \ifx\next H\mkern-\@ne mu\else
+   \ifx\next I\mkern-\@ne mu\else
+   \ifx\next K\mkern-\@ne mu\else
+   \ifx\next L\mkern-\@ne mu\else
+   \ifx\next M\mkern-\@ne mu\else
+   \ifx\next P\mkern-\@ne mu\else
+   \ifx\next X\mkern-\tw@ mu\else
+   \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi}%
+ \fi
+ \next@.}
+
+% New definitions for characters on MTMI... fonts
+
+\mathchardef\Gamma="0180
+\mathchardef\Delta="0181
+\mathchardef\Theta="0182
+\mathchardef\Lambda="0183
+\mathchardef\Xi="0184
+\mathchardef\Pi="0185
+\mathchardef\Sigma="0186
+\mathchardef\Upsilon="0187
+\mathchardef\Phi="0188
+\mathchardef\Psi="0189
+\mathchardef\Omega="017F
+\mathchardef\varGamma="0100
+\mathchardef\varDelta="0101
+\mathchardef\varTheta="0102
+\mathchardef\varLambda="0103
+\mathchardef\varXi="0104
+\mathchardef\varPi="0105
+\mathchardef\varSigma="0106
+\mathchardef\varUpsilon="0107
+\mathchardef\varPhi="0108
+\mathchardef\varPsi="0109
+\mathchardef\varOmega="010A
+\mathchardef\varkappa="017E
+\mathchardef\upalpha="0192
+\mathchardef\upbeta="0193
+\mathchardef\upgamma="0194
+\mathchardef\updelta="0195
+\mathchardef\upepsilon="0196
+\mathchardef\upzeta="0197
+\mathchardef\upeta="0198
+\mathchardef\uptheta="0199
+\mathchardef\upiota="019A
+\mathchardef\upkappa="019B
+\mathchardef\uplambda="019C
+\mathchardef\upmu="019D
+\mathchardef\upnu="019E
+\mathchardef\upxi="019F
+\mathchardef\uppi="01A0
+\mathchardef\uprho="01A1
+\mathchardef\upsigma="01A2
+\mathchardef\uptau="01A3
+\mathchardef\upupsilon="01A4
+\mathchardef\upphi="01A5
+\mathchardef\upchi="01A6
+\mathchardef\uppsi="01A7
+\mathchardef\upomega="01A8
+\mathchardef\upvarepsilon="01A9
+\mathchardef\upvartheta="01AA
+\mathchardef\upvarpi="01AB
+\mathchardef\upvarrho="01AC
+\mathchardef\upvarsigma="01AD
+\mathchardef\upvarphi="01AE
+\mathchardef\upvarkappa="01AF
+\mathchardef\varbeta="01B0
+\mathchardef\upvarbeta="01B1
+\mathchardef\vardelta="01B2
+\mathchardef\upvardelta="01B3
+
+\mathchardef\openclubsuit="0280
+\mathchardef\shadedclubsuit="0281
+\mathchardef\openspadesuit="0282
+\mathchardef\shadedspadesuit="0283
+\mathcode`\(="412E
+\mathcode`\)="512F
+\delcode`\(="12E300
+\delcode`\)="12F301
+\mathcode`\.="013A
+\mathchardef\ldotp="613A
+\mathcode`\,="613B
+\mathcode`\!="518A
+\mathcode`\?="518B
+\mathcode`\[="418C
+\mathcode`\]="518D
+\mathcode`\0="7130
+\mathcode`\1="7131
+\mathcode`\2="7132
+\mathcode`\3="7133
+\mathcode`\4="7134
+\mathcode`\5="7135
+\mathcode`\6="7136
+\mathcode`\7="7137
+\mathcode`\8="7138
+\mathcode`\9="7139
+\def\dag{\mathhexbox18E}
+\def\ddag{\mathhexbox18F}
+\def\S{\mathhexbox190}
+\def\P{\mathhexbox191}
+\mathchardef\dagger="218E
+\mathchardef\ddagger="218F
+
+% Macro to construct \mathstrut properly (and \Mathstrut@ and \ex@ for AmS-TeX, as
+% well as \newmu@, used later on to get \Hat, etc, defined properly).
+
+\def\usingMTPsizes#1#2#3{%
+ \dimen@#1\relax
+ \ifx\amstexloaded@\relax
+  \ht\Mathstrutbox@.75\dimen@
+  \dp\Mathstrutbox@.25\dimen@
+  \setboxz@h{x\dimen@.2326ex\xdef\Ex@{\the\dimen@}}%
+  \ex@\Ex@
+  \setboxz@h{$\mkern1mu$}\newmu@=\@M\wd\z@
+ \fi
+ \dimen@ii=.38\dimen@
+ \dimen@=.72\dimen@
+ \edef\tmathstrut@{\vrule height \the\dimen@ depth \the\dimen@ii width\z@}%
+ \dimen@#2\relax
+ \dimen@ii=.22\dimen@
+ \dimen@=.78\dimen@
+ \edef\smathstrut@{\vrule height \the\dimen@ depth \the\dimen@ii width\z@}%
+ \dimen@#3\relax
+ \dimen@ii=.23\dimen@
+ \dimen@=.76\dimen@
+ \edef\fmathstrut@{\vrule height \the\dimen@ depth \the\dimen@ii width\z@}%
+ \def\mathstrut{\mathchoice{\tmathstrut@}{\tmathstrut@}{\smathstrut@}%
+   {\fmathstrut@}}%
+}
+
+% Old style numbers are no longer on the math italic font. (Calligraphic letters
+% are also not on the math symbol font, but we will allow calligraphic letters later.)
+
+\let\mit=\undefined
+\let\oldstyle=\undefined
+\ifx\amstexloaded@\relax
+ \let\oldnos=\undefined
+\fi
+
+% Definitions for characters on MTSY... fonts
+
+\mathchardef\triangleleft="2247
+\mathchardef\triangleright="2246
+\def\vec{\mathaccent"0245 }
+\ifx\amstexloaded@\relax
+ \def\t#1#2{{\edef\next@{\the\font}\textfontii\accent"41 \next@#1#2}}
+\else
+ \def\t#1{{\edef\next{\the\font}\the\textfont2\accent"41\next#1}}
+\fi
+\mathchardef\comp="2242
+\mathchardef\setdif="2258
+\mathchardef\cupprod="2259
+\mathchardef\capprod="225A
+\mathcode`\+="2243
+\mathcode`\=="3244
+\mathchardef\Relbar="3248
+\mathcode`\;="6249
+\mathcode`\:="3257
+\mathchardef\colon="6257
+
+% Individually designed characters for ones that used to be built up from pieces
+
+\mathchardef\hbar="0284
+\mathchardef\notin="3285
+\mathchardef\angle="0286
+\mathchardef\doteq="3287
+\mathchardef\models="3288
+\mathchardef\bowtie="3289
+\mathchardef\cong="328A
+\mathchardef\hookleftarrow="328B
+\mathchardef\hookrightarrow="328C
+\mathchardef\longleftarrow="328D
+\mathchardef\longrightarrow="328E
+\mathchardef\Longleftarrow="328F
+\mathchardef\Longrightarrow="3290
+\mathchardef\mapsto="3291
+\mathchardef\longmapsto="3292
+\mathchardef\longleftrightarrow="3293
+\mathchardef\Longleftrightarrow="3294
+\mathchardef\rightleftharpoons="3295
+\mathchardef\notless="3296
+\let\nless=\notless
+\mathchardef\notleq="3297
+\let\nleq=\notleq
+\mathchardef\notprec="3298
+\let\nprec=\notprec
+\mathchardef\notpreceq="3299
+\let\npreceq=\notpreceq
+\mathchardef\notsubset="329A
+\let\nsubset=\notsubset
+\mathchardef\notsubseteq="329B
+\let\nsubseteq=\notsubseteq
+\mathchardef\notsqsubseteq="329C
+\let\nsqsubseteq=\notsqsubseteq
+\mathchardef\notgr="329D
+\let\ngtr=\notgr
+\mathchardef\notgeq="329E
+\let\ngeq=\notgeq
+\mathchardef\notsucc="329F
+\let\nsucc=\notsucc
+\mathchardef\notsucceq="32A0
+\let\nsucceq=\notsucceq
+\mathchardef\notsupset="32A1
+\let\nsupset=\notsupset
+\mathchardef\notsupseteq="32A2
+\let\nsupseteq=\notsupseteq
+\mathchardef\notsqsupseteq="32A3
+\let\nsqsupseteq=\notsqsupseteq
+\mathchardef\neq="32A4 \let\ne=\neq
+\mathchardef\notequiv="32A5
+\mathchardef\notsim="32A6
+\mathchardef\notsimeq="32A7
+\mathchardef\notapprox="32A8
+\mathchardef\notcong="32A9
+\mathchardef\notasymp="32AA
+
+% We redefine how ' and '' and ''', etc.,  work, so that there will be
+% extra space before the first ' mark.  Also, for constructions like
+% f''^3, we want extra space after the last prime.  Spacing is determined
+% by counters \firstprimesep and \nonprimesep, initially set to have the
+% values 2 and 7.
+
+\newif\iffirstprime@
+\newdimen\emcent@
+\emcent@=.01em
+\newcount\firstprimesep
+\firstprimesep=2
+{\catcode`\'=\active \gdef'{^\bgroup\firstprime@true\prim@s}}
+\def\prim@s{\iffirstprime@\kern\firstprimesep\emcent@\fi
+  \prime\firstprime@false\futurelet\next\pr@m@s}
+\newcount\nonprimesep
+\nonprimesep=7
+\def\pr@m@s{\ifx'\next\def\next@##1{\prim@s}\else
+ \ifx^\next\def\next@##1##2{\kern\nonprimesep\emcent@##2\egroup}\else
+ \let\next@\egroup\fi\fi\next@}   
+
+% The accents on MTSY... fonts are not in same position as on the text fonts.
+% We store old values, in case they come from amstex, so aren't simply \mathaccent... 
+
+\let\@grave@\grave
+\let\@acute@\acute
+\let\@check@\check
+\let\@breve@\breve
+\let\@bar@\bar
+\let\@hat@\hat
+\let\@dot@\dot
+\let\@tilde@\tilde
+\let\@ddot@\ddot
+\def\grave{\ifnum\fam=\m@ne\mathaccent"024A \else\@grave@\fi}
+\def\acute{\ifnum\fam=\m@ne\mathaccent"024B \else\@acute@\fi}
+\def\check{\ifnum\fam=\m@ne\mathaccent"024C \else\@check@\fi}
+\def\breve{\ifnum\fam=\m@ne\mathaccent"024D \else\@breve@\fi}
+\def\bar{\ifnum\fam=\m@ne\mathaccent"024E \else\@bar@\fi}
+\def\hat{\ifnum\fam=\m@ne\mathaccent"024F \else\@hat@\fi}
+\def\dot{\ifnum\fam=\m@ne\mathaccent"0250 \else\@dot@\fi}
+\def\tilde{\ifnum\fam=\m@ne\mathaccent"0251 \else\@tilde@\fi}
+\def\ddot{\ifnum\fam=\m@ne\mathaccent"0252 \else\@ddot@\fi}
+\def\dddot{\mathaccent"02AB }
+\def\ddddot{\mathaccent"02AC }
+\def\dddotup{\mathaccent"02AD}
+\def\ddddotup{\mathaccent"02AE }
+\mathchardef\digamma="02B1 
+\def\yen{\ifmmode\mathchar"02B0\else\mathhexbox2B0\fi}
+\mathchardef\hslash="02AF
+
+% New definitions for the Ams-TeX constructions \Hat, ...  (The command
+% \usingMTPsizes resets \newmu@ for fonts not loaded at their design size).
+
+\ifx\amstexloaded@\relax
+ \alloc@1\dimen\dimendef\insc@unt\newmu@ % can't say \newcount@, since that's \outer
+ \newmu@5555\p@
+ \def\dimentomu@{%
+  \multiply\accentdimen@100
+  \expandafter\getpoints@\the\accentdimen@\getpoints@
+  \multiply\pointcount@18
+  \divide\pointcount@\@m
+  \dimen@\newmu@
+  \dimen@ii5555\p@
+  \divide\dimen@\dimen@ii
+  \divide\pointcount@\dimen@
+  \global\accentmu@\pointcount@
+  }%
+ \Makeacc@\Hat{24F}%
+ \Makeacc@\Check{24C}%
+ \Makeacc@\Tilde{251}%
+ \Makeacc@\Acute{24B}%
+ \Makeacc@\Grave{24A}%
+ \Makeacc@\Dot{250}%
+ \Makeacc@\Ddot{252}%
+ \Makeacc@\Dotup{254}%
+ \Makeacc@\Ddotup{255}%
+ \Makeacc@\Breve{24D}%
+ \Makeacc@\Bar{24E}%
+ \Makeacc@\Wbar{278 }%
+ \Makeacc@\Wwbar{253 }%
+ \Makeacc@\What{279 }%
+ \Makeacc@\Wtilde{27A }%
+ \Makeacc@\Wcheck{27B }%
+ \Makeacc@\Wwhat{380 }%
+ \Makeacc@\Wwtilde{381 }%
+ \Makeacc@\Wwcheck{37D }%
+ \Makeacc@\Oacc{256}%
+ \Makeacc@\Dddot{2AB }
+ \Makeacc@\Ddddot{2AC }
+ \Makeacc@\Dddotup{2AD}
+ \Makeacc@\Ddddotup{2AE }
+ \def\Vec{\relax\ifmmode\DN@{\mathaccent@{"0245 }}\else %%% Can't use \RIfM@ here!!!
+  \DN@{\nonmatherr@\Vec}\fi\next@}%
+\fi
+
+% We set up the mechanism to allow use of \cal.
+
+% We use \alloc@@ instead of \alloc@ so that data for \Calfam and \mbffam are not written
+% to the log file (also can't use \newfam in definition of \usecal, since it's \outer).
+
+\def\alloc@@#1#2#3#4#5{\global\advance\count1#1by\@ne
+ \ch@ck#1#4#2\allocationnumber=\count1#1
+ \global#3#5=\allocationnumber}
+\newfam\mbffam
+\def\usecal{%
+ \ifx\Calfam\undefined
+  \alloc@@8\fam\chardef\sixt@@n\Calfam
+ \fi
+ \def\cal{\fam\Calfam}%
+ \ifx\amstexloaded@\relax
+  \def\Cal@@##1{\noaccents@\fam\Calfam##1}%                     
+ \fi
+}
+
+% Make sure that periods in math constructions come from the new math fonts,
+% not the text fonts.
+
+\def\vdots{\vbox{\baselineskip4\p@\lineskiplimit\z@
+ \kern6\p@\hbox{$\m@th.$}\hbox{$\m@th.$}\hbox{$\m@th.$}}}
+\def\ddots{\mathinner{\mkern1mu\raise7\p@\vbox{\kern7\p@
+ \hbox{$\m@th.$}}\mkern2mu
+ \raise4\p@\hbox{$\m@th.$}\mkern2mu\raise\p@\hbox{$\m@th.$}\mkern1mu}}
+
+% Similarly for AmS-TeX, making sure letters come from \textfont0. 
+
+\ifx\amstexloaded@\relax
+ \def\varinjlim{\mathop{\vtop{\ialign{##\crcr
+  \hfil\the\textfont\z@ lim\hfil\crcr
+  \noalign{\nointerlineskip}\rightarrowfill\crcr
+  \noalign{\nointerlineskip\kern-\ex@}\crcr}}}}
+ \def\varprojlim{\mathop{\vtop{\ialign{##$$\crcr
+  \hfil\the\textfont\z@ lim\hfil\crcr
+  \noalign{\nointerlineskip}\leftarrowfill\crcr
+  \noalign{\nointerlineskip\kern-\ex@}\crcr}}}}
+ \def\varliminf{\mathop{\underline{\vrule height\z@ depth.2ex width\z@
+  \hbox{\the\textfont\z@ lim}}}}
+ \def\varlimsup{\mathop{\overline{\hbox{\the\textfont\z@ lim}}}}
+ \def\spdot{^{\hbox{\raise\ex@\hbox{$\m@th.$}}}}
+ \def\spddot{^{\hbox{\raise\ex@\hbox{$\m@th..$}}}}
+ \def\spdddot{^{\hbox{\raise\ex@\hbox{$\m@th...$}}}}
+ \def\spddddot{^{\hbox{\raise\ex@\hbox{$\m@th....$}}}}
+\fi
+
+% Allow \uproot and \leftroot with \sqrt and \root.  The position 
+% of the root is more complicated than in plain TeX, mainly 
+% because there are several different fonts contributing radicals.
+
+\newcount\uproot@
+\newcount\leftroot@
+\ifx\amstexloaded@\relax\else  
+ \def\nonmatherr@#1{\errmessage{\noexpand#1allowed only in math mode}}
+\fi
+\def\uproot#1{\relax\ifmmode\uproot@#1\relax\else\nonmatherr@\uproot\fi}
+\def\leftroot#1{\relax\ifmmode\leftroot@#1\relax\else\nonmatherr@\leftroot\fi}
+\def\UPROOT#1{\relax\ifmmode\uproot@#1\relax\else\nonmatherr@\UPROOT\fi}
+\def\LEFTROOT#1{\relax\ifmmode\leftroot@#1\relax\else\nonmatherr@\LEFTROOT\fi}
+\def\root#1\of#2{\setbox\rootbox\hbox{$\m@th\scriptscriptstyle{#1}$}%
+ \mathpalette\r@@t{#2}}
+\def\r@@t#1#2{\setbox\z@\hbox{$\uproot@\z@\leftroot\z@\m@th#1\sqrt{#2}$}%
+ \dimen@\ht\z@\advance\dimen@-\dp\z@
+ \dimen@ii\dimen@
+  \ifdim\dimen@>30\p@\advance\dimen@ii-\sixt@@n\p@\else
+  \ifdim\dimen@>24\p@\advance\dimen@ii-8\p@\else
+  \ifdim\dimen@>18\p@\advance\dimen@ii-6\p@\else
+  \ifdim\dimen@>12\p@\advance\dimen@ii-4\p@\else
+  \ifdim\dimen@>10\p@\advance\dimen@ii-\tw@\p@\fi\fi\fi\fi\fi
+ \setbox\tw@\hbox{$\m@th#1\mskip\uproot@ mu$}\advance\dimen@ii by1.667\wd\tw@
+ \mkern-\leftroot@ mu\mkern5mu\raise.6\dimen@ii\copy\rootbox
+ \mkern-8mu\mkern\leftroot@ mu\box\z@\leftroot\z@\uproot\z@}
+
+% Extra symbols provided; some are on symbol fonts, some on first extension font.
+
+\def\dotup{\mathaccent"0254 }
+\def\ddotup{\mathaccent"0255 }
+\def\oacc{\mathaccent"0256 }
+\let\mathring=\oacc
+\def\wbar{\mathaccent"0278 }
+\def\wwbar{\mathaccent"0253 }
+\def\what{\mathaccent"0279 }
+\def\wtilde{\mathaccent"027A }
+\def\wcheck{\mathaccent"027B }
+\def\wwhat{\mathaccent"0380 }%
+\def\wwtilde{\mathaccent"0381 }%
+\def\wwcheck{\mathaccent"037D }%
+\mathchardef\bigcupprod="138E
+\mathchardef\bigcapprod="1390
+\mathchardef\iintop="1392    \def\iint{\iintop\nolimits}
+\mathchardef\iiintop="1394   \def\iiint{\iiintop\nolimits}
+\mathchardef\oiintop="1396   \def\oiint{\oiintop\nolimits}
+\mathchardef\oiiintop="1398  \def\oiiint{\oiiintop\nolimits}
+\mathchardef\cwointop="139A  \def\cwoint{\cwointop\nolimits}
+\mathchardef\awointop="139C  \def\awoint{\awointop\nolimits}
+\mathchardef\cwintop="139E   \def\cwint{\cwintop\nolimits}
+
+
+% Parts for braces are in different places on the first extension font
+% and we use specifically designed middles, instead of trying to construct
+% them out of end pieces.
+
+\mathchardef\mbraceu="386
+\mathchardef\mbraced="387
+\mathchardef\braceld="382
+\mathchardef\bracerd="383
+\mathchardef\bracelu="384
+\mathchardef\braceru="385
+\def\downbracefill{$\m@th\braceld\leaders\vrule\hfill\mbraced
+  \leaders\vrule\hfill\bracerd$}%
+\def\upbracefill{$\m@th\bracelu\leaders\vrule\hfill\mbraceu
+  \leaders\vrule\hfill\braceru$}%
+\def\lmoustache{\delimiter"4382389 }
+\def\rmoustache{\delimiter"538338A }
+\def\lgroup{\delimiter"412E33A } 
+\def\rgroup{\delimiter"512F33B } 
+\def\bracevert{\delimiter"38D38D } 
+
+% Now come the macros for the bold fonts.
+
+\def\hexnumber@#1{\ifcase#1 0\or 1\or 2\or 3\or 4\or 5\or 6\or 7\or 8\or
+ 9\or A\or B\or C\or D\or E\or F\fi}
+
+\def\bm{\futurelet\next\bm@}%
+\def\bm@{\ifx\next'\def\next@##1{\bprime@}\else
+ \ifcat\noexpand\next A\def\next@##1{{\fam\mtbmi@\relax\next}}\else
+ \ifcat\noexpand\next0\def\next@{\bm@@}\else
+ \def\next@{\errmessage{Invalid use of \string\bm}}\fi\fi\fi
+ \next@}
+
+\newcount\firstbprimesep
+\firstbprimesep=2
+\def\bprime@{^\bgroup\firstprime@true\bprim@s}
+\def\bprim@s{\iffirstprime@\kern\firstbprimesep\emcent@\fi
+  \bmprime\firstprime@false\futurelet\next\bpr@m@s}
+\newcount\nonbprimesep
+\nonbprimesep=7
+\def\bpr@m@s{\ifx'\next\def\next@##1{\bprim@s}\else
+ \ifx^\next\def\next@##1##2{\kern\nonbprimesep\emcent@##2\egroup}\else
+ \let\next@\egroup\fi\fi\next@}
+
+\newif\ifnumeral@
+\newcount\codecount@
+
+\def\bm@@#1{%
+ \codecount@=`#1\relax
+ \numeral@false
+ \ifnum\codecount@>47 \ifnum\codecount@<58 \numeral@true\fi\fi
+ \ifnumeral@
+  {\fam\mtbmi@\relax#1}%
+ \else
+  \ifx#1+\mathchar"2\mtbsy@@43
+  \else\ifx#1-\mathchar"2\mtbsy@@00
+  \else\ifx#1=\mathchar"3\mtbsy@@44
+  \else\ifx#1<\mathchar"3\mtbmi@@3C
+  \else\ifx#1>\mathchar"3\mtbmi@@3E
+  \else\ifx#1/\mathchar"0\mtbmi@@3D
+  \else\ifx#1(\mathchar"4\mtbmi@@2E
+  \else\ifx#1)\mathchar"5\mtbmi@@2F
+  \else\ifx#1[\mathchar"4\mtbmi@@8C
+  \else\ifx#1]\mathchar"5\mtbmi@@8D
+  \else\ifx#1|\mathchar"0\mtbsy@@6A
+  \else\ifx#1*\mathchar"2\mtbsy@@03
+  \else\ifx#1.\mathchar"0\mtbmi@@3A
+  \else\ifx#1,\mathchar"6\mtbmi@@3B
+  \else\ifx#1;\mathchar"6\mtbsy@@49 
+  \else\ifx#1:\mathchar"3\mtbsy@@57
+  \else\ifx#1!\mathchar"5\mtbmi@@8A
+  \else\ifx#1?\mathchar"5\mtbmi@@8B
+  \else\errmessage{Invalid use of \string\bm}%
+  \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
+\fi}
+\def\bmdefs@{%
+ \mathchardef\bmvarGamma="0\mtbmi@@00
+ \mathchardef\bmvarDelta="0\mtbmi@@01
+ \mathchardef\bmvarTheta="0\mtbmi@@02
+ \mathchardef\bmvarLambda="0\mtbmi@@03
+ \mathchardef\bmvarXi="0\mtbmi@@04
+ \mathchardef\bmvarPi="0\mtbmi@@05
+ \mathchardef\bmvarSigma="0\mtbmi@@06
+ \mathchardef\bmvarUpsilon="0\mtbmi@@07
+ \mathchardef\bmvarPhi="0\mtbmi@@08
+ \mathchardef\bmvarPsi="0\mtbmi@@09
+ \mathchardef\bmvarOmega="0\mtbmi@@0A
+ \mathchardef\bmGamma="0\mtbmi@@80
+ \mathchardef\bmDelta="0\mtbmi@@81
+ \mathchardef\bmTheta="0\mtbmi@@82
+ \mathchardef\bmLambda="0\mtbmi@@83
+ \mathchardef\bmXi="0\mtbmi@@84
+ \mathchardef\bmPi="0\mtbmi@@85
+ \mathchardef\bmSigma="0\mtbmi@@86
+ \mathchardef\bmUpsilon="0\mtbmi@@87
+ \mathchardef\bmPhi="0\mtbmi@@88
+ \mathchardef\bmPsi="0\mtbmi@@89
+ \mathchardef\bmOmega="0\mtbmi@@7F
+ \mathchardef\bmalpha="0\mtbmi@@0B
+ \mathchardef\bmbeta="0\mtbmi@@0C
+ \mathchardef\bmgamma="0\mtbmi@@0D
+ \mathchardef\bmdelta="0\mtbmi@@0E
+ \mathchardef\bmepsilon="0\mtbmi@@0F
+ \mathchardef\bmzeta="0\mtbmi@@10
+ \mathchardef\bmeta="0\mtbmi@@11
+ \mathchardef\bmtheta="0\mtbmi@@12
+ \mathchardef\bmiota="0\mtbmi@@13
+ \mathchardef\bmkappa="0\mtbmi@@14
+ \mathchardef\bmlambda="0\mtbmi@@15
+ \mathchardef\bmmu="0\mtbmi@@16
+ \mathchardef\bmnu="0\mtbmi@@17
+ \mathchardef\bmxi="0\mtbmi@@18
+ \mathchardef\bmpi="0\mtbmi@@19
+ \mathchardef\bmrho="0\mtbmi@@1A
+ \mathchardef\bmsigma="0\mtbmi@@1B
+ \mathchardef\bmtau="0\mtbmi@@1C
+ \mathchardef\bmupsilon="0\mtbmi@@1D
+ \mathchardef\bmphi="0\mtbmi@@1E
+ \mathchardef\bmchi="0\mtbmi@@1F
+ \mathchardef\bmpsi="0\mtbmi@@20
+ \mathchardef\bmomega="0\mtbmi@@21
+ \mathchardef\bmvarepsilon="0\mtbmi@@22
+ \mathchardef\bmvartheta="0\mtbmi@@23
+ \mathchardef\bmvarpi="0\mtbmi@@24
+ \mathchardef\bmvarrho="0\mtbmi@@25
+ \mathchardef\bmvarsigma="0\mtbmi@@26
+ \mathchardef\bmvarphi="0\mtbmi@@27
+ \mathchardef\bmvarkappa="0\mtbmi@@7E
+ \mathchardef\bmleftharpoonup="3\mtbmi@@28
+ \mathchardef\bmleftharpoondown="3\mtbmi@@29
+ \mathchardef\bmrightharpoonup="3\mtbmi@@2A
+ \mathchardef\bmrightharpoondown="3\mtbmi@@2B
+ \def\bmlparens{\delimiter"\mtbmi@@2E\mtbex@@00 }%
+ \def\bmrparens{\delimiter"\mtbmi@@2F\mtbex@@01 }%
+ \def\bmslash{\delimiter"\mtbmi@@3D\mtbex@@0E }%
+ \mathchardef\bmstar="2\mtbmi@@3F
+ \mathchardef\bmpartial="0\mtbmi@@40
+ \mathchardef\bmflat="0\mtbmi@@5B
+ \mathchardef\bmnatural="0\mtbmi@@5C
+ \mathchardef\bmsharp="0\mtbmi@@5D
+ \mathchardef\bmsmile="3\mtbmi@@5E
+ \mathchardef\bmfrown="3\mtbmi@@5F
+ \mathchardef\bmell="0\mtbmi@@60
+ \mathchardef\bmimath="0\mtbmi@@7B
+ \mathchardef\bmjmath="0\mtbmi@@7C
+ \mathchardef\bmwp="0\mtbmi@@7D
+ \def\bmlbrack{\delimiter"4\mtbmi@@8C\mtbex@@02 }%
+ \def\bmrbrack{\delimiter"5\mtbmi@@8D\mtbex@@03 }%
+ \mathchardef\bmdagger="2\mtbmi@@8E
+ \mathchardef\bmddagger="2\mtbmi@@8F
+ \mathchardef\bmupalpha="0\mtbmi@@92
+ \mathchardef\bmupbeta="0\mtbmi@@93
+ \mathchardef\bmupgamma="0\mtbmi@@94
+ \mathchardef\bmupdelta="0\mtbmi@@95
+ \mathchardef\bmupepsilon="0\mtbmi@@96
+ \mathchardef\bmupzeta="0\mtbmi@@97
+ \mathchardef\bmupeta="0\mtbmi@@98
+ \mathchardef\bmuptheta="0\mtbmi@@99
+ \mathchardef\bmupiota="0\mtbmi@@9A
+ \mathchardef\bmupkappa="0\mtbmi@@9B
+ \mathchardef\bmuplambda="0\mtbmi@@9C
+ \mathchardef\bmupmu="0\mtbmi@@9D
+ \mathchardef\bmupnu="0\mtbmi@@9E
+ \mathchardef\bmupxi="0\mtbmi@@9F
+ \mathchardef\bmuppi="0\mtbmi@@ A0
+ \mathchardef\bmuprho="0\mtbmi@@ A1
+ \mathchardef\bmupsigma="0\mtbmi@@ A2
+ \mathchardef\bmuptau="0\mtbmi@@ A3
+ \mathchardef\bmupupsilon="0\mtbmi@@ A4
+ \mathchardef\bmupphi="0\mtbmi@@ A5
+ \mathchardef\bmupchi="0\mtbmi@@ A6
+ \mathchardef\bmuppsi="0\mtbmi@@ A7
+ \mathchardef\bmupomega="0\mtbmi@@ A8
+ \mathchardef\bmupvarepsilon="0\mtbmi@@ A9
+ \mathchardef\bmupvartheta="0\mtbmi@@ AA
+ \mathchardef\bmupvarpi="0\mtbmi@@ AB
+ \mathchardef\bmupvarrho="0\mtbmi@@ AC
+ \mathchardef\bmupvarsigma="0\mtbmi@@ AD
+ \mathchardef\bmupvarphi="0\mtbmi@@ AE
+ \mathchardef\bmupvarkappa="0\mtbmi@@ AF
+ \mathchardef\bmcdot="2\mtbsy@@01
+ \mathchardef\bmtimes="2\mtbsy@@02
+ \mathchardef\bmast="2\mtbsy@@03
+ \mathchardef\bmdiv="2\mtbsy@@04
+ \mathchardef\bmdiamond="2\mtbsy@@05
+ \mathchardef\bmpm="2\mtbsy@@06
+ \mathchardef\bmmp="2\mtbsy@@07
+ \mathchardef\bmoplus="2\mtbsy@@08
+ \mathchardef\bmominus="2\mtbsy@@09
+ \mathchardef\bmotimes="2\mtbsy@@0A
+ \mathchardef\bmoslash="2\mtbsy@@0B
+ \mathchardef\bmodot="2\mtbsy@@0C
+ \mathchardef\bmbigcirc="2\mtbsy@@0D
+ \mathchardef\bmcirc="2\mtbsy@@0E
+ \mathchardef\bmbullet="2\mtbsy@@0F
+ \mathchardef\bmasymp="3\mtbsy@@10
+ \mathchardef\bmequiv="3\mtbsy@@11
+ \mathchardef\bmsubseteq="3\mtbsy@@12
+ \mathchardef\bmsupseteq="3\mtbsy@@13
+ \mathchardef\bmleq="3\mtbsy@@14 \let\bmle=\bmleq
+ \mathchardef\bmgeq="3\mtbsy@@15 \let\bmge=\bmgeq
+ \mathchardef\bmpreceq="3\mtbsy@@16
+ \mathchardef\bmsucceq="3\mtbsy@@17
+ \mathchardef\bmsim="3\mtbsy@@18
+ \mathchardef\bmapprox="3\mtbsy@@19
+ \mathchardef\bmsubset="3\mtbsy@@1A
+ \mathchardef\bmsupset="3\mtbsy@@1B
+ \mathchardef\bmll="3\mtbsy@@1C
+ \mathchardef\bmgg="3\mtbsy@@1D
+ \mathchardef\bmprec="3\mtbsy@@1E
+ \mathchardef\bmsucc="3\mtbsy@@1F
+ \mathchardef\bmleftarrow="3\mtbsy@@20 \let\bmgets=\bmleftarrow
+ \mathchardef\bmrightarrow="3\mtbsy@@21 \let\bmto=\bmrightarrow
+ \def\bmuparrow{\delimiter"3\mtbsyt@@22\mtbex@@78 }%
+ \def\bmdownarrow{\delimiter"3\mtbsyt@@23\mtbex@@79 }%
+ \mathchardef\bmleftrightarrow="3\mtbsy@@24
+ \def\bmuparrow{\delimiter"3\mtbsy@@22378 }%
+ \def\bmdownarrow{\delimiter"3\mtbsy@@23379 }%
+ \mathchardef\bmnearrow="3\mtbsy@@25
+ \mathchardef\bmsearrow="3\mtbsy@@26
+ \mathchardef\bmsimeq="3\mtbsy@@27
+ \mathchardef\bmLeftarrow="3\mtbsy@@28
+ \mathchardef\bmRightarrow="3\mtbsy@@29
+ \def\bmUparrow{\delimiter"3\mtbsy@@2A\mtbex@@7E }%
+ \def\bmDownarrow{\delimiter"3\mtbsy@@2B\mtbex@@7F }%
+ \mathchardef\bmLeftrightarrow="3\mtbsy@@2C
+ \mathchardef\bmnwarrow="3\mtbsy@@2D
+ \mathchardef\bmswarrow="3\mtbsy@@2E
+ \mathchardef\bmpropto="3\mtbsy@@2F
+ \mathchardef\bmprime="0\mtbsy@@30
+ \mathchardef\bminfty="0\mtbsy@@31
+ \mathchardef\bmin="3\mtbsy@@32
+ \mathchardef\bmni="3\mtbsy@@33 \let\bmowns=\bmni
+ \mathchardef\bmbigtriangleup="2\mtbsy@@34
+ \mathchardef\bmtriangle="0\mtbsy@@34
+ \mathchardef\bmbigtriangledown="2\mtbsy@@35
+ \mathchardef\bmforall="0\mtbsy@@38
+ \mathchardef\bmexists="0\mtbsy@@39
+ \mathchardef\bmneg="0\mtbsy@@3A \let\lnot=\neg
+ \mathchardef\bmemptyset="0\mtbsy@@3B
+ \mathchardef\bmRe="0\mtbsy@@3C
+ \mathchardef\bmIm="0\mtbsy@@3D
+ \mathchardef\bmtop="0\mtbsy@@3E
+ \mathchardef\bmbot="0\mtbsy@@3F
+ \mathchardef\bmperp="3\mtbsy@@3F
+ \mathchardef\bmaleph="0\mtbsy@@40
+ \mathchardef\bmcomp="2\mtbsy@@42
+ \def\bmvec{\mathaccent"0\mtbsy@@45 }%
+ \mathchardef\bmtriangleright="2\mtbsy@@46
+ \mathchardef\bmtriangleleft="2\mtbsy@@47
+ \mathchardef\bmcolon="6\mtbsy@@57
+ \mathchardef\bmsetdif="2\mtbsy@@58
+ \mathchardef\bmcupprod="2\mtbsy@@59
+ \mathchardef\bmcapprod="2\mtbsy@@5A
+ \mathchardef\bmcup="2\mtbsy@@5B
+ \mathchardef\bmcap="2\mtbsy@@5C
+ \mathchardef\bmuplus="2\mtbsy@@5D
+ \mathchardef\bmwedge="2\mtbsy@@5E \let\bmland=\bmwedge
+ \mathchardef\bmvee="2\mtbsy@@5F \let\bmlor=\bmvee
+ \mathchardef\bmvdash="3\mtbsy@@60
+ \mathchardef\bmdashv="3\mtbsy@@61
+ \def\bmlfloor{\delimiter"4\mtbsy@@62\mtbex@@04 }%
+ \def\bmrfloor{\delimiter"5\mtbsy@@63\mtbex@@05 }%
+ \def\bmlceil{\delimiter"4\mtbsy@@64\mtbex@@06 }%
+ \def\bmrceil{\delimiter"5\mtbsy@@65\mtbex@@07 }%
+ \def\bmlbrace{\delimiter"4\mtbsy@@66\mtbex@@08 }% 
+ \def\bmrbrace{\delimiter"5\mtbsy@@67\mtbex@@09 }%
+ \def\bmlangle{\delimiter"4\mtbsy@@68\mtbex@@0A }%
+ \def\bmrangle{\delimiter"5\mtbsy@@69\mtbex@@0B }%
+ \mathchardef\bmmid="3\mtbsy@@6A
+ \def\bmvert{\delimiter"\mtbsy@@6A\mtbex@@0C }%
+ \mathchardef\bmparallel="3\mtbsy@@6B
+ \def\bmVert{\delimiter"\mtbsy@@6B\mtbex@@0D }%
+ \def\bmupdownarrow{\delimiter"3\mtbsy@@6C\mtbex@@3F }%
+ \def\bmUpdownarrow{\delimiter"3\mtbsy@@6D\mtbex@@77 }%
+ \def\bmbackslash{\delimiter"\mtbsy@@6E\mtbex@@0F }%
+ \def\bmarrowvert{\delimiter"\mtbsy@@6A\mtbex@@3C }%
+ \def\bmArrowvert{\delimiter"\mtbsy@@6\mtbex@@3D }%
+ \def\bmlgroup{\delimiter"4\mtbmi@@2E\mtbex@@3A }% 
+ \def\bmrgroup{\delimiter"5\mtbmi@@2F\mtbex@@3B }% 
+ \def\bmbracevert{\delimiter"\mtbex@@8D\mtbex@@8D }% 
+ \mathchardef\bmsetminus="2\mtbsy@@6E 
+ \mathchardef\bmwr="2\mtbsy@@6F
+ \def\bmsurd{{\mathchar"1\mtbsy@@70}}%
+ \mathchardef\bmamalg="2\mtbsy@@71
+ \mathchardef\bmnabla="0\mtbsy@@72
+ \mathchardef\bmsmallint="1\mtbsy@@73
+ \mathchardef\bmsqcup="2\mtbsy@@74
+ \mathchardef\bmsqcap="2\mtbsy@@75
+ \mathchardef\bmsqsubseteq="3\mtbsy@@76
+ \mathchardef\bmsqsupseteq="3\mtbsy@@77
+ \mathchardef\bmclubsuit="0\mtbsy@@7C
+ \mathchardef\bmdiamondsuit="0\mtbsy@@7D
+ \mathchardef\bmheartsuit="0\mtbsy@@7E
+ \mathchardef\bmspadesuit="0\mtbsy@@7F
+ \mathchardef\bmhbar="0\mtbsy@@84
+ \mathchardef\bmnotin="3\mtbsy@@85
+ \mathchardef\bmangle="0\mtbsy@@86
+ \mathchardef\bmdoteq="3\mtbsy@@87
+ \mathchardef\bmmodels="3\mtbsy@@88
+ \mathchardef\bmbowtie="3\mtbsy@@89
+ \mathchardef\bmcong="3\mtbsy@@8A
+ \mathchardef\bmhookleftarrow="3\mtbsy@@8B
+ \mathchardef\bmhookrightarrow="3\mtbsy@@8C
+ \mathchardef\bmlongleftarrow="3\mtbsy@@8D
+ \mathchardef\bmlongrightarrow="3\mtbsy@@8E
+ \mathchardef\bmLongleftarrow="3\mtbsy@@8F
+ \mathchardef\bmLongrightarrow="3\mtbsy@@90
+ \mathchardef\bmmapsto="3\mtbsy@@91
+ \mathchardef\bmlongmapsto="3\mtbsy@@92
+ \mathchardef\bmlongleftrightarrow="3\mtbsy@@93
+ \mathchardef\bmLongleftrightarrow="3\mtbsy@@94
+ \def\bmiff{\;\bmLongleftrightarrow\;}%
+ \mathchardef\bmrightleftharpoons="3\mtbsy@@95
+ \mathchardef\bmnotless="3\mtbsy@@96
+ \mathchardef\bmnotleq="3\mtbsy@@97
+ \mathchardef\bmnotprec="3\mtbsy@@98
+ \mathchardef\bmnotpreceq="3\mtbsy@@99
+ \mathchardef\bmnotsubset="3\mtbsy@@9A
+ \mathchardef\bmnotsubseteq="3\mtbsy@@9B
+ \mathchardef\bmnotsqsubseteq="3\mtbsy@@9C
+ \mathchardef\bmnotgr="3\mtbsy@@9D
+ \mathchardef\bmnotgeq="3\mtbsy@@9E
+ \mathchardef\bmnotsucc="3\mtbsy@@9F
+ \mathchardef\bmnotsucceq="3\mtbsy@@ A0
+ \mathchardef\bmnotsupset="3\mtbsy@@ A1
+ \mathchardef\bmnotsupseteq="3\mtbsy@@ A2
+ \mathchardef\bmnotsqsupseteq="3\mtbsy@@ A3
+ \mathchardef\bmneq="3\mtbsy@@ A4 \let\bmne=\bmneq
+ \mathchardef\bmnotequiv="3\mtbsy@@ A5
+ \mathchardef\bmnotsim="3\mtbsy@@ A6
+ \mathchardef\bmnotsimeq="3\mtbsy@@ A7
+ \mathchardef\bmnotapprox="3\mtbsy@@ A8
+ \mathchardef\bmnotcong="3\mtbsy@@ A9
+ \mathchardef\bmnotasymp="3\mtbsy@@ AA
+ \def\bmgrave{\ifnum\fam=\m@ne\mathaccent"0\mtbsy@@4A \else\@grave@\fi}%
+ \def\bmacute{\ifnum\fam=\m@ne\mathaccent"0\mtbsy@@4B \else\@acute@\fi}%
+ \def\bmcheck{\ifnum\fam=\m@ne\mathaccent"0\mtbsy@@4C \else\@check@\fi}%
+ \def\bmbreve{\ifnum\fam=\m@ne\mathaccent"0\mtbsy@@4D \else\@breve@\fi}%
+ \def\bmbar{\ifnum\fam=\m@ne\mathaccent"0\mtbsy@@4E \else\@bar@\fi}%
+ \def\bmhat{\ifnum\fam=\m@ne\mathaccent"0\mtbsy@@4F \else\@hat@\fi}%
+ \def\bmdot{\ifnum\fam=\m@ne\mathaccent"0\mtbsy@@50 \else\@dot@\fi}%
+ \def\bmtilde{\ifnum\fam=\m@ne\mathaccent"0\mtbsy@@51 \else\@tilde@\fi}%
+ \def\bmddot{\ifnum\fam=\m@ne\mathaccent"0\mtbsy@@52 \else\@ddot@\fi}%
+ \def\bmdotup{\mathaccent"0\mtbsy@@54 }%
+ \def\bmddotup{\mathaccent"0\mtbsy@@55 }%
+ \def\bmoacc{\mathaccent"0\mtbsy@@56 }%
+ \def\bmdddot{\mathaccent"0\mtbsy@@ AB }%
+ \def\bmddddot{\mathaccent"0\mtbsy@@ AC }%
+ \def\bmdddotup{\mathaccent"0\mtbsy@@ AD}%
+ \def\bmddddotup{\mathaccent"0\mtbsy@@ AE }%
+ \mathchardef\bmhslash="\mtbsy@@ AF
+ \mathchardef\bmdigamma="0\mtbsy@@ B1
+ \def\bmyen{\ifmmode\mathchar"0\mtbsy@@ B0 \else\mathhexbox\mtbsy@@ B0\fi}%
+ \ifx\amstexloaded@\relax
+  \Makeacc@\bmHat{\mtbsy@@4F}%
+  \Makeacc@\bmCheck{\mtbsy@@4C}%
+  \Makeacc@\bmTilde{\mtbsy@@51}%
+  \Makeacc@\bmAcute{\mtbsy@@4B}%
+  \Makeacc@\bmGrave{\mtbsy@@4A}%
+  \Makeacc@\bmDot{\mtbsy@@50}%
+  \Makeacc@\bmDdot{\mtbsy@@52}%
+  \Makeacc@\bmDotup{\mtbsy@@54}%
+  \Makeacc@\bmDdotup{\mtbsy@@55}%
+  \Makeacc@\bmBreve{\mtbsy@@4D}%
+  \Makeacc@\bmBar{\mtbsy@@4E}%
+  \Makeacc@\bmOacc{\mtbsy@@56}%
+  \Makeacc@\bmDddot{\mtbsy@@ AB}%
+  \Makeacc@\bmDdddot{\mtbsy@@ AC}%
+  \Makeacc@\bmDddotup{\mtbsy@@ AD}%
+  \Makeacc@\bmDdddotup{\mtbsy@@ AE}%
+ \fi
+ \def\bmwbar{\mathaccent"0\mtbsy@@78 }%
+ \def\bmwwbar{\mathaccent"0\mtbsy@@53 }%
+ \def\bmwhat{\mathaccent"0\mtbsy@@79 }%
+ \def\bmwtilde{\mathaccent"0\mtbsy@@7A }%
+ \def\bmwcheck{\mathaccent"0\mtbsy@@7B }%
+ \def\bmwwhat{\mathaccent"0\mtbex@@80 }%
+ \def\bmwwtilde{\mathaccent"0\mtbex@@81 }%
+ \def\bmwwcheck{\mathaccent"0\mtbex@@7D }%
+ \def\bmwidehat{\mathaccent"0\mtbex@@62 }%
+ \def\bmwidetilde{\mathaccent"0\mtbex@@65 }%
+ \def\bmwidecheck{\mathaccent"0\mtbex@@7A }%
+ \ifx\amstexloaded@\relax
+  \Makeacc@\bmWbar{\mtbsy@@78 }%
+  \Makeacc@\bmWwbar{\mtbsy@@53 }%
+  \Makeacc@\bmWhat{\mtbsy@@79 }%
+  \Makeacc@\bmWtilde{\mtbsy@@7A }%
+  \Makeacc@\bmWcheck{\mtbsy@@7B }%
+  \Makeacc@\bmWwhat{\mtbex@@80 }%
+  \Makeacc@\bmWwtilde{\mtbex@@81 }%
+  \Makeacc@\bmWwcheck{\mtbex@@7D }%
+ \fi
+ \mathchardef\bmcoprod="1\mtbex@@60
+ \mathchardef\bmbigvee="1\mtbex@@57
+ \mathchardef\bmbigwedge="1\mtbex@@56
+ \mathchardef\bmbiguplus="1\mtbex@@55
+ \mathchardef\bmbigcap="1\mtbex@@54
+ \mathchardef\bmbigcup="1\mtbex@@53
+ \mathchardef\bmintop="1\mtbex@@52 \def\bmint{\bmintop\nolimits}%
+ \mathchardef\bmprod="1\mtbex@@51
+ \mathchardef\bmsum="1\mtbex@@50
+ \mathchardef\bmbigotimes="1\mtbex@@4E
+ \mathchardef\bmbigoplus="1\mtbex@@4C
+ \mathchardef\bmbigodot="1\mtbex@@4A
+ \mathchardef\bmointop="1\mtbex@@48 \def\bmoint{\ointop\nolimits}%
+ \mathchardef\bmiintop="1\mtbex@@92 \def\bmiint{\bmiintop\nolimits}%
+ \mathchardef\bmiiintop="1\mtbex@@94 \def\bmiiint{\bmiiintop\nolimits}%
+ \mathchardef\bmoiintop="1\mtbex@@96 \def\bmoiint{\bmoiintop\nolimits}%
+ \mathchardef\bmoiiintop="1\mtbex@@98 \def\bmoiiint{\bmoiiintop\nolimits}%
+ \mathchardef\bmcwointop="1\mtbex@@9A \def\bmcwoint{\bmcwointop\nolimits}%
+ \mathchardef\bmawointop="1\mtbex@@9C \def\bmawoint{\bmawointop\nolimits}%
+ \mathchardef\bmcwintop="1\mtbex@@9E \def\bmcwint{\bmcwintop\nolimits}%
+ \mathchardef\bmbigsqcup="1\mtbex@@46
+ \def\bmlmoustache{\delimiter"4\mtbex@@7A\mtbex@@40 }%
+ \def\bmrmoustahce{\delimiter"5\mtbex@@7B\mtbex@@41 }% 
+ \def\bmlgroup{\delimiter"4\mtbmi@@2E\mtbex@@3A }% 
+ \def\bmrgroup{\delimiter"5\mtbmi@@2F\mtbex@@3B }%
+ \def\bmbracevert{\delimiter"\mtbex@@3E\mtbex@@3E }%
+ \def\bmchoose{\atopwithdelims\bmlparens\bmrparens}%
+ \def\bmbrack{\atopwithdelims\bmlbrack\bmrbrack}%
+ \def\bmbrace{\atopwithdelims\bmlbrace\bmrbrace}%
+}
+
+
+
+\def\boldmath{%
+ \textfont\z@\the\textfont\bffam
+ \scriptfont\z@\the\scriptfont\bffam
+ \scriptscriptfont\z@\the\scriptscriptfont\bffam
+ \textfont\@ne\the\textfont\mtbmi@
+ \scriptfont\@ne\the\scriptfont\mtbmi@
+ \scriptscriptfont\@ne\the\scriptscriptfont\mtbmi@
+ \textfont\tw@\the\textfont\mtbsy@
+ \scriptfont\tw@\the\scriptfont\mtbsy@
+ \scriptscriptfont\tw@\the\scriptscriptfont\mtbsy@
+ \textfont\thr@@\the\textfont\mtbex@
+ \scriptfont\thr@@\the\scriptfont\mtbex@
+ \scriptscriptfont\thr@@\the\scriptscriptfont\mtbex@
+ \ifx\p@renwd\undefined
+  \else
+  \setbox\z@\hbox{\the\textfont\mtbex@ B}\p@renwd\wd\z@
+ \fi
+ \ifx\amstexloaded@\relax
+  \buffer@\fontdimen13\the\textfont\mtbex@
+  \buffer\buffer@
+ \fi
+ \let\lmoustache\bmlmoustache % these 5 delimiters have different definitions for mtexa !
+ \let\rmoustache\bmrmoustahce 
+ \let\lgroup\bmlgroup
+ \let\rgroup\bmrgroup
+ \let\bracevert\bmbracevert
+ \let\SQRT\sqrt
+ \def\ROOT##1\OF##2{\root##1\of{##2}}%
+ \def\PARENS##1{\left(##1\right)}%
+ \def\LEFTRIGHT##1##2##3{\left##1##2\right##3}%
+ \let\widehat\bmwidehat % these 3 wide accents have different definitions for mtexa !
+ \let\widetilde\bmwidetilde
+ \let\widecheck\bmwidecheck
+}
+
+% Now come the macros for the heavy fonts.
+
+\def\hm{\futurelet\next\hm@}
+\def\hm@{\ifx\next'\def\next@##1{\hprime@}\else
+ \ifcat\noexpand\next0\def\next@{\hm@@}\else
+ \def\next@{\errmessage{Invalid use of \string\hm}}\fi\fi
+ \next@}
+\newcount\firsthprimesep
+\firsthprimesep=2
+\def\hprime@{^\bgroup\firstprime@true\hprim@s}
+\def\hprim@s{\iffirstprime@\kern\firsthprimesep\emcent@\fi
+  \hmprime\firstprime@false\futurelet\next\hpr@m@s}
+\newcount\nonhprimesep
+\nonhprimesep=7
+\def\hpr@m@s{\ifx'\next\def\next@##1{\hprim@s}\else
+ \ifx^\next\def\next@##1##2{\kern\nonhprimesep\emcent@##2\egroup}\else
+ \let\next@\egroup\fi\fi\next@}
+\def\hm@@#1{%
+  \ifx#1+\mathchar"2\mthsy@@43
+  \else\ifx#1-\mathchar"2\mthsy@@00
+  \else\ifx#1=\mathchar"3\mthsy@@44
+  \else\ifx#1<\mathchar"3\mthsy@@ EA
+  \else\ifx#1>\mathchar"3\mthsy@@ EC
+  \else\ifx#1/\mathchar"0\mthsy@@ EB
+  \else\ifx#1(\mathchar"4\mthsy@@ E6
+  \else\ifx#1)\mathchar"5\mthsy@@ E7
+  \else\ifx#1[\mathchar"4\mthsy@@ F8
+  \else\ifx#1]\mathchar"5\mthsy@@ F9
+  \else\ifx#1|\mathchar"0\mthsy@@6A
+  \else\ifx#1*\mathchar"2\mthsy@@03
+  \else\ifx#1.\mathchar"0\mthsy@@ E8
+  \else\ifx#1,\mathchar"6\mthsy@@ E9
+  \else\ifx#1;\mathchar"6\mthsy@@49 
+  \else\ifx#1:\mathchar"3\mthsy@@57
+  \else\ifx#1!\mathchar"5\mthsy@@ F6
+  \else\ifx#1?\mathchar"5\mthsy@@ F7
+  \else\errmessage{Invalid use of \string\hm}%
+  \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi}
+\def\hmdefs@{%
+ \mathchardef\hmleftharpoonup="3\mthsy@@ E0
+ \mathchardef\hmleftharpoondown="3\mthsy@@ E1
+ \mathchardef\hmrightharpoonup="3\mthsy@@ E2
+ \mathchardef\hmrightharpoondown="3\mthsy@@ E3
+ \def\hmlparens{\delimiter"\mthsy@@ E6\mthex@@00 }%
+ \def\hmrparens{\delimiter"\mthsy@@ E7\mthex@@01 }%
+ \def\hmslash{\delimiter"\mthsy@@ EB\mthex@@0E }%
+ \mathchardef\hmstar="2\mthsy@@ ED
+ \mathchardef\hmpartial="0\mthsy@@ EE
+ \mathchardef\hmflat="0\mthsy@@ EF
+ \mathchardef\hmnatural="0\mthsy@@ F0
+ \mathchardef\hmsharp="0\mthsy@@ F1
+ \mathchardef\hmsmile="3\mthsy@@ F2
+ \mathchardef\hmfrown="3\mthsy@@ F3
+ \mathchardef\hmell="0\mthsy@@ F4
+ \mathchardef\hmwp="0\mthsy@@ F5
+ \def\hmlbrack{\delimiter"4\mthsy@@ F8\mthex@@02 }%
+ \def\hmrbrack{\delimiter"5\mthsy@@ F9\mthex@@03 }%
+ \mathchardef\hmdagger="2\mthsy@@ FA
+ \mathchardef\hmddagger="2\mthsy@@ FB
+ \mathchardef\hmcdot="2\mthsy@@01
+ \mathchardef\hmtimes="2\mthsy@@02
+ \mathchardef\hmast="2\mthsy@@03
+ \mathchardef\hmdiv="2\mthsy@@04
+ \mathchardef\hmdiamond="2\mthsy@@05
+ \mathchardef\hmpm="2\mthsy@@06
+ \mathchardef\hmmp="2\mthsy@@07
+ \mathchardef\hmoplus="2\mthsy@@08
+ \mathchardef\hmominus="2\mthsy@@09
+ \mathchardef\hmotimes="2\mthsy@@0A
+ \mathchardef\hmoslash="2\mthsy@@0B
+ \mathchardef\hmodot="2\mthsy@@0C
+ \mathchardef\hmbigcirc="2\mthsy@@0D
+ \mathchardef\hmcirc="2\mthsy@@0E
+ \mathchardef\hmbullet="2\mthsy@@0F
+ \mathchardef\hmasymp="3\mthsy@@10
+ \mathchardef\hmequiv="3\mthsy@@11
+ \mathchardef\hmsubseteq="3\mthsy@@12
+ \mathchardef\hmsupseteq="3\mthsy@@13
+ \mathchardef\hmleq="3\mthsy@@14 \let\hmle=\hmleq
+ \mathchardef\hmgeq="3\mthsy@@15 \let\hmge=\hmgeq
+ \mathchardef\hmpreceq="3\mthsy@@16
+ \mathchardef\hmsucceq="3\mthsy@@17
+ \mathchardef\hmsim="3\mthsy@@18
+ \mathchardef\hmapprox="3\mthsy@@19
+ \mathchardef\hmsubset="3\mthsy@@1A
+ \mathchardef\hmsupset="3\mthsy@@1B
+ \mathchardef\hmll="3\mthsy@@1C
+ \mathchardef\hmgg="3\mthsy@@1D
+ \mathchardef\hmprec="3\mthsy@@1E
+ \mathchardef\hmsucc="3\mthsy@@1F
+ \mathchardef\hmleftarrow="3\mthsy@@20 \let\hmgets=\hmleftarrow
+ \mathchardef\hmrightarrow="3\mthsy@@21 \let\hmto=\hmrightarrow
+ \def\hmuparrow{\delimiter"3\mthsy@@22\mthex@@78 }%
+ \def\hmdownarrow{\delimiter"3\mthsy@@23\mthex@@79 }%
+ \mathchardef\hmleftrightarrow="3\mthsy@@24
+ \def\hmuparrow{\delimiter"3\mthsy@@22378 }%
+ \def\hmdownarrow{\delimiter"3\mthsy@@23379 }%
+ \mathchardef\hmnearrow="3\mthsy@@25
+ \mathchardef\hmsearrow="3\mthsy@@26
+ \mathchardef\hmsimeq="3\mthsy@@27
+ \mathchardef\hmLeftarrow="3\mthsy@@28
+ \mathchardef\hmRightarrow="3\mthsy@@29
+ \def\hmUparrow{\delimiter"3\mthsy@@2A\mthex@@7E }%
+ \def\hmDownarrow{\delimiter"3\mthsy@@2B\mthex@@7F }%
+ \mathchardef\hmLeftrightarrow="3\mthsy@@2C
+ \mathchardef\hmnwarrow="3\mthsy@@2D
+ \mathchardef\hmswarrow="3\mthsy@@2E
+ \mathchardef\hmpropto="3\mthsy@@2F
+ \mathchardef\hmprime="0\mthsy@@30
+ \mathchardef\hminfty="0\mthsy@@31
+ \mathchardef\hmin="3\mthsy@@32
+ \mathchardef\hmni="3\mthsy@@33 \let\hmowns=\hmni
+ \mathchardef\hmbigtriangleup="2\mthsy@@34
+ \mathchardef\hmtriangle="0\mthsy@@34
+ \mathchardef\hmbigtriangledown="2\mthsy@@35
+ \mathchardef\hmnot="3\mthsy@@36
+ \mathchardef\hmmapstochar="3\mthsy@@37 
+ \mathchardef\hmforall="0\mthsy@@38
+ \mathchardef\hmexists="0\mthsy@@39
+ \mathchardef\hmneg="0\mthsy@@3A \let\lnot=\neg
+ \mathchardef\hmemptyset="0\mthsy@@3B
+ \mathchardef\hmRe="0\mthsy@@3C
+ \mathchardef\hmIm="0\mthsy@@3D
+ \mathchardef\hmtop="0\mthsy@@3E
+ \mathchardef\hmbot="0\mthsy@@3F
+ \mathchardef\hmperp="3\mthsy@@3F
+ \mathchardef\hmaleph="0\mthsy@@40
+ \mathchardef\hmcomp="2\mthsy@@42
+ \def\hmvec{\mathaccent"0\mthsy@@45 }%
+ \mathchardef\hmtriangleright="2\mthsy@@46
+ \mathchardef\hmtriangleleft="2\mthsy@@47
+ \mathchardef\hmcolon="6\mthsy@@57
+ \mathchardef\hmsetdif="2\mthsy@@58
+ \mathchardef\hmcupprod="2\mthsy@@59
+ \mathchardef\hmcapprod="2\mthsy@@5A
+ \mathchardef\hmcup="2\mthsy@@5B
+ \mathchardef\hmcap="2\mthsy@@5C
+ \mathchardef\hmuplus="2\mthsy@@5D
+ \mathchardef\hmwedge="2\mthsy@@5E \let\hmland=\hmwedge
+ \mathchardef\hmvee="2\mthsy@@5F \let\hmlor=\hmvee
+ \mathchardef\hmvdash="3\mthsy@@60
+ \mathchardef\hmdashv="3\mthsy@@61
+ \def\hmlfloor{\delimiter"4\mthsy@@62\mthex@@04 }%
+ \def\hmrfloor{\delimiter"5\mthsy@@63\mthex@@05 }%
+ \def\hmlceil{\delimiter"4\mthsy@@64\mthex@@06 }%
+ \def\hmrceil{\delimiter"5\mthsy@@65\mthex@@07 }%
+ \def\hmlbrace{\delimiter"4\mthsy@@66\mthex@@08 }% 
+ \def\hmrbrace{\delimiter"5\mthsy@@67\mthex@@09 }%
+ \def\hmlangle{\delimiter"4\mthsy@@68\mthex@@0A }%
+ \def\hmrangle{\delimiter"5\mthsy@@69\mthex@@0B }%
+ \mathchardef\hmmid="3\mthsy@@6A
+ \def\hmvert{\delimiter"\mthsy@@6A\mthex@@0C }%
+ \mathchardef\hmparallel="3\mthsy@@6B
+ \def\hmVert{\delimiter"\mthsy@@6B\mthex@@0D }%
+ \def\hmupdownarrow{\delimiter"3\mthsy@@6C\mthex@@3F }%
+ \def\hmUpdownarrow{\delimiter"3\mthsy@@6D\mthex@@77 }%
+ \def\hmbackslash{\delimiter"\mthsy@@6E\mthex@@0F }%
+ \def\hmarrowvert{\delimiter"\mthsy@@6A\mthex@@3C }%
+ \def\hmArrowvert{\delimiter"\mthsy@@6\mthex@@3D }%
+ \def\hmlgroup{\delimiter"4\mthsy@@2E\mthex@@3A }% 
+ \def\hmrgroup{\delimiter"5\mthsy@@2F\mthex@@3B }% 
+ \def\hmbracevert{\delimiter"\mthex@@8D\mthex@@8D }% 
+ \mathchardef\hmsetminus="2\mthsy@@6E 
+ \mathchardef\hmwr="2\mthsy@@6F
+ \def\hmsurd{{\mathchar"1\mthsy@@70}}%
+ \mathchardef\hmamalg="2\mthsy@@71
+ \mathchardef\hmnabla="0\mthsy@@72
+ \mathchardef\hmsmallint="1\mthsy@@73
+ \mathchardef\hmsqcup="2\mthsy@@74
+ \mathchardef\hmsqcap="2\mthsy@@75
+ \mathchardef\hmsqsubseteq="3\mthsy@@76
+ \mathchardef\hmsqsupseteq="3\mthsy@@77
+ \mathchardef\hmclubsuit="0\mthsy@@7C
+ \mathchardef\hmdiamondsuit="0\mthsy@@7D
+ \mathchardef\hmheartsuit="0\mthsy@@7E
+ \mathchardef\hmspadesuit="0\mthsy@@7F
+ \mathchardef\hmnotin="3\mthsy@@85
+ \mathchardef\hmangle="0\mthsy@@86
+ \mathchardef\hmdoteq="3\mthsy@@87
+ \mathchardef\hmmodels="3\mthsy@@88
+ \mathchardef\hmbowtie="3\mthsy@@89
+ \mathchardef\hmcong="3\mthsy@@8A
+ \mathchardef\hmhookleftarrow="3\mthsy@@8B
+ \mathchardef\hmhookrightarrow="3\mthsy@@8C
+ \mathchardef\hmlongleftarrow="3\mthsy@@8D
+ \mathchardef\hmlongrightarrow="3\mthsy@@8E
+ \mathchardef\hmLongleftarrow="3\mthsy@@8F
+ \mathchardef\hmLongrightarrow="3\mthsy@@90
+ \mathchardef\hmmapsto="3\mthsy@@91
+ \mathchardef\hmlongmapsto="3\mthsy@@92
+ \mathchardef\hmlongleftrightarrow="3\mthsy@@93
+ \mathchardef\hmLongleftrightarrow="3\mthsy@@94
+ \def\hmiff{\;\hmLongleftrightarrow\;}%
+ \mathchardef\hmrightleftharpoons="3\mthsy@@95
+ \mathchardef\hmnotless="3\mthsy@@96
+ \mathchardef\hmnotleq="3\mthsy@@97
+ \mathchardef\hmnotprec="3\mthsy@@98
+ \mathchardef\hmnotpreceq="3\mthsy@@99
+ \mathchardef\hmnotsubset="3\mthsy@@9A
+ \mathchardef\hmnotsubseteq="3\mthsy@@9B
+ \mathchardef\hmnotsqsubseteq="3\mthsy@@9C
+ \mathchardef\hmnotgr="3\mthsy@@9D
+ \mathchardef\hmnotgeq="3\mthsy@@9E
+ \mathchardef\hmnotsucc="3\mthsy@@9F
+ \mathchardef\hmnotsucceq="3\mthsy@@ A0
+ \mathchardef\hmnotsupset="3\mthsy@@ A1
+ \mathchardef\hmnotsupseteq="3\mthsy@@ A2
+ \mathchardef\hmnotsqsupseteq="3\mthsy@@ A3
+ \mathchardef\hmneq="3\mthsy@@ A4 \let\hmne=\hmneq
+ \mathchardef\hmnotequiv="3\mthsy@@ A5
+ \mathchardef\hmnotsim="3\mthsy@@ A6
+ \mathchardef\hmnotsimeq="3\mthsy@@ A7
+ \mathchardef\hmnotapprox="3\mthsy@@ A8
+ \mathchardef\hmnotcong="3\mthsy@@ A9
+ \mathchardef\hmnotasymp="3\mthsy@@ AA
+ \mathchardef\hmangle="2\mthsy@@86
+ \mathchardef\hmdigamma="0\mthsy@@ B1
+ \def\hmyen{\ifmmode\mathchar"0\mthsy@@ B0 \else\mathhexbox\mthsy@@ B0\fi}%
+ \def\hmgrave{\ifnum\fam=\m@ne\mathaccent"0\mthsy@@4A \else\@grave@\fi}%
+ \def\hmacute{\ifnum\fam=\m@ne\mathaccent"0\mthsy@@4B \else\@acute@\fi}%
+ \def\hmcheck{\ifnum\fam=\m@ne\mathaccent"0\mthsy@@4C \else\@check@\fi}%
+ \def\hmbreve{\ifnum\fam=\m@ne\mathaccent"0\mthsy@@4D \else\@breve@\fi}%
+ \def\hmbar{\ifnum\fam=\m@ne\mathaccent"0\mthsy@@4E \else\@bar@\fi}%
+ \def\hmhat{\ifnum\fam=\m@ne\mathaccent"0\mthsy@@4F \else\@hat@\fi}%
+ \def\hmdot{\ifnum\fam=\m@ne\mathaccent"0\mthsy@@50 \else\@dot@\fi}%
+ \def\hmtilde{\ifnum\fam=\m@ne\mathaccent"0\mthsy@@51 \else\@tilde@\fi}%
+ \def\hmddot{\ifnum\fam=\m@ne\mathaccent"0\mthsy@@52 \else\@ddot@\fi}%
+ \def\hmdotup{\mathaccent"0\mthsy@@54 }%
+ \def\hmddotup{\mathaccent"0\mthsy@@55 }%
+ \def\hmoacc{\mathaccent"0\mthsy@@56 }%
+ \def\hmdddot{\mathaccent"0\mthsy@@ AB }%
+ \def\hmddddot{\mathaccent"0\mthsy@@ AC }%
+ \def\hmdddotup{\mathaccent"0\mthsy@@ AD }%
+ \def\hmddddotup{\mathaccent"0\mthsy@@ AE }%
+ \ifx\amstexloaded@\relax
+  \Makeacc@\hmHat{\mthsy@@4F}%
+  \Makeacc@\hmCheck{\mthsy@@4C}%
+  \Makeacc@\hmTilde{\mthsy@@51}%
+  \Makeacc@\hmAcute{\mthsy@@4B}%
+  \Makeacc@\hmGrave{\mthsy@@4A}%
+  \Makeacc@\hmDot{\mthsy@@50}%
+  \Makeacc@\hmDdot{\mthsy@@52}%
+  \Makeacc@\hmDotup{\mthsy@@54}%
+  \Makeacc@\hmDdotup{\mthsy@@55}%
+  \Makeacc@\hmBreve{\mthsy@@4D}%
+  \Makeacc@\hmBar{\mthsy@@4E}%
+  \Makeacc@\hmOacc{\mthsy@@56}%
+  \Makeacc@\hmDddot{\mthsy@@ AB}%
+  \Makeacc@\hmDdddot{\mthsy@@ AC}%
+  \Makeacc@\hmDddotup{\mthsy@@ AD}%
+  \Makeacc@\hmDdddotup{\mthsy@@ AE}% 
+ \fi
+ \def\hmwbar{\mathaccent"0\mthsy@@78 }%
+ \def\hmwwbar{\mathaccent"0\mthsy@@53 }%
+ \def\hmwhat{\mathaccent"0\mthsy@@79 }%
+ \def\hmwtilde{\mathaccent"0\mthsy@@7A }%
+ \def\hmwcheck{\mathaccent"0\mthsy@@7B }%
+ \def\hmwwhat{\mathaccent"0\mthex@@80 }%
+ \def\hmwwtilde{\mathaccent"0\mthex@@81 }%
+ \def\hmwwcheck{\mathaccent"0\mthex@@7D }%
+ \def\hmwidehat{\mathaccent"0\mthex@@62 }%
+ \def\hmwidetilde{\mathaccent"0\mthex@@65 }%
+ \def\hmwidecheck{\mathaccent"0\mthex@@7A }%
+ \ifx\amstexloaded@\relax
+  \Makeacc@\hmWbar{\mthsy@@78}%
+  \Makeacc@\hmWwbar{\mthsy@@53}%
+  \Makeacc@\hmWhat{\mthsy@@79}%
+  \Makeacc@\hmWtilde{\mthsy@@7A}%
+  \Makeacc@\hmWcheck{\mthsy@@7B}%
+  \Makeacc@\hmWwhat{\mthex@@80}%
+  \Makeacc@\hmWwtilde{\mthex@@81}%
+  \Makeacc@\hmWwcheck{\mthex@@7D}%
+ \fi
+ \mathchardef\hmcoprod="1\mthex@@60
+ \mathchardef\hmbigvee="1\mthex@@57
+ \mathchardef\hmbigwedge="1\mthex@@56
+ \mathchardef\hmbiguplus="1\mthex@@55
+ \mathchardef\hmbigcap="1\mthex@@54
+ \mathchardef\hmbigcup="1\mthex@@53
+ \mathchardef\hmintop="1\mthex@@52 \def\hmint{\hmintop\nolimits}%
+ \mathchardef\hmprod="1\mthex@@51
+ \mathchardef\hmsum="1\mthex@@50
+ \mathchardef\hmbigotimes="1\mthex@@4E
+ \mathchardef\hmbigoplus="1\mthex@@4C
+ \mathchardef\hmbigodot="1\mthex@@4A
+ \mathchardef\hmointop="1\mthex@@48 \def\hmoint{\ointop\nolimits}%
+ \mathchardef\hmointop="1\mthex@@48 \def\hmoint{\ointop\nolimits}%
+ \mathchardef\hmiintop="1\mthex@@92 \def\hmiint{\hmiintop\nolimits}%
+ \mathchardef\hmiiintop="1\mthex@@94 \def\hmiiint{\hmiiintop\nolimits}%
+ \mathchardef\hmoiintop="1\mthex@@96 \def\hmoiint{\hmoiintop\nolimits}%
+ \mathchardef\hmoiiintop="1\mthex@@98 \def\hmoiiint{\hmoiiintop\nolimits}%
+ \mathchardef\hmcwointop="1\mthex@@9A \def\hmcwoint{\hmcwointop\nolimits}%
+ \mathchardef\hmawointop="1\mthex@@9C \def\hmawoint{\hmawointop\nolimits}%
+ \mathchardef\hmcwintop="1\mthex@@9E \def\hmcwint{\hmcwintop\nolimits}%
+ \mathchardef\hmbigsqcup="1\mthex@@46
+ \def\hmlmoustache{\delimiter"4\mthex@@7A\mthex@@40 }%
+ \def\hmrmoustahce{\delimiter"5\mthex@@7B\mthex@@41 }% 
+ \def\hmlgroup{\delimiter"4\mthsy@@2E\mthex@@3A }% 
+ \def\hmrgroup{\delimiter"5\mthsy@@2F\mthex@@3B }%
+ \def\hmbracevert{\delimiter"\mthex@@3E\mthex@@3E }%
+ \def\hmchoose{\atopwithdelims\hmlparens\hmrparens}%
+ \def\hmbrack{\atopwithdelims\hmlbrack\hmrbrack}%
+ \def\hmbrace{\atopwithdelims\hmlbrace\hmrbrace}%
+}
+\def\heavymath{%
+ \textfont\@ne\the\textfont\z@
+ \scriptfont\@ne\the\scriptfont\z@
+ \scriptscriptfont\@ne\the\scriptscriptfont\z@
+ \textfont\tw@\the\textfont\mthsy@
+ \scriptfont\tw@\the\scriptfont\mthsy@
+ \scriptscriptfont\tw@\the\scriptscriptfont\mthsy@
+ \textfont\thr@@\the\textfont\mthex@
+ \scriptfont\thr@@\the\scriptfont\mthex@
+ \scriptscriptfont\thr@@\the\scriptscriptfont\mthex@
+ \ifx\p@renwd\undefined
+  \else
+  \setbox\z@\hbox{\the\textfont\mthex@ B}\p@renwd\wd\z@
+ \fi
+ \ifx\amstexloaded@\relax
+  \buffer@\fontdimen13\the\textfont\mthex@
+  \buffer\buffer@
+ \fi
+ \let\lmoustache\hmlmoustache
+ \let\rmoustache\hmrmoustahce 
+ \let\lgroup\hmlgroup
+ \let\rgroup\hmrgroup
+ \let\bracevert\hmbracevert
+ \let\SQRT\sqrt
+ \def\ROOT##1\OF##2{\root##1\of{##2}}%
+ \def\PARENS##1{\left(##1\right)}%
+ \def\LEFTRIGHT##1##2##3{\left##1##2\right##3}%
+ \let\widehat\hmwidehat % these 3 wide accents have different definition for mtexa !
+ \let\widetilde\hmwidetilde
+ \let\widecheck\hmwidecheck
+}
+
+% Now come the macros for dealing with the multiple extension fonts.
+% First comes a macro to provide proper dimensions and definitions when
+% fonts are loaded by hand.
+
+\def\usingMTPextensions#1#2#3#4{\let\MTEXA@#1\let\MTEXE@#2\let\MTEXF@#3\let\MTEXG@##4\relax
+ \ifx\p@renwd\undefined
+ \else
+  \setbox\z@\hbox{#1B}\p@renwd\wd\z@
+ \fi
+ \ifx\amstexloaded@\relax
+  \buffer@\fontdimen13#1%
+  \buffer\buffer@
+ \fi}
+
+% The following macros presume that \MTEXA@, \MTEXE@, \MTEXF@, and \MTEXG@ can
+% be used to refer to the four extension fonts that have been loaded.
+
+\newbox\prePbox@
+\newbox\Pbox@
+\newif\ifPEX@
+\def\PEX@#1{\setbox\Pbox@\vbox{$$\left.\vcenter{\copy\prePbox@}\right)$$}%
+ \setbox\Pbox@\vbox{\unvbox\Pbox@\unskip\unpenalty
+ \setbox\Pbox@\lastbox
+ \setbox\Pbox@\hbox{\unhbox\Pbox@\setbox\Pbox@\lastbox  
+ \setbox\Pbox@\hbox{\unhbox\Pbox@\setbox\Pbox@\lastbox  
+ \setbox0\hbox{#1}%
+ \ifdim\dp\Pbox@>\dp0\global\PEX@true\else
+ \global\PEX@false\fi}}}}
+\def\EXtest@#1{\setbox\prePbox@\hbox{$\displaystyle{#1}$}%
+ \PEX@{\MTEXA@\char32}%
+ \ifPEX@ 
+  {\textfont3=\MTEXE@\PEX@{\MTEXE@\char12}}%
+  \ifPEX@
+   {\textfont3=\MTEXF@\PEX@{\MTEXF@\char12}}%
+   \ifPEX@
+    \def\EXtest@@{\textfont3=\MTEXG@}%
+   \else
+    \def\EXtest@@{\textfont3=\MTEXF@}%
+   \fi
+  \else
+   \def\EXtest@@{\textfont3=\MTEXE@}%
+  \fi
+ \else
+  \def\EXtest@@{\textfont3=\MTEXA@}%
+ \fi}
+\def\vc@nt@r#1{\hbox{$\vcenter{\hbox{$\displaystyle{#1}$}}$}}
+\newdimen\extcorrect@
+\newdimen\vertcorrect@
+\extcorrect@\z@
+\vertcorrect@\z@
+\def\extcorrect#1{\extcorrect@#1\relax}
+\def\vertcorrect#1{\vertcorrect@#1\relax\extcorrect@\z@}
+\newbox\LRbox@
+\def\LEFTRIGHT@#1#2#3{\setbox\LRbox@\vc@nt@r{#3}%
+ \EXtest@{\vc@nt@r{#3}}%
+ \vcenter{\hbox{\EXtest@@$\displaystyle\left#1\box\LRbox@\right#2$}}}%
+\def\PARENS#1{\ifdim\vertcorrect@=\z@\LEFTRIGHT@(){#1}\else\LEFTRIGHT(){#1}\fi}%
+\newif\ifspecdelim@
+\def\specdelim@#1{\ifx#1(\specdelim@true
+ \else\ifx#1)\specdelim@true
+ \else\ifx#1<\specdelim@true
+ \else\ifx#1\langle\specdelim@true
+ \else\ifx#1>\specdelim@true
+ \else\ifx#1\rangle\specdelim@true
+ \else\ifx#1/\specdelim@true
+ \else\ifx#1\backslash\specdelim@true
+ \else\specdelim@false\fi\fi\fi\fi\fi\fi\fi\fi}
+\def\LEFTRIGHT#1#2#3{%
+ \specdelim@#1%
+ \ifspecdelim@
+  \ifdim\vertcorrect@=\z@
+   \LEFTRIGHT@#1.{\vc@nt@r{#3}}%
+  \else
+   \LEFTRIGHT@#1.{\vc@nt@r{\vrule height\vertcorrect@ depth\z@ width\z@}}%
+  \fi
+ \else
+  \left#1
+   \ifdim\extcorrect@=\z@
+    \vc@nt@r{#3}%
+   \else
+    \smash{\vc@nt@r{#3}}\vc@nt@r{\vrule height\extcorrect@ depth\z@ width\z@}%
+   \fi
+  \right.%
+ \fi
+ \kern-2\nulldelimiterspace\mskip-\thinmuskip
+ \specdelim@#2%
+ \ifspecdelim@
+  \ifdim\vertcorrect@=\z@
+   \LEFTRIGHT@.#2{\vphantom{\vc@nt@r{#3}}}%
+  \else
+   \LEFTRIGHT@.#2{\vc@nt@r{\vrule height\vertcorrect@ depth\z@ width\z@}}%
+  \fi
+ \else
+  \left.%
+  \ifdim\extcorrect@=\z@
+   \vphantom{\vc@nt@r{#3}}%
+  \else
+   \vc@nt@r{\vrule height\extcorrect@ depth\z@ width\z@}%
+  \fi
+  \right#2%
+ \fi
+ \extcorrect@\z@\vertcorrect@\z@}%
+\newbox\HATbox@
+\def\widehat#1{\setbox\HATbox@\hbox{$\displaystyle{#1}$}%
+ \setbox0\hbox{\MTEXF@;}%
+ \ifdim\wd\HATbox@>\wd0
+  \def\HAT@{\textfont3=\MTEXG@}%
+ \else
+  \setbox0\hbox{\MTEXE@9}%
+  \ifdim\wd\HATbox@>\wd0
+   \def\HAT@{\textfont3=\MTEXF@}%
+  \else
+   \setbox0\hbox{\MTEXA@ d}%
+   \ifdim\wd\HATbox@>\wd0
+    \def\HAT@{\textfont3=\MTEXE@}%
+   \else 
+    \def\HAT@{\textfont3=\MTEXA@}%
+   \fi
+  \fi
+ \fi
+ \hbox{\HAT@$\mathaccent"0362 {#1}$}}%
+\newbox\TDbox@
+\def\widetilde#1{\setbox\TDbox@\hbox{$\displaystyle{#1}$}%
+ \setbox0\hbox{\MTEXF@ K}%
+ \ifdim\wd\TDbox@>\wd0
+  \def\TD@{\textfont3=\MTEXG@}%
+ \else
+  \setbox0\hbox{\MTEXE@ I}%
+  \ifdim\wd\TDbox@>\wd0
+   \def\TD@{\textfont3=\MTEXF@}%
+  \else
+   \setbox0\hbox{\MTEXA@ d}%
+   \ifdim\wd\TDbox@>\wd0
+    \def\TD@{\textfont3=\MTEXE@}%
+   \else 
+    \def\TD@{\textfont3=\MTEXA@}%
+   \fi
+  \fi
+ \fi
+ \hbox{\TD@$\mathaccent"0365 {#1}$}}
+\newbox\CHbox@
+\def\widecheck#1{\setbox\CHbox@\hbox{$\displaystyle{#1}$}%
+ \setbox0\hbox{\MTEXF@[}%
+ \ifdim\wd\CHbox@>\wd0
+  \def\CHECK@{\textfont3=\MTEXG@}%
+ \else
+  \setbox0\hbox{\MTEXE@ Y}%
+  \ifdim\wd\CHbox@>\wd0
+   \def\CHECK@{\textfont3=\MTEXF@}%
+  \else
+   \setbox0\hbox{\MTEXA@ z}%
+   \ifdim\wd\CHbox@>\wd0
+    \def\CHECK@{\textfont3=\MTEXE@}%
+   \else 
+    \def\CHECK@{\textfont3=\MTEXA@}%
+   \fi
+  \fi
+ \fi
+ \hbox{\CHECK@$\mathaccent"037A {#1}$}}%
+\newbox\preSbox@
+\newbox\Sbox@
+\newif\ifSQEX@
+\def\SQEX@#1{\setbox\Sbox@\vbox{$$\radical"270370{\copy\preSbox@}$$}%
+ \setbox\Sbox@\vbox{\unvbox\Sbox@\unskip\unpenalty
+ \setbox\Sbox@\lastbox\setbox\Sbox@\hbox{\unhbox\Sbox@\setbox\Sbox@\lastbox
+ \setbox\Sbox@\hbox{\unhbox\Sbox@\setbox\Sbox@\lastbox\setbox\Sbox@\lastbox
+ \setbox0\hbox{#1}%
+ \ifdim\dp\Sbox@>\dp0\global\SQEX@true\else
+ \global\SQEX@false\fi}}}}
+\newcount\SQcount@
+\def\SQtest@#1{\setbox\preSbox@\hbox{$\displaystyle{#1}$}%
+ \SQEX@{\MTEXA@ s}%
+ \ifSQEX@
+  {\textfont3=\MTEXE@\SQEX@{\MTEXE@ u}}%
+  \ifSQEX@
+   {\textfont3=\MTEXF@\SQEX@{\MTEXF@ u}}%
+    \ifSQEX@
+     \def\SQtest@@{\textfont3=\MTEXG@}\global\SQcount@3
+    \else
+     \def\SQtest@@{\textfont3=\MTEXF@}\global\SQcount@2
+    \fi
+  \else
+   \def\SQtest@@{\textfont3=\MTEXE@}\global\SQcount@1
+  \fi
+ \else
+  \def\SQtest@@{\textfont3=\MTEXA@}\global\SQcount@0
+ \fi}
+\newbox\SQRTbox@
+\def\SQRT#1{\setbox\SQRTbox@\hbox{$\displaystyle{#1}$}%
+ \SQtest@{#1}%
+ \hbox{\SQtest@@$\displaystyle\radical"270370{\box\SQRTbox@}$}}
+\def\ROOT#1\OF#2{\setbox\rootbox\hbox{$\m@th\scriptscriptstyle{#1}$}%
+ \mathpalette\R@@T{#2}}
+\def\R@@T#1#2{\setbox\z@\hbox{$\uproot@\z@\leftroot\z@\m@th#1\SQRT{#2}$}%
+ \dimen@\ht\z@\advance\dimen@-\dp\z@
+ \dimen@ii\dimen@
+ \setbox\tw@\hbox{$\m@th#1\mskip\uproot@ mu$}\advance\dimen@ii by1.667\wd\tw@
+ \setbox\tw@\hbox{$\m@th#1\mskip10mu$}%\advance\dimen@ by1.667\wd\tw@
+ \ifcase\SQcount@\advance\dimen@3\wd\tw@\or\advance\dimen@1.5\wd\tw@\or
+ \advance\dimen@\wd\tw@\fi
+ \mkern1mu\kern.13\dimen@\mkern-\leftroot@ mu
+ \raise.44\dimen@ii\copy\rootbox
+ \mkern-1mu\kern-.13\dimen@\mkern\leftroot@ mu\box\z@\kern-\wd\rootbox
+ \leftroot\z@\uproot\z@}
+
+% Now come the macros for the extra large symbols.  They assume that
+% \MTXL@ and \MTXXXL@ refer to the fonts mtxl and mtxxxl that have been loaded.
+
+\def\eat@#1{}
+
+% \FNSS@ is \futurelet\next skipping spaces before the next token
+
+\def\FNSS@#1{\let\FNSS@@#1\FN@\FNSS@@@}
+\def\FNSS@@@{\ifx\next\space@\def\FNSS@@@@. {\FN@\FNSS@@@}\else
+ \def\FNSS@@@@.{\FNSS@@}\fi\FNSS@@@@.}
+
+% we define struts for subscripts and superscripts to give the extra space that would
+% normally be provided for limits of large operators
+
+\def\fdxiii@sub{\vrule height\fontdimen13 \the\textfont3 width\z@ depth\z@}
+\def\fdxiii@sup{\vrule depth\fontdimen13 \the\textfont3 width\z@ height\z@}
+
+% \XL#1#2 etc., will define \next@, depending on the next symbol
+% \largeopx@ and \largeopxNL@ will be used for \XL and \XXL, with all operators other 
+% than \int, etc., and \largeopxxx@ and \largeopxxxNL@ will be used for \XXXL. 
+% We make the definitions in terms of a common one that uses the font as the argument.
+
+\def\LARGEOPx@#1#2#3{% #1=0 or 1 for 'limits' or no 'limits'; #2 is font, #3 is char position
+ \ifnum#1=\@ne
+  \def\next@{\mathop{\hbox{$\vcenter{\hbox{#2\char#3}}$}}\nolimits
+    _{\SUB@}^{\SUP@}\eat@}%
+ \else
+  \def\next@{\mathop{\hbox{$\vcenter{\hbox{#2\char#3}}$}}%
+    _{\SUB@}^{\SUP@}\eat@}%
+ \fi}
+
+
+\def\largeopx@#1#2{\LARGEOPx@#1\MTXL@{#2}}
+\def\largeopxxx@#1#2{\LARGEOPx@#1\MTXXXL@{#2}}
+
+% Similarly, for \LARGEINTx@.  When there are 'limits', the construction is especially 
+% complicated. \maxXLscripts@ will store the maximum of the widths of the sub 
+% and superscripts. There is the additional complication that the amount to adjust the
+% superscript differs for \XL and \XXL, and the adjustment is made in terms of an extra
+% \fontdimen in the mtxxl font, which measures the horizontal distance between the
+% lowest and highest points of the integral sign (for the \XXL versions these are exactly
+% twice the \XL versions).
+
+
+\newdimen\maxXLscripts@
+\newcount\X@count % 0 for \XL, 1 for \XXL, 2 for \XXXL, 3 for \xl
+
+\def\LARGEINTx@#1#2#3{% 
+ \ifnum#1=\@ne
+  \def\next@{\setbox\z@\hbox{#2\char#3\/}\dimen@\wd\z@
+  \setbox\z@\hbox{#2\char#3}\advance\dimen@-\wd\z@
+  \mathop{\hbox{$\vcenter{\hbox{#2\char#3}}$}}\nolimits
+   _{\SUB@}^{\kern\dimen@\SUP@}\eat@}%
+ \else                             
+  \def\next@{\setbox\z@\hbox{\ifcase\X@count\kern\tw@\fontdimen8\MTXL@\or
+   \kern4\fontdimen8\MTXL@\or\kern\tw@\fontdimen8\MTXXXL@\or\kern1.7\fontdimen8\MTXL@\fi}%
+  \setbox\@ne\hbox{#2\char#3}%
+  \setbox\tw@\hbox{$\scriptstyle{\SUB@}$}%
+  \setbox\thr@@\hbox{$\kern\wd\z@\scriptstyle{\SUP@}$}%
+  % let \maxXLscripts@ be max of subscript and superscript boxes
+  \maxXLscripts@\wd\thr@@\ifdim\maxXLscripts@<\wd\tw@\maxXLscripts@\wd\tw@\fi
+ % let \dimen@ii be amount of subscript to left of int 
+  \dimen@ii.5\wd\tw@ \advance\dimen@ii-.5\wd\@ne
+ % let \dimen@ be amount of visible superscript to left of int, namely
+    % [visible length] - [amount to right of left boundary of \int sign], i.e.,
+    %% [wd3 - \wd0] - 1/2(wd3 + wd1) 
+  \dimen@.5\wd\thr@@ \advance\dimen@-\wd\z@ \advance\dimen@-.5\wd\@ne
+  \ifdim\dimen@>\z@ % if visible part of superscript extends to left of \int
+    \ifdim\dimen@>\dimen@ii  % if visible part of superscript to left of subscript
+                             % kern by - [1/2(\maxXLscripts@ - wd1) - \dimen@]
+     \kern\dimen@\kern.5\wd\@ne\kern-.5\maxXLscripts@
+    \else                    % only trim to subscript,
+                             % kern - [1/2(\maxXLscripts@ - wd1) - \dimen@ii]
+     \kern\dimen@ii\kern.5\wd\@ne\kern-.5\maxXLscripts@
+    \fi
+  \else % visible part of superscript entirely to right of \int, so trim to subscript
+    \ifdim\dimen@ii > \z@
+     \kern\dimen@ii\kern.5\wd\@ne\kern-.5\maxXLscripts@
+    \else
+     \kern.5\wd\@ne\kern-.5\maxXLscripts@
+    \fi 
+  \fi
+  \setbox\@ne\hbox{#2\char#3\/}\dimen@ii\wd\@ne
+  \setbox\@ne\hbox{#2\char#3}\advance\dimen@ii-\wd\@ne
+  \mathop{\hbox{$\vcenter{\hbox{#2\char#3}}$}}_{\SUB@}^{\kern\wd\z@\SUP@}\kern\dimen@ii\eat@}%
+ \fi}
+
+
+\def\largeintx@#1#2{\LARGEINTx@#1\MTXL@{#2}}
+\def\largeintxxx@#1#2{\LARGEINTx@#1\MTXXXL@{#2}}
+
+\newcount\XLtype@
+
+\def\xl{\XLtype@\z@\x@l}
+\def\xlnl{\XLtype@\@ne\x@l}
+\def\x@l#1#2{\def\SUB@{#1}\def\SUP@{#2}\futurelet\next\xl@}
+\def\xl@{\X@count\thr@@
+ \ifx\next\bigodot\largeopx@\XLtype@{96}\else
+ \ifx\next\bigoplus\largeopx@\XLtype@{97}\else
+ \ifx\next\bigotimes\largeopx@\XLtype@{98}\else
+ \ifx\next\bigsqcup\largeopx@\XLtype@{99}\else
+ \ifx\next\bigcup\largeopx@\XLtype@{100}\else
+ \ifx\next\bigcap\largeopx@\XLtype@{101}\else
+ \ifx\next\biguplus\largeopx@\XLtype@{102}\else
+ \ifx\next\bigwedge\largeopx@\XLtype@{103}\else
+ \ifx\next\bigvee\largeopx@\XLtype@{104}\else
+ \ifx\next\sum\largeopx@\XLtype@{105}\else
+ \ifx\next\prod\largeopx@\XLtype@{106}\else
+ \ifx\next\coprod\largeopx@\XLtype@{107}\else
+ \ifx\next\int\largeintx@\XLtype@{108}\else
+ \ifx\next\oint\largeintx@\XLtype@{109}\else
+ \ifx\next\bigcupprod\largeopx@\XLtype@{110}\else
+ \ifx\next\bigcapprod\largeopx@\XLtype@{111}\else
+ \ifx\next\cwoint\largeintx@\XLtype@{112}\else
+ \ifx\next\awoint\largeintx@\XLtype@{113}\else
+ \ifx\next\cwint\largeintx@\XLtype@{114}\else
+ \ifx\next\iint\largeintx@\XLtype@{115}\else
+ \ifx\next\iiint\largeintx@\XLtype@{116}\else
+ \ifx\next\oiint\largeintx@\XLtype@{117}\else
+ \ifx\next\oiiint\largeintx@\XLtype@{118}\else
+ \errmessage{Invalid use of \noexpand\xl}%
+ \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\next@}
+
+
+
+
+\def\XL{\XLtype@\z@\X@L}
+\def\XLNL{\XLtype@\@ne\X@L}
+\def\X@L#1#2{\def\SUB@{#1}\def\SUP@{#2}\futurelet\next\XL@}
+\def\XL@{\X@count\z@
+ \ifx\next\bigodot\largeopx@\XLtype@0\else
+ \ifx\next\bigoplus\largeopx@\XLtype@1\else
+ \ifx\next\bigotimes\largeopx@\XLtype@2\else
+ \ifx\next\bigsqcup\largeopx@\XLtype@3\else
+ \ifx\next\bigcup\largeopx@\XLtype@4\else
+ \ifx\next\bigcap\largeopx@\XLtype@5\else
+ \ifx\next\biguplus\largeopx@\XLtype@6\else
+ \ifx\next\bigwedge\largeopx@\XLtype@7\else
+ \ifx\next\bigvee\largeopx@\XLtype@8\else
+ \ifx\next\sum\largeopx@\XLtype@9\else
+ \ifx\next\prod\largeopx@\XLtype@{10}\else
+ \ifx\next\coprod\largeopx@\XLtype@{11}\else
+ \ifx\next\int\largeintx@\XLtype@{12}\else
+ \ifx\next\oint\largeintx@\XLtype@{13}\else
+ \ifx\next\bigcupprod\largeopx@\XLtype@{14}\else
+ \ifx\next\bigcapprod\largeopx@\XLtype@{15}\else
+ \ifx\next\cwoint\largeintx@\XLtype@{16}\else
+ \ifx\next\awoint\largeintx@\XLtype@{17}\else
+ \ifx\next\cwint\largeintx@\XLtype@{18}\else
+ \ifx\next\iint\largeintx@\XLtype@{19}\else
+ \ifx\next\iiint\largeintx@\XLtype@{20}\else
+ \ifx\next\oiint\largeintx@\XLtype@{21}\else
+ \ifx\next\oiiint\largeintx@\XLtype@{22}\else
+ \errmessage{Invalid use of \noexpand\XL}%
+ \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\next@}
+
+\def\XXL{\XLtype@\z@\XX@L}
+\def\XXLNL{\XLtype@\@ne\XX@L}
+\def\XX@L#1#2{\def\SUB@{#1}\def\SUP@{#2}\futurelet\next\XXL@}
+\def\XXL@{\X@count\@ne
+ \ifx\next\bigodot\largeopx@\XLtype@{48}\else
+ \ifx\next\bigoplus\largeopx@\XLtype@{49}\else
+ \ifx\next\bigotimes\largeopx@\XLtype@{50}\else
+ \ifx\next\bigsqcup\largeopx@\XLtype@{51}\else
+ \ifx\next\bigcup\largeopx@\XLtype@{52}\else
+ \ifx\next\bigcap\largeopx@\XLtype@{53}\else
+ \ifx\next\biguplus\largeopx@\XLtype@{54}\else
+ \ifx\next\bigwedge\largeopx@\XLtype@{55}\else
+ \ifx\next\bigvee\largeopx@\XLtype@{56}\else
+ \ifx\next\sum\largeopx@\XLtype@{57}\else
+ \ifx\next\prod\largeopx@\XLtype@{58}\else
+ \ifx\next\coprod\largeopx@\XLtype@{59}\else
+ \ifx\next\int\largeintx@\XLtype@{60}\else
+ \ifx\next\oint\largeintx@\XLtype@{61}\else
+ \ifx\next\bigcupprod\largeopx@\XLtype@{62 \char64}\else
+ \ifx\next\bigcapprod\largeopx@\XLtype@{63 \char65}\else
+ \ifx\next\cwoint\largeintx@\XLtype@{66}\else
+ \ifx\next\awoint\largeintx@\XLtype@{67}\else
+ \ifx\next\cwint\largeintx@\XLtype@{68}\else
+ \ifx\next\iint\largeintx@\XLtype@{69}\else
+ \ifx\next\iiint\largeintx@\XLtype@{70}\else
+ \ifx\next\oiint\largeintx@\XLtype@{71}\else
+ \ifx\next\oiiint\largeintx@\XLtype@{72}\else
+ \errmessage{Invalid use of \noexpand\XXL}%
+ \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\next@}
+
+\def\XXXL{\XLtype@\z@\XXX@L}
+\def\XXXLNL{\XLtype@\@ne\XXX@L}
+\def\XXX@L#1#2{\def\SUB@{#1}\def\SUP@{#2}\futurelet\next\XXXL@}
+\def\XXXL@{\X@count\tw@
+ \ifx\next\bigodot\largeopxxx@\XLtype@0\else
+ \ifx\next\bigoplus\largeopxxx@\XLtype@1\else
+ \ifx\next\bigotimes\largeopxxx@\XLtype@2\else
+ \ifx\next\bigsqcup\largeopxxx@\XLtype@3\else
+ \ifx\next\bigcup\largeopxxx@\XLtype@4\else
+ \ifx\next\bigcap\largeopxxx@\XLtype@5\else
+ \ifx\next\biguplus\largeopxxx@\XLtype@6\else
+ \ifx\next\bigwedge\largeopxxx@\XLtype@7\else
+ \ifx\next\bigvee\largeopxxx@\XLtype@8\else
+ \ifx\next\sum\largeopxxx@\XLtype@9\else
+ \ifx\next\prod\largeopxxx@\XLtype@{10}\else
+ \ifx\next\coprod\largeopxxx@\XLtype@{11}\else
+ \ifx\next\int\largeintxxx@\XLtype@{12}\else
+ \ifx\next\oint\largeintxxx@\XLtype@{13}\else
+  % xxxl \bigcupprod is too wide for PostScript, so it is split into parts
+  % in positions 14 and 16; similarly \bigcapprod is in positions 15 and 17
+ \ifx\next\bigcupprod\largeopxxx@\XLtype@{14 \char16}\else
+ \ifx\next\bigcapprod\largeopxxx@\XLtype@{15 \char17}\else
+ \ifx\next\cwoint\largeintxxx@\XLtype@{18}\else
+ \ifx\next\awoint\largeintxxx@\XLtype@{19}\else
+ \ifx\next\cwint\largeintxxx@\XLtype@{20}\else
+ \ifx\next\iint\largeintxxx@\XLtype@{21}\else
+ \ifx\next\iiint\largeintxxx@\XLtype@{22}\else
+ \ifx\next\oiint\largeintxxx@\XLtype@{23}\else
+ \ifx\next\oiiint\largeintxxx@\XLtype@{24}\else
+ \def\next@{\errmessage{Invalid use of \noexpand\XXXL}}%
+ \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\next@}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% If designing your own style file, you will probably want to omit %%
+%% everything from here to the end. Remember to  return @ and " to  %%
+%% their proper category codes, if necessary.                       %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\FONT@#1#2{\expandafter\ifx\csname#1#2\endcsname\relax
+ \expandafter\expandafter\expandafter\global
+ \expandafter\font\csname#1#2\endcsname=#1#2\fi
+ \def\next@{\let\next@}%
+ \expandafter\next@\csname#1#2\endcsname}
+\def\PSZ@{\edef\nextiii@{ at \the\dimen@}}
+\def\MTPMI@#1#2#3{%
+ \dimen@#1\relax\PSZ@
+ \FONT@{mtmit}\nextiii@\textfont\@ne\next@\skewchar\next@45
+ \dimen@#2\relax\PSZ@
+ \FONT@{mtmis}\nextiii@\scriptfont\@ne\next@\skewchar\next@45
+ \dimen@#3\relax\PSZ@
+ \FONT@{mtmif}\nextiii@\scriptscriptfont\@ne\next@\skewchar\next@45\relax
+}
+\def\MTPSY@#1#2#3{%
+ \dimen@#1\relax\PSZ@
+ \FONT@{mtsyt}\nextiii@\textfont\tw@\next@\skewchar\next@48
+ \dimen@#2\relax\PSZ@
+ \FONT@{mtsys}\nextiii@\scriptfont\tw@\next@\skewchar\next@48
+ \dimen@#3\relax\PSZ@
+ \FONT@{mtsyf}\nextiii@\scriptscriptfont\tw@\next@\skewchar\next@48\relax
+}
+\def\MTPEX@#1{%
+ \dimen@#1\relax\PSZ@
+ \FONT@{mtexa}\nextiii@
+ \let\MTEXA@\next@
+ \setbox0\hbox{\MTEXA@\char'165}%
+ \textfont\thr@@\next@
+ \scriptfont\thr@@\next@
+ \scriptscriptfont\thr@@\next@
+ \ifx\p@renwd\undefined
+ \else
+  \setbox\z@\hbox{\next@ B}\p@renwd\wd\z@
+ \fi
+ \ifx\amstexloaded@\relax
+  \buffer@\fontdimen13 \next@
+  \buffer\buffer@
+ \fi
+ \FONT@{mtxl}\nextiii@
+ \let\MTXL@\next@
+ \multiply\dimen@\tw@\PSZ@\FONT@{mtexe}\nextiii@\let\MTEXE@\next@
+  \FONT@{mtxxxl}\nextiii@\let\MTXXXL@\next@
+ \multiply\dimen@\tw@\PSZ@\FONT@{mtexf}\nextiii@\let\MTEXF@\next@
+ \multiply\dimen@\tw@\PSZ@\FONT@{mtexg}\nextiii@\let\MTEXG@\next@
+}
+\def\MTPMB@#1#2#3{%
+ \dimen@#1\relax\PSZ@
+ \FONT@{mtmbt}\nextiii@\textfont\mbffam\next@\skewchar\next@32
+ \dimen@#2\relax\PSZ@
+ \FONT@{mtmbs}\nextiii@\scriptfont\mbffam\next@\skewchar\next@32
+ \dimen@#3\relax\PSZ@
+ \FONT@{mtmbf}\nextiii@\scriptscriptfont\mbffam\next@\skewchar\next@32
+}
+\def\mbf#1{{\fam\mbffam#1}}
+\def\MTPBMI@#1#2#3{%
+ \alloc@@8\fam\chardef\sixt@@n\mtbmi@
+ \edef\mtbmi@@{\hexnumber@\mtbmi@}%
+ \dimen@#1\relax\PSZ@
+ \FONT@{mtbmit}\nextiii@\textfont\mtbmi@\next@\skewchar\next@45
+ \dimen@#2\relax\PSZ@
+ \FONT@{mtbmis}\nextiii@\scriptfont\mtbmi@\next@\skewchar\next@45
+ \dimen@#3\relax\PSZ@
+ \FONT@{mtbmif}\nextiii@\scriptscriptfont\mtbmi@\next@\skewchar\next@45\relax
+}
+\def\MTPBSY@#1#2#3{%
+ \alloc@@8\fam\chardef\sixt@@n\mtbsy@
+ \edef\mtbsy@@{\hexnumber@\mtbsy@}%
+ \dimen@#1\relax\PSZ@
+ \FONT@{mtbsyt}\nextiii@\textfont\mtbsy@\next@\skewchar\next@48
+ \dimen@#2\relax\PSZ@
+ \FONT@{mtbsys}\nextiii@\scriptfont\mtbsy@\next@\skewchar\next@48
+ \dimen@#3\relax\PSZ@
+ \FONT@{mtbsyf}\nextiii@\scriptscriptfont\mtbsy@\next@\skewchar\next@48\relax
+}
+\def\MTPBEX@#1{%
+ \alloc@@8\fam\chardef\sixt@@n\mtbex@
+ \edef\mtbex@@{\hexnumber@\mtbex@}%
+ \dimen@#1\relax\PSZ@
+ \FONT@{mtbexa}\nextiii@
+ \textfont\mtbex@\next@
+ \scriptfont\mtbex@\next@
+ \scriptscriptfont\mtbex@\next@
+}
+\def\MTPHSY@#1#2#3{%
+ \alloc@@8\fam\chardef\sixt@@n\mthsy@
+ \edef\mthsy@@{\hexnumber@\mthsy@}%
+ \dimen@#1\relax\PSZ@
+ \FONT@{mthsyt}\nextiii@\textfont\mthsy@\next@\skewchar\next@48
+ \dimen@#2\relax\PSZ@
+ \FONT@{mthsys}\nextiii@\scriptfont\mthsy@\next@\skewchar\next@48
+ \dimen@#3\relax\PSZ@
+ \FONT@{mthsyf}\nextiii@\scriptscriptfont\mthsy@\next@\skewchar\next@48\relax
+}
+\def\MTPHEX@#1{%
+ \alloc@@8\fam\chardef\sixt@@n\mthex@
+ \edef\mthex@@{\hexnumber@\mthex@}%
+ \dimen@#1\relax\PSZ@
+ \FONT@{mthexa}\nextiii@
+ \textfont\mthex@\next@
+ \scriptfont\mthex@\next@
+ \scriptscriptfont\mthex@\next@
+}
+\def\CAL@#1#2#3{%
+ \usecal
+ \FONT@{#1}\empty\textfont\Calfam\next@\skewchar\next@48
+ \FONT@{#2}\empty\scriptfont\Calfam\next@\skewchar\next@48
+ \FONT@{#3}\empty\scriptscriptfont\Calfam\next@\skewchar\next@48\relax
+}
+\def\MTPsizes#1#2#3{%
+ \def\tMTPsize{#1}\def\sMTPsize{#2}\def\fMTPsize{#3}%  % info for mtpb.tex and mtph.tex
+ \ifx\timesmt@loaded\relax 
+  \TimesMTsizes{#1}{#2}{#3}%
+ \fi
+ \MTPMI@{#1}{#2}{#3}%
+ \MTPSY@{#1}{#2}{#3}%
+ \MTPEX@{#1}%
+ \MTPMB@{#1}{#2}{#3}%
+ \CAL@{cmsy10 at#1}{cmsy7 at#2}{cmsy5 at#3}%
+ \usingMTPsizes{#1}{#2}{#3}%
+}
+\def\loadbm{\MTPBMI@\tMTPsize\sMTPsize\fMTPsize
+ \MTPBSY@\tMTPsize\sMTPsize\fMTPsize
+ \MTPBEX@\tMTPsize
+ \bmdefs@}
+\def\loadhm{\MTPHSY@\tMTPsize\sMTPsize\fMTPsize
+ \MTPHEX@\tMTPsize
+ \hmdefs@}
+
+\catcode`\"=\qqcode@
+\catcode`\@=\atcode@
+\MTPsizes{10pt}{7pt}{5.5pt}
+
+
+
+ 

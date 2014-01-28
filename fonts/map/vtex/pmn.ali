@@ -1,0 +1,29 @@
+%1 = $PFM$
+%2 = $TEXMF$fonts/type1/adobe/minion/
+
+@Minion-Bold = pmnb8a %2,1
+@Minion-Bold-8r = pmnb8r %2,1,r="8r",b="pmnb8a"
+@Minion-BoldItalic = pmnbi8a %2,1
+@Minion-BoldItalic-8r = pmnbi8r %2,1,r="8r",b="pmnbi8a"
+@Minion-Semibold = pmns8a %2,1
+@Minion-Semibold-8r = pmns8r %2,1,r="8r",b="pmns8a"
+@Minion-SemiboldItalic = pmnsi8a %2,1
+@Minion-SemiboldItalic-8r = pmnsi8r %2,1,r="8r",b="pmnsi8a"
+@Minion-Regular = pmnr8a %2,1
+@Minion-Regular-8r = pmnr8r %2,1,r="8r",b="pmnr8a"
+@Minion-Italic = pmnri8a %2,1
+@Minion-Italic-8r = pmnri8r %2,1,r="8r",b="pmnri8a"
+@MinionExp-Bold = pmnb8x %2,1
+@MinionExp-BoldItalic = pmnbi8x %2,1
+@MinionExp-Regular = pmnr8x %2,1
+@MinionExp-Italic = pmnri8x %2,1
+@MinionExp-Semibold = pmns8x %2,1
+@MinionExp-SemiboldItalic = pmnsi8x %2,1
+@Minion-DisplayRegular = pmnrd8a %2,1
+@Minion-DisplayRegular-8r = pmnrd8r %2,1,r="8r",b="pmnrd8a"
+@MinionExp-DisplayRegular = pmnrd8x %2,1
+@Minion-DisplayItalic = pmnrid8a %2,1
+@Minion-DisplayItalic-8r = pmnrid8r %2,1,r="8r",b="pmnrid8a"
+@MinionExp-DisplayItalic = pmnrid8x %2,1
+@Minion-Ornaments = pmnrp %2,1
+

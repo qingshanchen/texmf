@@ -1,0 +1,26 @@
+%%
+%% This is file `ot1trjn.fd',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% trajan.dtx  (with options: `fdot1')
+%% 
+%%  Copyright 1999 Peter R. Wilson
+%% 
+%%  This program is provided under the terms of the
+%%  LaTeX Project Public License distributed from CTAN
+%%  archives in directory macros/latex/base/lppl.txt.
+%% 
+%% Author: Peter Wilson (CUA and NIST)
+%%         now at: peter.r.wilson@boeing.com
+%% 
+\DeclareFontFamily{OT1}{trjn}{}
+  \DeclareFontShape{OT1}{trjn}{m}{n}{ <-> trjnr10 }{}
+  \DeclareFontShape{OT1}{trjn}{bx}{n}{ <-> sub trjn/m/n }{}
+  \DeclareFontShape{OT1}{trjn}{b}{n}{ <-> sub trjn/m/n }{}
+  \DeclareFontShape{OT1}{trjn}{m}{sl}{ <-> trjnsl10 }{}
+  \DeclareFontShape{OT1}{trjn}{m}{it}{ <-> sub trjn/m/sl }{}
+\endinput
+%%
+%% End of file `ot1trjn.fd'.

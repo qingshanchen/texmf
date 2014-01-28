@@ -1,0 +1,17 @@
+% Package created 2006/03/04 by Marius Kleiner <marius.kleiner@epfl.ch>
+%
+% This simple package sets the left and right margins to zero, such that the
+% text is the width of the page minus one inch on each side.
+%
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{widetext}[2006/03/04 Widetext package created by Marius
+Kleiner]
+
+% Set horizontal margins to zero
+\setlength{\oddsidemargin}{0pt}
+\setlength{\evensidemargin}{0pt}
+
+% Set textwidth to paperwidth - 2in
+\setlength{\@tempdima}{\paperwidth}
+\addtolength{\@tempdima}{-2in}
+\setlength{\textwidth}{\@tempdima}

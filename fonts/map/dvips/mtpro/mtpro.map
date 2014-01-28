@@ -1,0 +1,69 @@
+%
+% Publish or Perish MTPro fonts
+%
+% FAMILIES 1, 2, 3:
+% pfbs for mtmi* 
+%
+mnmif MNMIF <mnmif.pfb
+mnmis MNMIS <mnmis.pfb
+mnmit MNMIT <mnmit.pfb
+% and
+xtamt XTAMT <xtamt.pfb
+xtbmt XTBMT <xtbmt.pfb
+xtcmt XTCMT <xtcmt.pfb
+%
+% pfbs for mtsy* and mtex*
+%
+mtsyf MTSYF <mtsyf.pfb
+mtsys MTSYS <mtsys.pfb
+mtsyt MTSYT <mtsyt.pfb
+mtexa MTEXA <mtexa.pfb
+mtexe MTEXE <mtexe.pfb
+mtexf MTEXF <mtexf.pfb
+mtexg MTEXG <mtexg.pfb
+%
+% "MATH BOLD" FAMILY (BOLD UPRIGHT LETTERS):
+% pfbs for mtmb*
+%
+mnmbf MNMBF <mnmbf.pfb
+mnmbs MNMBS <mnmbs.pfb
+mnmbt MNMBT <mnmbt.pfb
+% and
+xtdmt XTDMT <xtdmt.pfb
+xtemt XTEMT <xtemt.pfb
+xtfmt XTFMT <xtfmt.pfb
+%
+% BOLD MATH FAMILY (BOLD ITALIC, ETC.):
+% pfbs for mtbmi*
+%
+mtbmif MTBMIF <mtbmif.pfb
+% and
+mnbmis MNBMIS <mnbmis.pfb
+mnbmit MNBMIT <mnbmit.pfb
+% and
+xtgmt XTGMT <xtgmt.pfb
+xthmt XTHMT <xthmt.pfb
+xtimt XTIMT <xtimt.pfb
+%
+% pfbs for mtbsy* and mtbexa
+%
+mtbsyf MTBSYF <mtbsyf.pfb
+mtbsys MTBSYS <mtbsys.pfb
+mtbsyt MTBSYT <mtbsyt.pfb
+mtbexa MTBEXA <mtbexa.pfb
+%
+% HEAVY MATH FAMILY:
+% pfbs for mthmi*
+%
+mthmif MTHMIF <mthmif.pfb
+mthmis MTHMIS <mthmis.pfb
+mthmit MTHMIT <mthmit.pfb
+%
+% pfbs for mthsy* and mthexa
+%
+mthsyf MTHSYF <mthsyf.pfb
+mthsys MTHSYS <mthsys.pfb
+mthsyt MTHSYT <mthsyt.pfb
+mthexa MTHEXA <mthexa.pfb
+mtxl MTXL <mtxl.pfb
+mtxxxl MTXXXL <mtxxxl.pfb

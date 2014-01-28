@@ -1,0 +1,100 @@
+StartFontMetrics 2.0
+FontName MTEXE
+FullName MTEXE
+FamilyName MathTime Professional
+Weight Normal
+Notice Copyright (C) Publish or Perish, Inc. 2000.
+ItalicAngle 0
+IsFixedPitch false
+UnderlinePosition -100
+UnderlineThickness 50
+Version 1.000
+EncodingScheme FontSpecific
+FontBBox 0 -3600 3692 449
+CapHeight 395
+XHeight 500
+Descender -1777
+Ascender 386
+StartCharMetrics 80
+C 0 ; WX 394 ; N NUL ; B 98 -1800 383 0 ; 
+C 1 ; WX 394 ; N SOH ; B 11 -1800 296 0 ; 
+C 2 ; WX 417 ; N STX ; B 109 -2100 406 0 ; 
+C 3 ; WX 417 ; N ETX ; B 11 -2100 308 0 ; 
+C 4 ; WX 440 ; N EOT ; B 120 -2400 429 0 ; 
+C 5 ; WX 440 ; N breve ; B 11 -2400 320 0 ; 
+C 6 ; WX 462 ; N dotaccent ; B 130 -2700 451 0 ; 
+C 7 ; WX 462 ; N BEL ; B 11 -2700 332 0 ; 
+C 8 ; WX 485 ; N ring ; B 141 -3000 474 0 ; 
+C 9 ; WX 485 ; N TAB ; B 11 -3000 344 0 ; 
+C 10 ; WX 321 ; N hungarumlaut ; B 29 -1800 291 0 ; 
+C 11 ; WX 321 ; N ogonek ; B 30 -1800 292 0 ; 
+C 12 ; WX 532 ; N caron ; B 151 -3300 521 0 ; 
+C 13 ; WX 532 ; N CR ; B 11 -3300 381 0 ; 
+C 14 ; WX 785 ; N dotlessi ; B 28 -1777 757 23 ; 
+C 15 ; WX 785 ; N SI ; B 28 -1777 757 23 ; 
+C 16 ; WX 900 ; N DLE ; B 28 -2077 872 23 ; 
+C 17 ; WX 900 ; N DC1 ; B 28 -2077 872 23 ; 
+C 18 ; WX 1025 ; N DC2 ; B 28 -2377 987 23 ; 
+C 19 ; WX 1025 ; N DC3 ; B 28 -2377 987 23 ; 
+C 20 ; WX 1130 ; N DC4 ; B 28 -2678 1102 23 ; 
+C 21 ; WX 1130 ; N NAK ; B 28 -2678 1102 23 ; 
+C 22 ; WX 1244 ; N SYN ; B 28 -2977 1217 23 ; 
+C 23 ; WX 1244 ; N ETB ; B 28 -2977 1217 23 ; 
+C 24 ; WX 1357 ; N CAN ; B 28 -3277 1329 23 ; 
+C 25 ; WX 1357 ; N EM ; B 28 -3277 1329 23 ; 
+C 26 ; WX 1468 ; N SUB ; B 28 -3577 1440 23 ; 
+C 27 ; WX 1468 ; N ESC ; B 28 -3577 1440 23 ; 
+C 28 ; WX 556 ; N FS ; B 162 -3600 544 0 ; 
+C 29 ; WX 556 ; N GS ; B 12 -3600 394 0 ; 
+C 30 ; WX 370 ; N RS ; B 34 -2100 335 0 ; 
+C 31 ; WX 370 ; N US ; B 35 -2100 336 0 ; 
+C 32 ; WX 419 ; N space ; B 0 -2400 379 0 ; 
+C 33 ; WX 419 ; N exclam ; B 40 -2400 380 0 ; 
+C 34 ; WX 469 ; N quotedbl ; B 44 -2700 424 0 ; 
+C 35 ; WX 469 ; N numbersign ; B 45 -2700 425 0 ; 
+C 36 ; WX 518 ; N dollar ; B 48 -3000 468 0 ; 
+C 37 ; WX 518 ; N percent ; B 50 -3000 470 0 ; 
+C 38 ; WX 567 ; N ampersand ; B 53 -3300 512 0 ; 
+C 39 ; WX 567 ; N quotesingle ; B 55 -3300 514 0 ; 
+C 40 ; WX 616 ; N parenleft ; B 58 -3600 556 0 ; 
+C 41 ; WX 616 ; N parenright ; B 60 -3600 558 0 ; 
+C 49 ; WX 1036 ; N one ; B 6 285 1030 393 ; 
+C 50 ; WX 1368 ; N two ; B 6 285 1362 400 ; 
+C 51 ; WX 1700 ; N three ; B 6 285 1694 407 ; 
+C 52 ; WX 2032 ; N four ; B 6 285 2026 414 ; 
+C 53 ; WX 2364 ; N five ; B 6 285 2358 421 ; 
+C 54 ; WX 2696 ; N six ; B 6 285 2690 428 ; 
+C 55 ; WX 3028 ; N seven ; B 6 285 3022 435 ; 
+C 56 ; WX 3360 ; N eight ; B 6 285 3354 442 ; 
+C 57 ; WX 3692 ; N nine ; B 6 285 3686 449 ; 
+C 65 ; WX 1036 ; N A ; B 0 299 1036 390 ; 
+C 66 ; WX 1368 ; N B ; B 0 299 1368 397 ; 
+C 67 ; WX 1700 ; N C ; B 0 299 1700 402 ; 
+C 68 ; WX 2032 ; N D ; B 0 299 2032 409 ; 
+C 69 ; WX 2364 ; N E ; B 0 299 2364 414 ; 
+C 70 ; WX 2696 ; N F ; B 0 299 2696 421 ; 
+C 71 ; WX 3028 ; N G ; B 0 299 3028 427 ; 
+C 72 ; WX 3360 ; N H ; B 0 299 3360 433 ; 
+C 73 ; WX 3692 ; N I ; B 0 299 3692 439 ; 
+C 81 ; WX 1036 ; N Q ; B 6 285 1030 393 ; 
+C 82 ; WX 1368 ; N R ; B 6 285 1362 400 ; 
+C 83 ; WX 1700 ; N S ; B 6 285 1694 407 ; 
+C 84 ; WX 2032 ; N T ; B 6 285 2026 414 ; 
+C 85 ; WX 2364 ; N U ; B 6 285 2358 421 ; 
+C 86 ; WX 2696 ; N V ; B 6 285 2690 428 ; 
+C 87 ; WX 3028 ; N W ; B 6 285 3022 435 ; 
+C 88 ; WX 3360 ; N X ; B 6 285 3354 442 ; 
+C 89 ; WX 3692 ; N Y ; B 6 285 3686 449 ; 
+C 98 ; WX 704 ; N b ; B 6 285 698 386 ; 
+C 101 ; WX 704 ; N e ; B 0 297 704 383 ; 
+C 112 ; WX 560 ; N p ; B 94 -1777 570 23 ; 
+C 113 ; WX 647 ; N q ; B 104 -2077 657 23 ; 
+C 114 ; WX 670 ; N r ; B 114 -2377 680 23 ; 
+C 115 ; WX 720 ; N s ; B 124 -2677 730 23 ; 
+C 116 ; WX 770 ; N t ; B 134 -2977 780 23 ; 
+C 117 ; WX 890 ; N u ; B 144 -3277 900 23 ; 
+C 118 ; WX 930 ; N v ; B 154 -3577 940 23 ; 
+C 122 ; WX 704 ; N z ; B 6 285 698 386 ; 
+C 160 ; WX 500 ; N nbspace ; B 0 0 0 0 ; 
+EndCharMetrics
+EndFontMetrics

@@ -1,0 +1,26 @@
+%Filename: t1pasx.fd
+%Created by: tex inst
+%Created using fontinst v1.916
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{t1pasx.fd}
+   [2003/07/09 Fontinst v1.916 font definitions for T1/pasx.]
+
+\DeclareFontFamily{T1}{pasx}{}
+
+\DeclareFontShape{T1}{pasx}{m}{n}{
+   <-> pasr9e
+}{}
+
+\DeclareFontShape{T1}{pasx}{m}{sc}{
+   <-> pasrc9e
+}{}
+
+\DeclareFontShape{T1}{pasx}{m}{it}{
+   <-> pasri9e
+}{}
+
+\DeclareFontShape{T1}{pasx}{m}{sl}{<->ssub * pasx/m/it}{}
+
+\endinput
