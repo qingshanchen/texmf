@@ -13,7 +13,9 @@
 \begin{pgflibrary}{profiler}
 	A library to simplify the optimization of runtime speed of \TeX\ programs.
 
-	It relies on the |pdftex| primitive \declareandlabel{\pdfelapsedtime} to count (fractional) seconds and counts total time and self time for macro invocations.
+	It relies on the |pdftex| primitive
+        \declareandlabel{\pdfelapsedtime}\footnote{The primitive is
+          emulated in lua\TeX.} to count (fractional) seconds and counts total time and self time for macro invocations.
 \end{pgflibrary}
 
 \subsection{Overview}
@@ -28,22 +30,23 @@ The work flow for the optimization is simple: the preamble contains configuratio
 \noindent and then, the time between |\begin{tikzpicture}| and |\end{tikzpicture}| and the time required to call |\pgfkeys| will be collected.
 
 At the end, a short usage summary like
-\begin{codeexample}[code only]
+\begin{codeexample}[code only, tikz syntax=false]
  pgflibraryprofiler(main job) {total time=1.07378sec; (100.0122%) self time=0.034sec; (3.1662%)}
  pgflibraryprofiler(<ENV>tikzpicture) {total time=1.03978sec; (96.84601%) self time=1.00415sec; (93.52722%)}
  pgflibraryprofiler(<CS>pgfkeys) {total time=0.03563sec; (3.31726%) self time=0.03563sec; (3.31726%)}
 \end{codeexample}
 \noindent will be provided in the log file, furthermore, the same information is available in a text table called |\jobname.profiler.|\meta{datetime}|.dat| which is of the form:
-\begin{codeexample}[code only]
+\begin{codeexample}[code only, tikz syntax=false]
 profilerentry       totaltime[s]        totaltime[percent]  selftime[s]         selftime[percent]   
 main job            1.07378             100.0122            0.034               3.1662              
 <ENV>tikzpicture    1.03978             96.84601            1.00415             93.52722            
 <CS>pgfkeys         0.03563             3.31726             0.03563             3.31726             
 \end{codeexample}
-Here, the |totaltime| means the time used for all invocations of the respective profiler entry (one row in the table). The |selftime| measures time which is not already counted for in another profiler entry which has been invoked within the current one. The example above is not very exiting: the main job consists only of several (quite complex) pictures and nothing else. Thus, its total time is large. However, the self time is very small because the |tikzpicture|s are counted separately, and they have been invoked within the |main job|. The |\pgfkeys| control sequence has been invoked within the |tikzpicture|, that's why the |selftime| for the |tikzpicture| is a little bit smaller than its |totaltime|.
+Here, the |totaltime| means the time used for all invocations of the respective profiler entry (one row in the table). The |selftime| measures time which is not already counted for in another profiler entry which has been invoked within the current one. The example above is not very exciting: the main job consists only of several (quite complex) pictures and nothing else. Thus, its total time is large. However, the self time is very small because the |tikzpicture|s are counted separately, and they have been invoked within the |main job|. The |\pgfkeys| control sequence has been invoked within the |tikzpicture|, that's why the |selftime| for the |tikzpicture| is a little bit smaller than its |totaltime|.
 
 \subsection{Requirements}
-The library doesn't work without |pdftex|. Furthermore, it requires a more or less recent version which supports the |\pdfelapsedtime| directive.
+The library works with |pdftex| and |luatex|. Furthermore, it requires
+a more or less recent version of |pdftex| which supports the |\pdfelapsedtime| directive.
 
 \subsection{Defining Profiler Entries}
 Unlike profilers for C/C++ or java, this library doesn't extract information about every \TeX\ macro automatically, nor does it collect information for each of them. Instead, every profiler entry needs to be defined explicitly. Only defined profiler entries will be processed.
@@ -104,7 +107,7 @@ Note that |\pgfprofilenewforcommand| is a special case of |\pgfprofilenewforcomm
 \begin{command}{\pgfprofileshowinvocationsfor\marg{profiler entry name}}
 	Enables verbose output for \emph{every} invocation of \meta{profiler entry name}.
 
-	This is only available for profiler entries for commands (those created by |\pgfprofilenewforcommand| for example). It will also show any arguments.
+	This is only available for profiler entries for commands (those created by |\pgfprofilenewforcommand| for example). It will also show all given arguments.
 \end{command}
 \begin{command}{\pgfprofileshowinvocationsexpandedfor\marg{profiler entry name}}
 	A variant of |\pgfprofileshowinvocationsfor| which will expand all arguments for \meta{profiler entry name} before showing them. The invocation as such is not affected by this expansion.

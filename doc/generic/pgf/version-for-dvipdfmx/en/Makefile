@@ -12,9 +12,23 @@ pgfmanual.ind: pgfmanual.idx
 	makeindex $(doc).idx
 
 pgfmanual.pdf: $(doc).tex $(doc).ind 
+	mkdir -p plots
 	(TEXINPUTS="$(TEXINPUTS)" $(latex) $(doc).tex) || true
 	(egrep -q $(rerun) $(doc).log && TEXINPUTS="$(TEXINPUTS)" $(latex) $(doc).tex) || true
 	dvipdfmx -p a4 $(doc)
 
 clean:
-	rm -f pgfmanual*.aux pgfmanual.{out,log,idx,ind,ilg,pdf,toc,bbl,blg,ps,dvi}
+	rm -f  \
+		plots/* \
+		pgfmanual.out \
+		pgfmanual.log \
+		pgfmanual.idx \
+		pgfmanual.ind \
+		pgfmanual.ilg \
+		pgfmanual.pdf \
+		pgfmanual.toc \
+		pgfmanual.bbl \
+		pgfmanual.blg \
+		pgfmanual.ps \
+		pgfmanual.dvi \
+		pgfmanual*.aux 

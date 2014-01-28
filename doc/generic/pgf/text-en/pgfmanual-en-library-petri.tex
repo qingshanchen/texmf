@@ -11,14 +11,14 @@
 \section{Petri-Net Drawing Library}
 
 \begin{tikzlibrary}{petri}
-  This packages provides shapes and styles for drawing Petri nets. 
+  This packages provides shapes and styles for drawing Petri nets.
 \end{tikzlibrary}
 
 
 
 \subsection{Places}
 
-The package defines a style for drawing places of Petri nets. 
+The package defines a style for drawing places of Petri nets.
 
 \begin{stylekey}{/tikz/place}
   This style indicates that a node is a place of a Petri net. Usually,
@@ -27,16 +27,16 @@ The package defines a style for drawing places of Petri nets.
   like its name or its capacity. You should use the |tokens| options,
   explained in Section~\ref{section-tokens}, to add tokens inside the
   place.
-  
+
 \begin{codeexample}[]
 \begin{tikzpicture}
   \node[place,label=above:$p_1$,tokens=2]        (p1) {};
   \node[place,label=below:$p_2\ge1$,right=of p1] (p2) {};
 \end{tikzpicture}
 \end{codeexample}
-  
+
   \begin{stylekey}{/tikz/every place}
-    This stype is envoked by the style |place|. To change the
+    This style is evoked by the style |place|. To change the
     appearance of places, you can change this style.
 \begin{codeexample}[]
 \begin{tikzpicture}
@@ -55,7 +55,7 @@ The package defines a style for drawing places of Petri nets.
 \subsection{Transitions}
 
 Transitions are also nodes. They should be drawn using the following
-style: 
+style:
 
 \begin{stylekey}{/tikz/transition}
   This style indicates that a node is a transition. As for places, the
@@ -64,7 +64,7 @@ style:
 
   To connect a transition to places, you can use the |edge| command as
   in the following example:
-  
+
 \begin{codeexample}[]
 \begin{tikzpicture}
   \node[place,tokens=2,label=above:$p_1$]        (p1) {};
@@ -75,9 +75,9 @@ style:
     edge[post] node[auto] {2} (p2);
 \end{tikzpicture}
 \end{codeexample}
-  
+
   \begin{stylekey}{/tikz/every transition}
-    This style is envoked by the style |transition|.
+    This style is evoked by the style |transition|.
   \end{stylekey}
 
   \begin{stylekey}{/tikz/pre}
@@ -116,7 +116,7 @@ simple style for typesetting them.
   text will be typeset in a tiny font and in white on black
   (naturally, you can easily change this by setting the style
   |every token|).
-    
+
 \begin{codeexample}[]
 \begin{tikzpicture}
   \node[place,label=above:$p_1$]             (p1) {};
@@ -127,7 +127,7 @@ simple style for typesetting them.
 \end{tikzpicture}
 \end{codeexample}
   \begin{stylekey}{/tikz/every token}
-    Change this style to chagne the appearance of tokens.
+    Change this style to change the appearance of tokens.
   \end{stylekey}
 \end{stylekey}
 
@@ -198,10 +198,10 @@ The Petri net library offers a solution to this problem: The
   \end{key}
 \end{stylekey}
 
-The |children are tokens| options gives you a lot of flexibility, but
+The |children are tokens| option gives you a lot of flexibility, but
 it is a bit cumbersome to use. For this reason there are some options
 that help in standard situations. They all use |children are tokens|
-internally, so any change to, say, the |every tokens| style will
+internally, so any change to, say, the |every token| style will
 affect how these options depict tokens.
 
 \begin{key}{/tikz/tokens=\meta{number}}
@@ -236,15 +236,14 @@ affect how these options depict tokens.
 \begin{key}{/tikz/colored tokens=\meta{color list}}
   This option, which must also be given when a place node is being
   created, gets a list of colors as parameter. It will then add as
-  many tokens to the place are in this list, each colored with the
-  corresponding color in the list.
+  many tokens to the place as there are colors in this list, each filled correspondingly.
 \begin{codeexample}[]
 \tikz  \node[place,colored tokens={black,black,red,blue}] {};
 \end{codeexample}
 \end{key}
 \begin{key}{/tikz/structured tokens=\meta{token texts}}
-  This option, which must again be passed to a place, gets a list
-  texts for tokens. For each text, another token will be added to the place.
+  This option, which must again be passed to a place, gets a list of 
+  texts for tokens. For each text, a new token will be added to the place.
 \begin{codeexample}[]
 \tikz  \node[place,structured tokens={$x$,$y$,$z$}] {};
 \end{codeexample}
@@ -271,7 +270,7 @@ affect how these options depict tokens.
   every place/.style={draw=blue,fill=blue!20,minimum size=6mm}]
 
   \foreach \i in {1,...,6} {
-    \node[place,label=left:$p_\i$] (p\i) at (0,\i) {}; 
+    \node[place,label=left:$p_\i$] (p\i) at (0,\i) {};
     \node[place,label=right:$q_\i$] (q\i) at (8,\i) {};
   }
   \foreach \name/\var/\vala/\valb/\height/\x in
@@ -284,8 +283,8 @@ affect how these options depict tokens.
   \node[token] at (h1) {};
 
   \node[transition] at (1.5,1.5) {}  edge [pre] (p1)  edge [post] (p2);
-  \node[transition] at (1.5,2.5) {}  edge[pre] (p2)   edge[pre] (m1f)
-                                     edge[post] (p3)  edge[post] (m1t);
+  \node[transition] at (1.5,2.5) {}  edge [pre] (p2)  edge[pre]   (m1f)
+                                     edge [post](p3)  edge[post]  (m1t);
   \node[transition] at (1.5,3.3) {}  edge [pre] (p3)  edge [post] (p4)
                                      edge [pre and post] (h1);
   \node[transition] at (1.5,3.7) {}  edge [pre] (p3)  edge [pre] (h2)
@@ -311,7 +310,7 @@ affect how these options depict tokens.
   \node[transition] at (6.5,5.5) {}  edge [pre] (q5)  edge [pre] (m2t)
                                      edge [post] (q6) edge [post] (m2f);
   \node[transition] at (6.5,6.5) {}  edge [pre] (q6)  edge [post] (q1.south west);
-\end{tikzpicture}  
+\end{tikzpicture}
 \end{codeexample}
 
 Here is the same net once more, but with these styles changes:
@@ -326,7 +325,7 @@ Here is the same net once more, but with these styles changes:
   every place/.style={draw,thick,minimum size=6mm}]
 
   \foreach \i in {1,...,6} {
-    \node[place,label=left:$p_\i$] (p\i) at (0,\i) {}; 
+    \node[place,label=left:$p_\i$] (p\i) at (0,\i) {};
     \node[place,label=right:$q_\i$] (q\i) at (8,\i) {};
   }
   \foreach \name/\var/\vala/\valb/\height/\x in
@@ -368,7 +367,7 @@ Here is the same net once more, but with these styles changes:
   \node[transition] at (6.5,6.5) {}  edge [pre] (q6)  edge [post] (q1.south west);
 \end{tikzpicture}
 
-%%% Local Variables: 
+%%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "pgfmanual-pdftex-version"
-%%% End: 
+%%% End:

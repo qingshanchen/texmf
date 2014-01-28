@@ -15,7 +15,7 @@
 \subsection{Overview}
 
 \pgfname\ provides a layering mechanism for composing graphics from
-multiple layers. (This mechanism is not be confused with the
+multiple layers. (This mechanism is not to be confused with the
 conceptual ``software layers'' the \pgfname\ system is composed of.)
 Layers are often used in graphic programs. The idea is that you can
 draw on the different layers in any order. So you might start drawing
@@ -53,7 +53,7 @@ layer. You can declare a new layer using the following command:
 
 \begin{command}{\pgfdeclarelayer\marg{name}}
   This command declares a layer named \meta{name} for later
-  use. Mainly, this will setup some internal bookkeeping.
+  use. Mainly, this will set up some internal bookkeeping.
 \end{command}
 
 The next step toward using a layer is to tell \pgfname\ which layers
@@ -62,8 +62,7 @@ ordering. Thus, it is possible to have more layers declared than are
 actually used.
 
 \begin{command}{\pgfsetlayers\marg{layer list}}
-  This command, which should be used \emph{outside} a |{pgfpicture}|
-  environment, tells \pgfname\ which layers will be used in
+  This command tells \pgfname\ which layers will be used in
   pictures. They are stacked on top of each other in the order
   given. The layer |main| should always be part of the list. Here is
   an example:
@@ -72,6 +71,9 @@ actually used.
 \pgfdeclarelayer{foreground}  
 \pgfsetlayers{background,main,foreground}
 \end{codeexample}
+
+  This command should be given either outside of any picture or ``directly inside'' of a picture.
+  Here, the ``directly inside'' means that there should be no further level of \TeX\ grouping between |\pgfsetlayers| and the matching |\end{pgfpicture}| (no closing braces, no |\end{...}|). It will also work if |\pgfsetlayers| is provided before |\end{tikzpicture}| (with similar restrictions).
 \end{command}
 
 

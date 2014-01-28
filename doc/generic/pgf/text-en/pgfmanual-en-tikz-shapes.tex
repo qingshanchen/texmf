@@ -15,12 +15,12 @@
 
 In the present section, the usage of \emph{nodes} in
 \tikzname\ is explained. A node is typically a rectangle or circle or
-another simple shape with some text on it. 
+another simple shape with some text on it.
 
 Nodes are added to paths using the special path
 operation |node|. Nodes \emph{are not part of the path
-  itself}. Rather, they are added to the picture after the path has
-been drawn. 
+  itself}. Rather, they are added to the picture just before or after
+the path has been drawn.
 
 In Section~\ref{section-nodes-basic} the basic syntax of the node
 operation is explained, followed in Section~\ref{section-nodes-multi}
@@ -33,12 +33,12 @@ Section~\ref{section-nodes-transformations} the different ways
 transformations affect nodes are
 studied. Sections~\ref{section-nodes-placing-1}
 and~\ref{section-nodes-placing-2} are about placing nodes on or next
-to straight lines and curves. In
-Section~\ref{section-nodes-connecting} it is explained how a node can
+to straight lines and curves.
+Section~\ref{section-nodes-connecting} explains how a node can
 be used as a ``pseudo-coordinate.'' Section~\ref{section-nodes-edges}
 introduces the |edge| operation, which
 works similar to the |to| operation and also similar to the |node|
-operation. 
+operation.
 
 
 \subsection{Nodes and Their Shapes}
@@ -58,7 +58,7 @@ There are no special \TeX\ commands for adding a node to a picture; rather,
 there is path operation called |node| for this. Nodes are created
 whenever \tikzname\ encounters |node| or |coordinate| at a point on a
 path where it would expect a normal path operation (like |-- (1,1)| or
-|sin (1,1)|). It is also possible to give node specifications
+|rectangle (1,1)|). It is also possible to give node specifications
 \emph{inside} certain path operations as explained later.
 
 The node operation is typically followed by some options, which apply
@@ -66,27 +66,129 @@ only to the node. Then, you can optionally \emph{name} the node by
 providing a name in round braces. Lastly, for the |node| operation you
 must provide some label text for the node in curly braces, while for
 the |coordinate| operation you may not. The node is placed at the
-current position of the path \emph{after the path has been
-  drawn}. Thus, all nodes are drawn ``on top'' of the path and
-retained until the path is complete. If there are several nodes on a
-path, they are drawn on top of the path in the order they are
+current position of the path either \emph{after the path has been
+  drawn} or (more seldomly and only if you add the |behind path|
+option) \emph{just before the path is drawn.} Thus, all nodes are
+drawn ``on top'' or ``behind'' the path and are retained until the
+path is complete. If there are several nodes on a path, perhaps some
+behind and some on top of the path, first come the nodes behind the
+path in the order they were encountered, then comes that path, and
+then come the remaining node, again in the order they are
 encountered. 
 
 \begin{codeexample}[]
-\tikz \fill[fill=examplefill]
-     (0,0) node {first node}
-  -- (1,1) node {second node}
-  -- (0,2) node {third node};
+\tikz \fill [fill=yellow!80!black]
+     (0,0) node              {first node}  
+  -- (1,1) node[behind path] {second node}
+  -- (0,2) node              {third node};
 \end{codeexample}
 
+\subsubsection{Syntax of the Node Command}
+
 The syntax for specifying nodes is the following:
-\begin{pathoperation}{node}{\opt{|[|\meta{options}|]|}\opt{|(|\meta{name}|)|}%
-    \opt{|at(|\meta{coordinate}|)|}\opt{\marg{text}}}
-  The effect of |at| is to place the node at the coordinate given
-  after |at| and not, as would normally be the case, at the last
-  position. The |at| syntax is not available when a node is given
-  inside a path operation (it would not make any sense, there).
+\begin{pathoperation}{node}{\opt{\meta{foreach statements}}%
+      \opt{|[|\meta{options}|]|}\opt{|(|\meta{name}|)|}%
+    \opt{|at(|\meta{coordinate}|)|}\opt{\marg{node contents}}}
+  Since this path operation is one of the most involved around, let us
+  go over it step by step.
+
+  \medskip
+  \textbf{Order of the parts of the specification.}
+  Everything between ``|node|'' and the opening brace of a node is
+  optional. If there are \meta{foreach statements}, they must come
+  first, directly following ``|node|.'' Other than that, the ordering
+  of all the other elements of a node specification (the
+  \meta{options}, the  \meta{name}, and \meta{coordinate}) is
+  arbitrary, indeed, there can be multiple occurrences of any of these
+  elements (although only for options this makes much sense).  
   
+  \medskip
+  \textbf{The text of a node.}
+  At the end of a node, you must (normally) provide some \meta{node contents}
+  in curly braces; indeed, the ``end'' of the node specification is
+  detected by the opening curly brace. For normal nodes it is possible to use
+  ``fragile'' stuff inside the \meta{node contents} like the |\verb|
+  command (for the technically savvy: code inside the \meta{node
+    contents} is allowed to change catcodes; however, this rule does
+  not apply to ``nodes on a path'' to be discussed later).
+
+  Instead of giving \meta{node contents} at the end of the node in
+  curly braces, you can also use the following key:
+  \begin{key}{/tikz/node contents=\meta{node contents}}
+    \label{option-node-contents}%
+    This key sets that contents of the node to the given text as if
+    you had given it at the end in curly braces. When the option is
+    used inside the options of a node, the parsing of the node stops
+    immediately after the end of the option block. In particular, the
+    option block cannot be followed by further option blocks or curly
+    braces (or, rather, these do not count as part of the node
+    specification.) Also note that the \meta{node contents} may not
+    contain fragile stuff since the catcodes get fixed upon reading
+    the options. Here is an example:
+\begin{codeexample}[]
+\tikz {
+  \path (0,0) node [red]                    {A}
+        (1,0) node [blue]                   {B}
+        (2,0) node [green, node contents=C]
+        (3,0) node [node contents=D]           ;
+}
+\end{codeexample}
+\end{key}
+
+  \medskip
+  \textbf{Specifying the location of the node.}
+  Nodes are placed at the last position mentioned on the path. The
+  effect of adding ``|at|'' to a node 
+  specification is that the coordinate given after |at| is used
+  instead. The |at| syntax is not available when a node is given
+  inside a path operation (it would not make any sense there).
+
+  \begin{key}{/tikz/at=\meta{coordinate}}
+    This is another way of specifying the |at| coordinate. Note that,
+    typically, you will have to enclose the \meta{coordinate} in curly
+    braces so that a comma inside the \meta{coordinate} does not
+    confuse \TeX.
+  \end{key}
+
+  Another aspect of the ``location'' of a node is whether it appears
+  \emph{in front of} or \emph{behind} the current path. You can change
+  which of these two possibilities happens on a node-by-node basis
+  using the following keys:
+  \begin{key}{/tikz/behind path}
+    When this key is set, either as a local option for the node or
+    some surrounding scope, the node will be drawn behind the current
+    path. For this, \tikzname\ collects all nodes defined on the
+    current path with this option set and then inserts all of them, in
+    the order they appear, just before it draws the path. Thus,
+    several nodes with this option set may obscure one anther, but
+    never the path itself. ``Just before it draws the path'' actually
+    means that the nodes are inserted into the page output just before
+    any pre-actions are applied to the path (see below for what
+    pre-actions are).
+\begin{codeexample}[]
+\tikz \fill [fill=blue!50, draw=blue, very thick]
+      (0,0)   node [behind path, fill=red!50]   {first node}
+   -- (1.5,0) node [behind path, fill=green!50] {second node}
+   -- (1.5,1) node [behind path, fill=brown!50] {third node}
+   -- (0,1)   node [             fill=blue!30]  {fourth node};
+\end{codeexample}
+    
+    Note that |behind path| only applies to the current path; not to
+    the current scope or picture. To put a node ``behind everything''
+    you need to use layers and options like |on background layer|, see
+    the background library in Section~\ref{section-tikz-backgrounds}.
+  \end{key}
+
+  \begin{key}{/tikz/in front of path}
+    This is the opposite of |behind path|: It causes nodes to be drawn
+    on top of the path. Since this is the default behaviour, you
+    usually do not need this option; it is only needed when an
+    enclosing scope has used |behind path| and you now wish to
+    ``switch back'' to the normal behaviour.
+  \end{key}
+  
+  \medskip
+  \textbf{The name of a node.}
   The |(|\meta{name}|)| is a name for later reference and it is
   optional. You may also add the option |name=|\meta{name} to the
   \meta{option} list; it has the same effect.
@@ -98,23 +200,19 @@ The syntax for specifying nodes is the following:
     can name a node just |1| or perhaps |start of chart| or even
     |y_1|. Your node name should \emph{not} contain any punctuation like
     a dot, a comma, or a colon since these are used to detect what kind
-    of coordinate you mean when you reference a node. 
+    of coordinate you mean when you reference a node.
   \end{key}
 
   \begin{key}{/tikz/alias=\meta{another node name}}
     This option allows you to provide another name for the
     node. Giving this option multiple times will allow you to access
-    the node via several aliases. Using the |late options| options,
-    you can also assign an alias name to a node at a later point.
+    the node via several aliases. Using the |node also| syntax,
+    you can also assign an alias name to a node at a later point, see
+    Section~\ref{section-node-also}. 
   \end{key}
-
-  \begin{key}{/tikz/at=\meta{coordinate}}
-    This is another way of specifying ath |at| coordinate. Note that,
-    typically, you will have to enclose the \meta{coordinate} in curly
-    braces so that a comma inside the \meta{coordinate} does not
-    confuse \TeX.
-  \end{key}
-
+    
+  \medskip
+  \textbf{The options of a node.}
   The \meta{options} is an optional list of options that \emph{apply
     only to the node} and have no effect outside. The other way round,
   most ``outside'' options also apply to the node, but not all. For
@@ -123,32 +221,33 @@ The syntax for specifying nodes is the following:
   |draw| or |fill|, never applies to the node and must be given in the
   node (unless some special other options are used, deep sigh).
 
+  \medskip
+  \textbf{The shape of a node.}
   As mentioned before, we can add a border and even a background to a
-  node:  
+  node:
 \begin{codeexample}[]
-\tikz \fill[fill=examplefill]
+\tikz \fill[fill=yellow!80!black]
       (0,0) node {first node}
-   -- (1,1) node[draw] {second node}
+   -- (1,1) node[draw, behind path] {second node}
    -- (0,2) node[fill=red!20,draw,double,rounded corners] {third node};
 \end{codeexample}
 
   The ``border'' is actually just a special case of a much more general
   mechanism. Each node has a certain \emph{shape} which, by default, is
   a rectangle. However, we can also ask \tikzname\ to use a circle shape
-  instead or an ellipse shape (you have to include |pgflibraryshapes| for
-  the latter shape): 
+  instead or an ellipse shape (you have to include one of the
+  |shapes.geometric| library for the latter shape):
 
 \begin{codeexample}[]
-\tikz \fill[fill=examplefill]
-      (0,0) node{first node}
-   -- (1,1) node[ellipse,draw] {second node}
-   -- (0,2) node[circle,fill=red!20] {third node};
+\tikz \fill[fill=yellow!80!black]
+      (0,0) node                            {first node}
+   -- (1,1) node[ellipse,draw, behind path] {second node}
+   -- (0,2) node[circle,fill=red!20]        {third node};
 \end{codeexample}
 
-  In the future, there might be much more complicated shapes available
-  such as, say, a shape for a resistor or a shape for a \textsc{uml}
-  class. Unfortunately, creating new shapes is a bit tricky and makes
-  it necessary to use the basic layer directly. Life is hard.
+  There are many more shapes available such as, say, a shape for a
+  resistor or a large arrow, see the |shapes| library in
+  Section~\ref{section-libs-shapes} for details.
 
   To select the shape of a node, the following option is used:
   \begin{key}{/tikz/shape=\meta{shape name} (initially rectangle)}
@@ -164,14 +263,45 @@ The syntax for specifying nodes is the following:
     shape is selected as if you had said |shape=|\meta{shape name}.
 
     By default, the following shapes are available: |rectangle|,
-    |circle|, |coordinate|, and, when the package |pgflibraryshapes| is
-    loaded, also |ellipse|. Details of these shapes, like their anchors
+    |circle|, |coordinate|. Details of these shapes, like their anchors
     and size options, are discussed in Section~\ref{section-the-shapes}.
   \end{key}
-  
-  The following styles influences how nodes are rendered:
+
+  \medskip
+  \textbf{The foreach statement for nodes.}
+  At the beginning of a node specification (and only there) you can provide multiple
+  \meta{foreach statements}, each of which has the form |foreach| \meta{var}
+  |in| |{|\meta{list}|}| (note that there is no slash before
+  |foreach|). When they are given, instead of a single node, multiple
+  nodes will be created: The \meta{var} will iterate over all values
+  of \meta{list} and for each of them, a new node is created. These
+  nodes are all created using all the text following the \meta{foreach
+    statements}, but in each copy the \meta{var} will have the current
+  value of the current element in the \meta{list}.
+
+  As an example, the following two codes have the same effect:
+\begin{codeexample}[]
+\tikz \draw (0,0) node foreach \x in {1,2,3} at (\x,0) {\x};
+\end{codeexample}
+\begin{codeexample}[]
+\tikz \draw (0,0) node at (1,0) {1} node at (2,0) {2} node at (3,0) {3};
+\end{codeexample}
+  When you provide several |foreach| statements, they work like
+  ``nested loops'':
+\begin{codeexample}[]
+\tikz \node foreach \x in {1,...,4} foreach \y in {1,2,3}
+            [draw] at (\x,\y) {\x,\y};
+\end{codeexample}
+  As the example shows, a \meta{list} can contain ellipses (three
+  dots) to indicated that a larger number of numbers is meant. Indeed,
+  you can use the full power of the |\foreach| command here, including
+  multiple parameters and options, see Section~\ref{section-foreach}.
+
+  \medskip
+  \textbf{Styles for nodes.}
+  The following styles influence how nodes are rendered:
   \begin{stylekey}{/tikz/every node (initially \normalfont empty)}
-    This style is installed at the beginning of every node. 
+    This style is installed at the beginning of every node.
 \begin{codeexample}[]
 \begin{tikzpicture}[every node/.style={draw}]
   \draw (0,0) node {A} -- (1,1) node {B};
@@ -184,22 +314,62 @@ The syntax for specifying nodes is the following:
     rectangle nodes, and so on.
 \begin{codeexample}[]
 \begin{tikzpicture}
-  [every rectangle node/.style={draw}, 
+  [every rectangle node/.style={draw},
    every circle node/.style={draw,double}]
   \draw (0,0) node[rectangle] {A} -- (1,1) node[circle] {B};
 \end{tikzpicture}
 \end{codeexample}
   \end{stylekey}
+  
+  \medskip
+  \textbf{Name scopes.}
+  It turns out that the name of a node can further be influenced using
+  two keys:
+  \begin{key}{/tikz/name prefix=\meta{text} (initially \normalfont empty)}
+    The value of this key is prefixed to every node inside the
+    current scope. This includes both the naming of the node (via
+    the |name| key or via the implicit |(|\meta{name}|)| syntax) as
+    well as any referencing of the node. Outside the scope,
+    the nodes can (and need to) be referenced using ``full name''
+    consisting of the prefix and the node name.
+    
+    The net effect of this is that you can set the name prefix at
+    the beginning of a scope to some value and then use short and
+    simple names for the nodes inside the scope. Later, outside the
+    scope, you can reference the nodes via their full name:
+\begin{codeexample}[]
+\tikz {
+  \begin{scope}[name prefix = top-]
+    \node (A) at (0,1) {A};
+    \node (B) at (1,1) {B};
+    \draw (A) -- (B);
+  \end{scope}
+  \begin{scope}[name prefix = bottom-]
+    \node (A) at (0,0) {A};
+    \node (B) at (1,0) {B};
+    \draw (A) -- (B);
+  \end{scope}
+  
+  \draw [red] (top-A) -- (bottom-B);  
+}
+\end{codeexample}
+    As can be seen, name prefixing makes it easy to write
+    ``recycable'' code.
+  \end{key}
+  \begin{key}{/tikz/name suffix=\meta{text} (initially \normalfont empty)}
+    Works as |name prefix|, only the \meta{text} is appended to
+    every node name in the current scope.  
+  \end{key}      
 \end{pathoperation}
 
-There is a special syntax for specifying ``light-weighed'' nodes:
+There is a special syntax for specifying ``light-weight'' nodes:
 
 \begin{pathoperation}{coordinate}{\opt{|[|\meta{options}|]|}|(|\meta{name}|)|\opt{|at(|\meta{coordinate}|)|}}
   This has the same effect as
 
-  |node[shape=coordinate][|\meta{options}|](|\meta{name}|)at(|\meta{coordinate}|){}|,
-  
-  where the |at| part might be missing.
+  |\node[shape=coordinate]|\verb|[|\meta{options}|](|\meta{name}|)at(|\meta{coordinate}|){}|,
+
+  where the |at| part may be omitted.
 \end{pathoperation}
 
 Since nodes are often the only path operation on paths, there are two
@@ -231,7 +401,7 @@ special commands for creating paths containing only a node:
 \end{itemize}
 By loading library packages, you can define more shapes like ellipses
 or diamonds; see Section~\ref{section-libs-shapes} for the complete
-list of shapes. 
+list of shapes.
 
 \label{section-tikz-coordinate-shape}
 The |coordinate| shape is handled in a special way by \tikzname. When
@@ -240,18 +410,18 @@ this has the same effect as if you had said |(x.center)|. None  of the
 special ``line shortening rules'' apply in this case. This can be
 useful since, normally, the line shortening causes paths to be
 segmented and they cannot be used for filling. Here is an example that
-demonstrates the difference: 
+demonstrates the difference:
 \begin{codeexample}[]
 \begin{tikzpicture}[every node/.style={draw}]
   \path[yshift=1.5cm,shape=rectangle]
     (0,0) node(a1){} (1,0) node(a2){}
     (1,1) node(a3){} (0,1) node(a4){};
-  \filldraw[fill=examplefill] (a1) -- (a2) -- (a3) -- (a4);
-  
+  \filldraw[fill=yellow!80!black] (a1) -- (a2) -- (a3) -- (a4);
+
   \path[shape=coordinate]
     (0,0) coordinate(b1) (1,0) coordinate(b2)
     (1,1) coordinate(b3) (0,1) coordinate(b4);
-  \filldraw[fill=examplefill] (b1) -- (b2) -- (b3) -- (b4);
+  \filldraw[fill=yellow!80!black] (b1) -- (b2) -- (b3) -- (b4);
 \end{tikzpicture}
 \end{codeexample}
 
@@ -277,13 +447,13 @@ shapes:
   to make it a bit ``larger.''
 
   For those familiar with \textsc{css}, this is the same as
-  \emph{padding}. 
+  \emph{padding}.
 
 \begin{codeexample}[]
 \begin{tikzpicture}
   \draw (0,0)     node[inner sep=0pt,draw] {tight}
         (0cm,2em) node[inner sep=5pt,draw] {loose}
-        (0cm,4em) node[fill=examplefill]   {default};
+        (0cm,4em) node[fill=yellow!80!black]   {default};
 \end{tikzpicture}
 \end{codeexample}
 \end{key}
@@ -296,7 +466,7 @@ shapes:
 \begin{key}{/pgf/inner ysep=\meta{dimension} (initially .3333em)}
   \keyalias{tikz}
   Specifies the inner separation in the $y$-direction, only.
-\end{key}  
+\end{key}
 
 \begin{key}{/pgf/outer sep=\meta{dimension} (initially .5\string\pgflinewidth)}
   \keyalias{tikz}
@@ -312,15 +482,15 @@ shapes:
   exactly on the ``outside border'' of the path (not on the path
   itself). When the shape is filled, but not drawn, this may not be
   desirable. In this case, the |outer sep| should be set to zero
-  point. 
+  points. 
 \begin{codeexample}[]
 \begin{tikzpicture}
   \draw[line width=5pt]
-    (0,0) node[outer sep=0pt,fill=examplefill]     (f) {filled}
+    (0,0) node[outer sep=0pt,fill=yellow!80!black]     (f) {filled}
     (2,0) node[inner sep=.5\pgflinewidth+2pt,draw] (d) {drawn};
 
   \draw[->] (1,-1) -- (f);
-  \draw[->] (1,-1) -- (d);  
+  \draw[->] (1,-1) -- (d);
 \end{tikzpicture}
 \end{codeexample}
 \end{key}
@@ -340,7 +510,7 @@ shapes:
   This option ensures that the height of the shape (including the
   inner, but ignoring the outer separation) will be at least
   \meta{dimension}. Thus, if the text plus the inner separation is not
-  at least as large as \meta{dimension}, the shape will be enlarged 
+  at least as large as \meta{dimension}, the shape will be enlarged
   appropriately. However, if the text is already larger than
   \meta{dimension}, the shape will not be shrunk.
 \begin{codeexample}[]
@@ -386,35 +556,33 @@ shapes:
 
 \label{section-rotating-shape-borders}
 
-Some shapes (but not all), support a special kind of rotation. This 
-rotation affects only the border of a shape and is independent of the 
+Some shapes (but not all), support a special kind of rotation. This
+rotation affects only the border of a shape and is independent of the
 node contents, but \emph{in addition} to any other transformations.
 	
 \begin{codeexample}[]
-\tikzstyle{every node}=[dart, shape border uses incircle, 
+\tikzstyle{every node}=[dart, shape border uses incircle,
   inner sep=1pt, draw]
-\begin{tikzpicture}
-  \foreach \a/\b/\c in {A/0/0, B/45/0, C/0/45, D/45/45}
-    \node [shape border rotate=\b, rotate=\c] at (\b/36,-\c/36) {\a};
-\end{tikzpicture}
+\tikz \node foreach \a/\b/\c in {A/0/0, B/45/0, C/0/45, D/45/45}
+            [shape border rotate=\b, rotate=\c] at (\b/36,-\c/36) {\a};
 \end{codeexample}
 
-There are two types of rotation: restricted and unrestricted. Which 
-type of rotation is applied is determined by on how the shape border 
-is constructed. If the shape border is contructed using an incircle, 
-that is, a circle that tightly fits the node contents (including 
+There are two types of rotation: restricted and unrestricted. Which
+type of rotation is applied is determined by on how the shape border
+is constructed. If the shape border is constructed using an incircle,
+that is, a circle that tightly fits the node contents (including
 the |inner sep|), then the rotation can be unrestricted. If, however,
 the border is constructed using the natural dimensions of the node
-contents, the rotation is restricted to integer multiples of 90 
+contents, the rotation is restricted to integer multiples of 90
 degrees.
 
 Why should there be two kinds of rotation and border construction?
 Borders constructed using the natural dimensions of the node contents
-provide a much tighter fit to the node contents, but to maintain 
-this tight fit, the border rotation must be restricted to integer 
+provide a much tighter fit to the node contents, but to maintain
+this tight fit, the border rotation must be restricted to integer
 multiples of 90 degrees. By using an incircle, unrestricted rotation
 is possible, but the border will not make a very tight fit to the
-node contents. 
+node contents.
 	
 \begin{codeexample}[]
 \tikzstyle{every node}=[isosceles triangle, draw]
@@ -424,16 +592,16 @@ node contents.
 \end{tikzpicture}
 \end{codeexample}
 
-There are \pgfname{} keys determine how a shape border is 
-contructed, and to specify its rotation.
-It should be noted that not all shapes support these keys, so 
-reference should be made to the documentation for individual 
-shapes. 
+There are \pgfname{} keys that determine how a shape border is
+constructed, and to specify its rotation.
+It should be noted that not all shapes support these keys, so
+reference should be made to the documentation for individual
+shapes.
 	
 \begin{key}{/pgf/shape border uses incircle=\opt{\meta{boolean}}
     (default true)}
   \keyalias{tikz}
-  Determines if the border of a shape is constructed using the 
+  Determines if the border of a shape is constructed using the
   incircle. If no value is given \meta{boolean} will take the default
   value |true|.
 \end{key}
@@ -442,15 +610,15 @@ shapes.
 \begin{key}{/pgf/shape border rotate=\meta{angle} (initially 0)}
   \keyalias{tikz}
   Rotates the border of a shape independently of the node contents,
-  but in addition to any other transformations. If the shape 
+  but in addition to any other transformations. If the shape
   border is not constructed using the incircle, the rotation will be
   rounded to the nearest integer multiple of 90 degrees when the
-  shape is drawn. 
+  shape is drawn.
 \end{key}
 
-Note that if the border of the shape is rotated, 
-the compass point anchors, and `text box' anchors (including 
-|mid east|, |base west|, and so on), \emph{do not rotate}, but the 
+Note that if the border of the shape is rotated,
+the compass point anchors, and `text box' anchors (including
+|mid east|, |base west|, and so on), \emph{do not rotate}, but the
 other anchors do:
 	
 \begin{codeexample}[]
@@ -458,7 +626,7 @@ other anchors do:
 \begin{tikzpicture}
   \node at (0,0)  (A) {A};
   \node [shape border rotate=30] at (1.5,0) (B) {B};
-  \foreach \s/\t in 
+  \foreach \s/\t in
     {left side/base east, bottom side/north, bottom left corner/base}{
        \fill[red]  (A.\s) circle(1.5pt) (B.\s) circle(1.5pt);
        \fill[blue] (A.\t) circle(1.5pt) (B.\t) circle(1.5pt);
@@ -466,10 +634,10 @@ other anchors do:
 \end{tikzpicture}
 \end{codeexample}
 
-Finally, a somewhat unfortunate side-effect of rotating shape borders 
-is that the supporting shapes do not distinguish between 
-|outer xsep| and |outer ysep|, and typically, the larger of the 
-two values will be used. 
+Finally, a somewhat unfortunate side-effect of rotating shape borders
+is that the supporting shapes do not distinguish between
+|outer xsep| and |outer ysep|, and typically, the larger of the
+two values will be used.
 
 
 
@@ -479,13 +647,13 @@ two values will be used.
 \label{section-nodes-multi}
 
 Most nodes just have a single simple text label. However, nodes of a
-more complicated shapes might be made up from several \emph{node
+more complicated shape might be made up from several \emph{node
   parts}. For example, in automata theory a so-called Moore state has
 a state name, drawn in the upper part of the state circle, and an
 output text, drawn in the lower part of the state circle. These two
 parts are quite independent. Similarly, a \textsc{uml} class shape
 would have a name part, a method part, and an attributes
-part. Different molecule shape might use parts for the different atoms
+part. Different molecule shapes might use parts for the different atoms
 to be drawn at the different positions, and so on.
 
 Both \pgfname\ and \tikzname\ support such multipart nodes. On the
@@ -508,7 +676,7 @@ different node parts by using the following command:
   {
     % No \nodepart has been used, yet. So, the following is put in the
     % ``text'' node part by default.
-    $q_1$ 
+    $q_1$
     \nodepart{lower} % Ok, end ``text'' part, start ``output'' part
     $00$
   }; % output part ended.
@@ -521,7 +689,7 @@ different node parts by using the following command:
   \begin{stylekey}{/tikz/every \meta{part name} node part (initially
       \normalfont empty)}
     This style is installed at the beginning of every node part named
-    \meta{part name}. 
+    \meta{part name}.
 \begin{codeexample}[]
 \tikz [every lower node part/.style={red}]
   \node [circle split,draw] {$q_1$ \nodepart{lower} $00$};
@@ -539,7 +707,7 @@ different node parts by using the following command:
 
 The simplest option for the text in nodes is its color. Normally, this
 color is just the last color installed using |color=|, possibly
-inherited from another scope. However, it is possible to specificly
+inherited from another scope. However, it is possible to specifically
 set the color used for text using the following option:
 
 \begin{key}{/tikz/text=\meta{color}}
@@ -555,29 +723,68 @@ set the color used for text using the following option:
 \end{key}
 
 Just like the color itself, you may also wish to set the opacity of
-the text only. For this, use the option |text opacity| option, which
+the text only. For this, use the |text opacity| option, which
 is detailed in Section~\ref{section-tikz-transparency}.
 
 \subsubsection{Text Parameters: Font}
 
-Next, you may wish to adjust the font used for the text. Use the
-following option for this:
-\begin{key}{/tikz/font=\meta{font commands}}
-  Sets the font used for text labels. 
+Next, you may wish to adjust the font used for the text. Naturally,
+you can just use a font command like |\small| or |\rm| at the
+beginning of a node. However, the following two options make it easier
+to set the font used in nodes on a general basis. Let us start with:
+
+\begin{key}{/tikz/node font=\meta{font commands}}
+  This option sets the font used for all text used in a node. 
 \begin{codeexample}[]
 \begin{tikzpicture}
-  \draw[font=\itshape] (1,0) -- +(1,1) node[above] {italic};
+  \draw[node font=\itshape] (1,0) -- +(1,1) node[above] {italic};
 \end{tikzpicture}
 \end{codeexample}
-  A perhaps more useful example is the following:
-
+  Since the \meta{font commands} are executed at a very early stage in
+  the construction of the node, the font selected using this command
+  will also dictate the values of dimensions defined in terms of |em|
+  or |ex|. For instance, when the |minimum height| of a node is |3em|,
+  the actual height will be (at least) three times the line distance
+  selected by the \meta{font commands}:
 \begin{codeexample}[]
-\tikz [every text node part/.style={font=\itshape}, 
-       every lower node part/.style={font=\footnotesize}]
-  \node [circle split,draw] {state \nodepart{lower} output};
+\tikz \node [node font=\tiny,  minimum height=3em, draw] {tiny};
+\tikz \node [node font=\small, minimum height=3em, draw] {small};
 \end{codeexample}
 \end{key}
 
+The other font command is:
+
+\begin{key}{/tikz/font=\meta{font commands}}
+  Sets the font used for the text inside nodes. However, this font
+  will \emph{not} (yet) be installed when any of the dimensions of the
+  node are being computed, so dimensions like |1em| will be with
+  respect to the font used outside the node (usually the font that was
+  in force when the picture started). 
+\begin{codeexample}[]
+\begin{tikzpicture}
+  \node [font=\itshape] {italic};
+\end{tikzpicture}
+\end{codeexample}
+
+\begin{codeexample}[]
+\tikz \node [font=\tiny,  minimum height=3em, draw] {tiny};
+\tikz \node [font=\small, minimum height=3em, draw] {small};
+\end{codeexample}
+
+  A useful example of how the |font| option can be used is the
+  following: 
+
+\begin{codeexample}[]
+\tikz [every text node part/.style={font=\itshape},
+       every lower node part/.style={font=\footnotesize}]
+  \node [circle split,draw] {state \nodepart{lower} output};
+\end{codeexample}
+
+  As can be seen, the font can be changed for each node part. This
+  does \emph{not} work with the |node font| command since, as the name
+  suggests, this command can only be used to select the ``overall''
+  font for the node and this is done very early. 
+\end{key}
 
 
 \subsubsection{Text Parameters: Alignment and Width for Multi-Line Text}
@@ -607,19 +814,19 @@ lines of text. There are three different ways of achieving this:
   request \tikzname\ to arrange these lines in some manner. This will
   only be done, however, if the |align| option has been given.
 \begin{codeexample}[]
-\tikz[align=left] \node[draw] {This is a\\demonstration.};  
+\tikz[align=left] \node[draw] {This is a\\demonstration.};
 \end{codeexample}
 \begin{codeexample}[]
-\tikz[align=center] \node[draw] {This is a\\demonstration.};  
+\tikz[align=center] \node[draw] {This is a\\demonstration.};
 \end{codeexample}
   The |\\| command takes an optional extra space as an argument in square
   brackets.
 \begin{codeexample}[]
-\tikz \node[fill=examplefill,align=right]
-  {This is a\\[-2pt] demonstration text for\\[1ex] alignments.};  
+\tikz \node[fill=yellow!80!black,align=right]
+  {This is a\\[-2pt] demonstration text for\\[1ex] alignments.};
 \end{codeexample}
-\item You can request that \tikzname\ does an automatic line-breaking 
-  for you inside the node by specifying a fixed |text width| for the 
+\item You can request that \tikzname\ does an automatic line-breaking
+  for you inside the node by specifying a fixed |text width| for the
   node. In this case, you can still use |\\| to enforce a
   line-break. Note that when you specify a text width, the node will
   have this width, independently of whether the text actually
@@ -640,112 +847,136 @@ Let us now first have a look at the |text width| command.
   change the alignment using |align| or directly using commands line
   |\centering|.
 \begin{codeexample}[]
-\tikz \draw (0,0) node[fill=examplefill,text width=3cm]
-  {This is a demonstration text for showing how line breaking works.};  
+\tikz \draw (0,0) node[fill=yellow!80!black,text width=3cm]
+  {This is a demonstration text for showing how line breaking works.};
 \end{codeexample}
-  Setting \meta{dimension} to an emtpy string causes the automatic
+  Setting \meta{dimension} to an empty string causes the automatic
   line breaking to be disabled.
 \end{key}
 
-\begin{key}{/tikz/align=\meta{how}}
-  This key is used to setup an alignment for multi-line text inside a
+\begin{key}{/tikz/align=\meta{alignment option}}
+  This key is used to set up an alignment for multi-line text inside a
   node. If |text width| is set to some width (let us call this
   \emph{alignment with line breaking}), the |align| key will
   setup the |\leftskip| and the |\rightskip| in such a way that the
-  text is broken and aligned according to \meta{how}. If |text width|
+  text is broken and aligned according to \meta{alignment option}. If |text width|
   is not set (that is, set to the empty string; let us call this
   \emph{alignment without line breaking}), then a different
-  mechanism is ued internally, namely the key |node halign header|, is
+  mechanism is used internally, namely the key |node halign header|, is
   set to an appropriate value. While this key, which is documented
   below, is not to be used by beginners, the net effect is simple:
   When |text width| is not set, you can use |\\| to break lines and
-  align them according to \meta{how} and the resulting node's width
+  align them according to \meta{alignment option} and the resulting node's width
   will be minimal to encompass the resulting lines.
 
-  In detail, you can set \meta{how} to one of the following values:
+  In detail, you can set \meta{alignment option} to one of the following values:
   \begin{description}
   \item[|align=|\declare{|left|}]
     For alignment without line breaking, the different lines are simply
     aligned such that their left borders are below one another.
 \begin{codeexample}[]
-\tikz \node[fill=examplefill,align=left]
-  {This is a\\ demonstration text for\\ alignments.};  
+\tikz \node[fill=yellow!80!black,align=left]
+  {This is a\\ demonstration text for\\ alignments.};
 \end{codeexample}
-    For alignment with line breaking, the same will happen only 
+    For alignment with line breaking, the same will happen only
     the lines will now, additionally, be broken automatically:
 \begin{codeexample}[]
-\tikz \node[fill=examplefill,text width=3cm,align=left]
-  {This is a demonstration text for showing how line breaking works.};  
+\tikz \node[fill=yellow!80!black,text width=3cm,align=left]
+  {This is a demonstration text for showing how line breaking works.};
 \end{codeexample}
 
-  \item[|align=|\declare{|flush left|}]
+  \item[|align=|\declare{\texttt{flush left}}]
     For alignment without line breaking this option has exactly the
-    same effect as |left|. However, for alignment with line breaking, 
+    same effect as |left|. However, for alignment with line breaking,
     there is a difference: While |left| uses the
     original plain \TeX\ definition of a ragged right border, in which
     \TeX\ will try to balance the right border as well as possible,
     |flush left| causes the right border to be ragged in the
     \LaTeX-style, in which no balancing occurs. This looks ugly, but
     it may be useful for very narrow boxes and when you wish to avoid
-    hyphenations. 
+    hyphenations.
 \begin{codeexample}[]
-\tikz \node[fill=examplefill,text width=3cm,align=flush left]
-  {This is a demonstration text for showing how line breaking works.};  
+\tikz \node[fill=yellow!80!black,text width=3cm,align=flush left]
+  {This is a demonstration text for showing how line breaking works.};
 \end{codeexample}
 
   \item[|align=|\declare{|right|}]
     Works like |left|, only for right alignment.
 \begin{codeexample}[]
-\tikz \node[fill=examplefill,align=right]
-  {This is a\\ demonstration text for\\ alignments.};  
+\tikz \node[fill=yellow!80!black,align=right]
+  {This is a\\ demonstration text for\\ alignments.};
 \end{codeexample}
 \begin{codeexample}[]
-\tikz \node[fill=examplefill,text width=3cm,align=right]
-  {This is a demonstration text for showing how line breaking works.};  
+\tikz \node[fill=yellow!80!black,text width=3cm,align=right]
+  {This is a demonstration text for showing how line breaking works.};
 \end{codeexample}
 
-  \item[|align=|\declare{|flush right|}]
+  \item[|align=|\declare{\texttt{flush right}}]
     Works like |flush left|, only for right alignment.
 \begin{codeexample}[]
-\tikz \node[fill=examplefill,text width=3cm,align=flush right]
-  {This is a demonstration text for showing how line breaking works.};  
+\tikz \node[fill=yellow!80!black,text width=3cm,align=flush right]
+  {This is a demonstration text for showing how line breaking works.};
 \end{codeexample}
 
   \item[|align=|\declare{|center|}]
     Works like |left| or |right|, only for centered alignment.
 \begin{codeexample}[]
-\tikz \node[fill=examplefill,align=center]
-  {This is a\\ demonstration text for\\ alignments.};  
+\tikz \node[fill=yellow!80!black,align=center]
+  {This is a\\ demonstration text for\\ alignments.};
 \end{codeexample}
 \begin{codeexample}[]
-\tikz \node[fill=examplefill,text width=3cm,align=center]
-  {This is a demonstration text for showing how line breaking works.};  
+\tikz \node[fill=yellow!80!black,text width=3cm,align=center]
+  {This is a demonstration text for showing how line breaking works.};
 \end{codeexample}
 
-  \item[|align=|\declare{|flush center|}]
-    Works like |flush left| or |flush right|, only for center alignment.
+    There is one annoying problem with the |center|
+    alignment (but not with |flush center| and the other options): If
+    you specify a large line width and the node text  
+    fits on a single line and is, in fact, much shorter than the
+    specified |text width|, an underfull horizontal box will
+    result. Unfortunately, this cannot be avoided, due to the way \TeX\ works.
+    For this reason, \tikzname\ switches off horizontal badness
+    warnings inside boxes with |align=center|. Since this will also
+    suppress some ``wanted'' warnings, there is also an option for
+    switching the warnings on once more:
+
+    \begin{key}{/tikz/badness warnings for centered text=\meta{true or
+          false} (initially false)}
+      If set to true, normal badness warnings will be issued for
+      centered boxes. Note that you may get annoying warnings for
+      perfectly normal boxes, namely whenever the box is very large
+      and the contents is not long enough to fill the box
+      sufficiently. 
+    \end{key}
+
+  \item[|align=|\declare{\texttt{flush center}}]
+    Works like |flush left| or |flush right|, only for center
+    alignment. Because of all the trouble that results from the
+    |center| option in conjunction with narrow lines, I suggest picking
+    this option rather than  |center| \emph{unless} you have longer
+    text, in which case |center| will give the typographically better
+    results. 
 \begin{codeexample}[]
-\tikz \node[fill=examplefill,text width=3cm,align=flush center]
-  {This is a demonstration text for showing how line breaking works.};  
+\tikz \node[fill=yellow!80!black,text width=3cm,align=flush center]
+  {This is a demonstration text for showing how line breaking works.};
 \end{codeexample}
 
   \item[|align=|\declare{|justify|}]
     For alignment without line breaking, this has the same effect as
     |left|. For alignment with line breaking, this causes the text to
-    be ``justified.'' Use this
-  only with pretty broad nodes.
+    be ``justified.'' Use this only with rather broad nodes.
 {%
 \hbadness=10000
 \begin{codeexample}[]
-\tikz \node[fill=examplefill,text width=3cm,align=justify]
-  {This is a demonstration text for showing how line breaking works.};  
+\tikz \node[fill=yellow!80!black,text width=3cm,align=justify]
+  {This is a demonstration text for showing how line breaking works.};
 \end{codeexample}
 }
   In the above example, \TeX\ complains (rightfully) about three very
   badly typeset lines. (For this manual I asked \TeX\ to stop
   complaining by using |\hbadness=10000|, but this is a foul deed,
   indeed.)
-  
+
   \item[|align=|\declare{|none|}]
     Disables all alignments and |\\| will not be redefined.
   \end{description}
@@ -759,7 +990,7 @@ Let us now first have a look at the |text width| command.
   with the |\halign| command.
 
   This key only has an effect if |text width|
-  is empty, otherwise it is ignored. Furthermore, if \meta{header} is
+  is empty, otherwise it is ignored. Furthermore, if \meta{macro storing a header} is
   empty, then this key also has no effect. So, suppose |text width| is
   empty, but \meta{header} is not. In this case the following happens:
 
@@ -775,18 +1006,18 @@ Let us now first have a look at the |text width| command.
   command. For instance, you might define
 \begin{codeexample}[code only]
 \def\myheader{\hfil\hfil##\hfil\cr}
-\tikz [node halign header=\myheader] ...  
+\tikz [node halign header=\myheader] ...
 \end{codeexample}
   You cannot just say |node halign header=\hfil\hfil#\hfil\cr| because
   this confuses \TeX\ inside matrices, so this detour via a macro is
-  needed. 
+  needed.
 
   Next, conceptually, all these boxes are recursively put inside an
   |\halign| command. Assuming that \meta{first} is the first of the
   above boxes, the command |\halign{|\meta{header} |\box|\meta{first}
     |\cr}| is used to create a new box, which we will call the
   \meta{previous box}. Then, the following box is created, where
-  \meta{second} is the second input box: 
+  \meta{second} is the second input box:
   |\halign{|\meta{header} |\box|\meta{previous box} |\cr|
     |\box|\meta{second}|\cr}|. Let us call the resulting box the
   \meta{previous box} once more. Then the next box that is created is
@@ -833,15 +1064,15 @@ special situations.
   write |text height=| without specifying anything, the ``natural''
   size of the text box remains unchanged.
 \begin{codeexample}[]
-\tikz \node[draw]                  {y};    
-\tikz \node[draw,text height=10pt] {y};       
+\tikz \node[draw]                  {y};
+\tikz \node[draw,text height=10pt] {y};
 \end{codeexample}
 \end{key}
 
 \begin{key}{/tikz/text depth=\meta{dimension}}
   This option works like |text height|, only for the depth of the text
   box. This option is mostly useful when you need to ensure a uniform
-  depth of text boxes that need to be aligned. 
+  depth of text boxes that need to be aligned.
 \end{key}
 
 
@@ -858,7 +1089,7 @@ better to have the node to the right or above the actual coordinate.
 \subsubsection{Positioning Nodes Using Anchors}
 
 \pgfname\ uses a so-called anchoring mechanism to give you a very fine
-control over the placement. The idea is simple: Imaging a node of
+control over the placement. The idea is simple: Imagine a node of
 rectangular shape of a certain size. \pgfname\ defines numerous anchor
 positions in the shape. For example to upper right corner is called,
 well, not ``upper right anchor,'' but the |north east| anchor of the
@@ -902,7 +1133,7 @@ position.
   directions.'' Furthermore, the standard shapes also define a |base|
   anchor, as well as |base west| and |base east|, for placing things on
   the baseline of the text.
-  
+
   The standard shapes also define a |mid| anchor (and |mid west| and
   |mid east|). This anchor is half the height of the character ``x''
   above the base line. This anchor is useful for vertically centering
@@ -933,7 +1164,7 @@ more intuitively:
 \begin{key}{/tikz/above=\meta{offset} (default 0pt)}
   Does the same as |anchor=south|. If the \meta{offset} is specified,
   the node is additionally shifted upwards by the given
-  \meta{offset}. 
+  \meta{offset}.
 \begin{codeexample}[]
 \tikz \fill (0,0) circle (2pt) node[above] {above};
 \end{codeexample}
@@ -961,7 +1192,7 @@ more intuitively:
   takes an \meta{offset} parameter, but using this parameter without
   using the |positioning| library is deprecated. (The |positioning|
   library changes the meaning of this parameter to something more
-  sensible.) 
+  sensible.)
 \begin{codeexample}[]
 \tikz \fill (0,0) circle (2pt) node[above left] {above left};
 \end{codeexample}
@@ -986,7 +1217,7 @@ more intuitively:
 % as the options without |of|, however, their parameter is different:
 % You must provide the name of another node. The current node will then
 % be placed, say, above this specified node at a distance given by the
-% option |node distance|. 
+% option |node distance|.
 % \begin{key}{/tikz/above of=\meta{node}}
 %   This option causes the node to be placed at the distance
 %   |node distance| above of \meta{node}. The anchor is |center|.
@@ -1029,7 +1260,7 @@ more intuitively:
 % \begin{key}{/tikz/node distance=\meta{dimension}}
 %   Sets the distance between nodes that are placed using the
 %   |... of| options. Note that this distance is the distance between
-%   the centers of the nodes, not the distance between their borders. 
+%   the centers of the nodes, not the distance between their borders.
 % \end{key}
 
 
@@ -1050,7 +1281,7 @@ differently.
 
 \begin{key}{/tikz/above=\opt{\meta{specification}} (default 0pt)}
   With the |positioning| library loaded, the |above| option does not
-  take a simple \meta{dimension} as its paramter. Rather, it can
+  take a simple \meta{dimension} as its parameter. Rather, it can
   (also) take a more elaborate \meta{specification} as parameter. This
   \meta{specification} has the following general form: It starts with
   an optional \meta{shifting part} and is followed by an optional
@@ -1090,7 +1321,7 @@ differently.
     automatically used, as explained later.
 
     The effect of this option is the following. First, the point
-    |(|\meta{number of dimension 2}|,|\meta{number or dimension 1}|)|
+    |(|\meta{number or dimension 2}|,|\meta{number or dimension 1}|)|
     is computed (note the inversed order), using the normal rules for
     evaluating such a coordinate, yielding some position. Then, the
     node is shifted by the vertical component of this point. The
@@ -1106,20 +1337,20 @@ differently.
   The \meta{shifting part} can optionally be followed by a
   \meta{of-part}, which has one of the following forms:
   \begin{enumerate}
-  \item The \meta{of-part} can be declare{|of |\meta{coordinate}},
-    where\meta{coordinate} is \emph{not} in parentheses and it is
+  \item The \meta{of-part} can be \declareandlabel{of}| |\meta{coordinate},
+    where \meta{coordinate} is \emph{not} in parentheses and it is
     \emph{not} just a node name. An example would be
     |of somenode.north| or |of 2,3|. In this case, the
     following happens: First, the node's |at| parameter is set to the
     \meta{coordinate}. Second, the node is shifted according to the
-    \meta{shift-part}. Third, the anchor is set to |south|. 
+    \meta{shift-part}. Third, the anchor is set to |south|.
 
     Here is a basic example:
 \begin{codeexample}[]
 \begin{tikzpicture}[every node/.style=draw]
   \draw[help lines] (0,0) grid (2,2);
   \node (somenode) at (1,1) {some node};
-  
+
   \node [above=5mm of somenode.north east] {\tiny 5mm of somenode.north east};
   \node [above=1cm of somenode.north]      {\tiny 1cm of somenode.north};
 \end{tikzpicture}
@@ -1129,17 +1360,17 @@ differently.
     |somenode|. The same effect could have been achieved writing
     |above=5mm| followed by |at=(somenode.north east)|.
 
-    If the \meta{shift-part} is missing, the shift is not zero, but
+    If the \meta{shifting-part} is missing, the shift is not zero, but
     rather the value of the |node distance| key is used, see below.
-  \item The \meta{of-part} can have be |of |\meta{node name}. An
+  \item The \meta{of-part} can be |of |\meta{node name}. An
     example would be |of somenode|. In this case, the following
-    usually happens: 
+    usually happens:
     \begin{itemize}
     \item The anchor is set to |south|.
     \item The node is shifted according to the \meta{shifting part}
       or, if it is missing, according to the value of |node distance|.
     \item The node's |at| parameter is set to \meta{node
-        name}|.north|. 
+        name}|.north|.
     \end{itemize}
     The net effect of all this is that the new node will be placed in
     such a way that the distance between is south border and
@@ -1148,7 +1379,7 @@ differently.
 \begin{tikzpicture}[every node/.style=draw]
   \draw[help lines] (0,0) grid (2,2);
   \node (some node) at (1,1) {some node};
-  
+
   \node (other node) [above=1cm of some node] {\tiny above=1cm of some node};
 
   \draw [<->] (some node.north) -- (other node.south)
@@ -1160,15 +1391,14 @@ differently.
     \begin{key}{/tikz/on grid=\meta{boolean} (initially false)}
       When this key is set to |true|, an \meta{of-part} of the
       current form behaves differently: The anchors set for the
-      current node as well as the anchor used for other \meta{node
-        name} are set the |center|.
+      current node as well as the anchor used for the other \meta{node name} are set to |center|.
 
       This has the following effect: When you say
       |above=1cm of somenode| with |on grid| set to true, the new node
       will be placed in such a way that its center is 1cm above the
       center of |somenode|. Repeatedly placing nodes in this way will
       result in nodes that are centered on ``grid coordinate,'' hence
-      the name of the option. 
+      the name of the option.
 \begin{codeexample}[]
 \begin{tikzpicture}[every node/.style=draw]
   \draw[help lines] (0,0) grid (2,3);
@@ -1190,7 +1420,7 @@ differently.
   \begin{key}{/tikz/node distance=\meta{shifting part} (initially 1cm and 1cm)}
     The value of this key is used as \meta{shifting part} is used if
     and only if a \meta{of-part} is present, but no \meta{shifting
-      part}. 
+      part}.
 \begin{codeexample}[]
 \begin{tikzpicture}[every node/.style=draw,node distance=5mm]
   \draw[help lines] (0,0) grid (2,3);
@@ -1250,19 +1480,12 @@ differently.
     left. A more mathematical way of phrasing this is the following: A
     plain \meta{dimension} is measured in the $l_2$-norm, while a
     \meta{dimension}| and |\meta{dimension} is measured in the
-    $l_1$-norm. 
+    $l_1$-norm.
   \end{enumerate}
   The following example should help to illustrate the difference:
 \begin{codeexample}[]
 \begin{tikzpicture}[every node/.style={draw,circle}]
   \draw[help lines] (0,0) grid (2,5);
-  \begin{scope}[node distance=5mm]
-    \node (a) at (1,1) {a};
-    \node [left=of a] {1};       \node [right=of a] {2};
-    \node [above=of a] {3};      \node [below=of a] {4};
-    \node [above left=of a] {5}; \node [above right=of a] {6};
-    \node [below left=of a] {7}; \node [below right=of a] {8};
-  \end{scope}
   \begin{scope}[node distance=5mm and 5mm]
     \node (b) at (1,4) {b};
     \node [left=of b] {1};       \node [right=of b] {2};
@@ -1270,18 +1493,18 @@ differently.
     \node [above left=of b] {5}; \node [above right=of b] {6};
     \node [below left=of b] {7}; \node [below right=of b] {8};
   \end{scope}
+  \begin{scope}[node distance=5mm]
+    \node (a) at (1,1) {a};
+    \node [left=of a] {1};       \node [right=of a] {2};
+    \node [above=of a] {3};      \node [below=of a] {4};
+    \node [above left=of a] {5}; \node [above right=of a] {6};
+    \node [below left=of a] {7}; \node [below right=of a] {8};
+  \end{scope}
 \end{tikzpicture}
-\end{codeexample}  
+\end{codeexample}
 \begin{codeexample}[]
 \begin{tikzpicture}[every node/.style={draw,rectangle}]
   \draw[help lines] (0,0) grid (2,5);
-  \begin{scope}[node distance=5mm]
-    \node (a) at (1,1) {a};
-    \node [left=of a] {1};       \node [right=of a] {2};
-    \node [above=of a] {3};      \node [below=of a] {4};
-    \node [above left=of a] {5}; \node [above right=of a] {6};
-    \node [below left=of a] {7}; \node [below right=of a] {8};
-  \end{scope}
   \begin{scope}[node distance=5mm and 5mm]
     \node (b) at (1,4) {b};
     \node [left=of b] {1};       \node [right=of b] {2};
@@ -1289,8 +1512,15 @@ differently.
     \node [above left=of b] {5}; \node [above right=of b] {6};
     \node [below left=of b] {7}; \node [below right=of b] {8};
   \end{scope}
+  \begin{scope}[node distance=5mm]
+    \node (a) at (1,1) {a};
+    \node [left=of a] {1};       \node [right=of a] {2};
+    \node [above=of a] {3};      \node [below=of a] {4};
+    \node [above left=of a] {5}; \node [above right=of a] {6};
+    \node [below left=of a] {7}; \node [below right=of a] {8};
+  \end{scope}
 \end{tikzpicture}
-\end{codeexample}  
+\end{codeexample}
 \begin{codeexample}[]
 \begin{tikzpicture}[every node/.style={draw,rectangle},on grid]
   \draw[help lines] (0,0) grid (4,4);
@@ -1309,16 +1539,16 @@ differently.
     \node [below left=of b] {7}; \node [below right=of b] {8};
   \end{scope}
 \end{tikzpicture}
-\end{codeexample}  
+\end{codeexample}
 \end{key}
 
 \begin{key}{/tikz/below left=\opt{\meta{specification}}}
   Works similar to |above left|.
 \end{key}
-\begin{key}{/tikz/above left=\opt{\meta{specification}}}
+\begin{key}{/tikz/above right=\opt{\meta{specification}}}
   Works similar to |above left|.
 \end{key}
-\begin{key}{/tikz/above right=\opt{\meta{specification}}}
+\begin{key}{/tikz/below right=\opt{\meta{specification}}}
   Works similar to |above left|.
 \end{key}
 
@@ -1338,12 +1568,12 @@ keys:
   \node (X) at (0,1)     {X};
   \node (a) [right=of X] {a};
   \node (y) [right=of a] {y};
-  
+
   \node (X) at (0,0)          {X};
   \node (a) [base right=of X] {a};
   \node (y) [base right=of a] {y};
 \end{tikzpicture}
-\end{codeexample}  
+\end{codeexample}
 \end{key}
 \begin{key}{/tikz/base right=\opt{\meta{specification}}}
   Works like |base left|.
@@ -1359,7 +1589,7 @@ keys:
 
 
 
-\subsubsection{Arranging Nodes Using a Chains and Matrices}
+\subsubsection{Arranging Nodes Using Chains and Matrices}
 
 The simple |above| and |right| options may not always suffice for
 arranging a large number of nodes. For such situations \tikzname\
@@ -1368,7 +1598,7 @@ library and the |matrix| library. The first is mostly useful for
 creating ``chains of nodes'' and, more generally, ``flows.'' The
 second allows you to arrange multiple nodes in rows and columns. These
 methods for positioning nodes are described in two separate
-Sections~\ref{section-matrices} and~\ref{section-chains}. 
+Sections~\ref{section-matrices} and~\ref{section-chains}.
 
 
 \subsection{Fitting Nodes to a Set of Coordinates}
@@ -1379,11 +1609,11 @@ It is sometimes desirable that the size and position of a node is not
 given using anchors and size parameters, rather one would sometimes
 have a box be placed and be sized such that it ``is just large enough
 to contain this, that, and that point.'' This situation typically
-arises when a picture has been drawn an, afterwards, parts of the
-picture are supposed to be encircled or hilighted.
+arises when a picture has been drawn and, afterwards, parts of the
+picture are supposed to be encircled or highlighted.
 
 In this situation the |fit| option from the |fit| library is useful,
-see Section~\ref{section-library-fit} for a the details. The idea is
+see Section~\ref{section-library-fit} for the details. The idea is
 that you may give the |fit| option to a node. The |fit| option expects
 a list of coordinates (one after the other without commas) as its
 parameter. The effect will be that the node's text area has exactly
@@ -1435,7 +1665,7 @@ transformed. Scaling text is evil, rotating slightly less so.
 
 However, sometimes you \emph{do} wish to transform a node, for
 example, it certainly sometimes makes sense to rotate a node by
-90 degrees. There are two ways in which you can achieve this:
+90 degrees. There are two ways to achieve this:
 
 \begin{enumerate}
 \item
@@ -1447,10 +1677,10 @@ example, it certainly sometimes makes sense to rotate a node by
     will get a ``huge'' X in your graphic.
   \end{key}
 \item
-  You can give transformation option \emph{inside} the option list of
+  You can give transformation options \emph{inside} the option list of
   the node. \emph{These} transformations always apply to the node.
 \begin{codeexample}[]
-\begin{tikzpicture}[every node/.style={draw}]    
+\begin{tikzpicture}[every node/.style={draw}]
   \draw[help lines](0,0) grid (3,2);
   \draw            (1,0) node{A}
                    (2,0) node[rotate=90,scale=1.5] {B};
@@ -1462,6 +1692,41 @@ example, it certainly sometimes makes sense to rotate a node by
 \end{codeexample}
 \end{enumerate}
 
+
+Even though \tikzname\ currently does not allow you to configure
+so-called \emph{nonlinear transformations,} see
+Section~\ref{section-nonlinear-transformations}, there is an option
+that influences how nodes are transformed when nonlinear
+transformations are in force:
+
+\begin{key}{/tikz/transform shape nonlinear=\opt{\meta{true or false}}  (initially false)}
+  When set to true, \tikzname\ will try to apply any current nonlinear
+  transformation also to nodes. Typically, for the text in nodes this
+  is not possible in general, in such cases a linear approximation of
+  the nonlinear transformation is used. For more details, see
+  Section~\ref{section-nonlinear-transformations}.
+\makeatletter  
+\begin{codeexample}[]
+\begin{tikzpicture}
+   % Install a nonlinear transformation:
+   \pgfsetcurvilinearbeziercurve
+      {\pgfpoint{0mm}{20mm}}
+      {\pgfpoint{10mm}{20mm}}
+      {\pgfpoint{10mm}{10mm}}
+      {\pgfpoint{20mm}{10mm}}
+   \pgftransformnonlinear{\pgfpointcurvilinearbezierorthogonal\pgf@x\pgf@y}%
+
+   % Draw something:
+   \draw [help lines] (0,-30pt) grid [step=10pt] (80pt,30pt);
+   
+   \foreach \x in {0,20,...,80}
+     \node [fill=red!20]  at (\x pt, -20pt) {\x};
+  
+   \foreach \x in {0,20,...,80}
+     \node [fill=blue!20, transform shape nonlinear] at (\x pt, 20pt) {\x};
+\end{tikzpicture}
+\end{codeexample}
+\end{key}
 
 
 
@@ -1485,9 +1750,9 @@ ways are described in the following.
   coordinate. Rather, it is anchored on some point on the line from
   the previous coordinate to the current point. The \meta{fraction}
   dictates how ``far'' on the line the point should be. A
-  \meta{fraction} or 0 is the previous coordinate, 1 is the current
+  \meta{fraction} of 0 is the previous coordinate, 1 is the current
   one, everything else is in between. In particular, 0.5 is the
-  middle.  
+  middle.
 
   Now, what is ``the previous line''? This depends on the previous
   path construction operation.
@@ -1497,6 +1762,16 @@ ways are described in the following.
 \begin{codeexample}[]
 \tikz \draw (0,0) -- (3,1)
     node[pos=0]{0} node[pos=0.5]{1/2} node[pos=0.9]{9/10};
+\end{codeexample}
+
+  For the |arc| operation, the position is simply the corresponding
+  position on the arc:
+\begin{codeexample}[]
+\tikz {
+  \draw [help lines] (0,0) grid (3,2);
+  \draw (2,0) arc [x radius=1, y radius=2, start angle=0, end angle=180]
+              node foreach \t in {0,0.125,...,1} [pos=\t,auto] {\t};
+}
 \end{codeexample}
 
   The next case is the curve-to operation (the |..| operation). In this
@@ -1509,10 +1784,10 @@ ways are described in the following.
   connect the start and end points to the control points). The exact
   math is a bit complicated (depending on your point of view, of
   course); you may wish to consult a good book on computer graphics
-  and Bézier curves if you are intrigued. 
+  and B\'ezier curves if you are intrigued.
 \begin{codeexample}[]
-  \tikz \draw (0,0) .. controls +(right:3.5cm) and +(right:3.5cm) .. (0,3)
-    \foreach \p in {0,0.125,...,1} {node[pos=\p]{\p}};
+\tikz \draw (0,0) .. controls +(right:3.5cm) and +(right:3.5cm) .. (0,3)
+  node foreach \p in {0,0.125,...,1} [pos=\p]{\p};
 \end{codeexample}
 
   Another interesting case are the horizontal/vertical line-to operations
@@ -1530,11 +1805,10 @@ ways are described in the following.
 \end{codeexample}
 
   For all other path construction operations, \emph{the position
-  placement does not work}, currently. This will hopefully change in
-  the future (especially for the arc operation).  
+  placement does not work}, currently.
 \end{key}
 
-\begin{key}{/tikz/auto=\meta{left or right} (default \normalfont is scope's setting)}
+\begin{key}{/tikz/auto=\opt{\meta{direction}} (default \normalfont is scope's setting)}
   This option causes an anchor positions to be calculated
   automatically according to the following rule. Consider a line
   between to points. If the \meta{direction} is |left|, then the
@@ -1547,7 +1821,7 @@ ways are described in the following.
   |anchor| option or by one of the |above|, |below|, etc.\ options.
 
   This option only has an effect for nodes that are placed on lines or
-  curves. 
+  curves.
 
 \begin{codeexample}[]
 \begin{tikzpicture}
@@ -1574,13 +1848,13 @@ ways are described in the following.
   |right| is set instead and the other way round.
 \begin{codeexample}[]
 \begin{tikzpicture}[auto]
-  \draw[help lines,use as bounding box] (0,-.5) grid (4,5);  
+  \draw[help lines,use as bounding box] (0,-.5) grid (4,5);
 
   \draw (0.5,0) .. controls (9,6) and (-5,6) .. (3.5,0)
-    \foreach \pos in {0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1}
-      {node [pos=\pos,swap,fill=red!20] {\pos}}
-    \foreach \pos in {0.025,0.2,0.4,0.6,0.8,0.975}
-      {node [pos=\pos,fill=blue!20] {\pos}};
+    node foreach \pos in {0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1}
+         [pos=\pos,swap,fill=red!20] {\pos}
+    node foreach \pos in {0.025,0.2,0.4,0.6,0.8,0.975}
+         [pos=\pos,fill=blue!20] {\pos};
 \end{tikzpicture}
 \end{codeexample}
 \begin{codeexample}[]
@@ -1602,15 +1876,19 @@ ways are described in the following.
 \end{codeexample}
 \end{key}
 
+\begin{key}{/tikz/'}
+  This is a very short alias for |swap|.  
+\end{key}
+
 \begin{key}{/tikz/sloped}
   This option causes the node to be rotated such that a horizontal
-  line becomes a tangent to the curve. The rotation is normally 
+  line becomes a tangent to the curve. The rotation is normally
   done in such a way that text is never ``upside down.'' To get
   upside-down text, use can use |[rotate=180]| or
   |[allow upside down]|, see below.
 \begin{codeexample}[]
 \tikz \draw (0,0) .. controls +(up:2cm) and +(left:2cm) .. (1,3)
-    \foreach \p in {0,0.25,...,1} {node[sloped,above,pos=\p]{\p}};
+    node foreach \p in {0,0.25,...,1} [sloped,above,pos=\p]{\p};
 \end{codeexample}
 \begin{codeexample}[]
 \begin{tikzpicture}[->]
@@ -1622,11 +1900,11 @@ ways are described in the following.
 
 
 \begin{key}{/tikz/allow upside down=\meta{boolean} (default true, initially false)}
-  If set to |true|, \tikzname\ will not ``righten'' upside down text. 
+  If set to |true|, \tikzname\ will not ``righten'' upside down text.
 \begin{codeexample}[]
 \tikz [allow upside down]
   \draw (0,0) .. controls +(up:2cm) and +(left:2cm) .. (1,3)
-    \foreach \p in {0,0.25,...,1} {node[sloped,above,pos=\p]{\p}};
+    node foreach \p in {0,0.25,...,1} [sloped,above,pos=\p]{\p};
 \end{codeexample}
 \begin{codeexample}[]
 \begin{tikzpicture}[->,allow upside down]
@@ -1642,13 +1920,13 @@ There exist styles for specifying positions a bit less ``technically'':
   This has the same effect as |pos=0.5|.
 \begin{codeexample}[]
 \tikz \draw (0,0) .. controls +(up:2cm) and +(left:3cm) .. (1,5)
-       node[at end]          {|at end|}
-       node[very near end]   {|very near end|}
-       node[near end]        {|near end|}
-       node[midway]          {|midway|}
-       node[near start]      {|near start|}
-       node[very near start] {|very near start|}
-       node[at start]        {|at start|};
+       node[at end]          {\texttt{at end}}
+       node[very near end]   {\texttt{very near end}}
+       node[near end]        {\texttt{near end}}
+       node[midway]          {\texttt{midway}}
+       node[near start]      {\texttt{near start}}
+       node[very near start] {\texttt{very near start}}
+       node[at start]        {\texttt{at start}};
 \end{codeexample}
 \end{stylekey}
 
@@ -1691,7 +1969,7 @@ What happens is the following: The syntax of the line-to path
 operation is actually |--|
 \opt{|node|\meta{node specification}}\meta{coordinate}. (It is even
 possible to give multiple nodes in this way.) When the optional
-|node| is encountered, that is, 
+|node| is encountered, that is,
 when the |--| is directly followed by |node|, then the
 specification(s) are read and ``stored away.'' Then, after the
 \meta{coordinate} has finally been reached, they are inserted again,
@@ -1714,7 +1992,7 @@ should make this clearer:
 
 \begin{codeexample}[]
 \begin{tikzpicture}[near end]
-  \draw (0cm,4em) -- (3cm,4em) node{A};    
+  \draw (0cm,4em) -- (3cm,4em) node{A};
   \draw (0cm,3em) --           node{B}          (3cm,3em);
   \draw (0cm,2em) --           node[midway] {C} (3cm,2em);
   \draw (0cm,1em) -- (3cm,1em) node[midway] {D} ;
@@ -1730,9 +2008,39 @@ the operation with the |pos| option set.
 
 \subsection{The Label and Pin Options}
 
-In addition to the |node| path operation, nodes can also be added
-using the |label| and the |pin| option. This is mostly useful
-for simple nodes. 
+\subsubsection{Overview}
+
+In addition to the |node| path operation, the two options |label| and
+|pin| can be used to ``add a node next to another node''. As an
+example, suppose we want to draw a graph in which the nodes are
+small circles:
+\begin{codeexample}[]
+\tikz [circle] {
+  \node [draw] (s) {};
+  \node [draw] (a) [right=of s] {} edge (s);
+  \node [draw] (b) [right=of a] {} edge (a);
+  \node [draw] (t) [right=of b] {} edge (b);
+}
+\end{codeexample}
+
+Now, in the above example, suppose we wish to indicate that the first
+node is the start node and the last node is the target node. We could
+write |\node (s) {$s$};|, but this would enlarge the first
+node. Rather, we want the ``$s$'' to be placed next to the node. For
+this, we need to create \emph{another} node, but next to the existing
+node. The |label| and |pin| option allow us to do exactly this without
+having to use the cumbersome |node| syntax:
+
+\begin{codeexample}[]
+\tikz [circle] {
+  \node [draw] (s) [label=$s$]  {};
+  \node [draw] (a) [right=of s] {} edge (s);
+  \node [draw] (b) [right=of a] {} edge (a);
+  \node [draw] (t) [right=of b, label=$t$] {} edge (b);
+}
+\end{codeexample}
+
+\subsubsection{The Label Option}
 
 \begin{key}{/tikz/label=\opt{|[|\meta{options}|]|\meta{angle}|:|}\meta{text}}
   \label{label-option}%
@@ -1780,20 +2088,34 @@ for simple nodes.
   \node [transform shape,rectangle,draw,label=right:label] {main node};
 \end{codeexample}
     \end{key}
-  \item Then, an anchor point for the |label node|. It is determined
-    in such a way that the |labe node| will ``face away'' from the
+  \item Then, an anchor point for the |label node| is computed. It is determined
+    in such a way that the |label node| will ``face away'' from the
     border of the |main node|. The anchor that is chosen depends on
     the position of the border point that is chosen and its position
     relative to the center of the |main node| and on whether the
-    |transform shape| option is set. In general, the choice should be
-    what you would expect, but you may have to set the anchor yourself
-    in difficult situations. 
+    |transform shape| option is set. In detail, when the computed
+    border point is at $0^\circ$, the anchor |west| will be
+    used. Similarly, when the border point is at $90^\circ$, the
+    anchor |south| will be used, and so on for $180^\circ$ and
+    $270^\circ$.
+
+    For angles between these ``major'' angles, like
+    $30^\circ$ or $110^\circ$, combined anchors, like |south west| for
+    $30^\circ$ or |south east| for $110^\circ$, are used. However, for
+    angles close to the major angles, (differing by up to $2^\circ$ 
+    from the major angle), the anchor for the major angle is
+    used. Thus, a label at a border point for $2^\circ$ will have the
+    anchor |west|, while a label for $3^\circ$ will have the anchor
+    |south west|, resulting in a ``jump'' of the anchor. If this is
+    not desired, you will have to set the anchor yourself.
 \begin{codeexample}[]
-\tikz
-  \node [circle,draw,
+\tikz 
+  \node [circle, draw,
          label=default,
          label=60:$60^\circ$,
-         label=below:$-90^\circ$] {my circle};
+         label=below:$-90^\circ$,
+         label=3:$3^\circ$,
+         label=2:$2^\circ$] {my circle};
 \end{codeexample}
   \item
     One \meta{angle} is special: If you set the \meta{angle} to
@@ -1824,7 +2146,7 @@ for simple nodes.
 
   If you provide multiple |label| options, then multiple extra label
   nodes are added in the order they are given.
-  
+
   The following styles influence how labels are drawn:
   \begin{key}{/tikz/label distance=\meta{distance} (initially 0pt)}
     The \meta{distance} is additionally inserted between the main node
@@ -1842,11 +2164,14 @@ for simple nodes.
   \end{stylekey}
 \end{key}
 
+
+\subsubsection{The Pin Option}
+
 \begin{key}{/tikz/pin=\opt{|[|\meta{options}|]|}\meta{angle}|:|\meta{text}}
-  This is option is quite similar to the |label| option, but there is
-  one difference: In addition to adding a extra node to the picture, 
+  This option is quite similar to the |label| option, but there is
+  one difference: In addition to adding an extra node to the picture,
   it also adds an edge from this node to the main node. This causes
-  the node to look like a pin that has been added to the main node: 
+  the node to look like a pin that has been added to the main node:
 \begin{codeexample}[]
 \tikz \node [circle,fill=blue!50,minimum size=1cm,pin=60:$q_0$] {};
 \end{codeexample}
@@ -1872,7 +2197,7 @@ for simple nodes.
     The default pin position. Works like |label position|.
   \end{key}
   \begin{stylekey}{/tikz/every pin edge (initially help lines)}
-    This style is used in every edge created by the |pin| optins.
+    This style is used in every edge created by the |pin| options.
 \begin{codeexample}[]
 \tikz [pin distance=15mm,
        every pin edge/.style={<-,shorten <=1pt,decorate,
@@ -1885,7 +2210,7 @@ for simple nodes.
 
   \begin{key}{/tikz/pin edge=\meta{options} (initially \normalfont empty)}
     This option can be used to set the options that are to be used
-    in the edge created by the |pin| option. 
+    in the edge created by the |pin| option.
 \begin{codeexample}[]
 \tikz[pin distance=10mm]
   \node [circle,draw,pin={[pin edge={blue,thick}]right:X},
@@ -1901,6 +2226,213 @@ for simple nodes.
 \end{key}
 
 
+\subsubsection{The Quotes Syntax}
+\label{section-label-quotes}
+
+The |label| and |pin| option provide a syntax for
+creating nodes next to existing nodes, but this syntax is often a
+bit too verbose. By including the following library, you get access to
+an even more concise syntax:
+
+\begin{tikzlibrary}{quotes}
+  Enables the quotes syntax for labels, pins, edge nodes, and pic
+  texts. 
+\end{tikzlibrary}
+
+Let us start with the basics of what this library does: Once loaded,
+inside the options of a |node| command, instead of the usual
+\meta{key}|=|\meta{value} pairs, you may also provide strings of the
+following form (the actual syntax slightly more general, see the
+detailed descriptions later on):
+\begin{quote}
+  |"|\meta{text}|"|\opt{\meta{options}}
+\end{quote}
+The \meta{options} must be surrounded in curly braces when they
+contain a comma, otherwise the curly braces are optional. The may be
+preceded by an optional space.
+
+When a \meta{string} of the above form is encountered inside the
+options of a |node|, then it is internally transformed to
+\begin{quote}
+  |label={[|\meta{options}|]|\meta{text}|}|
+\end{quote}
+
+Let us have a look at an example:
+\begin{codeexample}[]
+\tikz \node ["my label" red, draw] {my node};
+\end{codeexample}
+The above has the same effect as the following:
+\begin{codeexample}[]
+\tikz \node [label={[red]my label}, draw] {my node};
+\end{codeexample}
+
+Here are further examples, one where no \meta{options} are added
+to the |label|, one where a position is specified, and examples with
+more complicated options in curly braces:
+
+\begin{codeexample}[]
+\begin{tikzpicture}
+  \matrix [row sep=5mm] {
+    \node [draw, "label"]                  {A}; \\
+    \node [draw, "label" left]             {B}; \\
+    \node [draw, "label" color=red]         {C}; \\
+    \node [draw, "label" {red,draw,thick}] {D}; \\
+  };  
+\end{tikzpicture}
+\end{codeexample}
+
+Let us now have a more detailed look at what which commands this
+library provides:
+
+\begin{key}{/tikz/quotes mean label}
+  When this option is used (which is the default when this library is
+  loaded), then, as described above, inside the options of a node a
+  special syntax check is done.
+  
+  \medskip
+  \noindent\textbf{The syntax.}
+  For each string in the list of options
+  it is tested whether it starts with a quotation mark (note that this
+  will never happen for normal keys since the normal keys of
+  \tikzname\ do not start with quotation marks). When this happens,
+  the \meta{string} should not be a key--value pair, but, rather, must
+  have the form:
+  \begin{quote}
+    |"|\meta{text}|"|\opt{|'|}\opt{\meta{options}}
+  \end{quote}
+
+  (We will discuss the optional apostrophe in a moment. It is not
+  really important for the current option, but only for
+  edge labels, which are discussed later).
+
+  \medskip
+  \noindent\textbf{Transformation to a label option.}
+  When a \meta{string} has the above form, it is treated (almost) as
+  if you had written
+  \begin{quote}
+    |label={[|\meta{options}|]|\meta{text}|}|
+  \end{quote}
+  instead. The ``almost'' refers to the following additional feature:
+  In reality, before the \meta{options} are executed inside the
+  |label| command, the direction keys |above|, |left|, |below right|
+  and so on are redefined so that |above| is a shorthand for
+  |label position=90| and similarly for the other keys. The net effect
+  is that in order to specify the position of the \meta{text} relative
+  to the main node you can just put something like |left| or
+  |above right| inside the \meta{options}:
+\begin{codeexample}[]
+\tikz 
+  \node ["$90^\circ$" above, "$180^\circ$" left, circle, draw] {circle};
+\end{codeexample}
+
+  Alternatively, you can also use \meta{direction}|:|\meta{actual
+    text} as your \meta{text}. This works since the |label| command
+  allows you to specify a direction at the beginning when it is
+  separated by a colon:
+\begin{codeexample}[]
+\tikz 
+  \node ["90:$90^\circ$", "left:$180^\circ$", circle, draw] {circle};
+\end{codeexample}
+  Arguably, placing |above| or |left| behind the \meta{text} seems
+  more natural than having it inside the \meta{text}.
+
+  In addition to the above, before the \meta{options} are executed,
+  the following style is also executed:
+  \begin{stylekey}{/tikz/every label quotes}
+\begin{codeexample}[]
+\tikz [every label quotes/.style=red]
+  \node ["90:$90^\circ$", "left:$180^\circ$", circle, draw] {circle};
+\end{codeexample}
+  \end{stylekey}
+  
+  \medskip
+  \noindent\textbf{Handling commas and colons inside the text.}
+  The \meta{text} may not contain a comma, unless it is inside curly
+  braces. The reason is that the key handler separates the total
+  options of a |node| along the commas it finds. So, in order to have
+  text containing a comma, just add curly braces around either the
+  comma or just around the whole \meta{text}:
+\begin{codeexample}[]
+\tikz \node ["{yes, we can}", draw] {foo};
+\end{codeexample}
+  The same is true for a colon, only in this case you may need to
+  surround specifically the colon by curly braces to stop the |label|
+  option from interpreting everything before the colon as a direction:
+\begin{codeexample}[]
+\tikz \node ["yes{:} we can", draw] {foo};
+\end{codeexample}
+
+  \medskip
+  \noindent\textbf{The optional apostrophe.}
+  Following the closing quotation marks in a \meta{string} there may
+  (but need  
+  not) be a single quotation mark (an apostrophe), possibly surrounded
+  by whitespaces. If it is present, it is simply added to the
+  \meta{options} as another option (and, indeed, a single apostrophe
+  is a legal option in \tikzname, it is a shorthand for |swap|):
+
+  \begin{tabular}{ll}
+    String & has the same effect as \\\hline
+    |"foo"'| & |"foo" {'}| \\
+    |"foo"' red| & |"foo" {',red}| \\
+    |"foo"'{red}| & |"foo" {',red}| \\
+    |"foo"{',red}| & |"foo" {',red}| \\
+    |"foo"{red,'}| & |"foo" {red,'}| \\
+    |"foo"{'red}| & |"foo" {'red}| (illegal; there is no key |'red|)\\
+    |"foo" red'| & |"foo" {red'}| (illegal; there is no key |red'|)\\
+  \end{tabular}
+\end{key}
+
+\begin{key}{/tikz/quotes mean pin}
+  This option has exactly the same effect as |quotes mean label|, only
+  instead of transforming quoted text to the |label| option, they get
+  transformed to the |pin| option:
+\begin{codeexample}[]
+\tikz [quotes mean pin]
+  \node ["$90^\circ$" above, "$180^\circ$" left, circle, draw] {circle};
+\end{codeexample}  
+  Instead of |every label quotes|, the following style is executed
+  with each such pin:
+  \begin{stylekey}{/tikz/every pin quotes}
+  \end{stylekey}
+\end{key}
+
+If instead of |label|s or |pin|s you would like quoted strings to be
+interpreted in a different manner, you can also define your own
+handlers:
+
+\begin{key}{/tikz/node quotes mean=\meta{replacement}}
+  This key allows you to define your own handler for quotes
+  options. Inside the options of a |node|, whenever a key--value pair
+  with the syntax
+  \begin{quote}
+    |"|\meta{text}|"|\opt{|'|}\opt{\meta{options}}
+  \end{quote}
+  is encountered, the following happens: The above string gets
+  replaced by \meta{replacement} where inside the \meta{replacement}
+  the parameter |#1| is \meta{text} and |#2| is \meta{options}. If the
+  apostrophe is present (see also the discussion of
+  |quotes mean label|), the \meta{options} start with |',|.
+
+  The \meta{replacement} is then parsed normally as options (using
+  |\pgfkeys|).
+
+  Here is an example, where the quotes are used to define labels that
+  are automatically named according to the |text|:
+\begin{codeexample}[]
+\tikzset{node quotes mean={label={[#2,name={#1}]#1}}}
+
+\tikz {
+  \node ["1", "2" label position=left, circle, draw] {circle};
+  \draw (1) -- (2);
+}
+\end{codeexample}
+\end{key}
+
+Some further options provided by the |quotes| library concern labels
+next to edges rather than nodes and they are described in
+Section~\ref{section-edge-quotes}. 
+
 \subsection{Connecting Nodes: Using Nodes as Coordinates}
 
 \label{section-nodes-connecting}
@@ -1908,7 +2440,7 @@ for simple nodes.
 Once you have defined a node and given it a name, you can use this
 name to reference it. This can be done in two ways, see also
 Section~\ref{section-node-coordinates}. Suppose you have said
-|\path(0,0) node(x) {Hello World!};| in order to define a node named |x|. 
+|\path(0,0) node(x) {Hello World!};| in order to define a node named |x|.
 \begin{enumerate}
 \item
   Once the node |x| has been defined, you can use
@@ -1925,7 +2457,7 @@ Section~\ref{section-node-coordinates}. Suppose you have said
   same effect.
 
   However, for most other shapes, some path construction operations like
-  |--| try to be ``clever'' when this they are asked to draw a line
+  |--| try to be ``clever'' when they are asked to draw a line
   from such a coordinate or to such a coordinate. When you say
   |(x)--(1,1)|, the |--| path operation will not draw a line from the center
   of |x|, but \emph{from the border} of |x| in the direction going
@@ -1955,17 +2487,19 @@ Section~\ref{section-node-coordinates}. Suppose you have said
 
 \label{section-nodes-edges}
 
+\subsubsection{Basic Syntax of the Edge Operation}
+
 The |edge| operation works like a |to| operation that is added after
 the main path has been drawn, much like a node is added after the main
-path has been drawn. This allows you to have each |edge| to have a
+path has been drawn. This allows each |edge| to have a
 different appearance. As the |node| operation, an |edge| temporarily
-suspends the construction of the current path and a new path $p$ is 
+suspends the construction of the current path and a new path $p$ is
 constructed. This new path $p$ will be drawn after the main path has
 been drawn. Note that $p$ can be totally different from the main
 path with respect to its options. Also note that if there are
 several |to| and/or |node| operations in the main path, each
 creates its own path(s) and they are drawn in the order that they
-are encountered on the path.
+are encountered on the main path.
 
 \begin{pathoperation}{edge}{\opt{|[|\meta{options}|]|}
     \opt{\meta{nodes}} |(|\meta{coordinate}|)|}
@@ -1980,22 +2514,22 @@ are encountered on the path.
   coordinate is already part of the main path).
 
   The |\tikztostart| is the last coordinate on the path just before
-  the |edge| operation, just as for the |node| or |to| operations. 
+  the |edge| operation, just as for the |node| or |to| operations.
   However, there is one exception to this rule: If the |edge|
   operation is directly preceded by a |node| operation, then this
   just-declared node is the start coordinate (and not, as would
   normally be the case, the coordinate where this just-declared node
   is placed -- a small, but subtle difference). In this regard, |edge|
   differs from both |node| and |to|.
-  
+
   If there are several |edge| operations in a row, the start coordinate
-  is the same for all of them as their target coordiantes are not,
+  is the same for all of them as their target coordinates are not,
   after all, part of the main path. The start coordinate is, thus, the
   coordinate preceding the first |edge| operation. This is
   similar to nodes insofar as the |edge| operation does not modify the
   current path at all. In particular, it does not change the last
   coordinate visited, see the following example:
-  
+
 \begin{codeexample}[]
 \begin{tikzpicture}
   \node (a) at   (0:1) {$a$};
@@ -2004,17 +2538,17 @@ are encountered on the path.
                              edge [<-]     (b);
   \node (d) at (270:1) {$d$} edge [->]     (a)
                              edge [dotted] (b)
-                             edge [<-]     (c);  
+                             edge [<-]     (c);
 \end{tikzpicture}
 \end{codeexample}
 
   A different way of specifying the above graph using the |edge|
-  operation is the following:  
+  operation is the following:
 
 \begin{codeexample}[]
 \begin{tikzpicture}
-  \foreach \name/\angle in {a/0,b/90,c/180,d/270}
-    \node (\name) at (\angle:1) {$\name$};
+  \node foreach \name/\angle in {a/0,b/90,c/180,d/270}
+        (\name) at (\angle:1) {$\name$};
 
   \path[->] (b) edge (a)
                 edge (c)
@@ -2030,33 +2564,113 @@ are encountered on the path.
 
 \begin{codeexample}[]
 \begin{tikzpicture}
-  \foreach \name/\angle in {a/0,b/90,c/180,d/270}
-    \node (\name) at (\angle:1.5) {$\name$};
+  \node foreach \name/\angle in {a/0,b/90,c/180,d/270}
+        (\name) at (\angle:1.5) {$\name$};
 
   \path[->] (b) edge            node[above right]  {$5$}     (a)
                 edge                                         (c)
                 edge [-,dotted] node[below,sloped] {missing} (d)
             (c) edge                                         (a)
                 edge                                         (d)
-            (d) edge [red]      node[above,sloped] {very}  
+            (d) edge [red]      node[above,sloped] {very}
                                 node[below,sloped] {bad}     (a);
 \end{tikzpicture}
 \end{codeexample}
 
   Instead of |every to|, the style |every edge| is installed at the
   beginning of the main path.
-  \begin{stylekey}{/tikz/every edge (inititially draw)}
+  \begin{stylekey}{/tikz/every edge (initially draw)}                 
     Executed for each |edge|.
 \begin{codeexample}[]
 \begin{tikzpicture}[every to/.style={draw,dashed}]
-  \path (0,0) to (3,2);
+  \path (0,0) edge (3,2);
 \end{tikzpicture}
 \end{codeexample}
   \end{stylekey}
 \end{pathoperation}
 
 
-\subsection{Referencing Nodes Outside the Current Pictures}
+\subsubsection{Nodes on Edges: Quotes Syntax}
+\label{section-edge-quotes}
+
+The standard way of specifying nodes that are placed ``on'' an edge
+(or on a to-path; all of the following is also true for to--paths) is 
+to put node specifications after the |edge| keyword, but before the
+target coordinate. Another way is to use the |edge node| option and
+its friends. Yet another way is to use the quotes syntax.
+
+The syntax is essentially the same as for labels added to nodes as
+described in Section~\ref{section-label-quotes} and you also need to
+load the |quotes| library.
+
+In detail, when the |quotes| library is loaded, each time a key--value
+pair in a list of options passed to an |edge| or a |to| path command
+starts with |"|, the key--value pair must actually be a string of the
+following form:
+\begin{quote}
+  |"|\meta{text}|"|\opt{|'|}\opt{\meta{options}}
+\end{quote}
+This string is transformed into the following:
+\begin{quote}
+  |edge node=node [every edge quotes,|\meta{options}|]{|\meta{text}|}|
+\end{quote}
+As described in Section~\ref{section-label-quotes}, the apostrophe
+becomes part of the \meta{options}, when present.
+
+The following style is important for the placement of the labels:
+\begin{stylekey}{/tikz/every edge quotes (initially auto)}
+  This style is |auto| by default, which causes labels specified using
+  the quotes-syntax to be placed next to the edges. Unless the setting
+  of |auto| has been changed, they will be placed to the left.
+\begin{codeexample}[]
+\tikz \draw (0,0) edge ["left", ->] (2,0);
+\end{codeexample}
+
+  In order to place all labels to the right by default, change this
+  style to |auto=right|:
+\begin{codeexample}[]
+\tikz [every edge quotes/.style={auto=right}]
+  \draw (0,0) edge ["right", ->] (2,0);
+\end{codeexample}
+
+  To place all nodes ``on'' the edge, just make this style empty (and,
+  possibly, make your labels opaque):
+\begin{codeexample}[]
+\tikz [every edge quotes/.style={fill=white,font=\footnotesize}]
+  \draw (0,0) edge ["mid", ->] (2,1);
+\end{codeexample}
+\end{stylekey}
+
+You may often wish to place some edge nodes to the right of edges and
+some to the left. For this, the special treatment of the apostrophe is
+particularly convenient: Recall that in \tikzname\ there is an option
+just called |'|, which is a shorthand for |swap|. Now, following the
+closing quotation mark come the options of an edge node. Thus, if the
+closing quotation mark is followed by an apostrophe, the |swap| option
+will be added to the edge label, causing it is be placed on the other
+side. Because of the special treatment, you can even add another
+option like |near end| after the apostrophe without having to add
+curly braces and commas:
+
+\begin{codeexample}[]
+\tikz 
+  \draw (0,0) edge ["left", "right"',
+                    "start" near start,
+                    "end"' near end] (4,0);
+\end{codeexample}
+
+In order to modify the distance between the edge labels and the edge,
+you should consider introducing some styles:
+
+\begin{codeexample}[]
+\tikz [tight/.style={inner sep=1pt}, loose/.style={inner sep=.7em}]
+  \draw (0,0) edge ["left"   tight,
+                    "right"' loose,
+                    "start"  near start] (4,0);
+\end{codeexample}
+
+
+\subsection{Referencing Nodes Outside the Current Picture}
 
 \label{section-cross-picture-tikz}
 
@@ -2065,7 +2679,7 @@ are encountered on the path.
 It is possible (but not quite trivial) to reference nodes in pictures
 other than the current one. This means that you can create a picture
 and a node therein and, later, you can draw a line from some other
-position to this node. 
+position to this node.
 
 To reference nodes in different pictures, proceed as follows:
 \begin{enumerate}
@@ -2090,9 +2704,9 @@ Let us have a look at the effect of these options.
   depending on which backend driver is used. Also, even if remembering
   works, the position may only be available on a second run of \TeX.
 
-  Provided that remebering works, you may consider saying
+  Provided that remembering works, you may consider saying
 \begin{codeexample}[code only]
-\tikzsytle{every picture}+=[remember picture]
+\tikzstyle{every picture}+=[remember picture]
 \end{codeexample}
   to make \tikzname\ remember all pictures. This will add one line in
   the |.aux| file for each picture in your document -- which typically
@@ -2150,7 +2764,7 @@ that we do not wish to count as part of the picture.
 \begin{codeexample}[]
 \begin{tikzpicture}[remember picture]
   \node (c) [circle,draw] {Big circle};
-  
+
   \draw [overlay,->,very thick,red,opacity=.5]
     (c) to[bend left] (n1) (n1) -| (n2);
 \end{tikzpicture}
@@ -2166,7 +2780,7 @@ access the current page. It is a node of shape rectangle whose
 |north east| anchor is the upper right corner of the page. While this
 node is handled in a special way internally, you can reference it as
 if it were defined in some remembered picture other than the current
-one. Thus, by giving the |remembered picture| and the |overlay|
+one. Thus, by giving the |remember picture| and the |overlay|
 options to a picture, you can position nodes \emph{absolutely} on a
 page.
 
@@ -2204,60 +2818,68 @@ page).
 
 
 \subsection{Late Code and Late Options}
+\label{section-node-also}
 
 All options given to a node only locally affect this one node. While
 this is a blessing in most cases, you may sometimes want to cause
 options to have effects ``later'' on. The other way round, you may
 sometimes note ``only later'' that some options should be added to the
-options of a node.
+options of a node. For this, the following version of the |node| path
+command can be used:
+
+\begin{pathoperation}{node also}{\opt{|[|\meta{late options}|]|}|(|\meta{name}|)|}
+  Note that the \meta{name} is compulsory and that \emph{no} text may
+  be given. Also, the ordering of options and node label must be as above.
+  
+  The effect of the above is the following effect: The node
+  \meta{name} must already  be existing. Now, the \meta{late options} are
+  executed in a local scope. Most of these options will have no effect
+  since you \emph{cannot change the appearance of the node,} that is,
+  you cannot change a red node into a green node using these ``late''
+  options. However, giving the |append after command| and
+  |prefix after command| options inside
+  the \meta{late options} (directly or indirectly) does have the desired
+  effect: The given path gets executed with the |\tikzlastnode|
+  set to the determined node.
+
+  The net effect of all this is that you can provide, say, the |label|
+  option inside the \meta{options} to a add a label to a node that has
+  already been constructed.
+  
+\begin{codeexample}[]
+\begin{tikzpicture}
+  \node      [draw,circle]       (a) {Hello};
+  \node also [label=above:world] (a);
+\end{tikzpicture}
+\end{codeexample}
+\end{pathoperation}
 
 As explained in Section~\ref{section-paths}, you
 can use the options |append after command| and
 |prefix after command| to add a path after a node. The following macro may be
 useful there:
 \begin{command}{\tikzlastnode}
-  Expands to the last node on the path.  
+  Expands to the last node on the path.
 \end{command}
 
-A \emph{late option} for a node is an option that is given a long time
-after the node has already been constructed.
+Instead of the |node also| syntax, you can also the following option:
 
 \begin{key}{/tikz/late options=\meta{options}}
   This option can be given on a path (but not as an argument to a
-  |node| path command). It has the following effect: An already
-  \meta{existing node} is determined (in a way to be described in a moment)
-  and, then, the \meta{options} are executed in a local scope. Most of
-  these options will have no effect since you \emph{cannot change the
-    appearance of the node,} that is, you cannot change a red node
-  into a green node using late options. However, giving the
-  the |append after command| and |prefix after command| options inside
-  the \meta{options} (directly or indirectly) does have the desired
-  effect: The given path gets executed with the |\tikzlastnode|
-  set to the determined node. 
-
-  The net effect of all this is that you can provide, say, the |label|
-  option inside the \meta{options} to a add a label to a node that has
-  already been constructed. Likewise, you can use the |on chain|
-  option to make an already \meta{existing node} part of a chain.
-
-  The \meta{existing node} is determined as follows: If the
-  |name=|\meta{existing node} option is used inside the
-  \meta{options}, then this name is used. Otherwise, if the last
-  coordinate on the current path was of the form |(|\meta{existing
-    node}|)|, then this \meta{existing node} name is used. Otherwise,
-  an error results.
-
+  |node| path command) and has the same effect as the |node also| path
+  command. Inside the \meta{options}, you should use the |name| option
+  to specify the node for which you wish to add late options:
+ 
 \begin{codeexample}[]
 \begin{tikzpicture}
-  \node (a) [draw,circle] {Hello};
-  \path (a) [late options={label=above:world}];
+  \node      [draw,circle]       (a) {Hello};
+  \path [late options={name=a, label=above:world}];
 \end{tikzpicture}
-\end{codeexample}  
-
+\end{codeexample}
 \end{key}
 
 
-%%% Local Variables: 
+%%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "pgfmanual"
-%%% End: 
+%%% End:

@@ -55,14 +55,17 @@
 \pgfdeclaremetadecoration{tikz@internal}{pre}{
   \state{pre}[width=\pgfkeysvalueof{/pgf/decoration/pre length}, next state=main]
   {
+    \tikz@dec@trans
     \decoration{\pgfkeysvalueof{/pgf/decoration/pre}}
   }
   \state{main}[width=\pgfmetadecoratedremainingdistance-\pgfkeysvalueof{/pgf/decoration/post length}, next state=final]
   {
+    \tikz@dec@trans
     \decoration{\tikz@decoration@name}
   }
   \state{final}
   {
+    \tikz@dec@trans
     \decoration{\pgfkeysvalueof{/pgf/decoration/post}}
   }
 }
@@ -87,12 +90,13 @@
       % Now, we expect a brace.
       \pgfutil@ifnextchar\bgroup{%
         \begingroup%
+          \tikz@auto@end@pathfalse%
           \aftergroup\tikz@enddecoration%
           \afterassignment\tikz@scan@next@command%
           \let\tikz@lib@next% gobble \bgroup%
       }%
       {%
-        \PackageError{tikz}{A decoration must begin with a brace}{}%
+        \tikzerror{A decoration must begin with a brace}%
         \tikz@enddecoration%
       }%
 }
@@ -103,8 +107,8 @@
   {%
     \pgfifdecoration{\tikz@decoration@name}%
     {\tikz@lib@dec@startdecoration}%
-    {\PackageError{tikz}{Unknown (meta-)decoration '\tikz@decoration@name'. Perhaps you
-        misspelled it?}{}}%
+    {\tikzerror{Unknown (meta-)decoration '\tikz@decoration@name'. Perhaps you
+        misspelled it?}}%
   }%
   \ifx\pgfdecorateexistingpath\pgfutil@empty%
     \pgfpathmoveto{\pgfqpoint{\the\tikz@lastxsaved}{\the\tikz@lastysaved}}%
@@ -147,8 +151,8 @@
         \tikz@lib@dec@stopdecoration%
       }
       {
-        \PackageError{tikz}{Unknown (meta-)decoration '\tikz@decoration@name'. Perhaps
-          you misspelled it?}{}
+        \tikzerror{Unknown (meta-)decoration '\tikz@decoration@name'. Perhaps
+          you misspelled it?}
       }
     }
   \fi%

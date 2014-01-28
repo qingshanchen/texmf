@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /cvsroot/pgf/pgf/generic/pgf/basiclayer/pgfcoregraphicstate.code.tex,v 1.9 2008/04/22 17:03:26 tantau Exp $
+\ProvidesFileRCS $Header: /cvsroot/pgf/pgf/generic/pgf/basiclayer/pgfcoregraphicstate.code.tex,v 1.11 2013/09/19 22:34:34 tantau Exp $
 
 % Globals
 
@@ -123,13 +123,15 @@
 % \pgfsetstrokecolor{red}
 
 \def\pgfsetstrokecolor#1{%
-  \pgfutil@colorlet{pgf@tempcolor}{#1}%
-  \pgfutil@ifundefined{applycolormixins}{}{\applycolormixins{pgf@tempcolor}}%
-  \expandafter\expandafter\expandafter\pgf@setstrokecolor\csname\string\color@pgf@tempcolor\endcsname%
+  \pgfutil@colorlet{pgfstrokecolor}{#1}%
+  \pgfutil@ifundefined{applycolormixins}{}{\applycolormixins{pgfstrokecolor}}%
+  \expandafter\expandafter\expandafter\global%
+  \expandafter\expandafter\expandafter\let\expandafter\csname\expandafter\string\expandafter\color@pgfstrokecolor\expandafter\endcsname\csname\string\color@pgfstrokecolor\endcsname%
+  \expandafter\expandafter\expandafter\pgf@setstrokecolor\csname\string\color@pgfstrokecolor\endcsname%
 }
 \def\pgf@setstrokecolor#1#2#3#4#5{%
   \expandafter\ifx\csname pgfsys@color@#4@stroke\endcsname\relax%
-    \PackageError{pgfbase}{Unsupported color model `#4'. Sorry}{}%
+    \pgferror{Unsupported color model `#4'. Sorry}%
   \else%
     \edef\pgf@colmarshal{\expandafter\noexpand\csname pgfsys@color@#4@stroke\endcsname}%
     \pgf@uncomma#5,,%
@@ -155,13 +157,15 @@
 % \pgfsetfillcolor{gray}
 
 \def\pgfsetfillcolor#1{%
-  \pgfutil@colorlet{pgf@tempcolor}{#1}%
-  \pgfutil@ifundefined{applycolormixins}{}{\applycolormixins{pgf@tempcolor}}%
-  \expandafter\expandafter\expandafter\pgf@setfillcolor\csname\string\color@pgf@tempcolor\endcsname%
+  \pgfutil@colorlet{pgffillcolor}{#1}%
+  \pgfutil@ifundefined{applycolormixins}{}{\applycolormixins{pgffillcolor}}%
+  \expandafter\expandafter\expandafter\global%
+  \expandafter\expandafter\expandafter\let\expandafter\csname\expandafter\string\expandafter\color@pgffillcolor\expandafter\endcsname\csname\string\color@pgffillcolor\endcsname%
+  \expandafter\expandafter\expandafter\pgf@setfillcolor\csname\string\color@pgffillcolor\endcsname%
 }
 \def\pgf@setfillcolor#1#2#3#4#5{%
   \expandafter\ifx\csname pgfsys@color@#4@fill\endcsname\relax%
-    \PackageError{pgfbase}{Unsupported color model `#4'. Sorry}{}%
+    \pgferror{Unsupported color model `#4'. Sorry}%
   \else%
     \edef\pgf@colmarshal{\expandafter\noexpand\csname pgfsys@color@#4@fill\endcsname}%
     \pgf@uncomma#5,,%
@@ -177,13 +181,17 @@
 % \pgfsetcolor{blue}
 
 \def\pgfsetcolor#1{%
-  \pgfutil@colorlet{pgf@tempcolor}{#1}%
-  \pgfutil@ifundefined{applycolormixins}{}{\applycolormixins{pgf@tempcolor}}%
-  \expandafter\expandafter\expandafter\pgf@setcolor\csname\string\color@pgf@tempcolor\endcsname%
+  \pgfutil@colorlet{pgfstrokecolor}{#1}%
+  \pgfutil@ifundefined{applycolormixins}{}{\applycolormixins{pgfstrokecolor}}%
+  \expandafter\expandafter\expandafter\global%
+  \expandafter\expandafter\expandafter\let\expandafter\csname\expandafter\string\expandafter\color@pgfstrokecolor\expandafter\endcsname\csname\string\color@pgfstrokecolor\endcsname%
+  \expandafter\expandafter\expandafter\global%
+  \expandafter\expandafter\expandafter\let\expandafter\csname\expandafter\string\expandafter\color@pgffillcolor\expandafter\endcsname\csname\string\color@pgfstrokecolor\endcsname%
+  \expandafter\expandafter\expandafter\pgf@setcolor\csname\string\color@pgfstrokecolor\endcsname%
 }
 \def\pgf@setcolor#1#2#3#4#5{%
   \expandafter\ifx\csname pgfsys@color@#4\endcsname\relax%
-    \PackageError{pgfbase}{Unsupported color model `#4'. Sorry}{}%
+    \pgferror{Unsupported color model `#4'. Sorry}%
   \else%
     \edef\pgf@colmarshal{\expandafter\noexpand\csname pgfsys@color@#4\endcsname}%
     \pgf@uncomma#5,,%

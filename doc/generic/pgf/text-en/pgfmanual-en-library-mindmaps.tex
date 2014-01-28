@@ -17,7 +17,7 @@
 
 This library is intended to make the creation of mindmaps or concept
 maps easier. A \emph{mindmap} is a graphical representation of a
-concept together 
+concept together
 with related concepts and annotations. Mindmaps are, essentially,
 trees, possibly with a few extra edges added, but they are usually
 drawn in a special way: The root concept is placed in the middle of
@@ -47,14 +47,14 @@ Every mindmap should be put in a scope or a picture where the
 \begin{stylekey}{/tikz/mindmap}
   Use this style with all pictures or at least scopes that contain a
   mindmap. It installs a whole bunch of settings that are useful for
-  drawing mindmaps. 
+  drawing mindmaps.
 \begin{codeexample}[]
 \tikz[mindmap,concept color=red!50]
   \node [concept] {Root concept}
     child[grow=right] {node[concept] {Child concept}};
 \end{codeexample}
   The sizes of concepts are predefined in such a way that a
-  medium-size mindmap will fit on an A4 page (more or less).  
+  medium-size mindmap will fit on an A4 page (more or less).
   \begin{stylekey}{/tikz/every mindmap}
     This style is included by the |mindmap| style. Change this style to
     add special settings to your mindmaps.
@@ -65,7 +65,7 @@ Every mindmap should be put in a scope or a picture where the
 \end{codeexample}
   \end{stylekey}
 
-  \paragraph{Remark:} Note that |mindmap| re-defines |font| sizes and |sibling angle| depending on the current concept level (i.e. inside of |level 1 concept|, |level 2 concept| etc.). Thus, if you need to redefine these variables, use
+  \paragraph{Remark:} Note that |mindmap| redefines |font| sizes and |sibling angle| depending on the current concept level (i.e. inside of |level 1 concept|, |level 2 concept| etc.). Thus, if you need to redefine these variables, use
 
   |\tikzset{level 1 concept/.append style={font=\small}}|
 
@@ -89,7 +89,7 @@ Every mindmap should be put in a scope or a picture where the
   pages).
 \end{stylekey}
 \begin{stylekey}{/tikz/huge mindmap}
-  This style causes conepts to be even bigger and it is best used with
+  This style causes concepts to be even bigger and it is best used with
   A2 paper and above.
 \end{stylekey}
 
@@ -109,7 +109,7 @@ The following styles influence how isolated concepts are rendered:
   This style should be used with all nodes that are concepts, although
   some styles like |extra concept| install this style automatically.
 
-  Bascially, this style makes the concept node circular and installs a
+  Basically, this style makes the concept node circular and installs a
   uniform color called |concept color|, see below. Additionally, the
   style |every concept| is called.
 \begin{codeexample}[]
@@ -141,9 +141,9 @@ The following styles influence how isolated concepts are rendered:
 \begin{stylekey}{/tikz/extra concept}
   This style is intended for concepts that are not part of the
   ``mindmap tree,'' but stand beside it. Typically, they will have a
-  subdued color are be smaller. In order to have these concepts appear
+  subdued color or be smaller. In order to have these concepts appear
   in a uniform way and in order to indicate in the code that these
-  concepts are extra, you can use this style.
+  concepts are additional, you can use this style.
 \begin{codeexample}[]
 \begin{tikzpicture}[mindmap,concept color=blue!80]
   \node [concept]                 {Root concept};
@@ -158,10 +158,10 @@ The following styles influence how isolated concepts are rendered:
 
 \subsubsection{Concepts in Trees}
 
-As pointed out earlier, \tikzname\ assumes that your mindmap is build
+As pointed out earlier, \tikzname\ assumes that your mindmap is built
 using the |child| facilities of \tikzname. There are numerous options
 that influence how concepts are rendered at the different levels of a
-tree. 
+tree.
 
 \begin{stylekey}{/tikz/root concept}
   This style is used for the roots of mindmap trees. By adding
@@ -181,7 +181,7 @@ tree.
 \begin{stylekey}{/tikz/level 1 concept}
   The |mindmap| style adds this style to the |level 1| style. This
   means that the first level children of a mindmap tree will use this
-  style. 
+  style.
 \begin{codeexample}[]
 \tikz
   [root concept/.append style={concept color=blue!80},
@@ -199,10 +199,10 @@ tree.
   Works like |level 1 concept|.
 \end{stylekey}
 \begin{stylekey}{/tikz/level 4 concept}
-  Works like |level 1 concept|. Note that there are not fifth and
+  Works like |level 1 concept|. Note that there are no fifth and
   higher level styles, you need to modify |level 5| directly in such
-  cases. 
-\end{stylekey}  
+  cases.
+\end{stylekey}
 
 \begin{key}{/tikz/concept color=\meta{color}}
   We saw already that this option is used to change the color of
@@ -212,7 +212,7 @@ tree.
   |child| operation (and not to the |node| operation and also not as
   an option to all children via the |level 1| style), \tikzname\ will
   smoothly change the concept color from the parent's color to the
-  color of the child concept. 
+  color of the child concept.
 
   Here is an example:
 \begin{codeexample}[]
@@ -222,8 +222,9 @@ tree.
     child[concept color=orange,grow=0]  {node[concept] {Child concept}};
 \end{codeexample}
 
-  In order to have all children of a certain level have a different
-  concept color, a tiny bit of magic is needed:
+  In order to have a concept color which changes with the hierarchy level, a tiny bit of magic is needed:
+  % FIXME : is this a bug in the software!? The root concept is
+  % black!?
 \begin{codeexample}[]
 \tikz[mindmap,text=white,
       root concept/.style={concept color=blue},
@@ -301,7 +302,7 @@ in the mindmap library:
   first circle at the specified angle relative to the line connecting
   the centers of the circles. The path then changes into a rectangle
   whose thickness is given by the amplitude. Finally, the path ends
-  with the same angles on the second circle. 
+  with the same angles on the second circle.
 
   Here is an example that should make this clearer:
 \begin{codeexample}[]
@@ -331,13 +332,13 @@ in the mindmap library:
 
   In the above example you may notice the small white line between the
   circles and the decorated path. This is due to rounding
-  errors. Unfortunately, for larger distances, there errors can
+  errors. Unfortunately, for larger distances, the errors can
   accumulate quite strongly, especially since \tikzname\ and \TeX\ are
   not very good at computing square roots. For this reason, it is a
   good idea to make the circles slightly larger to cover up such
   problems. When using nodes of shape |circle|, you can just add the
-  |draw| option with a |line width| or one or two points (for very
-  large distances you may need line width up to 4pt). 
+  |draw| option with a |line width| of one or two points (for very
+  large distances you may need line width up to 4pt).
 \begin{codeexample}[]
 \begin{tikzpicture}
   [blue!50,decoration={start radius=1cm,
@@ -349,11 +350,12 @@ in the mindmap library:
 \end{tikzpicture}
 \end{codeexample}
 
-  Note the slightly strange |outer sep=0pt|. This is needed so that
-  the decorated path lies on the border of the filled circle, not on the
-  border of the stroked circle (which is slightly larger and this
-  slightly larger size is exactly what we wish to use to cover up the
-  rounding errors).
+  % FIXME : this paragraph appears to be deprecated:
+  %Note the slightly strange |outer sep=0pt|. This is needed so that
+  %the decorated path lies on the border of the filled circle, not on the
+  %border of the stroked circle (which is slightly larger and this
+  %slightly larger size is exactly what we wish to use to cover up the
+  %rounding errors).
 \end{decoration}
 
 
@@ -363,7 +365,7 @@ in the mindmap library:
 The |circle connection bar| decoration is a bit complicated to
 use. Especially specifying the radii is quite bothersome (the
 amplitude and the angle can be set once and for all). For this reason,
-the mindmap library defines a special to-path, that performs the
+the mindmap library defines a special to-path that performs the
 necessary computations for you.
 
 \begin{stylekey}{/tikz/circle connection bar}
@@ -377,11 +379,11 @@ necessary computations for you.
   from the |center| anchor to some anchor on the border) and will set
   the |start circle| keys accordingly. Next, the |fill| option
   is set to the |concept color| while |draw=none| is set. The decoration is
-  set to |circle conncetion bar|. Finally, the following style is
+  set to |circle connection bar|. Finally, the following style is
   included:
   \begin{stylekey}{/tikz/every circle connection bar}
-    Redefine this sytle to change the appearance of circle connection
-    bar to-paths.      
+    Redefine this style to change the appearance of circle connection
+    bar to-paths.
   \end{stylekey}
 \begin{codeexample}[]
 \begin{tikzpicture}[concept color=blue!50,blue!50,outer sep=0pt]
@@ -392,7 +394,7 @@ necessary computations for you.
 \end{tikzpicture}
 \end{codeexample}
   Note that it is not a good idea to have more than one |to| operation
-  together this the option |circle connection bar| in a single
+  together with the option |circle connection bar| in a single
   |\path|. Use the |edge| operation, instead, for creating multiple
   connections and this operation creates a new scope for each edge.
 \end{stylekey}
@@ -414,7 +416,7 @@ library provides a special option for facilitating this procedure.
   \node (n2) at (30:2.5) [circle,minimum size=1cm,fill,draw,thick,blue] {};
 
   \path (n1) to[circle connection bar switch color=from (red) to (blue)] (n2);
-\end{tikzpicture}  
+\end{tikzpicture}
 \end{codeexample}
 \end{key}
 
@@ -422,9 +424,8 @@ library provides a special option for facilitating this procedure.
 \subsubsection{Tree Edges}
 
 Most of the time, concepts in a mindmap are connected automatically
-when the mindmap is build as a tree. The reason is that the |mindmap|
-installs a |circle connection bar| path as the edge from parent
-path. Also, the |mindmap| option takes care of things like setting the
+when the mindmap is built as a tree. The reason is that the |mindmap|
+installs a |circle connection bar| path as the |edge from parent path|. Also, the |mindmap| option takes care of things like setting the
 correct |draw| and |outer sep| settings and some other stuff.
 
 In detail, the |mindmap| option sets the |edge from parent path| to a
@@ -432,18 +433,18 @@ path that uses the to-path |circle connection bar| to connect the parent node
 and the child node. The |concept color| option (locally) changes this
 by using |circle connection bar switch color| instead with the
 from-color set to the old (parent's) concept color and the to-color
-set to the new (child's) concept color. This menas that when you
+set to the new (child's) concept color. This means that when you
 provide the |concept color| option to a |child| command, the color
 will change from the parent's concept color to the specified color.
 
-Here is an example of a tree build in this way:
+Here is an example of a tree built in this way:
 
 \begin{codeexample}[]
 \begin{tikzpicture}
   \path[mindmap,concept color=black,text=white]
     node[concept] {Computer Science}
     [clockwise from=0]
-    % note that `sibling angle' can only be defined in 
+    % note that `sibling angle' can only be defined in
     % `level 1 concept/.append style={}'
     child[concept color=green!50!black] {
       node[concept] {practical}
@@ -452,7 +453,7 @@ Here is an example of a tree build in this way:
       child { node[concept] {data structures} }
       child { node[concept] {pro\-gramming languages} }
       child { node[concept] {software engineer\-ing} }
-    }  
+    }
     child[concept color=blue] {
       node[concept] {applied}
       [clockwise from=-30]
@@ -495,7 +496,7 @@ in an annotation node.
 
 
 
-%%% Local Variables: 
+%%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "pgfmanual-pdftex-version"
-%%% End: 
+%%% End:

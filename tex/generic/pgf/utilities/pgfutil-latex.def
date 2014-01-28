@@ -10,11 +10,20 @@
 
 \catcode`\@=11\relax
 
+\pgfutil@format@is@latextrue
+
 \let\pgfutil@auxout=\@auxout
+\def\pgfutil@writetoaux#1{\if@filesw\write\pgfutil@auxout{#1}\fi}
+
 \let\pgfutil@tempcnta=\@tempcnta
 \let\pgfutil@tempcntb=\@tempcntb
 \let\pgfutil@voidb@x=\voidb@x
 \let\pgfutil@toks@=\toks@
+
+\let\pgfutil@packageerror=\PackageError
+\let\pgfutil@packagewarning=\PackageWarning
+
+\def\pgfutil@protect{\protect}
 
 
 \def\pgfutil@definecolor{\definecolor}
@@ -38,6 +47,11 @@
   \pgf@next{#2}{#3}%  
 }
 
+\let\pgfutil@raggedleft\raggedleft
+\let\pgfutil@raggedright\raggedright
+
+\let\pgfutil@flushglue=\@flushglue
+
 \def\pgfutil@font@tiny{\tiny}
 \def\pgfutil@font@scriptsize{\scriptsize}
 \def\pgfutil@font@footnotesize{\footnotesize}
@@ -59,13 +73,30 @@
 
 \let\pgfutil@tempboxa=\@tempboxa
 
-\let\pgfutil@tempdima=\@tempdima
-\let\pgfutil@tempdimb=\@tempdimb
+\let\pgfmath@tempdima\pgfutil@tempdima
+\let\pgfmath@tempdima\pgfutil@tempdima
+\let\pgfmath@tempcnta\pgfutil@tempcnta
+\let\pgfmath@tempcntb\pgfutil@tempcntb
 
-\AtEndDocument{\the\pgfutil@everybye}
+
+\AtBeginDocument{\AtEndDocument{\par\vfil\penalty-10000\relax\the\pgfutil@everybye}}
 
 \def\pgfutil@insertatbegincurrentpagefrombox#1{%
-  \global\setbox\pgfutil@abb\hbox{\unhbox\pgfutil@abb#1}%
+  \edef\pgf@temp{\the\wd\pgfutil@abb}%
+  \global\setbox\pgfutil@abb\hbox{%
+  	\unhbox\pgfutil@abb 
+	%
+	% the order in which \pgfutil@insertatbegincurrentpagefrombox
+	% matters unless we make the following -shift!
+	% To see this, consider writing two such statements. The second
+	% one will (naturally) be placed more to the right, although there
+	% is no apparent reason why it should.
+	%
+	% CF observed problems when placing patterns in XObjects without
+	% this skip (dvipdfmx driver for pgfplots shader=interp)
+	\hskip-\pgf@temp\relax
+	#1%
+  }%
 }
 \newbox\pgfutil@abb%
 \def\pgfutil@insertatbegincurrentpage#1{%
@@ -80,14 +111,48 @@
 \RequirePackage{everyshi}
 \EveryShipout{%
   % Add at begin page stuff
-   \setbox255=\vbox{%
-     \setbox0=\hbox{\pgfutil@abe\unhbox\pgfutil@abb\pgfutil@abc\global\let\pgfutil@abc\pgfutil@empty}%
-     \wd0=0pt%
-     \ht0=0pt%
-     \dp0=0pt%
-     \box0%
-     \ifvbox255\unvbox255\else\hsize=\wd255\unhbox255\fi%
-   }%
+ \setbox\@cclv=\vbox{%
+    \setbox\z@=\hbox{\pgfutil@abe\unhbox\pgfutil@abb\pgfutil@abc\global\let\pgfutil@abc\pgfutil@empty}%
+    \wd\z@=\z@%
+    \ht\z@=\z@%
+    \dp\z@=\z@%
+    \box\z@%
+	% if TeX changes into vertical mode, it inserts \parskip and
+	% \lineskip. Disable it here:
+    \nointerlineskip%
+    \ifvbox\@cclv \unvbox\@cclv \else\hsize=\wd\@cclv \noindent\unhbox\@cclv \fi%
+	%\box\@cclv
+	% using \box instead of \unhbox or \unvbox 
+	% has the advantage that glue settings won't be
+	% altered (as for \unhbox/\unvbox). But \box breaks compatibility
+	% with the 'remember picture' feature.
+  }%
 }
+
+% Preview hack: preview.sty hacks into \shipout (which is ok), but
+% does not honour everyshi.sty (which is not ok). This causes everyshi
+% material to get lost.
+
+\AtBeginDocument{
+  \@ifpackageloaded{preview}{%
+    % Ok, package loaded. Swap definitions of everyshi.sty's shipout
+    % and preview.sty's shipout:
+    \let\pgf@temp\pr@shipout% This is the original shipout
+    \let\pr@shipout\@EveryShipout@Shipout% This is what preview.sty should call
+    \let\@EveryShipout@Org@Shipout\pgf@temp% Everyshi should now use the original one
+  }{}%    
+}
+
+
+% Guess the driver:
+
+\def\pgfutil@guessdriver{
+  \ifx\HCode\@undefined% 
+    \edef\pgfsysdriver{pgfsys-\Gin@driver}% should be right
+  \else%
+    \def\pgfsysdriver{pgfsys-tex4ht.def}% should be right
+  \fi%
+}
+
 
 \endinput

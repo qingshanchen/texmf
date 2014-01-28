@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /cvsroot/pgf/pgf/generic/pgf/systemlayer/pgfsys-pdftex.def,v 1.26 2009/05/22 07:25:48 jinhwancho Exp $
+\ProvidesFileRCS $Header: /cvsroot/pgf/pgf/generic/pgf/systemlayer/pgfsys-pdftex.def,v 1.33 2013/07/18 10:34:44 tantau Exp $
 
 
 % Driver commands for pdf
@@ -52,8 +52,7 @@
   \ifx\pgf@imagepage\pgfutil@empty\else\edef\pgf@imagepage{ page \pgf@imagepage }\fi%
   \ifx\pdfximage\@undefined% old version of pdflatex
     \ifx\pgf@imagepage\pgfutil@empty\else%
-      \PackageWarning{pgf}{Page selection not supported. Ignoring
-        page selection}%
+      \pgfwarning{Page selection not supported. Ignoring page selection}%
     \fi%
     \setbox\pgfutil@tempboxa=\hbox{%
       \pdfimage \pgf@imageheight \pgf@imagewidth {\pgf@filename}}%
@@ -81,7 +80,7 @@
     \pgfmathparse{#2}%
     \setbox\pgfutil@tempboxa=\hbox to\pgf@max{\vbox to\pgfmathresult pt{\vfil\pgfsys@invoke{/Sh sh}}\hfil}%
     \pgf@process{\pgfpoint{\pgf@max}{#2}}%
-    \pdfxform resources {%
+    \immediate\pdfxform resources {%
       /Shading << /Sh << /ShadingType 2
       /ColorSpace /DeviceRGB
       /Domain [\pgf@pdfparseddomain]
@@ -97,7 +96,7 @@
     \pgfmathparse{#2}%
     \setbox\pgfutil@tempboxa=\hbox to\pgfmathresult pt{\vbox to\pgf@max{\vfil\pgfsys@invoke{/Sh sh}}\hfil}%
     \pgf@process{\pgfpoint{#2}{\pgf@max}}%
-    \pdfxform resources {%
+    \immediate\pdfxform resources {%
       /Shading << /Sh << /ShadingType 2
       /ColorSpace /DeviceRGB
       /Domain [\pgf@pdfparseddomain]
@@ -121,7 +120,7 @@
     \pgf@sys@bp@correct{\pgf@y}%
     \pgf@sys@bp@correct{\pgf@xa}%
     \pgf@sys@bp@correct{\pgf@ya}%
-    \pdfxform resources {%
+    \immediate\pdfxform resources {%
       /Shading << /Sh << /ShadingType 3
       /ColorSpace /DeviceRGB
       /Domain [\pgf@pdfparseddomain]
@@ -218,41 +217,14 @@
 }
 
 
-\def\pgfsys@papersize#1#2{%
-  \pdfpageheight#2%
-  \pdfpagewidth#1}
+\def\pgfsys@papersize#1#2{\pdfpageheight#2\relax\pdfpagewidth#1\relax}
 
+\def\pgfsys@global@papersize#1#2{\global\pdfpageheight#2\relax\global\pdfpagewidth#1\relax}
 
-  % XForm version, crashes ghostview.
-  %\def\pgfsys@defobject#1#2#3#4{%
-  %  \pgf@process{#2}
-  %  \setbox\pgfobjectbox\hbox{\raise-\pgf@y\hbox{\hskip-\pgf@x\relax#4}}
-  %  \pgf@process{#3}
-  %  \pgf@xa=\pgf@x
-  %  \pgf@ya=\pgf@y
-  %  \pgf@process{#2}
-  %  \advance\pgf@xa by-\pgf@x
-  %  \advance\pgf@ya by-\pgf@y  
-  %  \wd\pgfobjectbox=\pgf@xa
-  %  \dp\pgfobjectbox=0pt
-  %  \ht\pgfobjectbox=\pgf@ya
-  %  \pdfxform\pgfobjectbox
-  %  \expandafter\xdef\csname#1\endcsname{\the\pdflastxform}
-  %  \expandafter\xdef\csname pgf@trans#1\endcsname
-  %  {{\pgfget x}{\pgfget y}}}
-  %\def\pgfsys@useobject#1#2{%
-  %  \setbox\pgfobjectbox\hbox{\pdfrefxform \csname#1\endcsname}%
-  %  \dp\pgfobjectbox=0pt%
-  %  \ht\pgfobjectbox=0pt%
-  %  \wd\pgfobjectbox=0pt%
-  %  \pgfsys@discardpath%
-  %  \pgfsys@beginscope%
-  %  #2%
-  %  \edef\pgf@temp{{1}{0}{0}{1}\csname pgf@trans#1\endcsname}%
-  %  \expandafter\pgfsys@transform\pgf@temp%
-  %  \box\pgfobjectbox%
-  %  \pgfsys@endscope}
-
+\ifx\paperheight\@undefined
+  \def\pgfsys@thepageheight{\pdfpageheight}
+  \def\pgfsys@thepagewidth{\pdfpagewidth}
+\fi
 
 
 %
@@ -261,7 +233,7 @@
 \def\pgfsys@markposition#1{%
   \pdfsavepos%
   \edef\pgf@temp{#1}%
-  \expandafter\write\expandafter\pgfutil@auxout\expandafter{%
+  \expandafter\pgfutil@writetoaux\expandafter{%
     \expandafter\noexpand\expandafter\pgfsyspdfmark\expandafter{\pgf@temp}{\the\pdflastxpos}{\the\pdflastypos}}%
 }
 
@@ -274,7 +246,7 @@
   \pgf@marshal%
 }
 
-\def\pgf@sys@pdf@mark@pos@pgfpageorigin{\pgfpointorigin}
+\def\pgf@sys@pdf@mark@pos@pgfpageorigin{\pgfqpoint{\hoffset}{\voffset}}
 
 
 %
@@ -294,7 +266,7 @@
 }
 \def\pgfsys@usefading#1#2#3#4#5#6#7{%
   \expandafter\ifx\csname pgfsmaskxform@#1\endcsname\relax%
-    \PackageError{pgf}{Undefined fading '#1'}{}%
+    \pgferror{Undefined fading '#1'}%
   \else%
     {%
       \expandafter\ifx\csname pgfsmaks@#1\endcsname\relax%
@@ -342,7 +314,9 @@
 \def\pgfsys@transparencygroupfrombox#1{%
   \pgf@sys@pdf@check@resources%
   \pdfxform
-  attr { /Group << /S /Transparency >> } %<<
+  attr { /Group << /S /Transparency
+    /I \ifpgfsys@transparency@group@isolated true \else false \fi
+    /K \ifpgfsys@transparency@group@knockout true \else false \fi >> } %<<
   resources { \pgf@sys@pdf@possible@resources }
   #1%
   \setbox#1=\hbox{\pdfrefxform\pdflastxform}%
@@ -394,6 +368,10 @@
 \pgfutil@setuppdfresources % possibly call the above
 
 \pgfutil@addpdfresource@colorspaces{ /pgfprgb [/Pattern /DeviceRGB] }
+
+\def\pgfsys@color@unstacked#1{%
+	\pdfliteral{\csname\string\color@#1\endcsname}%
+}
 
 \endinput
 

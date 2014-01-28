@@ -15,15 +15,15 @@ Zeichenprogramm.'' To use \tikzname, as a \LaTeX\ user say
 |\usepackage{tikz}| somewhere in the preamble, as a plain \TeX\ user
 say |\input tikz.tex|. \tikzname's job is to make your life easier by
 providing an easy-to-learn and easy-to-use syntax for describing
-graphics. 
+graphics.
 
 The commands and syntax of \tikzname\ were influenced by several
 sources. The basic command names and the notion of  path operations is
 taken from \textsc{metafont}, the option mechanism comes from
 \textsc{pstricks}, the notion of styles is reminiscent of
-\textsc{svg}. To make it all work together, some compromises were
-necessary. I also added some ideas of my own, like coordinate
-transformations.  
+\textsc{svg}, the graph syntax is taken from \textsc{graphviz}. To make it
+all work together, some compromises were necessary. I also added some
+ideas of my own, like coordinate transformations.
 
 The following basic design principles underlie \tikzname:
 \begin{enumerate}
@@ -33,6 +33,7 @@ The following basic design principles underlie \tikzname:
 \item Key-value syntax for graphic parameters.
 \item Special syntax for nodes.
 \item Special syntax for trees.
+\item Special syntax for graphs.
 \item Grouping of graphic parameters.
 \item Coordinate transformation system.
 \end{enumerate}
@@ -47,7 +48,7 @@ separated by commas, in round brackets as in |(1cm,2pt)|.
 
 You can also specify a point in polar coordinates by using a colon
 instead of a comma as in |(30:1cm)|, which means ``1cm in a 30
-degrees direction.'' 
+degrees direction.''
 
 If you do not provide a unit, as in |(2,1)|, you specify a point in
 \pgfname's $xy$-coordinate system. By default, the unit $x$-vector
@@ -105,12 +106,12 @@ command, which is an abbreviation for |\path[fill]|. The
 |\filldraw| command is an abbreviation for
 |\path[fill,draw]|. Shading is caused by the |shade| option (there
 are |\shade| and |\shadedraw| abbreviations) and clipping by the
-|clip| option. There is is also a |\clip| command, which does the
+|clip| option. There is also a |\clip| command, which does the
 same as |\path[clip]|, but not commands like |\drawclip|. Use, say,
 |\draw[clip]| or |\path[draw,clip]| instead.
 
 All of these commands can only be used inside |{tikzpicture}|
-environments. 
+environments.
 
 \tikzname\ allows you to use different colors for filling and
 stroking.
@@ -118,7 +119,7 @@ stroking.
 \subsection{Key-Value Syntax for Graphic Parameters}
 
 Whenever \tikzname\ draws or fills a path, a large number of graphic
-parameters influenced the rendering. Examples include the colors
+parameters influences the rendering. Examples include the colors
 used, the dashing pattern, the clipping area, the line width, and
 many others. In \tikzname, all these options are specified as lists
 of so called key-value pairs, as in |color=red|, that are
@@ -126,7 +127,7 @@ passed as optional parameters to the path drawing and filling
 commands. This usage is similar to \textsc{pstricks}. For
 example, the following will draw a thick, red triangle;
 \begin{codeexample}[]
-\tikz \draw[line width=2pt,color=red] (1,0) -- (0,0) -- (0,1) -- cycle; 
+\tikz \draw[line width=2pt,color=red] (1,0) -- (0,0) -- (0,1) -- cycle;
 \end{codeexample}
 
 \subsection{Special Syntax for Specifying Nodes}
@@ -137,11 +138,11 @@ in the following example:
 \tikz \draw (1,1) node {text} -- (2,2);
 \end{codeexample}
 Nodes are inserted at the current position of
-the path, but only \emph{after} the path has been rendered. When
-special options are given, as in
-|\draw (1,1) node[circle,draw] {text};|, the text is not just put 
+the path, but either \emph{after} (the default) or \emph{before} the
+complete path is rendered. When special options are given, as in
+|\draw (1,1) node[circle,draw] {text};|, the text is not just put
 at the current position. Rather, it is surrounded by a circle and
-this circle is ``drawn.'' 
+this circle is ``drawn.''
 
 You can add a name to a node for later reference either by using the
 option   |name=|\meta{node name} or by stating the node name in
@@ -152,12 +153,10 @@ it is possible (though a bit challenging) to define new shapes.
 
 \subsection{Special Syntax for Specifying Trees}
 
-In addition to the ``node syntax,'' \tikzname\ also introduces a
-special syntax for drawing trees. The syntax is intergrated with the
-special node syntax and only few new commands need to be remebered.
-In essence, a |node| can be followed by any number of children, each
-introduced by the keyword |child|. The children are nodes themselves,
-each of which may have children in turn.
+The ``node syntax'' can also be used to draw tress: A |node| can be
+followed by any number of children, each introduced by the keyword
+|child|. The children are nodes themselves, each of which may have
+children in turn. 
 
 \begin{codeexample}[]
 \begin{tikzpicture}
@@ -176,7 +175,7 @@ redrawn with different options:
 
 \begin{codeexample}[]
 \begin{tikzpicture}
-  [edge from parent fork down,
+  [edge from parent fork down, sibling distance=15mm, level distance=15mm,
    every node/.style={fill=red!30,rounded corners},
    edge from parent/.style={red,-o,thick,draw}]
   \node {root}
@@ -191,6 +190,7 @@ redrawn with different options:
 \begin{codeexample}[]
 \begin{tikzpicture}
   [parent anchor=east,child anchor=west,grow=east,
+   sibling distance=15mm, level distance=15mm,
    every node/.style={ball color=red,circle,text=white},
    edge from parent/.style={draw,dashed,thick,red}]
   \node {root}
@@ -201,6 +201,31 @@ redrawn with different options:
       };
 \end{tikzpicture}
 \end{codeexample}
+
+
+
+\subsection{Special Syntax for Graphs}
+
+The |\node| command gives you fine control over where nodes should be
+placed, what text they should use, and what they should look
+like. However, when you draw a graph, you typically need to create
+numerous fairly similar nodes that only differ with respect to the
+name they show. In these cases, the |graph| syntax can be used, which
+is another syntax layer build ``on top'' of the node syntax.
+
+\begin{codeexample}[]
+\tikz \graph [grow down, branch right] {
+  root -> { left, right -> {child, child} }
+};
+\end{codeexample}
+The syntax of the |graph| command extends the so-called
+\textsc{dot}-notation used in the popular \textsc{graphviz} program.
+
+Depending on the version of \TeX\ you use (it must allow you to call
+Lua code, which is the case for Lua\TeX), you can also ask \tikzname\
+to do automatically compute good positions for the nodes of a graph
+using one of several integrated \emph{graph drawing algorithms}. 
+
 
 \subsection{Grouping of Graphic Parameters}
 
@@ -240,15 +265,15 @@ the picture.
 
 \tikzname\ supports both \pgfname's \emph{coordinate} transformation
 system to perform transformations as well as \emph{canvas}
-transformations, a more low-level transformation system. (For 
+transformations, a more low-level transformation system. (For
 details on the difference between coordinate transformations and
-canvas transformations see Section~\ref{section-design-transformations}.) 
+canvas transformations see Section~\ref{section-design-transformations}.)
 
-The syntax is setup in such a way that is harder to use canvas
+The syntax is set up in such a way that it is harder to use canvas
 transformations than coordinate transformations. There are two reasons
 for this: First, the canvas transformation must be used with great
 care and often results in ``bad'' graphics with changing line width
-and text in wrong sizes. Second, \pgfname\ looses track of where nodes
+and text in wrong sizes. Second, \pgfname\ loses track of where nodes
 and shapes are positioned when canvas transformations are used.
 So, in almost all circumstances, you should use coordinate
 transformations rather than canvas transformations.

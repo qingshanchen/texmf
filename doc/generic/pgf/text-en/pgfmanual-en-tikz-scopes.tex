@@ -26,16 +26,16 @@ apply to everything within the environment.
 
 \begin{package}{tikz}
   This package does not have any options.
-  
+
   This will automatically load the \pgfname\ and the |pgffor| package.
 
   \pgfname\ needs to know what \TeX\ driver you are intending to use. In
   most cases \pgfname\ is clever enough to determine the correct driver
-  for you; this is true in particular if you use \LaTeX. Currently, the only
+  for you; this is true in particular if you use \LaTeX. One
   situation where \pgfname\ cannot know the driver ``by itself'' is when
   you use plain \TeX\ or Con\TeX t together with |dvipdfm|. In this case,
   you have to write |\def\pgfsysdriver{pgfsys-dvipdfm.def}|
-  \emph{before} you input |tikz.tex|. 
+  \emph{before} you input |tikz.tex|.
 \end{package}
 
 
@@ -45,19 +45,21 @@ apply to everything within the environment.
   libraries separated by commas. Instead of curly braces, you can also
   use square brackets, which is something Con\TeX t users will
   like. If you try to load a library a second time, nothing will
-  happen. 
+  happen.
 
-  \example |\usetikzlibrary{arrows}|
+  \example |\usetikzlibrary{arrows.meta}|
 
   The above command will load a whole bunch of extra arrow tip
   definitions.
 
   What this command does is to load the file
   |tikzlibrary|\meta{library}|.code.tex| for each \meta{library} in
-  the \meta{list of libraries}. Thus, to write your own library file,
-  all you need to do is to place a file of the appropriate name
-  somewhere where \TeX\ can find it. \LaTeX, plain \TeX, and Con\TeX t
-  users can then use your library.
+  the \meta{list of libraries}. If this file does not exist, the file
+  |pgflibrary|\meta{library}|.code.tex| is loaded instead. If this
+  file also does not exist, an error message is printed. Thus, to
+  write your own library file, all you need to do is to place a file
+  of the appropriate name somewhere where \TeX\ can find it. \LaTeX,
+  plain \TeX, and Con\TeX t users can then use your library.
 \end{command}
 
 
@@ -66,7 +68,7 @@ apply to everything within the environment.
 
 \subsubsection{Creating a Picture Using an Environment}
 
-The ``outermost'' scope of \tikzname\ is the |{tikzpicture}| 
+The ``outermost'' scope of \tikzname\ is the |{tikzpicture}|
 environment. You may give drawing commands only inside this
 environment, giving them outside (as is possible in many other
 packages) will result in chaos.
@@ -79,7 +81,7 @@ filenames of temporary files written while plotting functions using an
 external program. The graphic options are specified in \emph{key
   lists}, see Section~\ref{section-graphic-options} below for
 details. All graphic options are local to the |{tikzpicture}| to which
-they apply.  
+they apply.
 
 \begin{environment}{{tikzpicture}\opt{\oarg{options}}}
   All \tikzname\ commands should be given inside this
@@ -87,7 +89,7 @@ they apply.
   packages, it is not possible to use, say, |\pgfpathmoveto| outside
   this environment and doing so will result in chaos. For \tikzname,
   commands like |\path| are only defined inside this environment, so
-  there is little chance that you will do something wrong here. 
+  there is little chance that you will do something wrong here.
 
   When this environment is encountered, the \meta{options} are
   parsed, see Section~\ref{section-graphic-options}. All options given
@@ -108,10 +110,10 @@ they apply.
   then resizes the picture box such that the box has this size. To ``make its
   guess,'' everytime \pgfname\ encounters a coordinate, it updates the
   bounding box's size such that it encompasses all these
-  coordinates. This will usually give a good 
+  coordinates. This will usually give a good
   approximation of the bounding box, but will not always be
   accurate. First, the line thickness of diagonal lines is not taken
-  into account correctly. Second, controls points of a curve often lie far
+  into account correctly. Second, control points of a curve often lie far
   ``outside'' the curve and make the bounding box too large. In this
   case, you should use the |[use as bounding box]| option.
 
@@ -121,9 +123,11 @@ they apply.
     Normally, the lower end of the picture is put on the baseline of
     the surrounding text. For example, when you give the code
     |\tikz\draw(0,0)circle(.5ex);|, \pgfname\ will find out that the
-    lower end of the picture is at $-.5\mathrm{ex}$ and that the upper
-    end is at $.5\mathrm{ex}$. Then, the lower end will be put on the
-    baseline, resulting in the following: \tikz\draw(0,0)circle(.5ex);.
+    lower end of the picture is at $-.5\mathrm{ex} - 0.2\mathrm{pt}$
+    (the 0.2pt are half the line width, which is 0.4pt) and that the
+    upper end is at $.5\mathrm{ex}+.5\mathrm{pt}$. Then, the lower end
+    will be put on the baseline, resulting in the following:
+    \tikz\draw(0,0)circle(.5ex);. 
 
     Using this option, you can specify that the picture should be
     raised or lowered such that the height \meta{dimension} is on the
@@ -137,12 +141,12 @@ $A \mathbin{\tikz[baseline] \draw[->>] (0pt,.5ex) -- (3ex,.5ex);} B$
 \end{codeexample}
 
     Instead of a \meta{dimension} you can also provide a coordinate in
-    parantheses. Then the effect is to put the baseline on the
-    $y$-coordinate that the give \meta{coordinate} has \emph{at the
+    parentheses. Then the effect is to put the baseline on the
+    $y$-coordinate that the given \meta{coordinate} has \emph{at the
       end of the picture}. This means that, at the end of the picture,
     the \meta{coordinate} is evaluated and then the baseline is set
     to the $y$-coordinate of the resulting point. This makes it easy
-    to reference the $y$-coordinate of, say, the base line of nodes.
+    to reference the $y$-coordinate of, say, the baseline of nodes.
 \begin{codeexample}[]
 Hello
 \tikz[baseline=(X.base)]
@@ -211,7 +215,7 @@ Top align:
   This will have the desired effect.
 \end{environment}
 
-In other \TeX\ format, you should use instead the following commands:
+In other \TeX\ formats, you should use the following commands instead:
 
 \begin{plainenvironment}{{tikzpicture}\opt{\oarg{options}}}
   This is the plain \TeX\ version of the environment.
@@ -226,7 +230,7 @@ In other \TeX\ format, you should use instead the following commands:
 
 The following command is an alternative to |{tikzpicture}| that is
 particular useful for graphics consisting of a single or few
-commands. 
+commands.
 
 \begin{command}{\tikz\opt{\oarg{options}}\marg{path commands}}
   This command places the \meta{path commands} inside a
@@ -236,16 +240,33 @@ commands.
   If there is only one path command, it need not be surrounded by
   curly braces, if there are several, you need to add them (this is
   similar to the |\foreach| statement and also to the rules in
-  programming languages like Java or C conerning the placement of
+  programming languages like Java or C concerning the placement of
   curly braces).
 
   \example |\tikz{\draw (0,0) rectangle (2ex,1ex);}| yields
-  \tikz{\draw (0,0) rectangle (2ex,1ex);} 
+  \tikz{\draw (0,0) rectangle (2ex,1ex);}
 
   \example |\tikz \draw (0,0) rectangle (2ex,1ex);| yields
   \tikz \draw (0,0) rectangle (2ex,1ex);
 \end{command}
 
+
+\subsubsection{Handling Catcodes and the Babel Package}
+
+Inside a \tikzname\ picture, most symbols need to have the category 
+code 12 (normal text) in order to ensure that the parser works
+properly. This is typically not the case when packages like |babel|
+are used, which change catcodes aggressively.
+
+To solve this problem, \tikzname\ provides a small library also called
+|babel| (which can, however, also be used together with any other
+package that globally changes category codes). What it does is to
+reset the category codes at the beginning of every |{tikzpicture}| and
+to restore them at the beginning of every node. In almost all cases,
+this is exactly would you would expect and need, so I recommend to
+always load this library by saying |\usetikzlibrary{babel}|. For
+details on what, exactly, happens with the category codes, see
+Section~\ref{section-library-babel}.
 
 
 \subsubsection{Adding a Background}
@@ -259,7 +280,7 @@ some other kind of decoration.
 Since backgrounds are often not needed at all, the definition of
 styles for adding backgrounds has been put in the library package
 |backgrounds|. This package is documented in
-Section~\ref{section-tikz-backgrounds}. 
+Section~\ref{section-tikz-backgrounds}.
 
 
 \subsection{Using Scopes to Structure a Picture}
@@ -291,7 +312,7 @@ chance of doing anything wrong.
   \end{scope}
 \end{tikzpicture}
 \end{codeexample}
-  
+
   The following style influences scopes:
   \begin{stylekey}{/tikz/every scope (initially \normalfont empty)}
     This style is installed at the beginning of every scope.
@@ -309,7 +330,7 @@ chance of doing anything wrong.
     This option installs some code that will be executed
     at the end of the  current scope. Using this option multiple times
     will  cause the code to accumulate. This option must also be given
-    in the optional argument of the |{scope}| environment. 
+    in the optional argument of the |{scope}| environment.
 
     Again, the effect applies only to the current scope, not to subscopes.
   \end{key}
@@ -329,7 +350,7 @@ chance of doing anything wrong.
 There is a small library that makes using scopes a bit easier:
 \begin{tikzlibrary}{scopes}
   This library defines a shorthand for starting and ending |{scope}|
-  environments. 
+  environments.
 \end{tikzlibrary}
 When this library is loaded, the following happens: At certain places
 inside a \tikzname\ picture, it is allowed to start a scope just using
@@ -353,7 +374,7 @@ square brackets:
 \end{tikzpicture}
 \end{codeexample}
 
-In the above example, |{ [thick]| actually causes a 
+In the above example, |{ [thick]| actually causes a
   |\begin{scope}[thick]| to be inserted, and the corresponding closing
     |}| causes an |\end{scope}| to be inserted.
 
@@ -363,6 +384,34 @@ right after the end of a scope. Third, right at the beginning of a
 scope, which includes the beginning of a picture. Also note that some
 square bracket must follow, otherwise the brace is treated as a normal
 \TeX\ scope.
+
+
+\subsubsection{Single Command Scopes}
+
+In some situations it is useful to create a scope for a single
+command. For instance, when you wish to use algorithm graph drawing
+in order to layout a tree, the path of the tree needs to be surrounded
+by a scope whose only purpose is to take a key that selects a layout
+for the scope. Similarly, in order to put something on a background
+layer, a scope needs to be created. In such cases, where it will 
+cumbersome to create a |\begin{scope}| and |\end{scope}| pair just for
+a single command, the |\scoped| command may be useful:
+
+\begin{command}{\scoped\opt{\oarg{options}}\meta{path command}}
+  This command works like |\tikz|, only you can use it inside a
+  |{tikzpicture}|. It will take the following \meta{path command} and
+  put it inside a |{scope}| with the \meta{options} set. The
+  \meta{path command} may either be a single command ended by a
+  semicolon or it may contain multiple commands, but then they must be
+  surrounded by curly braces.
+  \begin{codeexample}[]
+\begin{tikzpicture}
+  \node [fill=white] at (1,1) {Hello world};
+  \scoped [on background layer]
+    \draw (0,0) grid (3,2);
+\end{tikzpicture}
+  \end{codeexample}
+\end{command}
 
 
 \subsubsection{Using Scopes Inside Paths}
@@ -463,7 +512,7 @@ my style/.style={draw=red,fill=red!20}
 \end{codeexample}
 
 The meaning of the curious |/.style| is the following: ``The key
-|my style| should not be used here but, rather, be defined. So, setup
+|my style| should not be used here but, rather, be defined. So, set up
 things such that using the key |my style| will, in the following, have
 the same effect as if we had written |draw=red,fill=red!20| instead.''
 
@@ -481,7 +530,7 @@ used in different pictures. In this case, we have to use the
 |\tikzset| command somewhere at the beginning.
 \begin{codeexample}[]
 \tikzset{help lines/.style={blue!50,very thin}}
-% ...  
+% ...
 \begin{tikzpicture}
   \draw             (0,0) grid +(2,2);
   \draw[help lines] (2,0) grid +(2,2);
@@ -504,7 +553,7 @@ In the above example, the option |blue!50| is appended to the style
 last one will ``win.'' There also exists a handler called
 |/.prefix style| that adds something at the beginning of the style.
 
-Just as normal keys, styles can be parametrized. This means that you
+Just as normal keys, styles can be parameterized. This means that you
 write \meta{style}|=|\meta{value} when you use the style instead of
 just \meta{style}. In this case, all occurrences of |#1| in
 \meta{style} are replaced by \meta{value}. Here is an example that
@@ -517,7 +566,7 @@ shows how this can be used.
 \end{tikzpicture}
 \end{codeexample}
 
-For parametrized styles you can also set a \emph{default} value using
+For parameterized styles you can also set a \emph{default} value using
 the |/.default| handler:
 
 \begin{codeexample}[]
@@ -529,6 +578,4 @@ the |/.default| handler:
 \end{codeexample}
 
 For more details on using and setting styles, see also
-Section~\ref{section-keys}. 
-
-
+Section~\ref{section-keys}.

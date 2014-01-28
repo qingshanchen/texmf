@@ -98,7 +98,7 @@
 \end{command}
 
 \subsection{Constant Plot Handlers}
-There are three plot handlers which produce piecewise constant interpolations between successive points.
+There are several plot handlers which produce piecewise constant interpolations between successive points:
 
 \begin{command}{\pgfplothandlerconstantlineto}
   This handler works like the line-to plot handler, only it will
@@ -132,6 +132,24 @@ the right line ends.
   \pgfusepath{stroke}
 \end{tikzpicture}
 \end{codeexample}
+\end{command}
+
+\begin{command}{\pgfplothandlerconstantlinetomarkmid}
+A variant of |\pgfplothandlerconstantlineto| which places its mark on
+the center of the line.
+\begin{codeexample}[]
+\begin{tikzpicture}    
+  \draw[gray] (0,0) node {x} (1,1) node {y} (2,.5) node {z};
+  \pgfplothandlerconstantlinetomarkmid
+  \pgfplotstreamstart
+  \pgfplotstreampoint{\pgfpoint{0cm}{0cm}}
+  \pgfplotstreampoint{\pgfpoint{1cm}{1cm}}
+  \pgfplotstreampoint{\pgfpoint{2cm}{0.5cm}}
+  \pgfplotstreamend
+  \pgfusepath{stroke}
+\end{tikzpicture}
+\end{codeexample}
+	The plot handler always connects two data points by a horizontal line starting from the previous data points, followed by a vertical line in the middle between the two data points, followed by a horizontal line between the middle and the current data point. This results in a symmetric constant plot handler for constant mesh width.
 \end{command}
 
 \begin{command}{\pgfplothandlerjumpmarkleft}
@@ -168,9 +186,27 @@ the right line ends.
 \end{codeexample}
 \end{command}
 
+\begin{command}{\pgfplothandlerjumpmarkmid}
+  This handler works like the |\pgfplothandlerconstantlinetomarkmid|, but it will
+  produce a non-connected, piecewise constant path to connect the points. If there are any plot marks, they will be placed in the center of the horizontal line segment..
+\begin{codeexample}[]
+\begin{tikzpicture}    
+  \draw[gray] (0,0) node {x} (1,1) node {y} (2,.5) node {z};
+  \pgfplothandlerjumpmarkmid
+  \pgfplotstreamstart
+  \pgfplotstreampoint{\pgfpoint{0cm}{0cm}}
+  \pgfplotstreampoint{\pgfpoint{1cm}{1cm}}
+  \pgfplotstreampoint{\pgfpoint{2cm}{0.5cm}}
+  \pgfplotstreamend
+  \pgfusepath{stroke}
+\end{tikzpicture}
+\end{codeexample}
+	See |\pgfplothandlerconstantlinetomarkmid| for details.
+\end{command}
+
 \subsection{Comb Plot Handlers}
 
-There are three ``comb'' plot handlers. There name stems from the fact
+There are three ``comb'' plot handlers. Their name stems from the fact
 that the plots they produce look like ``combs'' (more or less).
 
 \begin{command}{\pgfplothandlerxcomb}
@@ -377,10 +413,10 @@ interval). The $y$~value of the last point will be ignored.
 \end{command}
 
 \label{key-bar-interval-shift}%
-\begin{key}{/pgf/bar interval shift=\marg{shift} (initially 0.5)}
+\begin{key}{/pgf/bar interval shift=\marg{factor} (initially 0.5)}
   \keyalias{tikz}
   Sets the \emph{relative} shift of |\pgfplothandlerxbarinterval| and
-  |\pgfplothandlerybarinterval| to \marg{shift}. As
+  |\pgfplothandlerybarinterval| to \meta{factor}. As
   |/pgf/bar interval width|, the argument is relative to the interval
   length of the input coordinates. 
 	
@@ -428,6 +464,49 @@ interval). The $y$~value of the last point will be ignored.
   $0.25$ and $0.75$ instead of $0$ and $0.5$. 
 \end{key}
 
+\subsection{Gapped Plot Handlers}
+
+\label{section-plot-gapped}
+
+
+\begin{command}{\pgfplothandlergaplineto}
+  This handler will connect the points of the plots by straight line
+  segments. However, at the start and the end of the lines there will
+  be a small gap, given by the following key:
+  \begin{key}{/pgf/gap around stream point=\meta{dimension} (initially 1.5pt)}
+    The \meta{dimension} by which the lines between consecutive stream
+    points are shortened at the beginning and end.
+  \end{key}
+\begin{codeexample}[]
+\begin{tikzpicture}    
+  \pgfplothandlergaplineto
+  \pgfplotstreamstart
+  \pgfplotstreampoint{\pgfpoint{0cm}{0cm}}
+  \pgfplotstreampoint{\pgfpoint{1cm}{1cm}}
+  \pgfplotstreampoint{\pgfpoint{2cm}{0.5cm}}
+  \pgfplotstreamend
+  \pgfusepath{stroke}
+\end{tikzpicture}
+\end{codeexample}
+\end{command}
+
+
+\begin{command}{\pgfplothandlergapcycle}
+  Works like |\pgfplothandlergaplineto|, but the last point is
+  connected to the first in the same fashion:
+\begin{codeexample}[]
+\begin{tikzpicture}    
+  \pgfplothandlergapcycle
+  \pgfplotstreamstart
+  \pgfplotstreampoint{\pgfpoint{0cm}{0cm}}
+  \pgfplotstreampoint{\pgfpoint{1cm}{1cm}}
+  \pgfplotstreampoint{\pgfpoint{2cm}{0.5cm}}
+  \pgfplotstreamend
+  \pgfusepath{stroke}
+\end{tikzpicture}
+\end{codeexample}
+\end{command}
+
 \subsection{Mark Plot Handler}
 
 \label{section-plot-marks}
@@ -435,7 +514,7 @@ interval). The $y$~value of the last point will be ignored.
 \begin{command}{\pgfplothandlermark\marg{mark code}}
   This command will execute the \meta{mark code} for some points of the
   plot, but each time the coordinate transformation matrix will be
-  setup such that the origin is at the position of the point to be
+  set up such that the origin is at the position of the point to be
   plotted. This way, if the \meta{mark code} draws a little circle
   around the origin, little circles will be drawn at some point of the
   plot.
@@ -500,7 +579,7 @@ interval). The $y$~value of the last point will be ignored.
 
 \begin{command}{\pgfuseplotmark\marg{plot mark name}}
   Draws the given \meta{plot mark name} at the origin. The \meta{plot
-    mark name} must previously have been declared using
+    mark name} must have been previously declared using
   |\pgfdeclareplotmark|. 
 
 \begin{codeexample}[]

@@ -18,12 +18,12 @@ This section describes the |oo| module.
 \begin{pgfmodule}{oo}
   This module defines a relatively small set of \TeX\ commands for
   defining classes, methods, attributes and objects in the sense of
-  object-oriented programming. 
+  object-oriented programming.
 \end{pgfmodule}
 
 In this chapter it is assumed that you are familiar with the basics
 of a typical object-oriented programming language like Java, C++ or
-Eiffel. 
+Eiffel.
 
 
 
@@ -41,12 +41,12 @@ for non-time-critical things.
 
 Basically, the oo-system supports \emph{classes} (in the
 object-oriented sense, this has nothing to do with \LaTeX-classes),
-\emph{methods}, \emph{constructores}, \emph{attributes},
-\emph{objects}, and \emph{object identities}. It (currently) does not
-support either inheritance, overloading, destructors, or class nesting. 
+\emph{methods}, \emph{constructors}, \emph{attributes},
+\emph{objects}, \emph{object identities}, and (thanks to Sa\v o \v
+Zivanovi\'c) \emph{inheritance} and \emph{overloading.} 
 
 The first step is to define a class, using the macro |\pgfooclass|
-(all normal macros in \pgfname's object-oriented system start with 
+(all normal macros in \pgfname's object-oriented system start with
 |\pgfoo|). This macro gets the name of a class and in its body a
 number of \emph{methods} are defined. These are defined using the
 |\method| macro (which is defined only inside such a class definition)
@@ -58,7 +58,7 @@ Once a class has been defined, you can create objects of this
 class. Objects are created using |\pgfoonew|. Such an object has many
 characteristics of objects in a normal object-oriented programming
 language: Each object has a \emph{unique identity}, so when you create
-another object this object is completely distinct from all other
+another object, this object is completely distinct from all other
 objects. Each object also has a set of private attributes, which may
 change over time. Suppose, for instance, that we have a |point|
 class. Then creating a new object (called an instance) of this class
@@ -101,17 +101,18 @@ addition to \pgfname).
 We start with the definition of the |stamp| class. This is done using
 the |\pgfooclass| macro:
 
-\begin{command}{\pgfooclass\marg{class name}\marg{body}}
+\begin{command}{\pgfooclass\opt{|(|\meta{list of superclasses}|)|}\marg{class name}\marg{body}}
   This command defines a class named \meta{class name}. The name of
   the class can contain spaces and most other characters, but no
   periods. So, valid class names are |MyClass| or |my class| or
-  |Class_C++_emulation??1|.
+  |Class_C++_emulation??1|. The \meta{list of superclasses} is
+  optional just like the parenthesis around it.
 
-  The \meta{body} is actually just executed, so any 
+  The \meta{body} is actually just executed, so any
   normal \TeX-code is permissible here. However, while the \meta{body} is
-  being executed, the macros |\method| and |\attribute| are setup so
+  being executed, the macros |\method| and |\attribute| are set up so
   that they can be used to define methods and attributes for this
-  class (the original meanings are restored afterward). 
+  class (the original meanings are restored afterward).
 
   The definition of a class is local to the scope where the class has
   been defined.
@@ -121,7 +122,7 @@ the |\pgfooclass| macro:
 
   \attribute text;
   \attribute rotation angle=20;
-  
+
   \method stamp(#1) { % The constructor
     ...
   }
@@ -133,6 +134,17 @@ the |\pgfooclass| macro:
 
 % We can now create objects of type "stamp"
 \end{codeexample}
+
+  Concerning the list of base classes, the Method Resolution Order
+  (\textsc{mro}) is computed using the C3 algorithm also used in Python, v2.3
+  and higher. The linearization computed by the algorithm respects
+  both  local precedence ordering and monotonicity. Resolution of both
+  methods and attributes depends on the \textsc{mro}: when a method method name
+  is called on an object of class $C$, the system invokes method
+  method name from the first class in the \textsc{mro} of $C$ which defines
+  method method name; when an object is created, each attribute |attr|
+  is initialized to the value specified in the first class in the \textsc{mro}
+  of $C$ which declares attribute |attr|. 
 \end{command}
 
 The \meta{body} of a class usually just consists of calls to the macros
@@ -160,7 +172,7 @@ peculiar syntax:
 
   Here is an example in which three stamp objects are created.
 \begin{codeexample}[code only]
-\pgfoonew \firststamp  = new stamp()    
+\pgfoonew \firststamp  = new stamp()
 \pgfoonew \secondstamp = new stamp()
 {
   \pgfoonew \thirdstamp = new stamp()
@@ -173,14 +185,14 @@ peculiar syntax:
 
   The optional \meta{object handle or attribute} can either be an
   \meta{object handle} or an \meta{attribute}. When an \meta{object
-    handle} is give, it must be a normal \TeX\ macro name that will
+    handle} is given, it must be a normal \TeX\ macro name that will
   ``point'' to the object (handles are discussed in more detail in
   Section~\ref{section-identities}). You can use this macro to call
   methods of the object as discussed in the following section. When an
   \meta{attribute} is given, it must be given in curly braces (the
   curly braces are used to detect the presence of an attribute). In
   this case, a handle to the newly created object is stored in this
-  attribute. 
+  attribute.
 \begin{codeexample}[code only]
 \pgfooclass{foo}
 {
@@ -209,7 +221,7 @@ peculiar syntax:
 \subsection{Methods}
 
 Methods are defined inside the body of classes using the following
-command: 
+command:
 
 \begin{command}{\method \meta{method name}|(|\meta{parameter list}|)|\marg{method body}}
   This macro, which is only defined inside a class definition, defines
@@ -217,21 +229,22 @@ command:
   names can contain spaces and other characters, so \meta{method names} like
   |put_stamp_here| or |put stamp here| are both legal.
 
-  Three method names are special: First, a method having the same name
-  as the class is called the \emph{constructor} of the class. The must be
-  such a method, even if its body is empty. There are (currently) no
+  Three method names are special: First, a method having either the
+  same name as the class or having the name |init| is called the
+  \emph{constructor} of the class. There are (currently) no
   destructors; objects simply become ``undefined'' at the
   end of the scope in which they have been created. The other two
   methods are called |get id| and |get handle|, which are always automatically
   defined and which you cannot redefine. They are discussed in
-  Section~\ref{section-identities}. 
+  Section~\ref{section-identities}.
 
-  Overloading of methods is not possible, that is, it is illegal to
-  have two methods inside a single class with the same name (despite
-  possibly different parameter lists). However, two different classes
-  may contain a method with the same name, that is, classes form 
-  namespaces for methods.
-  
+  Overloading of methods by differing numbers of parameters is not
+  possible, that is, it is illegal to have two methods inside a single
+  class with the same name (despite possibly different parameter
+  lists). However, two different classes may contain a method with the
+  same name, that is, classes form namespaces for methods. Also, a
+  class can (re)implement a method from a superclass.
+
   The \meta{method name} must be followed by a \meta{parameter list}
   in parentheses, which must be present even when the \meta{parameter
     list} is empty. The \meta{parameter list} is actually a normal
@@ -239,14 +252,14 @@ command:
   inside the parentheses upon method invocation and, thus, could be
   something like |#1#2 foo #3 bar.|, but a list like |#1,#2,#3| is
   more customary. By setting the parameter list to just |#1| and then
-  calling, say,  |\pgfkeys{#1}| at the beginnig of a method, you can
+  calling, say,  |\pgfkeys{#1}| at the beginning of a method, you can
   implement Objective-C-like named parameters.
 
   When a method is called, the \meta{body} of
   the method will be executed. The main difference to a normal macro
-  is that while the \meta{body} is executed a special macro called
-  |\pgfoothis| is setup in such a way that it references that object
-  for which the method is executed. 
+  is that while the \meta{body} is executed, a special macro called
+  |\pgfoothis| is set up in such a way that it references the object
+  for which the method is executed.
 \end{command}
 
 In order to call a method for an object, you first need to create the
@@ -255,11 +268,18 @@ method for this object, a special syntax is used that is similar to
 Java or C++ syntax:
 
 \begin{pgfmanualentry}
-  \pgfmanualentryheadline{\meta{object handle}|.|\meta{method name}|(|\meta{parameters}|)|}%
+  \pgfmanualentryheadline{\meta{object handle}\opt{|.|\meta{super
+        class}}|.|\meta{method name}|(|\meta{parameters}|)|}% 
   \pgfmanualbody
   This causes the method \meta{method name} to be called for the
-  object referenced by the \meta{object handle}. Naturally, the method
-  is the one defined in the class of the object. The \meta{parameters}
+  object referenced by the \meta{object handle}. The method is the one
+  defined in the class of the object or, if it is not defined there,
+  the method defined in the superclasses of the object's class (if
+  there are several superclasses that define the same method, the
+  method resolution order is used to determine which one gets
+  called). If the optional \meta{super class} is specified, the method
+  implementation of that class will be used rather than the
+  implementation in the object's class. The \meta{parameters} 
   are matched against the parameters of the method and, then, the
   method body is executed. The execution of the method body is
   \emph{not} done inside a scope, so the effects of a method body
@@ -302,10 +322,10 @@ Java or C++ syntax:
   % This is the class stamp
 
   \method stamp() {}
-  
+
   \method apply(#1,#2) {
     \pgfoothis.shift origin(#1,#2)
-    
+
     % Draw the stamp:
     \node [rotate=20,font=\huge] {Passed};
   }
@@ -320,6 +340,16 @@ Java or C++ syntax:
 \end{pgfmanualentry}
 
 
+\begin{command}{\pgfoosuper|(|\meta{class},\meta{object
+      handle}|).|\meta{method name}|(|\meta{arguments}|)|}
+  This macro gives you finer control over which method gets invoked in
+  case of multiple inheritance. This macro calls \meta{method name} of
+  the object specified by \meta{object handle}, but which
+  implementation of the method is called is determined as follows: it
+  will be the implementation in the first class (in the method
+  resolution order) after \meta{class} that defines \meta{method
+    name}. 
+\end{command}
 
 \subsection{Attributes}
 
@@ -347,7 +377,7 @@ To declare an attribute you should use the |\attribute| command:
   attribute; if none is given, the empty string is used
   automatically. The initial value is the value that the attribute
   will have just after the object has been created and before the
-  constructor is called.  
+  constructor is called.
 
 \begin{codeexample}[code only]
 \pgfooclass{stamp}{
@@ -355,14 +385,14 @@ To declare an attribute you should use the |\attribute| command:
 
   \attribute text;
   \attribute rotation angle = 20;
-  
+
   \method stamp(#1) {
     \pgfooset{text}{#1} % Set the text
   }
-  
+
   \method apply(#1,#2) {
     \pgfoothis.shift origin(#1,#2)
-    
+
     % Draw the stamp:
     \node [rotate=\pgfoovalueof{rotation angle},font=\huge]
       {\pgfoovalueof{text}};
@@ -390,7 +420,7 @@ reasons. Instead, a set of special macros is used, all of which can
 
 \begin{command}{\pgfooset\marg{attribute}\marg{value}}
   Sets the \meta{attribute} of the current object to
-  \meta{value}. 
+  \meta{value}.
 \begin{codeexample}[code only]
 \method set rotation (#1) {
   \pgfooset{rotation angle}{#1}
@@ -446,7 +476,7 @@ possible to retrieve the object id using the |get id| method (discussed
 below), but normally you will not need to do so because the id itself
 cannot be used to access an object. Rather, you access objects via
 their methods and these, in turn, can only be called via object
-handles. 
+handles.
 
 Object handles can be created in four ways:
 \begin{enumerate}
@@ -457,7 +487,7 @@ Object handles can be created in four ways:
   a second handle to the same object.
 \item |\pgfooobj|\marg{id} can be used as an object handle to the
   object with the given \meta{id}.
-\item Using the |get handle| method to create a handle to a given object. 
+\item Using the |get handle| method to create a handle to a given object.
 \end{enumerate}
 
 Let us have a look at the last two methods.
@@ -495,7 +525,7 @@ a method of this name yourself.
   Different object that are alive (that are still within the scope in
   which they were created) will always have different ids, so you can
   use the id to test for equality of objects. However, after an object
-  has been destroyed because its scope has ended the same id may be
+  has been destroyed because its scope has ended, the same id may be
   used again for newly created objects.
 
   Here is a typical application where you need to call this method:
@@ -508,10 +538,10 @@ a method of this name yourself.
   valid or even exist, even though the object still exists. In this
   case, you wish to store the object id somewhere instead of the
   handle. Thus, for the object passed to |\addtoobjectlist| you call
-  the |get id| method and store the resulting id, rather than the handle. 
+  the |get id| method and store the resulting id, rather than the handle.
 \end{predefinedmethod}
 
-There is a second predefined methods, called |get handle|, which is also
+There is a second predefined method, called |get handle|, which is also
 used to create object handles.
 
 \begin{predefinedmethod}{get handle(\marg{macro name})}
@@ -520,7 +550,7 @@ used to create object handles.
   other than |\pgfoothis| -- the following two have the same effect:
   \begin{enumerate}
   \item |\let|\meta{macro name}|=\obj|
-  \item |\obj.get handle(|\meta{macro name}|)|    
+  \item |\obj.get handle(|\meta{macro name}|)|
   \end{enumerate}
 
   The first method is simpler and faster. However, for |\pgfoothis|
@@ -535,22 +565,41 @@ used to create object handles.
 
 
 
+\subsection{The Object Class}
+
+\label{section-object}
+
+The object-oriented module predefines a basic class |object| that can
+be used as a base class in different context.
+
+\begin{ooclass}{object}
+  This class current only implements one method:
+
+  \begin{method}{copy(\meta{handle})}
+    Creates a new object and initializes the values of its (declared)
+    attributes to the values of the original. The method takes one
+    argument: a control sequence which receives the handle of the
+    copy. 
+  \end{method}
+\end{ooclass}
+
+
 \subsection{The Signal Class}
 
 \label{section-signals}
 
-The object-oriented module predefines, in addition to the basic mechanism
-for defining and using classes and object, one class: |signal|. This
-class implements a so-called signal--slot mechanism.
+In addition to the basic mechanism for defining and using classes and
+object, the class |signal| is predefined. It implements a so-called
+signal--slot mechanism. 
 
 \begin{ooclass}{signal}
   This class is used to implement a simple signal--slot
-  mechanism. The idea is the following: Form time to time special
+  mechanism. The idea is the following: From time to time special
   things happen about which a number of objects need to be
   informed. Different things can happen and different object will be
   interested in these things. A |signal| object can be used to signal
-  that such special things of a certain kind have happend. For
-  example, on signal object might be used to signal the event that ``a
+  that such special things of a certain kind have happened. For
+  example, one signal object might be used to signal the event that ``a
   page has been shipped out.'' Another signal might be used to signal
   that ``a figure is about to be typeset,'' and so on.
 
@@ -569,7 +618,7 @@ class implements a so-called signal--slot mechanism.
 
   Currently, it is not possible to ``unregister'' or ``detach'' a slot
   from a signal, that is, once an object has been connect to a signal,
-  it will continue to recieve emmissions of this signal till the end
+  it will continue to receive emissions of this signal till the end
   of the life-time of the signal. This is even true when the object no
   longer exists (but the signal does), so care must be taken that
   signal objects are always created before the objects that are
@@ -648,6 +697,6 @@ implemented:
   value. This is done without scopes, so some tricky |\expandafter|
   magic is needed. Note that, because of this process, you cannot use
   commands like |\pgfutil@ifnextchar| at the end of a method.
-\item An object handle contains just the code to setup and restore the
+\item An object handle contains just the code to set up and restore the
   current object number to the number of the object being called.
 \end{itemize}

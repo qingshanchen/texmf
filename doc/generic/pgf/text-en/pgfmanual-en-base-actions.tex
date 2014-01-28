@@ -31,6 +31,8 @@ In detail, paths can be used in the following ways:
 \item
   You can \emph{stroke} (also known as \emph{draw}) a path.
 \item
+  You can add \emph{arrow tips} to a path.
+\item
   You can \emph{fill} a path with a uniform color.
 \item
   You can \emph{clip} subsequent renderings against the path.
@@ -42,7 +44,7 @@ In detail, paths can be used in the following ways:
 You can also perform any combination of the above, though it makes no
 sense to fill and shade a path at the same time.
 
-To perform (a combination of) the first three actions, you can use the
+To perform (a combination of) the first four actions, you can use the
 following command:
 \begin{command}{\pgfusepath\marg{actions}}
   Applies the given \meta{actions} to the current path. Afterwards,
@@ -59,8 +61,8 @@ following command:
   \pgfusepath{fill}
 \end{pgfpicture}
 \end{codeexample}
-  \item \declare{|stroke|}
-    strokes the path. See Section~\ref{section-stroke} for further details.
+  \item \declare{|stroke|} strokes the path. See
+    Section~\ref{section-stroke} for further details. 
 \begin{codeexample}[]
 \begin{pgfpicture}
   \pgfpathmoveto{\pgfpointorigin}
@@ -69,9 +71,10 @@ following command:
   \pgfusepath{stroke}
 \end{pgfpicture}
 \end{codeexample}
+  \item \declare{|draw|} has the same effect as |stroke|.
   \item \declare{|clip|}
-    clips all subsequent drawings against the path. See
-    Section~\ref{section-clip} for further details.
+    clips all subsequent drawings against the path. Always supresses
+    arrow tips. See Section~\ref{section-clip} for further details. 
 \begin{codeexample}[]
 \begin{pgfpicture}
   \pgfpathmoveto{\pgfpointorigin}
@@ -251,91 +254,6 @@ this may change in the future, so do not count on this.
 You can set the stroke opacity using |\pgfsetstrokeopacity|. This
 command is described in Section~\ref{section-transparency}.
 
-\subsubsection{Graphic Parameter: Arrows}
-
-After a path has been drawn, \pgfname\ can add arrow tips at the
-ends. It will only add arrows at the beginning of the first subpath
-and at the end of the last subpath. For closed paths the result is not
-defined, that is, it may change without notice in the future. 
-
-\begin{command}{\pgfsetarrowsstart\marg{arrow kind}}
-  Sets the arrow tip kind used at the start of a (possibly curved)
-  path. When this option is used, the line will often be slightly
-  shortened to ensure that the tip of the arrow will exactly ``touch''
-  the ``real'' start of the line.
-
-  To ``clear'' the start arrow, say |\pgfsetarrowsstart{}|.
-\begin{codeexample}[]
-\begin{pgfpicture}
-  \pgfsetarrowsstart{latex}
-  \pgfpathmoveto{\pgfpointorigin}
-  \pgfpathlineto{\pgfpoint{1cm}{0cm}}
-  \pgfusepath{stroke}
-  \pgfsetarrowsstart{to}
-  \pgfpathmoveto{\pgfpoint{0cm}{2mm}}
-  \pgfpathlineto{\pgfpoint{1cm}{2mm}}
-  \pgfusepath{stroke}
-\end{pgfpicture}
-\end{codeexample}
-
-  The effect of this command persists only till the end of the current
-  \TeX\ scope.
-
-  The different possible arrow kinds are explained in
-  Section~\ref{section-arrows}.  
-\end{command}
-
-\begin{command}{\pgfsetarrowsend\marg{arrow kind}}
-  Sets the arrow tip kind used at the end of a path.
-\begin{codeexample}[]
-\begin{pgfpicture}
-  \pgfsetarrowsstart{latex}
-  \pgfsetarrowsend{to}
-  \pgfpathmoveto{\pgfpointorigin}
-  \pgfpathlineto{\pgfpoint{1cm}{0cm}}
-  \pgfusepath{stroke}
-\end{pgfpicture}
-\end{codeexample}
-\end{command}
-
-\begin{command}{\pgfsetarrows{\texttt{\char`\{}}\meta{start kind}|-|\meta{end kind}{\texttt{\char`\}}}}
-  Sets the start arrow kind to \meta{start kind} and the end kind to
-  \meta{end kind}.
-\begin{codeexample}[]
-\begin{pgfpicture}
-  \pgfsetarrows{latex-to}
-  \pgfpathmoveto{\pgfpointorigin}
-  \pgfpathlineto{\pgfpoint{1cm}{0cm}}
-  \pgfusepath{stroke}
-\end{pgfpicture}
-\end{codeexample}
-\end{command}
-
-\begin{command}{\pgfsetshortenstart\marg{dimension}}
-  This command will shortened the start of every stroked path by the
-  given dimension. This shortening is done in addition to automatic
-  shortening done by a start arrow, but it can be used even if no
-  start arrow is given.
-
-  This command is useful if you wish arrows or lines to ``stop shortly
-  before'' a given point.
-\begin{codeexample}[]
-\begin{pgfpicture}
-  \pgfpathcircle{\pgfpointorigin}{5mm}
-  \pgfusepath{stroke}
-  \pgfsetarrows{latex-}
-  \pgfsetshortenstart{4pt}
-  \pgfpathmoveto{\pgfpoint{5mm}{0cm}} % would be on the circle
-  \pgfpathlineto{\pgfpoint{2cm}{0cm}}
-  \pgfusepath{stroke}
-\end{pgfpicture}
-\end{codeexample}
-\end{command}
-  
-\begin{command}{\pgfsetshortenend\marg{dimension}}
-  Works like |\pgfsetshortenstart|.
-\end{command}
-
 
 \subsubsection{Inner Lines}
 
@@ -345,7 +263,7 @@ color. This is a useful effect for creating ``double'' lines, for
 instance by setting the line width to 2pt and stroking a black line
 and then setting the inner line width to 1pt and stroking a white
 line on the same path as the original path. This results in what looks
-like two lines, each of thickness 0.5pt, spaces 1pt apart.
+like two lines, each of thickness 0.5pt, spaced 1pt apart.
 
 You may wonder why there is direct support for this ``double
 stroking'' in the basic layer. After all, this effect is easy to
@@ -416,6 +334,98 @@ Two commands are used to set the inner line width and color.
 \end{command}
 
 
+\subsection{Arrow Tips on a Path}
+\label{section-tips}
+
+After a path has been drawn, \pgfname\ can add arrow tips at the
+ends, depending on how the |tips| key is set, on whether |stroke| or
+|clip| arw used and on whether the path contains closed subpaths. The
+exact rules when arrow tips are added are explained in
+Section~\ref{section-arrow-tips-where}.
+
+\begin{command}{\pgfsetarrowsstart\marg{start arrow tip specification}}
+  Sets the arrow tip kind used at the start of a (possibly curved)
+  path. The syntax of the \meta{start arrow specification} is detailed
+  in Section~\ref{section-arrow-spec}. 
+
+  To ``clear'' the start arrow, say |\pgfsetarrowsstart{}|.
+\begin{codeexample}[]
+\begin{pgfpicture}
+  \pgfsetarrowsstart{Latex[length=10pt]}
+  \pgfpathmoveto{\pgfpointorigin}
+  \pgfpathlineto{\pgfpoint{1cm}{0cm}}
+  \pgfusepath{stroke}
+  \pgfsetarrowsstart{Computer Modern Rightarrow}
+  \pgfpathmoveto{\pgfpoint{0cm}{2mm}}
+  \pgfpathlineto{\pgfpoint{1cm}{2mm}}
+  \pgfusepath{stroke}
+\end{pgfpicture}
+\end{codeexample}
+
+  The effect of this command persists only till the end of the current
+  \TeX\ scope.
+\end{command}
+
+\begin{command}{\pgfsetarrowsend\marg{end arrow tip specification}}
+  Sets the arrow tip kind used at the end of a path.
+\begin{codeexample}[]
+\begin{pgfpicture}
+  \pgfsetarrowsstart{Latex[length=10pt]}
+  \pgfsetarrowsend{Computer Modern Rightarrow}
+  \pgfpathmoveto{\pgfpointorigin}
+  \pgfpathlineto{\pgfpoint{1cm}{0cm}}
+  \pgfusepath{stroke}
+\end{pgfpicture}
+\end{codeexample}
+\end{command}
+
+\begin{command}{\pgfsetarrows\marg{argument}}
+  The \meta{argument} can be of the form \meta{start arrow tip
+    specifciation}|-|\meta{end arrow tip specification}. In this
+  case, both the start and the end arrow specification are set:
+\begin{codeexample}[]
+\begin{pgfpicture}
+  \pgfsetarrows{Latex[length=10pt]->>}
+  \pgfpathmoveto{\pgfpointorigin}
+  \pgfpathlineto{\pgfpoint{1cm}{0cm}}
+  \pgfusepath{stroke}
+\end{pgfpicture}
+\end{codeexample}
+  Alternatively, \meta{argument} can be of the form |[|\meta{arrow
+    keys}|]|. In this case, the \meta{arrow keys} will be set for all
+  arrow tips in the current scope, see Section~\ref{section-arrow-scopes}.
+\end{command}
+
+
+\begin{command}{\pgfsetshortenstart\marg{dimension}}
+  This command will shortened the start of every stroked path by the
+  given dimension. This shortening is done in addition to automatic
+  shortening done by a start arrow, but it can be used even if no
+  start arrow is given.
+
+  It is usually better to use the |sep| key with arrow tips.
+
+  This command is useful if you wish arrows or lines to ``stop shortly
+  before'' a given point.
+\begin{codeexample}[]
+\begin{pgfpicture}
+  \pgfpathcircle{\pgfpointorigin}{5mm}
+  \pgfusepath{stroke}
+  \pgfsetarrows{Latex-}
+  \pgfsetshortenstart{4pt}
+  \pgfpathmoveto{\pgfpoint{5mm}{0cm}} % would be on the circle
+  \pgfpathlineto{\pgfpoint{2cm}{0cm}}
+  \pgfusepath{stroke}
+\end{pgfpicture}
+\end{codeexample}
+\end{command}
+  
+\begin{command}{\pgfsetshortenend\marg{dimension}}
+  Works like |\pgfsetshortenstart|.
+\end{command}
+
+
+
 \subsection{Filling a Path}
 \label{section-fill}
 
@@ -423,7 +433,7 @@ Filling a path means coloring every interior point of the path with
 the current fill color. It is not always obvious whether a point is
 ``inside'' a  path when the path is self-intersecting and/or consists
 or multiple parts. In this case either the nonzero winding number rule
-or the even-odd crossing number rule is used to decide, which points
+or the even-odd crossing number rule is used to decide which points
 lie ``inside.'' These rules are explained in
 Section~\ref{section-rules}. 
 

@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /cvsroot/pgf/pgf/generic/pgf/basiclayer/pgfcorepathconstruct.code.tex,v 1.24 2010/08/03 12:27:36 ludewich Exp $
+\ProvidesFileRCS $Header: /cvsroot/pgf/pgf/generic/pgf/basiclayer/pgfcorepathconstruct.code.tex,v 1.29 2013/10/07 15:51:46 tantau Exp $
 
 
 \newdimen\pgf@path@lastx
@@ -15,6 +15,8 @@
 
 \let\pgfgetpath=\pgfsyssoftpath@getcurrentpath
 \let\pgfsetpath=\pgfsyssoftpath@setcurrentpath
+
+
 
 % Replace corners by arcs.
 %
@@ -75,6 +77,36 @@
 }
 
 
+
+% The following protocol the passed sizes and all the corresponding
+% softpath commands. The nonlinear transformation (nlt) module
+% overwrites these commands. 
+
+\def\pgf@lt@moveto#1#2{%
+  \pgf@protocolsizes{#1}{#2}%
+  \pgfsyssoftpath@moveto{\the#1}{\the#2}%
+}
+\def\pgf@lt@lineto#1#2{%
+  \pgf@protocolsizes{#1}{#2}%
+  \pgfsyssoftpath@lineto{\the#1}{\the#2}%
+}
+\def\pgf@lt@curveto#1#2#3#4#5#6{%
+  \pgf@protocolsizes{#1}{#2}%
+  \pgf@protocolsizes{#3}{#4}%
+  \pgf@protocolsizes{#5}{#6}%
+  \pgfsyssoftpath@curveto{\the#1}{\the#2}{\the#3}{\the#4}{\the#5}{\the#6}%
+}
+
+\let\pgf@lt@closepath\pgfsyssoftpath@closepath
+
+\let\pgf@nlt@moveto\pgf@lt@moveto
+\let\pgf@nlt@lineto\pgf@lt@lineto
+\let\pgf@nlt@curveto\pgf@lt@curveto
+\let\pgf@nlt@closepath\pgf@lt@closepath
+
+\let\pgf@nlt@list\pgfutil@empty % If non-empty, the nlt module is active
+
+
 % Move current point to #1.
 %
 % #1 = new current point
@@ -87,8 +119,7 @@
 
 \def\pgfpathmoveto#1{%
   \pgfpointtransformed{#1}%
-  \pgf@protocolsizes{\pgf@x}{\pgf@y}%
-  \pgfsyssoftpath@moveto{\the\pgf@x}{\the\pgf@y}%
+  \pgf@nlt@moveto{\pgf@x}{\pgf@y}%
   \global\pgf@path@lastx=\pgf@x%
   \global\pgf@path@lasty=\pgf@y%
 }
@@ -147,9 +178,8 @@
 
 \def\pgfpathlineto#1{%
   \pgfpointtransformed{#1}%
-  \pgf@protocolsizes{\pgf@x}{\pgf@y}%
   \pgf@roundcornerifneeded%
-  \pgfsyssoftpath@lineto{\the\pgf@x}{\the\pgf@y}%
+  \pgf@nlt@lineto{\pgf@x}{\pgf@y}%
   \global\pgf@path@lastx=\pgf@x%
   \global\pgf@path@lasty=\pgf@y%
 }
@@ -173,7 +203,7 @@
 
 \def\pgfpathclose{%
   \pgf@roundcornerifneeded%
-  \pgfsyssoftpath@closepath%
+  \pgf@nlt@closepath%
 }
 
 
@@ -192,17 +222,14 @@
 
 \def\pgfpathcurveto#1#2#3{%
   \pgfpointtransformed{#3}%
-  \pgf@protocolsizes{\pgf@x}{\pgf@y}%
   \pgf@xb=\pgf@x%
   \pgf@yb=\pgf@y%
   \pgfpointtransformed{#2}%
-  \pgf@protocolsizes{\pgf@x}{\pgf@y}%
   \pgf@xa=\pgf@x%
   \pgf@ya=\pgf@y%
   \pgfpointtransformed{#1}%
-  \pgf@protocolsizes{\pgf@x}{\pgf@y}%
   \pgf@roundcornerifneeded%
-  \pgfsyssoftpath@curveto{\the\pgf@x}{\the\pgf@y}{\the\pgf@xa}{\the\pgf@ya}{\the\pgf@xb}{\the\pgf@yb}%
+  \pgf@nlt@curveto{\pgf@x}{\pgf@y}{\pgf@xa}{\pgf@ya}{\pgf@xb}{\pgf@yb}%
   \global\pgf@path@lastx=\pgf@xb%
   \global\pgf@path@lasty=\pgf@yb%
 }
@@ -223,7 +250,6 @@
 
 \def\pgfpathquadraticcurveto#1#2{%
   \pgfpointtransformed{#2}%
-  \pgf@protocolsizes{\pgf@x}{\pgf@y}%
   \pgf@xb=\pgf@x%
   \pgf@yb=\pgf@y%
   \pgfpointtransformed{#1}%
@@ -234,13 +260,11 @@
   \pgf@ya=.33333333\pgf@yb%
   \advance\pgf@xa by\pgf@xc%
   \advance\pgf@ya by\pgf@yc%
-  \pgf@protocolsizes{\pgf@xa}{\pgf@ya}%
   % compute first control point
   \advance\pgf@xc by.3333333\pgf@path@lastx%
   \advance\pgf@yc by.3333333\pgf@path@lasty%
-  \pgf@protocolsizes{\pgf@xc}{\pgf@yc}%
   \pgf@roundcornerifneeded%
-  \pgfsyssoftpath@curveto{\the\pgf@xc}{\the\pgf@yc}{\the\pgf@xa}{\the\pgf@ya}{\the\pgf@xb}{\the\pgf@yb}%
+  \pgf@nlt@curveto{\pgf@xc}{\pgf@yc}{\pgf@xa}{\pgf@ya}{\pgf@xb}{\pgf@yb}%
   \global\pgf@path@lastx=\pgf@xb%
   \global\pgf@path@lasty=\pgf@yb%
 }
@@ -374,12 +398,9 @@
   \pgf@yc=\pgf@yb\relax%
   \advance \pgf@xc by \pgf@x\relax%
   \advance \pgf@yc by \pgf@y\relax%
-  \pgfsyssoftpath@curveto{\the\pgf@xa}{\the\pgf@ya}{\the\pgf@xc}{\the\pgf@yc}{\the\pgf@xb}{\the\pgf@yb}%
+  \pgf@nlt@curveto{\pgf@xa}{\pgf@ya}{\pgf@xc}{\pgf@yc}{\pgf@xb}{\pgf@yb}%
   \global\pgf@path@lastx=\pgf@xb%
   \global\pgf@path@lasty=\pgf@yb%
-  \pgf@protocolsizes{\pgf@xa}{\pgf@ya}%
-  \pgf@protocolsizes{\pgf@xb}{\pgf@yb}%
-  \pgf@protocolsizes{\pgf@xc}{\pgf@yc}%
   }%
 }
 
@@ -819,7 +840,7 @@
 		\pgfpatharcofellipse@{%
 			\pgfpoint
 				{\pgfpath@center@x + #5*cos(\pgfpath@angle@i)}
-				{\pgfpath@center@y + #6*sin(\pgfpath@angle@i)}
+				{\pgfpath@center@y + #6*sin(\pgfpath@angle@i)}%
 		}%
 		%
 		\advance\c@pgf@countd by1
@@ -900,8 +921,7 @@
   {%
     \advance\pgf@xa by\pgf@xc%
     \advance\pgf@ya by\pgf@yc%
-    \pgfsyssoftpath@moveto{\the\pgf@xa}{\the\pgf@ya}%
-    \pgf@protocolsizes{\pgf@xa}{\pgf@ya}%
+    \pgf@nlt@moveto{\pgf@xa}{\pgf@ya}%
   }%
   \pgf@x=0.55228475\pgf@xb% first arc
   \pgf@y=0.55228475\pgf@yb%
@@ -909,8 +929,7 @@
   \advance\pgf@y by\pgf@ya%
   \advance\pgf@x by\pgf@xc%
   \advance\pgf@y by\pgf@yc%
-  \edef\pgf@temp{{\the\pgf@x}{\the\pgf@y}}%
-  \pgf@protocolsizes{\pgf@x}{\pgf@y}%
+  \edef\pgf@temp{\pgf@xc\the\pgf@x\pgf@yc\the\pgf@y}%
   \pgf@x=0.55228475\pgf@xa%
   \pgf@y=0.55228475\pgf@ya%
   \advance\pgf@x by\pgf@xb%
@@ -919,10 +938,9 @@
     \advance\pgf@x by\pgf@xc%
     \advance\pgf@y by\pgf@yc%
     \advance\pgf@xb by\pgf@xc%
-    \advance\pgf@yb by\pgf@yc%    
-    \expandafter\pgfsyssoftpath@curveto\pgf@temp{\the\pgf@x}{\the\pgf@y}{\the\pgf@xb}{\the\pgf@yb}%
-    \pgf@protocolsizes{\pgf@x}{\pgf@y}%
-    \pgf@protocolsizes{\pgf@xb}{\pgf@yb}%
+    \advance\pgf@yb by\pgf@yc%
+    \pgf@temp%
+    \pgf@nlt@curveto{\pgf@xc}{\pgf@yc}{\pgf@x}{\pgf@y}{\pgf@xb}{\pgf@yb}%
   }%
   \pgf@xa=-\pgf@xa% flip first axis
   \pgf@ya=-\pgf@ya%
@@ -932,8 +950,7 @@
   \advance\pgf@y by\pgf@yb%
   \advance\pgf@x by\pgf@xc%
   \advance\pgf@y by\pgf@yc%
-  \edef\pgf@temp{{\the\pgf@x}{\the\pgf@y}}%
-  \pgf@protocolsizes{\pgf@x}{\pgf@y}%
+  \edef\pgf@temp{\pgf@xc\the\pgf@x\pgf@yc\the\pgf@y}%
   \pgf@x=0.55228475\pgf@xb%
   \pgf@y=0.55228475\pgf@yb%
   \advance\pgf@x by\pgf@xa%
@@ -942,10 +959,9 @@
     \advance\pgf@x by\pgf@xc%
     \advance\pgf@y by\pgf@yc%
     \advance\pgf@xa by\pgf@xc%
-    \advance\pgf@ya by\pgf@yc%    
-    \expandafter\pgfsyssoftpath@curveto\pgf@temp{\the\pgf@x}{\the\pgf@y}{\the\pgf@xa}{\the\pgf@ya}%  
-    \pgf@protocolsizes{\pgf@x}{\pgf@y}%
-    \pgf@protocolsizes{\pgf@xa}{\pgf@ya}%
+    \advance\pgf@ya by\pgf@yc%
+    \pgf@temp%
+    \pgf@nlt@curveto{\pgf@xc}{\pgf@yc}{\pgf@x}{\pgf@y}{\pgf@xa}{\pgf@ya}%
   }%
   \pgf@xb=-\pgf@xb% flip second axis
   \pgf@yb=-\pgf@yb%
@@ -955,8 +971,7 @@
   \advance\pgf@y by\pgf@ya%
   \advance\pgf@x by\pgf@xc%
   \advance\pgf@y by\pgf@yc%
-  \edef\pgf@temp{{\the\pgf@x}{\the\pgf@y}}%
-  \pgf@protocolsizes{\pgf@x}{\pgf@y}%
+  \edef\pgf@temp{\pgf@xc\the\pgf@x\pgf@yc\the\pgf@y}%
   \pgf@x=0.55228475\pgf@xa%
   \pgf@y=0.55228475\pgf@ya%
   \advance\pgf@x by\pgf@xb%
@@ -966,9 +981,8 @@
     \advance\pgf@y by\pgf@yc%
     \advance\pgf@xb by\pgf@xc%
     \advance\pgf@yb by\pgf@yc%    
-    \expandafter\pgfsyssoftpath@curveto\pgf@temp{\the\pgf@x}{\the\pgf@y}{\the\pgf@xb}{\the\pgf@yb}%  
-    \pgf@protocolsizes{\pgf@x}{\pgf@y}%
-    \pgf@protocolsizes{\pgf@xb}{\pgf@yb}%
+    \pgf@temp%
+    \pgf@nlt@curveto{\pgf@xc}{\pgf@yc}{\pgf@x}{\pgf@y}{\pgf@xb}{\pgf@yb}%
   }%
   \pgf@xa=-\pgf@xa% flip first axis once more
   \pgf@ya=-\pgf@ya%
@@ -978,8 +992,7 @@
   \advance\pgf@y by\pgf@yb%
   \advance\pgf@x by\pgf@xc%
   \advance\pgf@y by\pgf@yc%
-  \edef\pgf@temp{{\the\pgf@x}{\the\pgf@y}}%
-  \pgf@protocolsizes{\pgf@x}{\pgf@y}%
+  \edef\pgf@temp{\pgf@xc\the\pgf@x\pgf@yc\the\pgf@y}%
   \pgf@x=0.55228475\pgf@xb%
   \pgf@y=0.55228475\pgf@yb%
   \advance\pgf@x by\pgf@xa%
@@ -989,12 +1002,11 @@
     \advance\pgf@y by\pgf@yc%
     \advance\pgf@xa by\pgf@xc%
     \advance\pgf@ya by\pgf@yc%    
-    \expandafter\pgfsyssoftpath@curveto\pgf@temp{\the\pgf@x}{\the\pgf@y}{\the\pgf@xa}{\the\pgf@ya}%
-    \pgf@protocolsizes{\pgf@x}{\pgf@y}%
-    \pgf@protocolsizes{\pgf@xa}{\pgf@ya}%
+    \pgf@temp%
+    \pgf@nlt@curveto{\pgf@xc}{\pgf@yc}{\pgf@x}{\pgf@y}{\pgf@xa}{\pgf@ya}%
   }%
-  \pgfsyssoftpath@closepath%
-  \pgfsyssoftpath@moveto{\the\pgf@xc}{\the\pgf@yc}%
+  \pgf@nlt@closepath%
+  \pgf@nlt@moveto{\pgf@xc}{\pgf@yc}%
 }
 
 
@@ -1029,7 +1041,9 @@
   \ifpgf@pt@identity%
     \ifpgf@arccorners%
     \else%
-      \let\pgfrect@next=\pgf@normalrect%
+      \ifx\pgf@nlt@list\pgfutil@empty%
+        \let\pgfrect@next=\pgf@normalrect%
+      \fi%
     \fi%
   \fi%
   \pgfrect@next%
@@ -1087,8 +1101,8 @@
 
 % Append a grid to the current path.
 %
-% #1 = lower left point of grid
-% #2 = upper right point of grid
+% #1 = first corner point of grid
+% #2 = second corner point of grid
 %  
 % Options: 
 %  
@@ -1119,97 +1133,86 @@
   \pgf@xb=\pgf@x%
   \pgf@yb=\pgf@y%
   \pgf@process{#2}%
-  \pgf@xa=\pgf@x\relax%
-  \pgf@ya=\pgf@y\relax%
-  {%
-    % compute bounding box
-    % first corner
+  \pgf@xa=\pgf@x%
+  \pgf@ya=\pgf@y%
+  % Swap coordinates if one of them is smaller than the other:
+  \ifdim\pgf@xa>\pgf@xb%
     \pgf@x=\pgf@xb%
+    \pgf@xb=\pgf@xa%
+    \pgf@xa=\pgf@x%
+  \fi%
+  \ifdim\pgf@ya>\pgf@yb%
     \pgf@y=\pgf@yb%
-    \pgf@pos@transform{\pgf@x}{\pgf@y}%
-    \pgf@protocolsizes{\pgf@x}{\pgf@y}%
-    % second corner
-    \pgf@x=\pgf@xb%
-    \pgf@y=\pgf@ya%
-    \pgf@pos@transform{\pgf@x}{\pgf@y}%
-    \pgf@protocolsizes{\pgf@x}{\pgf@y}%
-    % third corner
-    \pgf@x=\pgf@xa%
-    \pgf@y=\pgf@yb%
-    \pgf@pos@transform{\pgf@x}{\pgf@y}%
-    \pgf@protocolsizes{\pgf@x}{\pgf@y}%
-    % fourth corner
-    \pgf@x=\pgf@xa%
-    \pgf@y=\pgf@ya%
-    \pgf@pos@transform{\pgf@x}{\pgf@y}%
-    \pgf@protocolsizes{\pgf@x}{\pgf@y}%
-  }%
-  \c@pgf@counta=\pgf@y\relax%
+    \pgf@yb=\pgf@ya%
+    \pgf@ya=\pgf@y%
+  \fi%
+  \c@pgf@counta=\pgf@ya\relax%
   \c@pgf@countb=\pgf@yc\relax%
   \divide\c@pgf@counta by\c@pgf@countb\relax%
-  \pgf@y=\c@pgf@counta\pgf@yc\relax%
-  \ifdim\pgf@y<\pgf@ya%
-    \advance\pgf@y by\pgf@yc%
+  \pgfutil@tempdima=\c@pgf@counta\pgf@yc\relax%
+  \ifdim\pgfutil@tempdima<\pgf@ya%
+    \advance\pgfutil@tempdima by\pgf@yc%
   \fi%
-  \loop% horizontal lines
+  \pgfutil@tempdimb\pgf@x
+  \pgfutil@loop% horizontal lines
     {%
-      \pgf@xa=\pgf@x%
-      \pgf@ya=\pgf@y%
+      \pgf@xa=\pgfutil@tempdimb%
+      \pgf@ya=\pgfutil@tempdima%
       \pgf@pos@transform{\pgf@xa}{\pgf@ya}
-      \pgfsyssoftpath@moveto{\the\pgf@xa}{\the\pgf@ya}%
+      \pgf@nlt@moveto{\pgf@xa}{\pgf@ya}%
       \pgf@xa=\pgf@xb%
-      \pgf@ya=\pgf@y%
+      \pgf@ya=\pgfutil@tempdima%
       \pgf@pos@transform{\pgf@xa}{\pgf@ya}
-      \pgfsyssoftpath@lineto{\the\pgf@xa}{\the\pgf@ya}%
+      \pgf@nlt@lineto{\pgf@xa}{\pgf@ya}%
     }%
-    \advance\pgf@y by\pgf@yc%
-  \ifdim\pgf@y<\pgf@yb%
-  \repeat%
-  \advance\pgf@y by-0.01pt\relax%
-  \ifdim\pgf@y<\pgf@yb%
+  \advance\pgfutil@tempdima by\pgf@yc%
+  \ifdim\pgfutil@tempdima<\pgf@yb%
+  \pgfutil@repeat%
+  \advance\pgfutil@tempdima by-0.01pt\relax%
+  \ifdim\pgfutil@tempdima<\pgf@yb%
     {%
-      \pgf@xa=\pgf@x%
-      \pgf@ya=\pgf@y%
+      \pgf@xa=\pgfutil@tempdimb%
+      \pgf@ya=\pgfutil@tempdima%
       \pgf@pos@transform{\pgf@xa}{\pgf@ya}
-      \pgfsyssoftpath@moveto{\the\pgf@xa}{\the\pgf@ya}%
+      \pgf@nlt@moveto{\pgf@xa}{\pgf@ya}%
       \pgf@xa=\pgf@xb%
-      \pgf@ya=\pgf@y%
+      \pgf@ya=\pgfutil@tempdima%
       \pgf@pos@transform{\pgf@xa}{\pgf@ya}
-      \pgfsyssoftpath@lineto{\the\pgf@xa}{\the\pgf@ya}%
+      \pgf@nlt@lineto{\pgf@xa}{\pgf@ya}%
     }%
   \fi%
-  \c@pgf@counta=\pgf@x\relax%
+  \c@pgf@counta=\pgfutil@tempdimb\relax%
   \c@pgf@countb=\pgf@xc\relax%
   \divide\c@pgf@counta by\c@pgf@countb\relax%
-  \pgf@x=\c@pgf@counta\pgf@xc\relax%
-  \ifdim\pgf@x<\pgf@xa%
-    \advance\pgf@x by\pgf@xc%
+  \pgfutil@tempdimb=\c@pgf@counta\pgf@xc\relax%
+  \ifdim\pgfutil@tempdimb<\pgf@xa%
+    \advance\pgfutil@tempdimb by\pgf@xc%
   \fi%
-  \loop% vertical lines
+  \pgfutil@loop% vertical lines
     {%
-      \pgf@xc=\pgf@x%
+      \pgf@xc=\pgfutil@tempdimb%
       \pgf@yc=\pgf@ya%
       \pgf@pos@transform{\pgf@xc}{\pgf@yc}
-      \pgfsyssoftpath@moveto{\the\pgf@xc}{\the\pgf@yc}%
-      \pgf@xc=\pgf@x%
+      \pgf@nlt@moveto{\pgf@xc}{\pgf@yc}%
+      \pgf@xc=\pgfutil@tempdimb%
       \pgf@yc=\pgf@yb%
       \pgf@pos@transform{\pgf@xc}{\pgf@yc}
-      \pgfsyssoftpath@lineto{\the\pgf@xc}{\the\pgf@yc}%
+      \pgf@nlt@lineto{\pgf@xc}{\pgf@yc}%
     }%
-    \advance\pgf@x by\pgf@xc%
-  \ifdim\pgf@x<\pgf@xb%
-  \repeat%
-  \advance\pgf@x by-0.01pt\relax%
-  \ifdim\pgf@x<\pgf@xb%
+    \advance\pgfutil@tempdimb by\pgf@xc%
+  \ifdim\pgfutil@tempdimb<\pgf@xb%
+  \pgfutil@repeat%
+  \advance\pgfutil@tempdimb by-0.01pt\relax%
+  \ifdim\pgfutil@tempdimb<\pgf@xb%
     {%
-      \pgf@xc=\pgf@x%
+      \pgf@xc=\pgfutil@tempdimb%
       \pgf@yc=\pgf@ya%
       \pgf@pos@transform{\pgf@xc}{\pgf@yc}
-      \pgfsyssoftpath@moveto{\the\pgf@xc}{\the\pgf@yc}%
-      \pgf@xc=\pgf@x%
+      \pgf@nlt@moveto{\pgf@xc}{\pgf@yc}%
+      \pgf@xc=\pgfutil@tempdimb%
       \pgf@yc=\pgf@yb%
       \pgf@pos@transform{\pgf@xc}{\pgf@yc}
-      \pgfsyssoftpath@lineto{\the\pgf@xc}{\the\pgf@yc}%
+      \pgf@nlt@lineto{\pgf@xc}{\pgf@yc}%
     }%
   \fi%
 }

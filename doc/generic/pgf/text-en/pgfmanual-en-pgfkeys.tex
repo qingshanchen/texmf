@@ -18,7 +18,7 @@ automatically by both \pgfname\ and \tikzname.
   This package can be used independently of \pgfname. Note that no
   other package of \pgfname\ needs to be loaded (so neither the
   emulation layer nor the system layer is needed). The Con\TeX t
-  abbreviation is |pgfkey| if |pgfmod| is not loaded.
+  abbreviation is |pgfkey| if |pgfmod| is not loaded.                   % pgfkey --> pgfkeys?
 \end{package}
 
 
@@ -96,7 +96,7 @@ set to |hi!|.
 
 There are numerous handlers for defining a key. For instance, we can
 also define a key whose value actually consists of more than one
-parameter. 
+parameter.
 \begin{codeexample}[]
 \pgfkeys{/my key/.code 2 args=The values are '#1' and '#2'.}
 \pgfkeys{/my key={a1}{a2}}
@@ -147,10 +147,10 @@ executed whenever the style is executed. Here is an example:
 \pgfkeys{/my style/.style={/a=foo,/b=bar,/a=#1}}
 \pgfkeys{/my style=wow}
 \end{codeexample}
-As the above example shows, style can also be parametrized, just like
+As the above example shows, styles can also be paramaterized, just like
 the normal code keys.
 
-As a typical use of styles, suppose we wish to setup the key |/tikz|
+As a typical use of styles, suppose we wish to set up the key |/tikz|
 so that it will change the default path to |/tikz|. This can be
 achieved as follows:
 \begin{codeexample}[code only]
@@ -176,12 +176,12 @@ different parts separated by slashes. A typical key might be
 Let us fix some further terminology: Given a key like |/a/b/c|, we
 call the part leading up the last slash (|/a/b|) the \emph{path} of
 the key. We call everything after the last slash (|c|) the \emph{name}
-of the key (in a file system this would be the file name). 
+of the key (in a file system this would be the file name).
 
 We do not always wish to specify keys completely. Instead, we usually
 specify only part of a key (typically only the name) and the
 \emph{default path} is then added to the key at the front. So, when
-the default path is |/tikz| and you 
+the default path is |/tikz| and you
 refer to the (partial) key |line width|, the actual key that is used
 is |/tikz/line width|. There is a simple rule for deciding whether a
 key is a partial key or a full key: If it starts with a slash, then it
@@ -191,7 +191,7 @@ a slash, then the default path is automatically prefixed.
 Note that the default path is not the same as a search path. In
 particular, the default path is just a single path. When a partial key
 is given, only this single default path is prefixed; |pgfkeys| does
-not try to lookup the key in different parts of a search path. It is,
+not try to look up the key in different parts of a search path. It is,
 however, possible to emulate search paths, but a much more
 complicated mechanism must be used.
 
@@ -215,19 +215,19 @@ continue with the next subsection.
   like |#| or unbalanced \TeX-ifs.
 \begin{codeexample}[]
 \pgfkeyssetvalue{/my family/my key}{Hello, world!}
-\pgfkeysvalueof{/my family/my key}  
+\pgfkeysvalueof{/my family/my key}
 \end{codeexample}
 
   The setting of a key is always local to the current \TeX\ group.
 \end{command}
 
 \begin{command}{\pgfkeyslet\marg{full key}\marg{macro}}
-  Performs a |\let| statement so the the \meta{full key} pionts to the
+  Performs a |\let| statement so the \meta{full key} points to the
   contents of \meta{macro}.
 \begin{codeexample}[]
 \def\helloworld{Hello, world!}
 \pgfkeyslet{/my family/my key}{\helloworld}
-\pgfkeysvalueof{/my family/my key}  
+\pgfkeysvalueof{/my family/my key}
 \end{codeexample}
   You should never let a key be equal to |\relax|. Such a key may or
   may not be indistinguishable from an undefined key.
@@ -236,7 +236,7 @@ continue with the next subsection.
 \begin{command}{\pgfkeysgetvalue\marg{full key}\marg{macro}}
   Retrieves the tokens stored in the \meta{full key} and lets
   \meta{macro} be equal to these tokens. If the key has
-  not been set, the \meta{macro} will be equal to |\relax|. 
+  not been set, the \meta{macro} will be equal to |\relax|.
 \begin{codeexample}[]
 \pgfkeyssetvalue{/my family/my key}{Hello, world!}
 \pgfkeysgetvalue{/my family/my key}{\helloworld}
@@ -263,7 +263,7 @@ continue with the next subsection.
   This command will use e\TeX's |\ifcsname| command, if available, for
   efficiency. This means, however, that it may behave differently for
   \TeX\ and for e\TeX\ when you set keys to |\relax|. For this reason
-  you should not do so. 
+  you should not do so.
 \begin{codeexample}[]
 \pgfkeyssetvalue{/my family/my key}{Hello, world!}
 \pgfkeysifdefined{/my family/my key}{yes}{no}
@@ -283,13 +283,13 @@ taken. This action can be one of the following:
 \item A command is executed whose argument(s) are \meta{value}. This
   command is stored in a special subkey of \meta{key}.
 \item The \meta{value} is stored in the \meta{key} itself.
-\item If the key's name (the part after the last slahs) is a known
+\item If the key's name (the part after the last slash) is a known
   \emph{handler}, then this handler will take care of the key.
 \item If the key is totally unknown, one of several possible
-  \emph{unknown key handlers} is called. 
+  \emph{unknown key handlers} is called.
 \end{enumerate}
 
-Addtionally, if the \meta{value} is missing, a default value may or
+Additionally, if the \meta{value} is missing, a default value may or
 may not be substituted. Before we plunge into all the details,
 let us have a quick look at the command itself.
 
@@ -312,8 +312,8 @@ let us have a quick look at the command itself.
   then used. The default path is just the root path |/| when the first
   key is handled, but it may change later on. At the end of the
   command, the default path is reset to the value it had before this
-  command was executed. 
-  
+  command was executed.
+
   Calls of this command may be nested. Thus, it is permissible to call
   |\pgfkeys| inside the code that is executed for a key. Since the
   default path is restored after a call of |\pgfkeys|, the default
@@ -325,11 +325,11 @@ let us have a quick look at the command itself.
   This command has the same effect as |\pgfkeys{|\meta{default
       path}|/.cd,|\meta{key list}|}|, it is only marginally
   quicker. This command should not be used in user code, but rather in
-  commands like |\tikzset| or |\pgfset| that get called very often.   
+  commands like |\tikzset| or |\pgfset| that get called very often.
 \end{command}
 
 \begin{command}{\pgfkeysalso\marg{key list}}
-  This command has execatly the same effect as |\pgfkeys|, only the
+  This command has exactly the same effect as |\pgfkeys|, only the
   default path is not modified before or after the keys are being
   set. This command is mainly intended to be called by the code that
   is being processed for a key.
@@ -344,6 +344,149 @@ let us have a quick look at the command itself.
 \end{command}
 
 
+\subsubsection{First Char Syntax Detection}
+\label{sec:pgf:first:char:syntax}
+
+Usually, keys are of the form \meta{key}|=|\meta{value} and how such
+keys are handled is discussed in the rest of this section. However, it
+is also possible to setup a different syntax for certain parts of the
+input to |\pgfkeys|. Since this is a rather advanced option, most
+readers may wish to skip the following discussion upon first reading;
+it is discussed here because this special syntax detection is the very
+first thing that is done when a key is processed, before any of the
+following operations are performed.
+
+The |\pgfkeys| command and its variants decompose their input into a
+list of \meta{string}s that are separated by commas. By default, each
+such \meta{string} must either have the form \meta{key}|=|\meta{value}
+or of the form \meta{key} with the value-part missing. However, you
+might wish to interpret some of these strings differently. For
+instance, when a \meta{string} has the form |"|\meta{text}|"|, you
+might wish the \meta{string} to be interpreted as if one had written
+|label text={|\meta{text}|}|. Then, people could write
+\begin{codeexample}[code only]
+\myset{red, "main valve", thick}
+\end{codeexample}
+instead of the more cumbersome
+\begin{codeexample}[code only]
+\myset{red, label text=main valve, thick}
+\end{codeexample}
+An example where such a syntax reinterpretation is done is the
+|quotes| library, which allows you to write things like
+\begin{codeexample}[]
+\tikz \graph { a ->["1" red] b ->["0"] c };
+\end{codeexample}
+\noindent instead of the somewhat longer
+\begin{codeexample}[]
+\tikz \graph { a ->[edge node={node[red,auto]{1}}] b ->[edge label=0] c };
+\end{codeexample}
+
+In order to detect whether a \meta{string} has a special syntax, you
+can request that the \emph{first character} of \meta{string} is
+analysed by the key parser. If this first character matches a
+character that has been flagged as a special character, the
+\meta{string} is not interpreted as a usual key--value pair. Instead,
+\meta{string} is passed as a parameter to a special macro that should
+take care of the \meta{string}. After this macro has finished, the
+parsing continues with the \meta{next string} in the list.
+
+In order to setup a special syntax handling for \meta{strings} that
+begin with a certain character, two things need to be done:
+\begin{enumerate}
+\item First, the whole first char syntax detection must be ``switched
+  on,'' since, by default, it is turned off for efficiency reasons
+  (the overhead is rather small, however). This is done by setting the
+  following key:
+  \begin{key}{/handlers/first char syntax=\opt{\meta{true or false}}
+      (default true, initially false)}
+  \end{key}
+\item Second, in order to handle strings starting with a certain
+  \meta{character} in a special way, you need to store a macro in the
+  following key:
+  \begin{key}{/handlers/first char syntax/\meta{meaning of character}}
+    The \meta{meaning of character} should be the text that \TeX's
+    command |\meaning| returns for a macro that has been |\let| to the
+    \meta{character}. For instance, when strings starting with |"|
+    should be treated in a special way, the \meta{meaning of
+      character} would be the string |the character "| since this is
+    what \TeX\ writes when you say
+\begin{codeexample}[]
+\let\mycharacter="
+\meaning\mycharacter  
+\end{codeexample}
+    Now, the key |/handlers/first char syntax/|\meta{meaning of
+      character} should be setup (using |\pgfkeyssetvalue| or using
+    the |.initial| handler) to store a \meta{macro name}.
+
+    If this is the case and if \meta{string} starts with the
+    \meta{character} (blanks at the beginning of \meta{string} are
+    deleted prior to this test), then \meta{macro name} is called with
+    \meta{string} as its argument.
+  \end{key}
+\end{enumerate}
+
+Let us now have a look at an example. We install two handlers, one for
+strings starting with |"| and one for strings starting with |<|.
+
+\begin{codeexample}[]
+\pgfkeys{
+  /handlers/first char syntax=true,
+  /handlers/first char syntax/the character "/.initial=\myquotemacro,
+  /handlers/first char syntax/the character </.initial=\mypointedmacro,
+}
+
+\def\myquotemacro#1{Quoted: #1. }
+\def\mypointedmacro#1{Pointed: #1. }
+
+\ttfamily \pgfkeys{"foo", <bar>}
+\end{codeexample}
+
+Naturally, in the above examples, the two handling macros did not do
+something particularly exciting. In the next example, we setup a more
+elaborate macro that mimics a small part the behaviour of the |quotes|
+library, only for single quotes:
+
+\begin{codeexample}[]
+\pgfkeys{
+  /handlers/first char syntax=true,
+  /handlers/first char syntax/the character '/.initial=\mysinglequotemacro
+}
+
+\def\mysinglequotemacro#1{\pgfkeysalso{label={#1}}}
+
+\tikz \node [circle, 'foo', draw] {bar};
+\end{codeexample}
+
+Note that in the above example, the macro |\mysinglequotemacro| gets
+passed the complete string, including the single quotes. It is the job
+of the macro to get rid of them, if this is necessary.
+
+The first char syntax detection allows you to perform rather powerful
+transformations on the syntax of keys -- provided you can ``pin down''
+the syntax on the first character. In the following example, you can
+write expressions in parentheses in front of a key--value pair and the
+pair will only be executed when the expression evaluates to true:
+
+\begin{codeexample}[]
+\pgfkeys{
+  /handlers/first char syntax=true,
+  /handlers/first char syntax/the character (/.initial=\myparamacro
+}
+
+\def\myparamacro#1{\myparaparser#1\someendtext}
+\def\myparaparser(#1)#2\someendtext{
+  \pgfmathparse{#1}
+  \ifx\pgfmathresult\onetext
+    \pgfkeysalso{#2}
+  \fi
+}
+\def\onetext{1}
+
+\foreach \i in {1,...,4}
+  \tikz \node [draw, thick, rectangle, (pi>\i) circle, (pi>\i*2) draw=red] {x};
+\end{codeexample}
+
+
 \subsubsection{Default Arguments}
 
 The arguments of the |\pgfkeys| command can either be of the form
@@ -356,7 +499,7 @@ value is defined, it will be used as if you had written
 In the following, the details of how default values are determined is
 described; however, you should normally use the handlers |/.default|
 and |/.value required| as described in
-Section~\ref{section-default-handlers} and you can may wish to skip
+Section~\ref{section-default-handlers} and you may wish to skip
 the following details.
 
 When |\pgfkeys| encounters a \meta{key} without an equal-sign, the
@@ -366,7 +509,7 @@ following happens:
   particular, the commands |\pgfkeys{my key}| and
   |\pgfkeys{my key=\pgfkeysnovalue}| have exactly the same effect and
   you can ``simulate'' a missing value by providing the value
-  |\pgfkeysnovalue|, which is sometimes useful. 
+  |\pgfkeysnovalue|, which is sometimes useful.
 \item If the \meta{value} is |\pgfkeysnovalue|, then it is checked
   whether the subkey \meta{key}|/.@def| exists. For instance, if you
   write |\pgfkeys{/my key}|, then it is checked whether the key
@@ -391,7 +534,7 @@ following happens:
 After the transformation process described in the previous subsection,
 we arrive at a key of the form \meta{key}=\meta{value}, where
 \meta{key} is a full key. Different things can now happen, but always
-the macro |\pgfkeyscurrentkey| will have been setup to expand to the
+the macro |\pgfkeyscurrentkey| will have been set up to expand to the
 text of the \meta{key} that is currently being processed.
 
 The first things that is tested is whether the key \meta{key}|/.@cmd|
@@ -426,7 +569,7 @@ handlers described in Section~\ref{section-code-handlers}.
 \begin{command}{\pgfkeysdef\marg{key}\marg{code}}
   This command temporarily defines a \TeX-macro with the argument list
   |#1\pgfeov| and then lets \meta{key}|/.@cmd| be equal to this
-  macro. The net effect of all this is that you have then setup code
+  macro. The net effect of all this is that you have then set up code
   for the key \meta{key} so that when you write
   |\pgfkeys{|\meta{key}|=|\meta{value}|}|, then the \meta{code} is
   executed with all occurrences of |#1| in \meta{code} being replaced
@@ -491,7 +634,7 @@ it is checked whether the \meta{key} itself exists (has been
 previously assigned a value using, for instance,
 |\pgfkeyssetvalue|). In this case, the tokens stored in \meta{key} are
 replaced by \meta{value} and |\pgfkeys| proceeds with the next key in
-the \meta{key list}. 
+the \meta{key list}.
 
 
 \subsubsection{Keys That Are Handled}
@@ -514,12 +657,12 @@ key). It decomposed into  two parts:
 
   It is recommended (but not necessary) that the name of a handler
   starts with a dot (but not with |.@|), so that they are easy to
-  detect for the reader.  
+  detect for the reader.
 \end{enumerate}
 
-(For efficiency reasons, these two macros are only setup at this point;
+(For efficiency reasons, these two macros are only set up at this point;
 so when code is executed for a key in the ``usual'' manner then these
-macros are not setup.)
+macros are not set up.)
 
 The |\pgfkeys| command now checks whether the key
 |/handlers/|\meta{name}|/.@cmd| exists. If so, it should store a command
@@ -527,7 +670,7 @@ and this command is executed exactly in the same manner as described
 in Section~\ref{section-key-code}.
 Thus, this code gets the \meta{value} that was originally intended for
 \meta{key} as its argument, followed by |\pgfeov|.
-It is the job of the handlers to so something useful with the
+It is the job of the handlers to do something useful with the
 \meta{value}.
 
 For an example, let us write a handler that will output the value
@@ -550,10 +693,10 @@ this key and print it.
 \pgfkeys{/my key/.print to log}
 \end{codeexample}
 The above code will print |Hi!| in the log, provided the macro
-|\writetolog| is setup appropriately.
+|\writetolog| is set up appropriately.
 
 For a more interesting handler, let us program a handler that will
-setup a key so that when the key is used some code is executed. This
+set up a key so that when the key is used, some code is executed. This
 code is given as \meta{value}. All the handler must do is to call
 |\pgfkeysdef| for the path of the key (which misses the handler's
 name) and assign the parameter value to it.
@@ -566,14 +709,14 @@ name) and assign the parameter value to it.
 There are some parameters for handled keys which prove to be useful in some (possibly rare) special cases:
 \begin{key}{/handler config=\mchoice{all,only existing,full or existing} (initially all)}
   Changes the initial configuration how key handlers will be used.
-  
+
   This configuration is for advanced users and rarely necessary.
-  
+
   \begin{description}
   \item[\texttt{all}]
     The preconfigured setting |all| works as described above and
-    imposes no restriction on the key setting process. 
-    
+    imposes no restriction on the key setting process.
+
   \item[\texttt{only existing}]
     The value |only existing| modifies the algorithm for handled keys
     as follows: a handler \meta{key name}|/.|\meta{handler} will be
@@ -582,7 +725,7 @@ There are some parameters for handled keys which prove to be useful in some (pos
     \meta{key name} does \emph{not} exist already, the complete string
     \meta{key name}|/.|\meta{handler} is considered to be an unknown
     key and the procedure described in the next section applies (for
-    the path of \meta{key name}). 
+    the path of \meta{key name}).
 \begin{codeexample}[]
 % Define a test key and error handlers:
 \pgfkeys{/the/key/.code={Initial definition. }}
@@ -600,66 +743,68 @@ There are some parameters for handled keys which prove to be useful in some (pos
 \pgfkeys{/the/key}
 
 % not allowed: definition of new keys:
-% this checks for '/the/other key/.unknown' 
-% and '/handlers/.unknown' 
-% and yields finally 
+% this checks for '/the/other key/.unknown'
+% and '/handlers/.unknown'
+% and yields finally
 % 'Unknown key `/the/other key/.code`'
 \pgfkeys{/the/other key/.code={New definition. }}
 \end{codeexample}
     It is necessary to exclude some key handlers from this
-    procedure. Altogether, the detailed procedure is as follows: 
+    procedure. Altogether, the detailed procedure is as follows:
     \begin{enumerate}
     \item If a handled key like |/a path/a key/.a handler=value| is
       encountered, it is checked whether the handler should be
-      invoked. This is the case if 
+      invoked. This is the case if
       \begin{itemize}
       \item An exception from |only existing| for this key exists (see below),
       \item The key |/a path/a key| exists already -- either directly as
-        storage key or with the |.@cmd| suffix. 
+        storage key or with the |.@cmd| suffix.
       \end{itemize}
     \item If the check passes, everything works as before.
     \item If the check fails, the complete key will be considered to be
       unknown. In that case, the handling of unknown keys as described
       in the next section applies. There, the current key path will be
-      set to |/a path| and the current key's name to |key/.a handler|. 
+      set to |/a path| and the current key's name to |key/.a handler|.
     \end{enumerate}
-    
+
     A consequence of this configuration is to provide more meaningful
     processing of handled keys if a search path for keys is in effect,
-    see section~\ref{sec:pgf:unknown:keys} for an example. 
-    
+    see section~\ref{sec:pgf:unknown:keys} for an example.
+
   \item[\texttt{full or existing}] Finally, the choice
     |full or existing| is a variant of |only existing|: it works in
-    the same way 
-    for keys which do not have a full key path. For example, the style 
-    
+    the same way
+    for keys which do not have a full key path. For example, the style
+
     |\pgfkeys{/my path/.cd,key/.style={|$\dotsc$|}}|
-    
+
     can only be redefined: it doesn't have a full path, so the
-    |only existing| mechanism applies. But the style 
+    |only existing| mechanism applies. But the style
 	
-    |\pgfkeys{/my path/key/.style={|$\dotsc$|}}| 
-    
+    |\pgfkeys{/my path/key/.style={|$\dotsc$|}}|
+
     will still work. This allows users to override the |only existing|
     feature if they know what they're doing (and provide full key
-    paths). 
+    paths).
   \end{description}
 \end{key}
 
 \begin{key}{/handler config/only existing/add exception=\marg{key
-      handler name}} 
+      handler name}}
   Allows to add exceptions to the |/handler config=only existing|
-  feature. Initially exceptions for the key handlers 
+  feature. Initially exceptions for the key handlers
   |/.cd|, |/.try|, |/.retry|, |/.lastretry| and |/.unknown| are
   defined. The value \marg{key handler name} should be the name of a
-  key handler. 
+  key handler.
 \end{key}
+
+
 
 \subsubsection{Keys That Are Unknown}
 \label{sec:pgf:unknown:keys}
 
-For some keys, neither the key is defined nor its |.@cmd| subkey nor
-is a handler defined for this key. In this case, it is checked whether
+For some keys, neither the key, nor its |.@cmd| subkey nor
+a handler is defined. In this case, it is checked whether
 the key \meta{current path}|/.unknown/.@cmd| exists. Thus, when you try to
 use the key |/tikz/strange|, then it is checked whether
 |/tikz/.unknown/.@cmd| exists. If this key exists (which it does), it is
@@ -668,13 +813,13 @@ instance, the handler for \tikzname\ will try to interpret the key's
 name as a color or as an arrow specification or as a \pgfname\
 option.
 
-You can setup unknown key handlers for your own keys by simply setting
+You can set up unknown key handlers for your own keys by simply setting
 the code of the key \meta{my path prefix}|/.unknown|. This also allows
-you to setup ``search paths.'' The idea is that you would like keys to
+you to set up ``search paths.'' The idea is that you would like keys to
 be searched not only in a single default path, but in
 several. Suppose, for instance, that you would like keys to be
-searched 
-for in |/a|, |/b|, and |/b/c|. We setup a key |/my search path| for
+searched
+for in |/a|, |/b|, and |/b/c|. We set up a key |/my search path| for
 this:
 \begin{codeexample}[code only]
 \pgfkeys{/my search path/.unknown/.code=
@@ -692,7 +837,7 @@ this:
 In the above code, |foo| and |bar| will be searched for in the three
 directories  |/a|, |/b|, and |/b/c|. Before you start implementing
 search paths using this pattern, consider the |/.search also| handler
-discussed below. 
+discussed below.
 
 If the key \meta{current path}|/.unknown/.@cmd| does not exist, the
 handler |/handlers/.unknown| is invoked instead, which is always
@@ -701,21 +846,21 @@ defined and which prints an error message by default.
 \subsubsection{Search Paths And Handled Keys}
 
 There is one special case which occurs in the search path example
-above. What happens if we want to change a style? For example, 
+above. What happens if we want to change a style? For example,
 \begin{codeexample}[code only]
 \pgfkeys{/my search path/.cd,custom/.style={variables}}
 \end{codeexample}
 \noindent could mean a style in |/my search path/|, |/a/|, |/b/| or
-even |/b/c/|! 
+even |/b/c/|!
 
 Due to the rules for handled keys, the answer is
-|/my search path/custom/.style={variables}|. 
+|/my search path/custom/.style={variables}|.
 It may be useful to modify this default behavior. One useful thing
 would be to search for \emph{existing} styles named |custom| and
 redefine them. For example, if a style |/b/custom| exists, the
 assignment |custom/.style={variables}| should probably redefine
 |/b/custom| instead of |/my search path/custom|. This can be done
-using |handler config|: 
+using |handler config|:
 \begin{codeexample}[]
 \pgfkeys{/my search path/.unknown/.code=
   {%
@@ -742,7 +887,7 @@ using |handler config|:
 % defining /my search path/custom:
 \pgfkeys{/my search path/.cd,custom/.append code={Modified. }}
 
-% So using the search path, we again find /b/custom which 
+% So using the search path, we again find /b/custom which
 % leads to This is `/b/custom' Modified
 \pgfkeys{/my search path/.cd,custom}
 \end{codeexample}
@@ -773,130 +918,11 @@ also define new ones as described in Section~\ref{section-key-handlers}.
   the current path is set to \meta{key}. A typical use is the following:
 \begin{codeexample}[code only]
 \pgfkeys{/tikz/.is family}
-\pgfkeys{tikz,line width=1cm}  
+\pgfkeys{tikz,line width=1cm}
 \end{codeexample}
   The effect of this handler is the same as if you had written
   \meta{key}|/.style=|\meta{key}|/.cd|, only the code produced by the
   |/.is family| handler is quicker.
-\end{handler}
-
-\begin{handler}{{.search also}=\marg{path list}}
-  A style which installs a |/.unknown| handler into \meta{key}. This
-  |/.unknown| handler will then search for unknown keys in every path
-  provided in \marg{path list}. 
-
-\begin{codeexample}[]
-% define a key:
-\pgfkeys{/secondary path/option/.code={Invoking /secondary path/option with `#1'}}
-
-% set up a search path:
-\pgfkeys{/main path/.search also={/secondary path}}
-
-% try searching for `option=value' in '/main path':
-% -> this finds `/secondary path/option'!
-\pgfkeys{/main path/.cd,option=value}
-\end{codeexample}
-
-  The |/.search also| handler follows the strategy
-  \begin{enumerate}
-  \item If a user provides a fully qualified key which could not be
-    found, for example the full string |/main path/option|, it assume
-    that the user new what he is doing -- and does \emph{not} continue
-    searching for |an option| in \marg{path list}. 
-  \item If a user provides only the key's name, for example |option|
-    and |option| can't be found in the current default path (which is
-    |/main path| in our example above), the current default path is
-    set to the next element in \marg{path list} (which is
-    |/secondary path| here) and |\pgfkeys| will be restarted. 
-    
-    This will be iterated until either a match has been found or all
-    elements in \marg{path list} have been tested. 
-
-  \item If all elements in \marg{path list} have been checked and the
-    key is still unknown, the fall-back handler |/handlers/.unknown|
-    will be invoked. 
-  \end{enumerate}
-\begin{codeexample}[]
-% define a key:
-\pgfkeys{/secondary path/option/.code={Invoking /secondary path/option with `#1'}}
-
-% set up a search path:
-\pgfkeys{/main path/.search also={/secondary path}}
-
-% try searching for `option=value' in '/main path':
-% -> this finds `/secondary path/option'!
-\pgfkeys{/main path/.cd,option=value}
-
-% negative example:
-% try searching for fully qualified key /main path/option.
-% This won't be handled by .search also.
-\pgfkeys{/handlers/.unknown/.code={Found unknown option \pgfkeyscurrentkeyRAW={#1}!}}%
-\pgfkeys{/main path/.cd,/main path/option=value}
-\end{codeexample}
-
-  Please note that the strategy of |/.search also| is different from
-  the first example provided in section~\ref{sec:pgf:unknown:keys}
-  ``Unknown Keys'' because |/.search also| only applies only for keys
-  which are not fully qualified. 
-	
-
-  For those who are familiar with |\pgfkeys|, the actual
-  implementation of |/.search also| might be interesting: 
-  \begin{enumerate}
-  \item |\pgfkeys{/path/.search also={/tikz}}| is equivalent to
-\begin{codeexample}[code only]
-\pgfkeys{/path/.unknown/.code={%
-        \ifpgfkeysaddeddefaultpath 
-            % only process keys for which no full path has been
-            % provided:
-            \pgfkeyssuccessfalse 
-            \let\pgfkeys@searchalso@name =\pgfkeyscurrentkeyRAW 
-            \ifpgfkeyssuccess 
-            \else 
-                % search with /tikz as default path:
-                \pgfqkeys{/tikz}{\pgfkeys@searchalso@name={#1}}%
-            \fi 
-        \else 
-            \def\pgfutilnext{\pgfkeysvalueof {/handlers/.unknown/.@cmd}#1\pgfeov}%
-            \pgfutilnext
-        \fi
-    }
-}
-\end{codeexample}
-  \item |\pgfkeys{/path/.search also={/tikz,/pgf}}| is equivalent to
-\begin{codeexample}[code only]
-\pgfkeys{/path/.unknown/.code={%
-        \ifpgfkeysaddeddefaultpath 
-            \pgfkeyssuccessfalse 
-            \let\pgfkeys@searchalso@name=\pgfkeyscurrentkeyRAW
-            \ifpgfkeyssuccess
-            \else
-                % step 1: search in /tikz with .try:
-                \pgfqkeys{/tikz}{\pgfkeys@searchalso@name/.try={#1}}%
-            \fi
-            \ifpgfkeyssuccess
-            \else
-                % step 2: search in /pgf (without .try!):
-                \pgfqkeys{/pgf}{\pgfkeys@searchalso@name={#1}}%
-            \fi
-        \else
-            \def\pgfutilnext{\pgfkeysvalueof {/handlers/.unknown/.@cmd}#1\pgfeov}%
-            \pgfutilnext
-        \fi
-    }
-}
-\end{codeexample}
-  \end{enumerate}
-
-  To also enable searching for styles (or other handled keys),
-  consider changing the configuration for handled keys to
-  |/hander config=full or existing| when you use |/.search also|,
-  that is, use  
-\begin{codeexample}[code only]
-\pgfkeys{
-   /main path/.search also={/secondary path},
-   /handler config=full or existing}
-\end{codeexample}
 \end{handler}
 
 
@@ -925,7 +951,7 @@ also define new ones as described in Section~\ref{section-key-handlers}.
 
   This handler works be adding code to the code of the key. This means
   that you have to define the key first before you can use this
-  handler. 
+  handler.
 \begin{codeexample}[code only]
 \pgfkeys{/my key/.code=I do not want an argument!}
 \pgfkeys{/my key/.value forbidden}
@@ -964,7 +990,7 @@ A number of handlers exist for defining the code of keys.
 
 \begin{handler}{{.ecode}|=|\meta{code}}
   This handler works like |/.code|, only the command |\pgfkeysedef| is
-  used. 
+  used.
 \end{handler}
 
 
@@ -985,7 +1011,7 @@ A number of handlers exist for defining the code of keys.
 
   Because of the special way the \meta{value} is parsed, if you set
   \meta{value} to, for instance, |first| (without any braces), then
-  |#1| will be set to |f| and |#2| will be set to |irst|. 
+  |#1| will be set to |f| and |#2| will be set to |irst|.
 \end{handler}
 
 \begin{handler}{{.ecode 2 args}|=|\meta{code}}
@@ -1003,7 +1029,7 @@ A number of handlers exist for defining the code of keys.
 \end{codeexample}
   In contrast to |/.code 2 args|, there must be exactly \meta{argument
     count} arguments, not more and not less and these arguments should
-  be properly delimited. 
+  be properly delimited.
 \end{handler}
 
 \begin{handler}{{.ecode n args}|=|\marg{argument count}\marg{code}}
@@ -1020,7 +1046,7 @@ A number of handlers exist for defining the code of keys.
   \meta{code} is executed with any occurrence of |#1| replaced |first|
   and any occurrence of |#2| replaced by |second|. So, the actual
   \meta{value} is matched against the \meta{argument pattern} in the
-  standard \TeX\ way. 
+  standard \TeX\ way.
 
 \begin{codeexample}[code only]
 \pgfkeys{/page size/.code args={#1 and #2}{\paperheight=#2\paperwidth=#1}}
@@ -1030,7 +1056,7 @@ A number of handlers exist for defining the code of keys.
   Note that |/.code n args| should be preferred in case you need just a number
   of arguments (when the resulting keys are used, |/.code n args|
   gobbles spaces between the arguments whereas |/.code args| considers
-  spaces to be part of the argument). 
+  spaces to be part of the argument).
 \end{handler}
 
 \begin{handler}{{.ecode args}|=|\marg{argument pattern}\marg{code}}
@@ -1047,11 +1073,11 @@ There are also handlers for modifying existing keys.
   \meta{append code} is added to this code at the end. Either can be
   empty. The argument list of \meta{code} cannot be changed using this
   handler. Note that both \meta{prefix code} and \meta{append code}
-  may contain parameters like |#2|. 
-  
+  may contain parameters like |#2|.
+
 \begin{codeexample}[code only]
 \pgfkeys{/par indent/.code={\parindent=#1}}
-\newdimen\myparindent  
+\newdimen\myparindent
 \pgfkeys{/par indent/.add code={}{\myparindent=#1}}
 ...
 \pgfkeys{/par indent=1cm} % This will set both \parindent and
@@ -1076,10 +1102,10 @@ There are also handlers for modifying existing keys.
 The following handlers allow you to define \emph{styles}. A style is a
 key list that is processed whenever the style is given as a key in a
 key list. Thus, a style ``stands for'' a certain key value
-list. Styles can be parametrized just like normal code.
+list. Styles can be parameterized just like normal code.
 
 \begin{handler}{{.style}|=|\meta{key list}}
-  This handler set things up so that whenever \meta{key}|=|\meta{value} is
+  This handler sets things up so that whenever \meta{key}|=|\meta{value} is
   encountered in a key list, then the \meta{key list}, with every
   occurrence of |#1| replaced by \meta{value}, is processed
   instead. As always, if no \meta{value} is given, the default
@@ -1088,7 +1114,7 @@ list. Styles can be parametrized just like normal code.
   You can achieve the same effect by writing
   \meta{key}|/.code=\pgfkeysalso{|\meta{key list}|}|. This means, in
   particular, that the code of a key could also first execute some
-  normal code and only then process some further keys. 
+  normal code and only then process some further keys.
 
 \begin{codeexample}[code only]
 \pgfkeys{/par indent/.code={\parindent=#1}}
@@ -1098,7 +1124,7 @@ list. Styles can be parametrized just like normal code.
 ...
 \pgfkeys{/normal indent}
 \end{codeexample}
-  The following example shows a parametrized style ``in action''.
+  The following example shows a parameterized style ``in action''.
 \begin{codeexample}[]
 \begin{tikzpicture}[outline/.style={draw=#1,fill=#1!20}]
   \node [outline=red]            {red box};
@@ -1119,7 +1145,7 @@ For styles the corresponding handlers as for normal code exist:
   This handler works like |/.code 2 args|, only for styles. Thus, the
   \meta{key list} may contain occurrences of both |#1| and |#2| and
   when the style is used, two parameters must be given as
-  \meta{value}. 
+  \meta{value}.
 \begin{codeexample}[code only]
 \pgfkeys{/paper height/.code={\paperheight=#1},/paper width/.code={\paperwidth=#1}}
 \pgfkeys{/page size/.style 2 args={/paper height=#1,/paper width=#2}}
@@ -1176,8 +1202,8 @@ For styles the corresponding handlers as for normal code exist:
 
 For some keys, the code that should be executed for them is rather
 ``specialized.'' For instance, it happens often that the code for a
-key just sets a certain \TeX-if to true or false. For these case
-predefine handlers make it easier to install the necessary code.
+key just sets a certain \TeX-if to true or false. For these cases,
+predefined handlers make it easier to install the necessary code.
 
 However, we start with some handlers that are used to manage the value
 that is directly stored in a key.
@@ -1196,7 +1222,7 @@ that is directly stored in a key.
 % "/my key" now stores the value "blue"
 \end{codeexample}
 
-  Note that in the after the example, writing |\pgfkeys{/my key}| will not
+  Note that with this configuration, writing |\pgfkeys{/my key}| will not
   have the effect you might expect (namely that |blue| is inserted
   into the main text). Rather, |/my key| will be promoted to
   |/my key=\pgfkeysnovalue| and, thus, |\pgfkeysnovalue| will be
@@ -1207,7 +1233,7 @@ that is directly stored in a key.
 
 \begin{handler}{{.get}|=|\meta{macro}}
   Executes a |\let| command so that \meta{macro} contains the contents
-  stored in \meta{key}.  
+  stored in \meta{key}.
 
 \begin{codeexample}[]
 \pgfkeys{/my key/.initial=red}
@@ -1246,10 +1272,10 @@ value in the key itself.
   This handler has the following effect: When you write
   \meta{key}|=|\meta{value}, the code
   |\def|\meta{macro}|{|\meta{value}|}| is executed. Thus, the given
-  value is ``stored'' in the \meta{macro}.  
+  value is ``stored'' in the \meta{macro}.
 \begin{codeexample}[]
 \pgfkeys{/text/.store in=\mytext}
-\def\a{world} 
+\def\a{world}
 \pgfkeys{/text=Hello \a!}
 \def\a{Gruffalo}
 \mytext
@@ -1257,13 +1283,13 @@ value in the key itself.
 \end{handler}
 
 \begin{handler}{{.estore in}|=|\meta{macro}}
-  This handler is similar to |/.store in|, only the code 
+  This handler is similar to |/.store in|, only the code
   |\edef|\meta{macro}|{|\meta{value}|}| is used. Thus, the
   macro-expanded version of \meta{value} is stored in the
-  \meta{macro}. 
+  \meta{macro}.
 \begin{codeexample}[]
 \pgfkeys{/text/.estore in=\mytext}
-\def\a{world} 
+\def\a{world}
 \pgfkeys{/text=Hello \a!}
 \def\a{Gruffalo}
 \mytext
@@ -1271,18 +1297,18 @@ value in the key itself.
 \end{handler}
 
 In another common situation a key is used to set a \TeX-if to true or
-false. 
+false.
 
 \begin{handler}{{.is if}|=|\meta{\TeX-if name}}
   This handler has the following effect: When you write
   \meta{key}|=|\meta{value}, it is first checked that \meta{value} is
   |true| or |false| (the default is |true| if no \meta{value} is
   given). If this is not the case, the error key
-  |/errors/boolean expected| is executed. Otherwise, 
+  |/errors/boolean expected| is executed. Otherwise,
   the code |\|\meta{\TeX-if name}\meta{value} is executed, which sets
   the \TeX-if accordingly.
 \begin{codeexample}[]
-\newif\iftheworldisflat    
+\newif\iftheworldisflat
 \pgfkeys{/flat world/.is if=theworldisflat}
 \pgfkeys{/flat world=false}
 \iftheworldisflat
@@ -1300,7 +1326,7 @@ The next handler deals with the problem when a
 handler is useful.
 
 \begin{handler}{{.is choice}}
-  This handler set things up so that writing \meta{key}|=|\meta{value}
+  This handler sets things up so that writing \meta{key}|=|\meta{value}
   will cause the subkey \meta{key}|/|\meta{value} to be executed. So,
   each of the different possible choices should be given by a subkey
   of \meta{key}.
@@ -1327,7 +1353,7 @@ can even use things like |#1| or unbalanced \TeX-ifs inside
 expanded before it is used. For instance, \meta{value} might be a
 macro name like |\mymacro| and you do not want |\mymacro| to be used
 as the macro, but rather the \emph{contents} of |\mymacro|. Thus,
-instead of using \meta{value} you wish to use whatever \meta{value}
+instead of using \meta{value}, you wish to use whatever \meta{value}
 expands to. Instead of using some fancy |\expandafter| hackery, you
 can use the following handlers:
 
@@ -1384,19 +1410,161 @@ Key 4:& \pgfkeys{/key4}
 \end{codeexample}
 \end{handler}
 
+
+
+\subsubsection{Handlers for Forwarding}
+
+\begin{handler}{{.forward to}|=|\meta{another key}}
+  This handler causes the \meta{key} to ``forward'' its argument to
+  \meta{another key}. When the \meta{key} is used, its normal code
+  will be executed first. Then, the value is (additionally) passed to
+  \meta{another key}. If the \meta{key} has not yet been defined prior
+  to the use of |.forward to|, it will be defined then (and do nothing by
+  itself, expect for forwarding it to \meta{key name}). The
+  \meta{another key} must be a fully qualified key name. 
+\begin{codeexample}[]
+\pgfkeys{
+  /a/.code=(a:#1),
+  /b/.code=(b:#1),
+  /b/.forward to=/a,
+  /c/.forward to=/a
+}
+\pgfkeys{/b=1} \pgfkeys{/c=2}
+\end{codeexample}
+\end{handler}
+
+
+\begin{handler}{{.search also}=\marg{path list}}
+  A style which installs a |/.unknown| handler into \meta{key}. This
+  |/.unknown| handler will then search for unknown keys in every path
+  provided in \marg{path list}.
+
+\begin{codeexample}[]
+% define a key:
+\pgfkeys{/secondary path/option/.code={Invoking /secondary path/option with `#1'}}
+
+% set up a search path:
+\pgfkeys{/main path/.search also={/secondary path}}
+
+% try searching for `option=value' in '/main path':
+% -> this finds `/secondary path/option'!
+\pgfkeys{/main path/.cd,option=value}
+\end{codeexample}
+
+  The |/.search also| handler follows the strategy
+  \begin{enumerate}
+  \item If a user provides a fully qualified key which could not be
+    found, for example the full string |/main path/option|, it assume
+    that the user knew what she is doing -- and does \emph{not} continue
+    searching for |an option| in \marg{path list}.
+  \item If a user provides only the key's name, for example |option|
+    and |option| cannot be found in the current default path (which is
+    |/main path| in our example above), the current default path is
+    set to the next element in \marg{path list} (which is
+    |/secondary path| here) and |\pgfkeys| will be restarted.
+
+    This will be iterated until either a match has been found or all
+    elements in \marg{path list} have been tested.
+  \item If all elements in \marg{path list} have been checked and the
+    key is still unknown, the fall-back handler |/handlers/.unknown|
+    will be invoked.
+  \end{enumerate}
+\begin{codeexample}[]
+% define a key:
+\pgfkeys{/secondary path/option/.code={Invoking /secondary path/option with `#1'}}
+
+% set up a search path:
+\pgfkeys{/main path/.search also={/secondary path}}
+
+% try searching for `option=value' in '/main path':
+% -> this finds `/secondary path/option'!
+\pgfkeys{/main path/.cd,option=value}
+
+% negative example:
+% try searching for fully qualified key /main path/option.
+% This won't be handled by .search also.
+\pgfkeys{/handlers/.unknown/.code={Found unknown option \pgfkeyscurrentkeyRAW={#1}!}}%
+\pgfkeys{/main path/.cd,/main path/option=value}
+\end{codeexample}
+
+  Please note that the strategy of |/.search also| is different from
+  the first example provided in section~\ref{sec:pgf:unknown:keys}
+  ``Unknown Keys'' because |/.search also| only applies to keys
+  that are not fully qualified.
+	
+  For those who are familiar with |\pgfkeys|, the actual
+  implementation of |/.search also| might be interesting:
+  \begin{enumerate}
+  \item |\pgfkeys{/path/.search also={/tikz}}| is equivalent to
+\begin{codeexample}[code only]
+\pgfkeys{/path/.unknown/.code={%
+        \ifpgfkeysaddeddefaultpath
+            % only process keys for which no full path has been
+            % provided:
+            \pgfkeyssuccessfalse
+            \let\pgfkeys@searchalso@name =\pgfkeyscurrentkeyRAW
+            \ifpgfkeyssuccess
+            \else
+                % search with /tikz as default path:
+                \pgfqkeys{/tikz}{\pgfkeys@searchalso@name={#1}}%
+            \fi
+        \else
+            \def\pgfutilnext{\pgfkeysvalueof {/handlers/.unknown/.@cmd}#1\pgfeov}%
+            \pgfutilnext
+        \fi
+    }
+}
+\end{codeexample}
+  \item |\pgfkeys{/path/.search also={/tikz,/pgf}}| is equivalent to
+\begin{codeexample}[code only]
+\pgfkeys{/path/.unknown/.code={%
+        \ifpgfkeysaddeddefaultpath
+            \pgfkeyssuccessfalse
+            \let\pgfkeys@searchalso@name=\pgfkeyscurrentkeyRAW
+            \ifpgfkeyssuccess
+            \else
+                % step 1: search in /tikz with .try:
+                \pgfqkeys{/tikz}{\pgfkeys@searchalso@name/.try={#1}}%
+            \fi
+            \ifpgfkeyssuccess
+            \else
+                % step 2: search in /pgf (without .try!):
+                \pgfqkeys{/pgf}{\pgfkeys@searchalso@name={#1}}%
+            \fi
+        \else
+            \def\pgfutilnext{\pgfkeysvalueof {/handlers/.unknown/.@cmd}#1\pgfeov}%
+            \pgfutilnext
+        \fi
+    }
+}
+\end{codeexample}
+  \end{enumerate}
+
+  To also enable searching for styles (or other handled keys),
+  consider changing the configuration for handled keys to
+  |/hander config=full or existing| when you use |/.search also|,
+  that is, use
+\begin{codeexample}[code only]
+\pgfkeys{
+   /main path/.search also={/secondary path},
+   /handler config=full or existing}
+\end{codeexample}
+\end{handler}
+
+
 \subsubsection{Handlers for Testing Keys}
 
 \begin{handler}{{.try}|=|\meta{value}}
   This handler causes the same things to be done as if
   \meta{key}|=|\meta{value} had been written instead. However, if
   neither \meta{key}|/.@cmd| nor the key itself is defined, no
-  handlers will be called. Instead, 
+  handlers will be called. Instead,
   the execution of the key just stops. Thus, this handler will ``try''
   to use the key, but no further action is taken when the key is not
   defined.
 
   The \TeX-if |\||ifpgfkeyssuccess| will be set according to whether
-  the \meta{key} was successfully executed or not. 
+  the \meta{key} was successfully executed or not.
 \begin{codeexample}[]
 \pgfkeys{/a/.code=(a:#1)}
 \pgfkeys{/b/.code=(b:#1)}
@@ -1407,7 +1575,7 @@ Key 4:& \pgfkeys{/key4}
 \begin{handler}{{.retry}|=|\meta{value}}
   This handler works just like |/.try|, only it will not do anything if
   |\||ifpgfkeyssuccess| is false. Thus, this handler will only retry
-  to set a key if ``the last attempt failed''. 
+  to set a key if ``the last attempt failed''.
 \begin{codeexample}[]
 \pgfkeys{/a/.code=(a:#1)}
 \pgfkeys{/b/.code=(b:#1)}
@@ -1416,7 +1584,7 @@ Key 4:& \pgfkeys{/key4}
 \end{handler}
 
 \begin{handler}{{.lastretry}|=|\meta{value}}
-	This handler works like |/.retry|, only it will invoke the usual handlers for unknowns keys if |\||ifpgfkeyssuccess| is false. Thus, this handlers will only try to set a key if ``the last attempt failed''. Furthermore, this here is the last such attempt.
+	This handler works like |/.retry|, only it will invoke the usual handlers for unknowns keys if |\||ifpgfkeyssuccess| is false. Thus, this handler will only try to set a key if ``the last attempt failed''. Furthermore, this here is the last such attempt.
 \end{handler}
 
 
@@ -1439,7 +1607,7 @@ Key 4:& \pgfkeys{/key4}
 The following key is not a handler, but it also commonly used for
 inspecting things:
 \begin{key}{/utils/exec=\meta{code}}
-  This key will simply execute the given \meta{code}. 
+  This key will simply execute the given \meta{code}.
 
   \example |\pgfkeys{some key=some value,/utils/exec=\show\hallo,obscure key=obscure}|
 \end{key}
@@ -1459,7 +1627,7 @@ language currently set so that users get a localized error message.
 
 \begin{key}{/errors/value required=\marg{offending key}\marg{value}}
   This key is executed whenever an \meta{offending key} is used
-  without a value when a value is actually required. 
+  without a value when a value is actually required.
 \end{key}
 
 \begin{key}{/errors/value forbidden=\marg{offending key}\marg{value}}
@@ -1468,13 +1636,13 @@ language currently set so that users get a localized error message.
 \end{key}
 
 \begin{key}{/errors/boolean expected=\marg{offending key}\marg{value}}
-  This key is executed whenever a key setup using |/.is if| gets called
+  This key is executed whenever a key set up using |/.is if| gets called
   with a \meta{value} other than |true| or |false|.
 \end{key}
 
 \begin{key}{/errors/unknown choice value=\marg{offending key}\marg{value}}
   This key is executed whenever a choice is used as a \meta{value} for
-  a key setup using the |/.is choice| handler that is not defined.
+  a key set up using the |/.is choice| handler that is not defined.
 \end{key}
 
 \begin{key}{/errors/unknown key=\marg{offending key}\marg{value}}

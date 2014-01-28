@@ -1,3 +1,1136 @@
+2013-12-20 Till Tantau <tantau@users.sourceforge.net>
+
+	- Release 3.0.0!	
+
+2013-12-20 Till Tantau <tantau@users.sourceforge.net>
+
+	- In preparation for the release 3.0.0, I pimped the manual a
+	  bit. It will now automatically detect whether graph drawing
+	  C libs are available or not. Also, syntax hilighting is now
+	  always switched on. I also some subtle optical hints to
+	  crossreferenced words in the code examples; this is pretty
+	  useful, I think. 
+	- Did a lot of cleaning up for the release.
+	
+2013-12-18 Till Tantau <tantau@users.sourceforge.net>
+
+	- Fixed a bug in Vertex.lua that returned wrong anchor
+	  positions for non-centered vertices.
+	
+2013-12-13 Till Tantau <tantau@users.sourceforge.net>
+
+	- Fixed bug #280 "Layered layout" produces unknown key with graphs library.
+	- Fixed bug #279 "Some parts of arguments in foreach macro are lost".
+	- Fixed bug #258 "Default arrow edge style puts circumflex in
+	  drawn end node" by now allowing people to say tip=on proper draw.
+	
+2013-12-08 Christian Feuersaenger <cfeuersaenger@users.sourceforge.net>
+
+	- intersections lib: ensured that 'name path global' is reset between main paths.
+
+2013-11-30 Christian Feuersaenger <cfeuersaenger@users.sourceforge.net>
+
+	- worked on intersections lib (internals only); added O(N) list
+	append/prepend utilities
+
+2013-11-18 Mark Wibrow <vibrovski@users.sourceforge.net>
+
+	- Added keys 'rotate around x', 'rotate around y' and
+	'rotate around z' to rotate the xyz coordinate system
+	around the x, y, or z axis.
+	
+2013-11-17 Mark Wibrow <vibrovski@users.sourceforge.net>
+
+	- Fixes for 'text effects along path' decoration and docs.
+
+2013-11-16 Christian Feuersaenger <cfeuersaenger@users.sourceforge.net>
+
+	- external lib: added support for 'up to date check=md5' for lualatex.
+	  Now, lualatex and pdftex both result in the same checksums (by means of
+	  \usepackage{pdftexcmds})
+
+2013-11-16 Mark Wibrow <vibrovski@users.sourceforge.net>
+
+	- Finalised 'text effects along path' decoration and docs.
+	  
+2013-11-11 Mark Wibrow <vibrovski@users.sourceforge.net>
+
+	- Changed keyval example (and references to define@key) 
+	  in pgfcalendar documentation to pgfkeys stuff.
+
+2013-11-08 Mark Wibrow <vibrovski@users.sourceforge.net>
+
+	- Minor fixes to decorations.text and math libraries documentation
+	
+2013-11-07 Mark Wibrow <vibrovski@users.sourceforge.net>
+
+	- Added 'text effects along path' decoration. 
+
+2013-11-01 Christian Feuersaenger <cfeuersaenger@users.sourceforge.net>
+
+	- Fixed regression/bug in 'name path global'.
+
+2013-10-31 Till Tantau <tantau@users.sourceforge.net>
+	
+	- Applied path for bug #277 "\beforeforegroundpath not working".
+	
+2013-10-09 Till Tantau <tantau@users.sourceforge.net>
+
+	- Prepared manual for new release (fixed overful boxes and
+	  index problems).
+	
+2013-10-08 Mark Wibrow <vibrovski@users.sourceforge.net>
+
+	- Updated math library (minor fixes).
+
+2013-10-07 Till Tantau <tantau@users.sourceforge.net>
+	
+	- Applied some fixes so that C code for graph drawing works
+	  once more.
+	- Arrow tips and their doc are now officially finished!
+	- Added documentation of nonlinear transformations. 
+	
+2013-10-06 Christian Feuersaenger <cfeuersaenger@users.sourceforge.net>
+
+	- modified release script to allow uploads of unstable TDS
+	  zips to http://pgf.sourceforge.net using
+	  make -f pgf/scripts/pgf/Makefile.pgf_release upload USER=cfeuersaenger
+
+2013-10-02 Mark Wibrow <vibrovski@users.sourceforge.net>
+
+	- Fixed problem with math parser inserting extraneous
+	  spaces when parsing \dimenexpr
+	  
+2013-09-30 Till Tantau <tantau@users.sourceforge.net>
+
+	- Changed blend mode syntax to standard pgf syntax (since PDF
+	  and SVG do not agree on names...).
+	- Added scale and slant options for arrow tips.
+	- Added more generic arrow tips.
+	
+2013-09-24 Till Tantau <tantau@users.sourceforge.net>
+	
+	- First version of comlete arrow documentation finished. Still
+	  need to document the arrows.meta library, though.
+	- Added "tips" option for drawing arrow tips without drawing
+	  paths.
+	
+2013-09-23 Till Tantau <tantau@users.sourceforge.net>
+	
+	- Fixed bug #273 "Graph drawing sublayouts fails".
+	- Incorporated first partial documentation of the arrow tips
+	  into the main documentation.
+	- Fixed bug bugs:#272 "SVG parser error after close path" as
+	  suggested by Mark Wibrow.
+	- Also changed the default syntax for svg path command so that
+	  it uses braces instead of quotation marks. (Quotation marks
+	  still work, of course.)
+
+2013-09-22 Till Tantau <tantau@users.sourceforge.net>
+
+	- Started working on arrow doc.
+	
+2013-09-20 Mark Wibrow <vibrovski@users.sourceforge.net>
+
+	- Added macro to convert string of digits to comma separated list.
+	
+2013-09-18 Till Tantau <tantau@users.sourceforge.net>
+
+	- First version of new arrow tip management done. Up and
+	  running! Still needs documentation and the old arrow tip
+	  codes should (but need not) be ported.
+	- Did some porting of old code, added fixes. Doc still missing.
+	
+2013-09-17 Till Tantau <tantau@users.sourceforge.net>
+
+	- Fixed bug #264: "\pgfkeys /errors/unknown key should (?) expand first argument"
+	- Fixed bug #268: "`matrix of nodes' isn't working properly any more"
+	
+2013-09-11 Mark Wibrow <vibrovski@users.sourceforge.net>
+
+	- Corrected typos (bug #266 and bug #265)
+
+2013-09-11 Mark Wibrow <vibrovski@users.sourceforge.net>
+
+	- added magnetic tape shape.
+
+2013-09-09 Till Tantau <tantau@users.sourceforge.net>
+
+	- Fixed bug #262/267: "Line breaks are not working in labels anyy more."
+	- Fixed bug #260: "TikZ node on background in pgfextra"
+	- Started work on bending arrows.
+	
+2013-09-05 Christian Feuersaenger <cfeuersaenger@users.sourceforge.net>
+
+	- external lib: fixed bug: file dependency handling was incorrect and
+	suffered from regression caused by MD5 checks
+
+2013-08-31 Christian Feuersaenger <cfeuersaenger@users.sourceforge.net>
+
+	- repaired incompatibility with pgfplots <= 1.8: samples key was
+	evaluated in context of floating point unit and new pgf code relied on dimension
+	registers.
+
+2013-08-29 Till Tantau <tantau@users.sourceforge.net>
+
+	- Added "turn" key.
+	
+2013-08-28 Till Tantau <tantau@users.sourceforge.net>
+
+	- Added "angle" pic type and "angles" library.
+	- Patched gd loader code so that it works with context mark IV.
+	
+2013-08-27 Till Tantau <tantau@users.sourceforge.net>
+
+	- Added new pic path command.
+	- Patched pgfsys-dvipdfmx.def to step around the bug in
+	(x)dvipdfmx that caused scaled boxes (including scaled
+	graphics) inside nodes to be displayed incorrectly.
+	
+2013-08-24 Christian Feuersaenger <cfeuersaenger@users.sourceforge.net>
+	
+	- fixed bug in fpu: 0^0 and 0^x both produced nan. Now we get
+	  0^0=1 and 0^x = 0.
+
+2013-08-22 Till Tantau <tantua@users.sourceforge.net>
+
+	- Removed claims from manual (not by me...) that TikZ does not
+	  work with Mark IV of context. I just tried it and everything
+	  I tried (including advanced stuff like shadings) worked fine.
+	
+2013-08-18 Mark Wibrow <vibrovski@users.sourceforge.net>
+
+	- Fixed pgf intersection library to ensure that
+	  specialround tokens are processed.
+
+2013-08-06 Till Tantau <tantua@users.sourceforge.net>
+
+	- Added support for dvisvgm. Quite nice...
+	
+2013-08-05 Till Tantau <tantua@users.sourceforge.net>
+
+	- Worked on tex4ht code. Works reasonably well know and even
+	  graph drawing is possible (when luatex is used for
+	  typesetting; for this I needed to fix some latin1 characters in
+	  html4.4ht). Also, I renamed /tikz/tex4ht... to /pgf/tex4ht
+	  (someone else added that) since tikz has nothing to do with
+	  that stuff. 
+	  Typesetting the manual in tex4ht no longer works, but that seems
+	  like too much bother for my taste. 
+
+2013-08-02 Till Tantau <tantua@users.sourceforge.net>
+
+	- Fixed bug #256 "The special \pgfcoordinate macro doesn't
+	expand \pgfpictureid." 
+
+2013-08-04 Christian Feuersaenger <cfeuersaenger@users.sourceforge.net>
+	
+	- external lib: fixed incompatibility of pdflscape with
+	external lib
+
+2013-08-01 Till Tantau <tantua@users.sourceforge.net>
+
+	- Fixed a problem with pdf resources of transparency groups in
+	dvipdfmx. 
+	
+2013-07-31 Till Tantau <tantua@users.sourceforge.net>
+
+	- Fixed bug #149 "/tikz/raw gnuplot ignoring segmented plot"
+	  by introducing a new way of handling plot streams. There are
+	  now new kinds of points (outliers and undefined points) and
+	  "new data sets" commands inside streams. Handlers (like the
+	  lineto and curve handlers) can be configured to interpret
+	  these as jumps (this is the default).  
+	- Fixed bug #255 "Trig computations offend fp via fixedpointarithmetic lib"
+	
+2013-07-31 Mark Wibrow <vibrovski@users.sourceforge.net>
+	- Added "math" library. Could be integrated with calc library.
+	
+2013-07-26 Christian Feuersaenger <cfeuersaenger@users.sourceforge.net>
+
+	- Fixed bug in external lib: mode=list and make did not cope well with
+	\ref in externalized images. These will be remade now.
+
+2013-07-24 Till Tantau <tantua@users.sourceforge.net>
+
+	- Fixed bug #162 "PGF manual examples use undefined "shape example" style"
+	- Fixed bug #169 "ghostscript error: /undefined in pgfo"
+	- Concerning bug #167 "node pin option sets
+	  inconsistent/incorrect angle" I added some clarification in
+	  the manual that explains the observed behaviour.
+	- Fixed bug #158 "\pgfmathparse does not support e-TeXs
+	  \numexpr and \dimexpr". You can now also use
+	  \pgfmathsetlength to assign a muskip a value. Internally,
+	  "mu" is treated like "pt", but if an expression contains
+	  "mu", \pgfmathsetlength and \pgfmathaddtolength will convert
+	  the number to "mu" before the assignment.
+	
+2013-07-22 Till Tantau <tantua@users.sourceforge.net>
+
+	- Fixed bug #173 "Tikz's transparency, xelatex and preview
+	  package" by adding a specific fix for the interaction
+	  between preview.sty and everyshi.sty in pgfutil-latex.def.
+
+2013-07-19 Christian Feuersaenger <cfeuersaenger@users.sourceforge.net>
+	
+	- optimized mark=* and mark=o (q path versions lead to 10% time reduction)
+	- adopted new pgfkeys feature to /handler config/full or existing (
+	  required when /.search also is used to find the correct key path)
+
+2013-07-19 Till Tantau <tantua@users.sourceforge.net>
+
+	- Fixed bug #175 "In PGF oo module, calling a method strips grouping"
+	- Fixed bug #181 "Need to document |- coordinates using calc notation"
+	- Fixed bug #187 "\pgfmathanglebetweenpoints is not documented"
+	- Increased accuracy of atan, atan2 and
+	  \pgfmathanglebetweenpoints. 	
+
+2013-07-18 Till Tantau <tantua@users.sourceforge.net>
+
+	- Fixed bug "#168 PGF is sensitive to dollar catcode"
+	- Fixed bug "#186 pgfonlayer makes pgf forget options" and
+	  added "every on background layer" option.
+	- Fixed bug "#192 pgffor scope iteration is buggy"
+	- Fixed bug "#196 Incoherent syntax for Bézier curves"
+	- Fixed bug "#199 Drawing error for chamfered rectangle"
+	- Fixed bug "#201 Markings fail with "Dimension too Large" on
+	  certain paths" by fixing a mistake and the decoration core
+	  and, additionally, in pgfmathanglebetweenpoints.
+	- Fixed bug "#254 building currenct CVS version fails on
+	  graphdrawing with current luatex": Will now work nicely with
+	  TeXLive 2013 and Lua 5.2.
+	- Added feature request "bug #203 Blending modes and better transparency"
+	
+2013-07-17 Till Tantau <tantua@users.sourceforge.net>
+	
+	- Fixed bug #204 "strange influence of \baselinestretch on
+	  tikz figure" by no longer sharing \pgfutil@tempa with latex:
+	  This register gets changed by LaTeX in a fontchange, which, in
+	  turn can happen at the beginning of every
+	  \pgfmathsetlength. 
+	- Fixed bug #207 "Decoration markings not on path on large
+	  lines" by using a more precise computation of positions on
+	  straight lines in decorations. Also, the angle computation
+	  is now much more precise by fixedin bug #201.
+	- Fixed bug #212 "Error if using plot into a \foreach loop in
+	  a single path" by making \pgffor@beginhook and friends local
+	  to the current \foreach. A nice side-effect is that one can
+	  now nest \foreach statements on a path and also mix in the
+	  plots. Hopefully, no one relied on the (undocumented,
+	  unsupported) old bevahiour of the hooks.
+	- Fixed bug #213 "pgfmathsetcounter only works in local scope"
+	  by adding a note in the documentation.
+	- Fixed bug #211 "\nodepart ignores text transparency"
+	- Fixed bug #220 "Transformations ignored in edge decoration."
+	- Fixed bug #221 "xyz spherical and cylindrical coordinate, radius not defined"
+	- Fixed bug #225 "pgfkeys "/errors/unknown choice value" ignores parameters"
+	- Fixed bug #253 "\pgfkeysfiltered cannot accept long arguments"
+	- Fixed bug #252 "I'm not able to build the current CVS
+	version". This included a number of patches to fix problems
+	introduced with the bugfixes introduced recently
+	
+2013-07-16 Till Tantau <tantua@users.sourceforge.net>
+	
+	- Fixed bug #226 "matrix column sep=-\pgflinewidth changes after empty cell"
+	- Fixed bug #229 "pgfpagesuselayout breaks beamer class"
+	  (hopefully, setting page sizes is really messy in TeX!).
+	- Fixed bug #232 "pow function broken for 0^x for non-integer values of x"
+	- Fixed bug #165 "\draw with empty domain results in infinite calculation"
+	- Added better error message to adress bug #244 "mindmap-style
+	"invalidates" coordinate shape."
+	- Fixed bug #235 "\def\costhirty{0.8660256} not really used"
+	
+2013-07-15 Till Tantau <tantua@users.sourceforge.net>
+	
+	- Fixed bug "#237 CVS-version: pdfimage error: key interpolate undefined"
+	- Fixed bug "#245 broken key /pgf/decoration/reset marks"
+	- Fixed bug "#239 picture disappear after a zero-width rectangle width shading"
+	- Fixed bug "#247 Error messages hard to catch in plain TeX/ConTeXt"
+	- Fixed bug "#166 Possibly typos in circuits.logic.IEC"
+	- Fixed bug "#249 pgfkeys: /handlers/first char syntax is not
+	'self-contained' (CVS version)" 
+	- Fixed bug "#248 circuits adjustable annotation improperly placed"
+	
+2013-07-13 Till Tantau <tantua@users.sourceforge.net>
+	
+	- Fixed bug "#250 pgfkyes: .append style and similar undouble # tokens"
+	- Fixed bug "#143 label changes center of a matrix node"
+
+2013-07-12 Till Tantau <tantau@users.sourceforge.net>
+	
+	- Fixed bug #128 "fit does not scale if used in scaled scope"
+	- Fixed bug #136 "\hrulefill inherits or not pgf line styles"
+	- Fixed bug #224 "Including Tikzpicture in third part of
+	  multipart node" 
+
+2013-07-11 Till Tantau <tantau@users.sourceforge.net>
+	
+	- Fixed bug #251 "cross out shape interacts with path options of path it is drawn on"
+	- Fixed bug #139 "Placement of node inside matix environment"
+	- Fixed bug #131 "text centering calculates wrong" and added
+	  new "node font" option.
+	- Fixed bug #121 "Annoying "Underfull \hbox (badness 10000)" message"
+	- Fixed bug #134 "Edge node style affecting arrowhead".
+	
+2013-07-08 Till Tantau <tantau@users.sourceforge.net>
+	
+	- Fixed bug #132 "Error in matrix with column sep "between"
+	origins"	
+	- Fixed bug #133 "\draw[-<<,>=stealth] (10,45) -- (40,45); does
+	not work." However, this introduces a (small, only visual)
+	incompatibility with previous versions. If you need the visual
+	effect "-<<" used to have (which, in a sense, was wrong), use
+	"-< <" instead. The new "-> >" is also quite handy.
+	
+2013-06-28 Till Tantau <tantau@users.sourceforge.net>
+
+	- Fixed bug #116 "Decorations can't be repositioned when
+	  pre/post used."
+	
+2013-06-25 Till Tantau <tantau@users.sourceforge.net>
+	
+	- Fixed bug #241 "div/null error by (270:length) and a fading line."
+	- Fixed bug #126 "Incorrect placed labels for inplicite positioned nodes."
+	- Added foreach syntax to nodes. This is useful and also
+	  needed to fix the problem that the foreach statement cannot
+	  be used after a to path.
+	
+2013-06-24 Till Tantau <tantau@users.sourceforge.net>
+	
+	- Fixed bug #18 and #74 (active characters and tikz) by virtue
+	  of the new "babel" library, which deactivates catcodes at the
+	  beginning of tikz pictures and reactivates them in nodes.
+	
+2013-06-21 Till Tantau <tantau@users.sourceforge.net>
+
+	- Fixed bug #110 "cannot add node after cycle operation"
+	- Fixed bug #88 "\pgftransformarrow does not rotate with \pgfpointanchor"
+	- Fixed bug #86 "macro-expanded tree node has bad edge anchor"
+	- Fixed bug #85 "PGF + Crop package, at least for pdftex."
+	
+2013-06-20 Till Tantau <tantau@users.sourceforge.net>
+	
+	- Fixed bug #83 "Transparency Problem with \usepackage{endfloat}."
+	- Applied patch #19 pgfkeys: ".search also" fails at unbalanced "\if" values
+	- Applied patch #18 Missing grid lines with
+	  negative increment
+	- Applied patch #17 TikZ folding library
+	- Applied patch #14 inheritance in the oo module
+	- Applied patch #13 leaking space in \pgfpointintersectionoflines
+	- Applied patch #11 Patch for Bug #3165961 (\pgfmathmax and \pgfmathmin)
+	- Fixed problem of patch #9 Add papersize to XeTeX driver
+	- Applied patch #8 Support for changing physical page size with XeTeX
+	  (also added position saving support, while I was at it...)
+	- Applied patches #3, #4, #5, #6 (typos in manual) as far as possible
+	
+2013-06-18 Till Tantau <tantau@users.sourceforge.net>
+	
+	- Fixed bug #236 "Scaled closed paths, start/end points dont exactly match":
+	  "cycle" can now be used with all path operations where it
+	  makes sense, not only with --. In particular, things like
+	  ".. cycle" or "to [bend right] cycle" are now allowed.
+
+2013-05-23 Till Tantau <tantau@users.sourceforge.net>
+
+	- Reworked handling of edge and vertex paths in gd. In
+	  particular, edge--vertex intersections are now computed in
+	  Lua, rather than in TikZ. This is much more powerful and
+	  allows beautiful arcs between vertices. It is also very
+	  useful for planar graph drawings when several edges leave a
+	  vertex in the same direction.
+	
+2013-04-08 Till Tantau <tantau@users.sourceforge.net>
+	
+	- Did away with luadoc, now using simple handcoded documentor
+	that will also work with Lua 5.2
+	- Redid OGDF support. Resonably stable base now.
+	- Added better C support.
+	- Should now work with both Lua 5.1 and 5.2
+	
+2013-03-15 Christian Feuersaenger <cfeuersaenger@users.sourceforge.net>
+
+	- fixed incompatibility of fixltx2e and external lib
+
+2013-02-08 Till Tantau <tantau@users.sourceforge.net>
+	
+	- Reworked Storage mechanism of graph drawing system.
+	- Added phylogenetics library for graph drawing; documentation
+	still only rudimentary.
+	
+2012-12-30 Till Tantau <tantau@users.sourceforge.net>
+	
+	- Started adding support for calling C graph drawing functions
+	from Lua.
+	- First proof of concept for OGDF finished.
+	- Must still address luatex shared library link problems.
+
+2012-12-25 Christian Feuersaenger <cfeuersaenger@users.sourceforge.net>
+	
+	- fixed bug in external lib: \tikzexternalgetnextfilename did reset the
+	value of \tikzsetnextfilename and 'export next'
+
+2012-11-30 Christian Feuersaenger <cfeuersaenger@users.sourceforge.net>
+
+	- updated driver pgfsys-xetex: now, it supports all that the new driver
+	for dvipdfmx does which includes fadings, functional shadings, and
+	patterns.
+
+2012-11-30 Till Tantau <tantau@users.sourceforge.net>
+	
+	- First complete documentation of the graph drawing
+	system. (Finally!) 
+	
+2012-11-27 Till Tantau <tantau@users.sourceforge.net>
+
+	- Renamed gd files to shorter versions: instead of
+	pgf/gd/model/pgf.gd.model.Edges.lua we now have
+	pgf/gd/model/Edge.lua and so on.
+	- Worked on gd documentation. Only binding doc is still a
+	mess.
+	
+2012-11-26 Till Tantau <tantau@users.sourceforge.net>
+
+	- Worked on gd documentation.
+	
+2012-11-21 Till Tantau <tantau@users.sourceforge.net>
+	
+	- New version of gd lib. The internals have been completely
+	redone. In particular, no tikz libraries are needed for the
+	individual algorithms any longer, all declarations are now
+	done completely inside Lua. This makes gd usable (in
+	principle) independently of tikz and pgf.
+	- Because of this, all declarations of algorithms need to be
+	redone. 
+
+2012-11-10 Christian Feuersaenger <cfeuersaenger@users.sourceforge.net>
+	
+	- external lib: fixed spurious white space (caused by 'up to date check')
+
+2012-11-01 Christian Feuersaenger <cfeuersaenger@users.sourceforge.net>
+
+	- manual styles: improved robustness of auto cross references & active spaces
+
+2012-10-18 Christophe Jorssen <cjorssen@users.sourceforge.net>
+
+	- Fixed a bug with active colon in circuits lib. Probably more to
+	fix in other libraries.
+	
+2012-10-11 Christian Feuersaenger <cfeuersaenger@users.sourceforge.net>
+
+	- Improved precision of math functions asin and acos (using linear
+	interpolation instead of constant interpolation)
+
+2012-09-27 Till Tantau <tantau@users.sourceforge.net>
+
+	- Worked on gd.
+	
+2012-09-26 Christian Feuersaenger <cfeuersaenger@users.sourceforge.net>
+	- fixed pgfsys-pdftex.def : very old regression with \setbeamercovered{transparent}	and \pause
+	Patch by Hendrik Vogt
+
+2012-08-29 Till Tantau <tantau@users.sourceforge.net>
+
+	- Added support for sublayouts in gd (not yet fully
+	documented). This allows one to use several algorithms inside
+	a single graph.
+	
+2012-06-28 Till Tantau <tantau@users.sourceforge.net>
+	
+	- Redone handling of clusters in gd yet again. Renamed them to
+	"collections". Much better system now, can handle hyperedges,
+	subgraphs and other stuff (in principle).
+	- Nodes generated by a gd algorithm now have correct size
+	information (this one was tricky!).
+	
+2012-06-22 Till Tantau <tantau@users.sourceforge.net>
+	
+	- Redone handling of clusters in gd.
+	- Worked on gd documentation.
+
+2012-06-18 Christian Feuersaenger <cfeuersaenger@users.sourceforge.net>
+	- fixed minor expansion issue \foreach \x in {a,...,d} lead to unexpanded value \x
+	
+2012-06-18 Christian Feuersaenger <ludewich@users.sourceforge.net>
+
+	- externalization: added special switch to deactivate incompatible
+	geometry drivers during externalization 
+
+2012-05-31 Till Tantau <tantau@users.sourceforge.net>
+	
+	- Redone pgf.gd.model.Arc
+	- Added documentation for said class.
+	
+2012-05-23 Till Tantau <tantau@users.sourceforge.net>
+
+	- Worked on gd documentation.
+	- Replaced old luadoc by customized version. Gets called
+	directly from tex.
+	
+2012-05-17 Christian Feuersaenger <ludewich@users.sourceforge.net>
+	
+	- external lib: added support for MD5/diff based up-to-date checks.
+	Changes to a picture will automatically result in a remake of the
+	respective external graphics.
+
+2012-05-03 Christophe Jorssen <cjorssen@users.sourceforge.net>
+
+	- Fix bug #3527068 (\pgfmathatantwo did not exist)
+
+2012-05-14 Till Tantau <tantau@users.sourceforge.net>
+
+	- Changed pgf.gd.new_graph_drawing_algorithm syntax. Not
+	  likely to change again...
+	- Added support for algorithms to create nodes and edge in the
+	  syntactic digraph.
+	- Introduced library graphdrawing.examples that includes some
+	  code demonstrating how "things are done".
+
+
+2012-05-13 Christian Feuersaenger <ludewich@users.sourceforge.net>
+
+	- context: fixed catcode issues by means of suitable module
+	\protect/\unprotect statements. 
+
+2012-05-06 Till Tantau <tantau@users.sourceforge.net>
+
+	- Introduced a new class model for graph drawing (Digraph,
+	  Arc, and Vertex instead of Graph, Edge, Node). I'm currently
+	  porting all the old code, but it takes a while and it's a
+	  bit messy right now. Some easy algorithms are already based
+	  on the new system, old ones not. In the end, things should
+	  be significantly faster and also easier to program.
+
+2012-05-03 Christophe Jorssen <cjorssen@users.sourceforge.net>
+
+	- Attempt to fix bug in calc lib when '!' or ':' are active (not
+	  fully tested but should work).
+
+2012-05-02 Christophe Jorssen <cjorssen@users.sourceforge.net>
+
+	- Attempt to fix bug with label and pin when ':' is active (not
+	  fully tested but should work).
+
+2012-04-19 Till Tantau <tantau@users.sourceforge.net>
+
+	- Finished the first two chapters of the documentation of gd
+ 	  (overview and tikz usage).
+	- Module system is now redone and the directory structure
+	  has been reorganized. No more messing around with lua
+	  modules, everything is perfectly portable now.
+	
+2012-04-17 Till Tantau <tantau@users.sourceforge.net>
+
+	- Started to completely redo the module system of graph
+	  drawing in lua. I'm in the middle of it, so its currently
+	  messy, but it works.
+	
+2012-04-12 Till Tantau <tantau@users.sourceforge.net>
+
+	- Implemented packing procedure for graph drawing.
+	- Cleaned up graph drawing source some more.
+	- Renamed lots of files (still not happy with it, though).
+
+2012-04-11 Till Tantau <tantau@users.sourceforge.net>
+
+	- Implemented Reingold-Tilford tree layout.
+
+2012-04-05 Till Tantau <tantau@users.sourceforge.net>
+
+	- Implemented my first graph drawing algorithm: circular layout.
+
+2012-04-03 Till Tantau <tantau@users.sourceforge.net>
+
+	- Introduced new declaration mechanism for graph drawing
+	  algorithm classes
+	- Implemented preprocessing step of decomposing a graph into
+	  connected components.
+	
+2012-04-02 Till Tantau <tantau@users.sourceforge.net>
+
+	- Cleaned up graph drawing algorithm directories: Moved
+	obsolete algorithms to special directory.
+	- Switched graph drawing calling interface from function-base
+	to object-based: All graph drawing algorithms must now be
+	implemented in a class
+	- Cleaned up file and class names of graph drawing engine. 
+
+2012-03-30 Till Tantau <tantau@users.sourceforge.net>
+
+	- Fixed problem that in case math library is loaded before pgf
+	some math functions were broken (because \pgfmath@xa and
+	\pgf@xa were different registers, which they should not be).
+	
+2012-03-29 Till Tantau <tantau@users.sourceforge.net>
+
+	- Added anchoring and orientation to graph drawing library. 
+	
+2012-03-21 Till Tantau <tantau@users.sourceforge.net>
+
+	- Added arrows.spaced library.
+	- Added quotation syntax to graph lib.
+	- Renamed some graph drawing layouts.
+	- Worked on documentation of graph drawing lib.
+
+2012-03-07 Christophe Jorssen <cjorssen@users.sourceforge.net>
+
+	- Moved wrappers for luatex primitives (\pgfutil@directlua,
+	\pgfutil@ifluatex, \pgfutil@luaescapestring) to pgfutil-common.tex
+	- Added support for luatex to the profiler library by emulating
+	\pdfelapsedtime.
+
+2012-02-27 Till Tantau <tantau@users.sourceforge.net>
+
+	- Fixed wrong edef in graph lib that broke the /-syntax when
+	  text contained expandable stuff.
+	
+2012-02-21 Christophe Jorssen <cjorssen@users.sourceforge.net>
+
+	- More work on the luamath parser and evaluator.
+
+2012-01-24 Christophe Jorssen <cjorssen@users.sourceforge.net>
+
+	- Fix a bug in tikz polar coordinates (reported on tex.se
+	http://tex.stackexchange.com/questions/41828/using-math-in-tikz):
+	braces around a delimited argument are removed.
+
+2012-01-10 Christophe Jorssen <cjorssen@users.sourceforge.net>
+
+	- Fix a bug in pgfmath != operator (reported and fixed on tex.se
+	http://tex.stackexchange.com/questions/40605/using-in-pgfmathparse)
+
+2012-01-09 Christophe Jorssen <cjorssen@users.sourceforge.net>
+
+	- Fix a pgfmath dependency for pgffor.
+
+2012-01-03 Till Tantau <tantau@users.sourceforge.net>
+
+	- Added pos support to the arc command (finally...).
+	- Added support to the graph library for drawing tries.
+	- Added support to the graph library for adding edge labels in
+	  an easier way.
+
+2011-12-29 Christian Feuersaenger <ludewich@users.sourceforge.net>
+
+	- Added the 'fixed relative' number formatting style.
+
+2011-12-28 Christian Feuersaenger <ludewich@users.sourceforge.net>
+	
+	- Added 'const plot mark mid' and 'jump mark mid' plot handlers.
+
+2011-12-02 Till Tantau <tantau@users.sourceforge.net>
+
+	- Renamed "layered drawing" to "layered layout" for
+	consistency. 
+
+2011-11-12 Christophe Jorssen <cjorssen@users.sourceforge.net>
+
+	- More work on the lua math parser and evaluator.
+	- Added wrappers for luatex primitives: \pgfutil@directlua,
+	\pgfutil@ifluatex, \pgfutil@luaescapestring
+	- Make lua code more lua 5.2 compatible
+
+2011-11-11 Christophe Jorssen <cjorssen@users.sourceforge.net>
+
+	- Work on the lua math parser and evaluator. Begin to merge Mark's
+	code with mine.
+
+2011-11-03 Christian Feuersaenger <ludewich@users.sourceforge.net>
+	
+	- added FPU support for ==, !=, <=, >=, ?
+
+2011-10-29 Christian Feuersaenger <ludewich@users.sourceforge.net>
+
+	- fixed problem with pgf number printer: it introduced spurious spaces
+	tracker id 3430171. Thanks to Clemens Koppensteiner for the bugfix.
+
+2011-09-25 Christian Feuersaenger <ludewich@users.sourceforge.net>
+
+	- \pgfsetlayers can now be given inside of a pgfpicture (or tikzpicture)
+
+2011-06-22 Christophe Jorssen <cjorssen@users.sourceforge.net>
+
+	- The lua math parser now works on basic expressions (no units, no
+	arrays, no strings, no functions, ...?).
+
+2011-06-02 Christophe Jorssen <cjorssen@users.sourceforge.net>
+
+	- Some work on a lua (lpeg based) math parser.
+
+2011-05-31 Christophe Jorssen <cjorssen@users.sourceforge.net>
+
+	- Added a gnuplot call key to pgfmoduleplot.code.tex (feature
+	request #3308340).
+
+2011-05-30 Jannis Pohlmann <jannis@xfce.org>
+
+	- graph drawing: 
+	  - Initial work on layered drawing algorithms.
+
+2011-05-25 Christophe Jorssen <cjorssen@users.sourceforge.net>
+
+	- Added dim function for array to pgfmath (to be documented)
+	- Some work on a ODE solver
+	
+2011-05-20 Christian Feuersaenger <ludewich@users.sourceforge.net>
+
+	- removed spurious white spaces in my bugfix for pgfmathdivide
+
+2011-05-19 Till Tantau <tantau@users.sourceforge.net>
+
+	- Second attempt at fixing spy lib...
+
+2011-05-18 Matthias Schulz <ma.schulz@email.de>
+
+	- graph drawing:
+	  - added short overview for nodes and edges (lua class documentation)
+
+2011-05-17 Jannis Pohlmann <jannis@xfce.org>
+
+	- graph drawing:
+	  - Separate 'spring layout' and 'spring electrical layout' families.
+		  Rename existing algorithms accordingly.
+	  - Add an implementation of the Floyd-Warshall algorithm.
+	  - Add a new 'Hu2006 spring' algorithm based solely on springs.
+	  - Improve the initial layout of 'Hu2006 spring electrical' by 
+	    taking the graph size and diameter into account.
+	  - Rework existing spring electrical algorithms and improve 
+	    documentation.
+	  - Catch -!- edges and remove them from the Lua graph when detected.
+
+2011-05-14 Jannis Pohlmann <jannis@xfce.org>
+
+	- graph drawing:
+	  - Update documentation of spring and spring-electrical parameters.
+	    Add TODO items where things are missing, unclear or need to be 
+	    worked on.
+	  - Make initial step dimension and the electric charge of nodes
+	    configurable. Both, Walshaw2000 and Hu2006 support this.
+	  - Improve the approximation of the repulsive force.
+
+2011-05-13 Till Tantau <tantau@users.sourceforge.net>
+
+	- Fixed bug 3297817 (spy postscript problem).
+	- Fixed bug of missing newpath in postscript and opacity
+	  settings. 
+	
+2011-05-13 Jannis Pohlmann <jannis@xfce.org>
+
+	- graph drawing:
+	  - Rename graphdrawing.spring to graphdrawing.force.
+	  - Fix NaN bug in the orientation helper.
+	  - Initial work on improving and documenting the parameters for
+	    spring and spring-electrical algorithms.
+	  - Properly forward default node and edge parameters to Lua.
+
+2011-05-12 Jannis Pohlmann <jannis@xfce.org>
+
+	- graph drawing:
+	  - Add Fibonacci heap and priority queue classes. 
+	  - Add Lua file for common graph algorithms. Implement Dijkstra.
+	  - Add method Graph:getPseudoDiameter().
+	  - Hu2006: Scale coordinations of nodes in a coarse graph based on 
+	    the quotient of its pseudo diameters and that of the parent coarse
+	    graph, as described in the paper.
+
+2011-05-11 Jannis Pohlmann <jannis@xfce.org>
+
+	- graph drawing:
+	  - Fix several interpolation bugs in the coarse graph class.
+	  - Use the coarse graph class in the Walshaw2000 algorithm.
+
+2011-05-11 Till Tantau <tantau@users.sourceforge.net>
+
+	- Worked on documentation of gd backend. Still need to
+	  document graph parameters.
+	
+2011-05-10 Jannis Pohlmann <jannis@xfce.org>
+
+	- graph drawing:
+	  - Remove files from the old graph drawing library tree.
+	  - Disable verbose logging by default.
+	  - Specify sane initial values for spring algorithm parameters.
+
+2011-05-10 Till Tantau <tantau@users.sourceforge.net>
+
+	- Added .graph drawing parameter initial key.
+
+2011-05-09 Jannis Pohlmann <jannis@xfce.org>
+
+	- graph drawing:
+	  - Implement graph coarsening in the Hu2006 algorithm.
+	  - Name force-based algorithms after the paper author and year.
+
+2011-05-09 Till Tantau <tantau@users.sourceforge.net>
+
+	- Reorganized graph drawing documentation.
+
+2011-05-06 Jannis Pohlmann <jannis@xfce.org>
+
+	- Finished the graph drawing library reorganization started by Till.
+
+2011-05-06 Till Tantau <tantau@users.sourceforge.net>
+
+	- Reorganized the graph drawing key and directory
+	  structure. The documentation is still missing. Also, lots of
+	  files still need to be moved, but I'll leave that to Jannis.
+	
+2011-05-06 Jannis Pohlmann <jannis@xfce.org>
+
+	- graph drawing:
+	  - implement a quadtree optimization in the Walshaw algorithm.
+	  - add a simple version of the Hu spring-electrical algorithm that
+	    seems to work almost as good as the Walshaw even without
+		  the multilevel approach implemented (which is the only thing
+		  that really makes the Walshaw algorithm useful).
+
+2011-05-04 Jannis Pohlmann <jannis@xfce.org>
+
+	- graph drawing: 
+	  - Initial work on a quad tree implementation for spring and spring
+		  electrical algorithms, with unit test.
+		- Improve the internals of the Vector class.
+
+2011-05-03 Till Tantau <tantau@users.sourceforge.net>
+
+	- graph drawing: Started to cleanup pgf and tikz layers. Ongoing...
+
+2011-05-03 Jannis Pohlmann <jannis@xfce.org>
+
+	- graph drawing:
+		- Fix Walshaw algorithm to properly set the subnodes when copying
+		  the coarse graphs. Simplify the code that updates the node
+		  coordinates.
+
+2011-05-02 Jannis Pohlmann <jannis@xfce.org>
+
+	- graph drawing:
+	  - Modify the doclet to allow underscores in parameter names.
+		- Document the Vector class as well as the table, iter and traversal
+		  helpers.
+		- Remove old table and iterator helpers. Rename helper files. Rename
+		  table.merge() and table.copy() to table.custom_merge() and
+		  table.custom_copy() to avoid name clashes with luatools. Add 
+		  string helpers, including string.parse_braces(). Update algorithms 
+		  to work with these changes.
+		- Allow vectors to have an origin vector, similar to the Position
+		  class. Introduce new alternative table-based syntax for
+		  Vector:set() that is much easier to read. Update unit tests
+		  and algorithms. 
+
+2011-05-02 Christian Feuersaenger <ludewich@users.sourceforge.net>
+
+	- fpu: added support for log10 and log2
+
+2011-05-02 Jannis Pohlmann <jannis@xfce.org>
+
+	- graph drawing: 
+	  - Drop the 'not yet positionedPGFGDINTERNAL' node name prefix
+	    internally. It's stripped off now when nodes are passed over to
+	  	Lua and its added back again when shipping the node out to TeX.
+	  -	Drop the Node:shortname() method which is no longer needed.
+	  - Improve coding style and documentation of the Interface, Sys, 
+	    Node, Edge and Graph classes. 
+	  - Rename Sys:logMessage() to Sys:log().
+	  - Make parameter labels in the API docs not appear in bold.
+		- Disable verbose logging by default.
+		- Add methods Edge:getNodes() and Node:getEdges().
+
+2011-05-02 Jannis Pohlmann <jannis@xfce.org>
+
+	- graph drawing: 
+	  - Initial work on spring-electrical and layered drawing algorithms.
+		- Major rework of the Lua code of the graphdrawing library: added
+		  a Vector class for improved math operations and node positioning,
+			added quite a number of table and iterator helpers, added
+			post-processing code for fixing the orientation of graph drawings,
+			updated the graph/node/edge data structures to store nodes in the order
+			they appear instead of storing them in a random order, implement
+			coordinate keys for nodes, and much more.
+
+2011-04-30  Christian Feuersaenger <ludewich@users.sourceforge.net>
+
+	- number printing: added '1000 sep in fractionals' switch
+
+2011-04-29 Christophe Jorssen <cjorssen@users.sourceforge.net>
+
+	- Work on pgflibraryluamath (added pgfpointnormalised)
+
+2011-04-27 Matthias Schulz <ma.schulz@email.de>
+
+	- Graphdrawing library documentation, split into two files, removed
+	noluatex file, reworked the text (added information).
+
+2011-04-25 Christophe Jorssen <cjorssen@users.sourceforge.net>
+
+	- First attempt to do math with lua (very basical): pgflibraryluamath
+
+2011-04-18  Christian Feuersaenger <ludewich@users.sourceforge.net>
+
+	- bugfix for rounding error in \pgfmathdivide{83.407811000}{16.68156400}
+	was 4.10, is now 5.0: it could happen in rare cases that digits where 
+	appended where they shouldhave been than added (4 + .10 instead of 4 + 1.0)
+
+2011-04-22 Jannis Pohlmann <jannis@xfce.org>
+
+	- Implemented a G_n subgraph for creating grid (or: mesh) graphs.
+	This also introduces a new key /tikz/graphs/wrap after=<number> that
+	configures how the nodes in such a grid graph are connected. Some of
+	the common subgraph keys such as /tikz/graphs/V and /tikz/graphs/n 
+	can be used with G_n subgraphs as well.
+	- Added a simple grid placement strategy. It currently does not 
+	support the chain shift and group shift keys properly and does not 
+	implement any placement order other than left-to-right, so there is
+	room for improvement.
+
+2011-04-18  Christian Feuersaenger <ludewich@users.sourceforge.net>
+	
+	- external lib: reduced number of \newwrite allocations and allowed to disable features
+	to safe more of them (aux in dpth=false,disable dependency files)
+
+2011-04-17  Christian Feuersaenger <ludewich@users.sourceforge.net>
+	
+	- added '/pgf/number format/relative' formatting style.
+
+2011-03-22 Till Tantau <tantau@users.sourceforge.net>
+
+	- Finished documentation of data visualization (sort of)! 
+	- First usable version of data visualization!
+
+2011-03-15 Till Tantau <tantau@users.sourceforge.net>
+
+	- Worked on dv documentation. Finished chapter on visualizers,
+	style sheets. Legends still missing
+
+2011-03-07 Till Tantau <tantau@users.sourceforge.net>
+
+	- Worked on dv documentation. Finished chapter on axes.
+
+2011-03-07  Christian Feuersaenger <ludewich@users.sourceforge.net>
+	
+	- Incorporated a bugfix of Hans Hagen which makes pgf compatible with
+	Context Mk IV.
+	Verified: the patch is backwards compatible with TL 2009 and TL 2010
+	i.e. Context MkII and it works with Context Mk IV.
+
+2011-01-22 Till Tantau <tantau@users.sourceforge.net>
+
+	- Worked on dv documentation.
+	
+2011-01-05  Christophe Jorssen <cjorssen@users.sourceforge.net>
+
+	- Attempt to fix a bug #1911195 with pgfpages and rotation (fix
+	contributed by Mark Wibrow). Note: Mark was not sure it has side
+	effects.
+
+2010-12-17  Christophe Jorssen <cjorssen@users.sourceforge.net>
+
+	- Documentation will now compile with auto-xref enabled (a problem
+	with \_ in the graph lib not handled correctly by
+	pgfmanual.pdflinks.code.tex).
+	- Fix bug #3104978 thanks to Heiko Oberdiek patch on ctt.
+
+2010-12-17 Till Tantau <tantau@users.sourceforge.net>
+
+	- Changed the graph syntax for anonymous nodes in the graph
+	library and simplified the as= syntax.
+	- Added fresh nodes options to graph library.
+
+2010-12-14 Till Tantau <tantau@users.sourceforge.net>
+
+	- Fixed graph lib so that it compiles with plain TeX.
+
+2010-12-10 Till Tantau <tantau@users.sourceforge.net>
+
+	- Small fixed in the graph library.
+
+2010-12-07 Till Tantau <tantau@users.sourceforge.net>
+
+	- Finished graph library!
+
+2010-12-06 Till Tantau <tantau@users.sourceforge.net>
+
+	- Nearly finished graph lib and its documentation.
+
+2010-11-30 Till Tantau <tantau@users.sourceforge.net>
+
+	- Fixed bug #3123605 (hopefully...).
+	- Worked on graph lib.
+
+2010-11-19  Christophe Jorssen <cjorssen@users.sourceforge.net>
+
+	- Some integer arithmetics functions for the math parser
+	(contributed by Alain Matthes): gcd, isprime, isodd, iseven
+
+2010-11-19 Till Tantau <tantau@users.sourceforge.net>
+
+	- Second attempt at making \tikz work also with fragile stuff
+	following. The new code will no longer fail in a situation
+	like \tikz \foreach ...
+	- Worked on graph lib stuff.
+
+2010-11-06  Christophe Jorssen <cjorssen@users.sourceforge.net>
+
+	- A luatex version of the doc is available (fixed inputenc issues
+	since luatex works with utf8 by default).
+
+2010-11-04  Christophe Jorssen <cjorssen@users.sourceforge.net>
+
+	- Fix bug in pgfmathfunctions.basic.code.tex (bug reported by
+	Alain Matthes and fixed by Paul Gaborit on fctt): wrong
+	interaction between pow and exp (linked to \pgfmath@x modified
+	outside macro call).
+
+2010-11-01  Christophe Jorssen <cjorssen@users.sourceforge.net>
+
+	- Make \pgfkeys@exp@call long (bug reported by Florent Chervet on
+	fctt)
+	- Fix bug in pgflibraryshapes.callouts.code.tex: \pgf@test changed
+	to \pgf@node@name (bug reported by Zarko F. Cucej on ctt and fix
+	contributed by Mark Wibrow)
+	
+2010-10-27  Christophe Jorssen <cjorssen@users.sourceforge.net>
+
+	- fixed bug 3096333 (Fix contributed by Mark Wibrow): pgffor
+	failed to update \lastx in some cases 
+	
+2010-10-25  Christian Feuersaenger <ludewich@users.sourceforge.net>
+
+	Released version 2.10
+
+2010-10-22 Christian Feuersaenger <ludewich@users.sourceforge.net>
+
+	- closed a lot of bugs on sourceforge, especially documentation bugs
+	- fixed bug 2429749: gnuplot invocation in tabularx did not work.
+
+2010-10-21 Christian Feuersaenger <ludewich@users.sourceforge.net>
+
+	- fixed bug: there was an incompatibility between pgf and beamer due to a
+	missing \interlineskip in the shipout handling for latex.
+
+2010-10-15 Christian Feuersaenger <ludewich@users.sourceforge.net>
+
+	- renamed 'halfcircle' marker to 'halfcircle*' and added 'halfcircle'.
+	- provided special case 'mark color=none' for the half-filled markers.
+
+2010-10-13 Christian Feuersaenger <ludewich@users.sourceforge.net>
+
+	- fixed incorrect fill/stroke coloring of new marker contributions (see
+	ChangeLog 2010-09-27)
+	- added more predefined dashed and dotted line patterns for black/white plots
+	to fulfill a related feature request of Tomek
+	- fixed bug: the 'name path global' feature did not work in every case...
+	the actual implementation might need to be revised eventually.
+
+2010-10-12 Christian Feuersaenger <ludewich@users.sourceforge.net>
+
+	- Imported spell checking results of Stefan Pinnow (thanks!)
+	- Dealed with typo in 'sci generic' number formatting style: it now
+	accepts 'mantissa' *and* 'mantisse'
+
+2010-10-11 Christian Feuersaenger <ludewich@users.sourceforge.net>
+	
+	- External lib: Fixed bug. The 'failed ref warnings for' was not properly \protect'ed.
+
 2010-09-27 Till Tantau <tantua@users.sourceforge.net>
 
 	- Started on graph lib. Not yet finished and not documented.
@@ -2227,3 +3360,7 @@
 	- Added pgfshade.sty
 	
 
+
+;;; Local Variables:
+;;; coding: undecided-unix
+;;; End:
